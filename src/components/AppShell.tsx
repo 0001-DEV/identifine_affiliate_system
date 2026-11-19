@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { XtremLogo } from "./XtremLogo";
+import { ThemeToggle } from "./ThemeToggle";
 import { LogOut } from "lucide-react";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -71,7 +72,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     pathname?.startsWith("/r/")
   ) {
     return (
-      <div className="min-h-screen bg-[#070708] text-white">{children}</div>
+      <div className="min-h-screen bg-[#070708] text-white relative">
+        <div className="absolute top-4 right-4 z-50 no-print">
+          <ThemeToggle />
+        </div>
+        {children}
+      </div>
     );
   }
 
@@ -81,10 +87,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#070708]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-4">
           <Link href={userRole === "ADMIN" ? "/admin" : "/dashboard"}>
-            <XtremLogo variant="light" size="sm" showSubtitle={false} />
+            <XtremLogo size="sm" showSubtitle={false} />
           </Link>
 
           <div className="flex items-center gap-3">
+            <ThemeToggle showLabel={false} />
             <span className="text-xs font-medium text-neutral-300">
               {userName}
             </span>

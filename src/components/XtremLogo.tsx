@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 
 interface LogoProps {
   variant?: "light" | "dark";
@@ -7,18 +9,33 @@ interface LogoProps {
 }
 
 export function IdentifineLogo({
-  variant = "light",
+  variant,
   size = "md",
   showSubtitle = false,
 }: LogoProps) {
+  const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const isLight = document.documentElement.classList.contains("light");
+      setCurrentTheme(isLight ? "light" : "dark");
+    };
+    checkTheme();
+    window.addEventListener("theme-change", checkTheme);
+    return () => window.removeEventListener("theme-change", checkTheme);
+  }, []);
+
   const heightClasses = {
     sm: "h-8",
     md: "h-10",
     lg: "h-14",
   };
 
-  const logoSrc =
-    variant === "dark" ? "/identifine_logo_dark.webp" : "/identifine_logo.webp";
+  // If variant not passed, dark mode uses white text (/identifine_logo.webp), light mode uses dark text (/identifine_logo_dark.webp)
+  const isDarkTextNeeded = variant ? variant === "dark" : currentTheme === "light";
+  const logoSrc = isDarkTextNeeded
+    ? "/identifine_logo_dark.webp"
+    : "/identifine_logo.webp";
 
   return (
     <div className="inline-flex flex-col items-center select-none">
@@ -37,4 +54,5 @@ export function IdentifineLogo({
 }
 
 export const XtremLogo = IdentifineLogo;
+
 

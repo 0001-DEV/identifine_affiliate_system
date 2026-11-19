@@ -1,0 +1,353 @@
+{
+  "settings": {
+    "companyName": "XTREM CARDZ",
+    "companyTagline": "Smart NFC Business Cards & Corporate Identity Solutions",
+    "companyWhatsapp": "2349030001851",
+    "companyEmail": "billing@xtremcardz.com",
+    "companyBankName": "Providus Bank / Moniepoint MFB",
+    "companyAccountNumber": "8012345678",
+    "companyAccountName": "XTREM CARDZ TECHNOLOGIES LTD",
+    "defaultCommissionRate": 10,
+    "minWithdrawalAmount": 50000,
+    "currencySymbol": "₦",
+    "currencyCode": "NGN",
+    "servicePackages": [
+      {
+        "name": "Executive Team Smart NFC Cards (25 Units)",
+        "defaultPrice": 250000,
+        "description": "Custom laser-engraved matte black PVC & Metal NFC cards with team profile dashboard."
+      },
+      {
+        "name": "Corporate Enterprise Identity Pack (100 Units)",
+        "defaultPrice": 650000,
+        "description": "Full organization NFC card rollout, CRM lead capture integration & custom branding."
+      },
+      {
+        "name": "VIP Custom Metal Card Suite (10 Units)",
+        "defaultPrice": 180000,
+        "description": "24K Brushed Black Steel NFC smart cards for C-Suite executives."
+      },
+      {
+        "name": "Custom B2B Order / Bespoke Solution",
+        "defaultPrice": 350000,
+        "description": "Tailored corporate package quoted after WhatsApp or Email consultation."
+      }
+    ]
+  },
+  "users": [
+    {
+      "id": "usr_admin",
+      "name": "Xtrem Cardz Admin",
+      "email": "admin@xtremcardz.com",
+      "phone": "+234 800 000 0000",
+      "password": "password123",
+      "role": "ADMIN",
+      "referralCode": "xtrem-hq",
+      "commissionRate": 10,
+      "bankName": "Access Bank",
+      "accountNumber": "0011223344",
+      "accountName": "XTREM CARDZ HQ",
+      "createdAt": "2026-10-01T09:00:00.000Z"
+    },
+    {
+      "id": "usr_aff_1",
+      "name": "Joshua Olusola",
+      "email": "joshua@example.com",
+      "phone": "+234 812 345 6789",
+      "password": "password123",
+      "role": "AFFILIATE",
+      "referralCode": "joshua-842",
+      "commissionRate": 10,
+      "bankName": "GTBank (Guaranty Trust Bank)",
+      "accountNumber": "0158492011",
+      "accountName": "JOSHUA OLUSOLA",
+      "createdAt": "2026-11-01T10:15:00.000Z"
+    },
+    {
+      "id": "usr_aff_2",
+      "name": "Tunde Bakare",
+      "email": "tunde@example.com",
+      "phone": "+234 809 876 5432",
+      "password": "password123",
+      "role": "AFFILIATE",
+      "referralCode": "tunde-510",
+      "commissionRate": 10,
+      "bankName": "Zenith Bank",
+      "accountNumber": "2089341209",
+      "accountName": "TUNDE BAKARE",
+      "createdAt": "2026-11-05T14:20:00.000Z"
+    },
+    {
+      "id": "usr_1795078908184",
+      "name": "Love Olaoye",
+      "email": "loveolaoye2@gmail.com",
+      "phone": "09044444444",
+      "password": "weblove16",
+      "role": "AFFILIATE",
+      "referralCode": "loveolao-268",
+      "commissionRate": 10,
+      "bankName": "opay",
+      "accountNumber": "111111111",
+      "accountName": "L",
+      "createdAt": "2026-11-19T09:01:48.184Z"
+    },
+    {
+      "id": "usr_1795091827830",
+      "name": "n",
+      "email": "081497067@39",
+      "phone": "h",
+      "password": "weblove16",
+      "role": "AFFILIATE",
+      "referralCode": "n-950",
+      "commissionRate": 10,
+      "bankName": "",
+      "accountNumber": "",
+      "accountName": "N",
+      "createdAt": "2026-11-19T12:37:07.830Z"
+    },
+    {
+      "id": "usr_1795094860887",
+      "name": "Love Olaoye",
+      "email": "loveolaoye@gmail.com",
+      "phone": "08149706739",
+      "password": "1234",
+      "role": "AFFILIATE",
+      "referralCode": "loveolao-114",
+      "commissionRate": 10,
+      "bankName": "GTBank (Guaranty Trust Bank)",
+      "accountNumber": "2222222222",
+      "accountName": "LOVE OLAOYE",
+      "createdAt": "2026-11-19T13:27:40.887Z"
+    }
+  ],
+  "referrals": [
+    {
+      "id": "ref_1795095562247",
+      "affiliateId": "usr_1795094860887",
+      "affiliateName": "Love Olaoye",
+      "affiliateCode": "loveolao-114",
+      "businessName": "nh",
+      "contactName": "bg",
+      "contactEmail": "",
+      "contactPhone": "09044444444",
+      "serviceInterested": "Custom B2B Order / Bespoke Solution",
+      "notes": "",
+      "source": "REFERRAL_LINK",
+      "status": "PAID_CUSTOMER",
+      "invoiceItems": [
+        {
+          "description": "Custom B2B Order / Bespoke Solution",
+          "quantity": 5,
+          "unitPrice": 350000
+        }
+      ],
+      "invoiceTotal": 1750000,
+      "amountPaid": 1750000,
+      "expectedCommission": 175000,
+      "earnedCommission": 175000,
+      "payments": [
+        {
+          "id": "pay_1795096840377",
+          "amount": 1750000,
+          "commissionCredited": 175000,
+          "date": "2026-11-19T14:00:40.377Z",
+          "method": "Bank Transfer (Confirmed via WhatsApp Receipt)",
+          "reference": "TRX-569339",
+          "note": "Verified client invoice payment."
+        }
+      ],
+      "createdAt": "2026-11-19T13:39:22.247Z",
+      "updatedAt": "2026-11-19T14:00:40.377Z",
+      "invoiceNumber": "INV-2026-0104",
+      "invoiceDate": "2026-11-19",
+      "invoiceDueDate": "2026-11-26"
+    },
+    {
+      "id": "ref_1795095306744",
+      "affiliateId": "usr_1795094860887",
+      "affiliateName": "Love Olaoye",
+      "affiliateCode": "loveolao-114",
+      "businessName": "b",
+      "contactName": "bb",
+      "contactEmail": "",
+      "contactPhone": "08149706739",
+      "serviceInterested": "Custom B2B Order / Bespoke Solution",
+      "notes": "",
+      "source": "REFERRAL_LINK",
+      "status": "WHATSAPP_INQUIRY",
+      "invoiceItems": [],
+      "invoiceTotal": 0,
+      "amountPaid": 0,
+      "expectedCommission": 0,
+      "earnedCommission": 0,
+      "payments": [],
+      "createdAt": "2026-11-19T13:35:06.744Z",
+      "updatedAt": "2026-11-19T13:35:06.744Z"
+    },
+    {
+      "id": "ref_101",
+      "affiliateId": "usr_aff_1",
+      "affiliateName": "Joshua Olusola",
+      "affiliateCode": "joshua-842",
+      "businessName": "Vanguard Sterling Logistics Ltd",
+      "contactName": "Chidi Nwosu",
+      "contactEmail": "c.nwosu@vanguardsterling.com",
+      "contactPhone": "+234 803 400 1122",
+      "serviceInterested": "Executive Team Smart NFC Cards (25 Units)",
+      "notes": "Spoke with their Operations Director. They needed 35 executive NFC cards.",
+      "source": "REFERRAL_LINK",
+      "status": "PAID_CUSTOMER",
+      "invoiceNumber": "INV-2026-0101",
+      "invoiceDate": "2026-11-10",
+      "invoiceDueDate": "2026-11-17",
+      "invoiceItems": [
+        {
+          "description": "Executive Matte Black NFC Smart Cards (35 Units)",
+          "quantity": 35,
+          "unitPrice": 10000
+        }
+      ],
+      "invoiceTotal": 350000,
+      "amountPaid": 350000,
+      "expectedCommission": 35000,
+      "earnedCommission": 35000,
+      "payments": [
+        {
+          "id": "pay_001",
+          "amount": 350000,
+          "commissionCredited": 35000,
+          "date": "2026-11-12T15:30:00.000Z",
+          "method": "Bank Transfer (Verified on WhatsApp)",
+          "reference": "TRX-9482019-VSL",
+          "note": "Full invoice payment received via Providus corporate account."
+        }
+      ],
+      "createdAt": "2026-11-09T11:00:00.000Z",
+      "updatedAt": "2026-11-12T15:30:00.000Z"
+    },
+    {
+      "id": "ref_102",
+      "affiliateId": "usr_aff_1",
+      "affiliateName": "Joshua Olusola",
+      "affiliateCode": "joshua-842",
+      "businessName": "Meridian Real Estate Partners",
+      "contactName": "Amina Bello",
+      "contactEmail": "amina@meridianrealtors.ng",
+      "contactPhone": "+234 805 229 8811",
+      "serviceInterested": "Corporate Enterprise Identity Pack (100 Units)",
+      "notes": "Client chatted on WhatsApp; invoice for ₦300,000 issued and sent on WhatsApp.",
+      "source": "REFERRAL_LINK",
+      "status": "INVOICE_ISSUED",
+      "invoiceNumber": "INV-2026-0104",
+      "invoiceDate": "2026-11-17",
+      "invoiceDueDate": "2026-11-24",
+      "invoiceItems": [
+        {
+          "description": "Custom Brushed Metal & PVC Smart Cards for Sales Agents",
+          "quantity": 30,
+          "unitPrice": 10000
+        }
+      ],
+      "invoiceTotal": 300000,
+      "amountPaid": 0,
+      "expectedCommission": 30000,
+      "earnedCommission": 0,
+      "payments": [],
+      "createdAt": "2026-11-16T09:40:00.000Z",
+      "updatedAt": "2026-11-17T14:10:00.000Z"
+    },
+    {
+      "id": "ref_103",
+      "affiliateId": "usr_aff_1",
+      "affiliateName": "Joshua Olusola",
+      "affiliateCode": "joshua-842",
+      "businessName": "NovaTech Advisory Group",
+      "contactName": "David Okafor",
+      "contactEmail": "d.okafor@novatech.io",
+      "contactPhone": "+234 818 900 4455",
+      "serviceInterested": "VIP Custom Metal Card Suite (10 Units)",
+      "notes": "Clicked Joshua's referral link and initiated WhatsApp chat.",
+      "source": "REFERRAL_LINK",
+      "status": "WHATSAPP_INQUIRY",
+      "invoiceItems": [],
+      "invoiceTotal": 0,
+      "amountPaid": 0,
+      "expectedCommission": 0,
+      "earnedCommission": 0,
+      "payments": [],
+      "createdAt": "2026-11-18T17:20:00.000Z",
+      "updatedAt": "2026-11-18T17:20:00.000Z"
+    },
+    {
+      "id": "ref_104",
+      "affiliateId": "usr_aff_2",
+      "affiliateName": "Tunde Bakare",
+      "affiliateCode": "tunde-510",
+      "businessName": "Crestview Capital & Law",
+      "contactName": "Barr. Segun Adeyemi",
+      "contactEmail": "segun@crestviewlaw.com",
+      "contactPhone": "+234 802 331 9090",
+      "serviceInterested": "Corporate Enterprise Identity Pack (100 Units)",
+      "notes": "Enterprise rollout for 80 partners and associates.",
+      "source": "DASHBOARD_LEAD",
+      "status": "PAID_CUSTOMER",
+      "invoiceNumber": "INV-2026-0098",
+      "invoiceDate": "2026-11-07",
+      "invoiceDueDate": "2026-11-14",
+      "invoiceItems": [
+        {
+          "description": "Corporate Enterprise Identity Pack (80 NFC Smart Cards + Digital Portal)",
+          "quantity": 1,
+          "unitPrice": 680000
+        }
+      ],
+      "invoiceTotal": 680000,
+      "amountPaid": 680000,
+      "expectedCommission": 68000,
+      "earnedCommission": 68000,
+      "payments": [
+        {
+          "id": "pay_002",
+          "amount": 680000,
+          "commissionCredited": 68000,
+          "date": "2026-11-08T12:00:00.000Z",
+          "method": "Bank Transfer (WhatsApp Receipt Confirmed)",
+          "reference": "TRX-778120-CCL",
+          "note": "Full settlement confirmed."
+        }
+      ],
+      "createdAt": "2026-11-06T10:00:00.000Z",
+      "updatedAt": "2026-11-08T12:00:00.000Z"
+    }
+  ],
+  "withdrawals": [
+    {
+      "id": "wd_1795098502315",
+      "affiliateId": "usr_1795094860887",
+      "affiliateName": "Love Olaoye",
+      "affiliateEmail": "loveolaoye@gmail.com",
+      "amount": 175000,
+      "bankName": "GTBank (Guaranty Trust Bank)",
+      "accountNumber": "2222222222",
+      "accountName": "LOVE OLAOYE",
+      "status": "APPROVED_PAID",
+      "reference": "WD-XTR-426709",
+      "createdAt": "2026-11-19T14:28:22.315Z",
+      "adminNote": "Transferred to Affiliate Bank Account",
+      "processedAt": "2026-11-19T14:29:25.126Z"
+    },
+    {
+      "id": "wd_1795092215817",
+      "affiliateId": "usr_aff_2",
+      "affiliateName": "Tunde Bakare",
+      "affiliateEmail": "tunde@example.com",
+      "amount": 68000,
+      "bankName": "Zenith Bank",
+      "accountNumber": "2089341209",
+      "accountName": "TUNDE BAKARE",
+      "status": "PENDING",
+      "reference": "WD-XTR-494309",
+      "createdAt": "2026-11-19T12:43:35.817Z"
+    }
+  ]
+}

@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: "IDENTIFINE — Partner & Affiliate Commission App",
   description:
     "Refer businesses to Identifine, track official client invoices, earn 10% commission on every paid invoice, and withdraw directly to your bank account.",
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

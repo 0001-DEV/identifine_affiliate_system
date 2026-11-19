@@ -469,7 +469,7 @@ export default function AdminPortalPage() {
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          <span>Copy Invoice for WhatsApp</span>
+                          <span>Copy Invoice</span>
                         </>
                       )}
                     </button>

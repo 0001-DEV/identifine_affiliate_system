@@ -444,17 +444,15 @@ export default function AdminPortalPage() {
 
                 {/* Right: Clear Step-by-Step Buttons */}
                 <div className="flex flex-wrap items-center gap-2 shrink-0">
-                  <button
-                    onClick={() => openInvoiceGenerator(ref)}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-neutral-900 px-4 py-2.5 text-xs font-bold text-white hover:bg-neutral-800 transition"
-                  >
-                    <FileText className="w-3.5 h-3.5" />
-                    <span>
-                      {ref.invoiceNumber
-                        ? "Edit Invoice"
-                        : "Step 1: Create Invoice"}
-                    </span>
-                  </button>
+                  {!ref.invoiceNumber && (
+                    <button
+                      onClick={() => openInvoiceGenerator(ref)}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-neutral-900 px-4 py-2.5 text-xs font-bold text-white hover:bg-neutral-800 transition"
+                    >
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>Create Invoice</span>
+                    </button>
+                  )}
 
                   {ref.invoiceNumber && (
                     <button

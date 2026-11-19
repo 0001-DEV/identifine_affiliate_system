@@ -50,7 +50,7 @@ export default function SystemGuidePage() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b-4 border-black pb-7">
             <div className="space-y-2">
               <img
-                src="/identifine_logo.webp"
+                src="/identifine_logo_dark.webp"
                 alt="Identifine"
                 className="h-14 w-auto object-contain"
               />

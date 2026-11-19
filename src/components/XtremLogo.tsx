@@ -7,6 +7,7 @@ interface LogoProps {
 }
 
 export function IdentifineLogo({
+  variant = "light",
   size = "md",
   showSubtitle = false,
 }: LogoProps) {
@@ -16,10 +17,13 @@ export function IdentifineLogo({
     lg: "h-14",
   };
 
+  const logoSrc =
+    variant === "dark" ? "/identifine_logo_dark.webp" : "/identifine_logo.webp";
+
   return (
     <div className="inline-flex flex-col items-center select-none">
       <img
-        src="/identifine_logo.webp"
+        src={logoSrc}
         alt="Identifine"
         className={`${heightClasses[size]} w-auto object-contain`}
       />

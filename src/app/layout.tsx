@@ -7,10 +7,8 @@ export const metadata: Metadata = {
   description:
     "Refer businesses to Identifine, track official client invoices, earn 10% commission on every paid invoice, and withdraw directly to your bank account.",
   icons: {
-    icon: [
-      { url: "/favicon.png", type: "image/png" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
+    icon: "/favicon.ico",
+    shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
 };

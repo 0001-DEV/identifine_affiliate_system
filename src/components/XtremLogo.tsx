@@ -6,7 +6,7 @@ interface LogoProps {
   showSubtitle?: boolean;
 }
 
-export function XtremLogo({
+export function IdentifineLogo({
   size = "md",
   showSubtitle = false,
 }: LogoProps) {
@@ -19,8 +19,8 @@ export function XtremLogo({
   return (
     <div className="inline-flex flex-col items-center select-none">
       <img
-        src="/xtreme-cardz-logo.png"
-        alt="Xtreme Cardz"
+        src="/identifine_logo.webp"
+        alt="Identifine"
         className={`${heightClasses[size]} w-auto object-contain`}
       />
       {showSubtitle && (
@@ -31,3 +31,6 @@ export function XtremLogo({
     </div>
   );
 }
+
+export const XtremLogo = IdentifineLogo;
+

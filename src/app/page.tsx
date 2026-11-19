@@ -98,7 +98,7 @@ export default function EntryAuthPortalPage() {
       }
 
       const companyPhone = data.settings?.companyWhatsapp || "2349030001851";
-      const msg = `Hello XTREME CARDZ,\n\nI was referred with code *${cleanCode.toUpperCase()}*.\n• Name / Business: ${clientBusiness}`;
+      const msg = `Hello IDENTIFINE,\n\nI was referred with code *${cleanCode.toUpperCase()}*.\n• Name / Business: ${clientBusiness}`;
       window.open(
         `https://wa.me/${companyPhone}?text=${encodeURIComponent(msg)}`,
         "_blank",
@@ -115,7 +115,7 @@ export default function EntryAuthPortalPage() {
   return (
     <div className="min-h-screen bg-[#070708] flex flex-col items-center justify-center px-4 py-10">
       <div className="w-full max-w-md space-y-6">
-        {/* Official Xtreme Cardz Logo */}
+        {/* Official Identifine Logo */}
         <div className="flex flex-col items-center text-center space-y-2">
           <XtremLogo size="lg" showSubtitle={true} />
         </div>
@@ -183,7 +183,7 @@ export default function EntryAuthPortalPage() {
                   <MessageSquare className="w-6 h-6" />
                 </div>
                 <h2 className="text-lg font-bold text-white">
-                  Welcome to Xtreme Cardz!
+                  Welcome to Identifine!
                 </h2>
                 <p className="text-xs text-neutral-300 leading-relaxed">
                   Your referral code{" "}
@@ -194,7 +194,7 @@ export default function EntryAuthPortalPage() {
                   <strong className="text-white">{clientBusiness}</strong>.
                 </p>
                 <p className="text-xs text-neutral-400 leading-relaxed pt-1">
-                  Thank you for choosing Xtreme Cardz to redefine your
+                  Thank you for choosing Identifine to redefine your
                   professional and corporate identity. Please continue your
                   conversation with our team on WhatsApp.
                 </p>
@@ -203,7 +203,7 @@ export default function EntryAuthPortalPage() {
             <form onSubmit={handleRefereeWhatsapp} className="space-y-3.5">
               <div className="text-center pb-1">
                 <div className="text-sm font-bold text-white">
-                  Were You Referred to Xtreme Cardz?
+                  Were You Referred to Identifine?
                 </div>
                 <p className="text-xs text-neutral-400 mt-0.5">
                   Enter the referral code given to you and chat with us on WhatsApp
@@ -323,9 +323,9 @@ export default function EntryAuthPortalPage() {
             onClick={() =>
               signInAndRedirect({
                 id: "usr_admin",
-                name: "Xtreme Cardz Admin",
+                name: "Identifine Admin",
                 role: "ADMIN",
-                referralCode: "xtrem-hq",
+                referralCode: "identifine-hq",
               })
             }
             className="inline-flex items-center gap-1.5 hover:text-white underline underline-offset-4"

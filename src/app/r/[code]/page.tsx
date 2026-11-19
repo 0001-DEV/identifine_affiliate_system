@@ -57,7 +57,7 @@ export default function ReferralLandingPage() {
 
       setSubmitted(true);
       const companyPhone = settings?.companyWhatsapp || "2349030001851";
-      const msg = `Hello XTREME CARDZ,\n\nI was referred with code *${refCode
+      const msg = `Hello IDENTIFINE,\n\nI was referred with code *${refCode
         .trim()
         .toUpperCase()}*.\n• Name / Business: ${businessName}`;
       window.open(
@@ -84,7 +84,7 @@ export default function ReferralLandingPage() {
             <div className="text-center py-6 space-y-3">
               <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
               <h2 className="text-lg font-bold text-white">
-                Welcome to Xtreme Cardz!
+                Welcome to Identifine!
               </h2>
               <p className="text-xs text-neutral-300 leading-relaxed">
                 Your referral code{" "}
@@ -95,7 +95,7 @@ export default function ReferralLandingPage() {
                 <strong className="text-white">{businessName}</strong>.
               </p>
               <p className="text-xs text-neutral-400 leading-relaxed pt-1">
-                Thank you for choosing Xtreme Cardz to redefine your professional
+                Thank you for choosing Identifine to redefine your professional
                 and corporate identity. Please continue your conversation with our
                 team on WhatsApp.
               </p>
@@ -104,7 +104,7 @@ export default function ReferralLandingPage() {
             <>
               <div className="text-center">
                 <h1 className="text-lg font-bold text-white">
-                  Welcome to Xtreme Cardz
+                  Welcome to Identifine
                 </h1>
                 <p className="text-xs text-neutral-400 mt-1">
                   {affiliate

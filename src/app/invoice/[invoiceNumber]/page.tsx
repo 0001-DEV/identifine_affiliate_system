@@ -348,7 +348,7 @@ export default function ClientInvoicePage() {
           {/* Transparent Affiliate Verification Footer */}
           <div className="mt-8 border-t border-neutral-200 pt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[11px] font-mono text-neutral-500">
             <span>
-              XTREM CARDZ VERIFIED INVOICE LEDGER • REF:{" "}
+              IDENTIFINE VERIFIED INVOICE LEDGER • REF:{" "}
               {referral.affiliateCode.toUpperCase()}
             </span>
             <span>

@@ -178,9 +178,9 @@ export default function LoginPage() {
             onClick={() =>
               quickLogin(
                 "usr_admin",
-                "Xtrem Cardz Admin",
+                "Identifine Admin",
                 "ADMIN",
-                "xtrem-hq",
+                "identifine-hq",
                 "/admin"
               )
             }
@@ -188,14 +188,14 @@ export default function LoginPage() {
           >
             <span className="flex items-center gap-2 font-medium">
               <ShieldCheck className="w-3.5 h-3.5 text-white" />
-              Xtrem Cardz Admin (Generate Invoices & Approve Payouts)
+              Identifine Admin (Generate Invoices & Approve Payouts)
             </span>
             <span className="font-mono text-[10px] text-neutral-400">Open →</span>
           </button>
         </div>
 
         <div className="mt-6 border-t border-neutral-800 pt-4 text-center text-xs text-neutral-400">
-          New to Xtrem Cardz Partner Network?{" "}
+          New to Identifine Partner Network?{" "}
           <Link
             href="/register"
             className="font-semibold text-white underline underline-offset-4"

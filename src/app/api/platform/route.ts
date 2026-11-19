@@ -350,7 +350,7 @@ export async function POST(req: NextRequest) {
         referral.invoiceDueDate = referral.invoiceDate;
         referral.invoiceItems = [
           {
-            description: referral.serviceInterested || "Xtrem Cardz Corporate Order",
+            description: referral.serviceInterested || "Identifine Corporate Order",
             quantity: 1,
             unitPrice: payAmount,
           },

@@ -27,7 +27,7 @@ export default function SystemGuidePage() {
           <div className="flex items-center gap-2.5">
             <a
               href="/api/guide-pdf"
-              download="Xtreme_Cardz_Affiliate_System_Guide.pdf"
+              download="Identifine_Affiliate_System_Guide.pdf"
               className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-extrabold text-black hover:bg-neutral-200 transition shadow-lg"
             >
               <Download className="w-4 h-4" />
@@ -50,8 +50,8 @@ export default function SystemGuidePage() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b-4 border-black pb-7">
             <div className="space-y-2">
               <img
-                src="/xtreme-cardz-logo.png"
-                alt="Xtreme Cardz"
+                src="/identifine_logo.webp"
+                alt="Identifine"
                 className="h-14 w-auto object-contain"
               />
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-black pt-2">
@@ -77,7 +77,7 @@ export default function SystemGuidePage() {
             </div>
             <p className="text-base sm:text-lg font-bold text-white mt-2 leading-relaxed">
               People sign up to get a personal Referral Code, give that code to
-              clients who want Xtreme Cardz products, earn 10% of whatever
+              clients who want Identifine products, earn 10% of whatever
               those clients pay you, and withdraw their money once their
               earnings reach ₦50,000.
             </p>
@@ -102,7 +102,7 @@ export default function SystemGuidePage() {
                   <strong className="font-extrabold text-black">
                     10% commission
                   </strong>{" "}
-                  by bringing paying clients to Xtreme Cardz.
+                  by bringing paying clients to Identifine.
                 </p>
               </div>
 
@@ -115,7 +115,7 @@ export default function SystemGuidePage() {
                 </div>
                 <p className="text-sm font-medium text-neutral-700 leading-relaxed">
                   A person or business who wants to buy Smart NFC Cards from
-                  Xtreme Cardz using an Affiliate&apos;s{" "}
+                  Identifine using an Affiliate&apos;s{" "}
                   <strong className="font-extrabold text-black">
                     Referral Code
                   </strong>
@@ -128,7 +128,7 @@ export default function SystemGuidePage() {
                   3. The Admin
                 </div>
                 <div className="text-base font-extrabold text-black pt-1">
-                  Xtreme Cardz Team
+                  Identifine Team
                 </div>
                 <p className="text-sm font-medium text-neutral-700 leading-relaxed">
                   Your team that chats with the client on WhatsApp, records
@@ -197,7 +197,7 @@ export default function SystemGuidePage() {
                 </div>
                 <ul className="space-y-2 text-sm sm:text-base font-medium text-neutral-800 list-disc pl-6">
                   <li>
-                    The Affiliate tells a client about Xtreme Cardz and gives them
+                    The Affiliate tells a client about Identifine and gives them
                     their code (<strong className="font-black">JOSHUA-842</strong>).
                   </li>
                   <li>
@@ -226,10 +226,10 @@ export default function SystemGuidePage() {
                         account so Joshua gets credit for bringing them.
                       </li>
                       <li>
-                        It opens a WhatsApp chat straight to your Xtreme Cardz line
+                        It opens a WhatsApp chat straight to your Identifine line
                         (<strong className="font-black">09030001851</strong>) saying:{" "}
                         <em>
-                          &ldquo;Hello XTREME CARDZ, I was referred with code
+                          &ldquo;Hello IDENTIFINE, I was referred with code
                           JOSHUA-842...&rdquo;
                         </em>
                       </li>

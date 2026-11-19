@@ -4,11 +4,18 @@ import path from "path";
 
 export async function GET() {
   try {
-    const filePath = path.join(
+    let filePath = path.join(
       process.cwd(),
       "public",
-      "Xtreme_Cardz_Affiliate_System_Guide.pdf"
+      "Identifine_Affiliate_System_Guide.pdf"
     );
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(
+        process.cwd(),
+        "public",
+        "Xtreme_Cardz_Affiliate_System_Guide.pdf"
+      );
+    }
     const fileBuffer = fs.readFileSync(filePath);
 
     return new NextResponse(fileBuffer, {
@@ -16,7 +23,7 @@ export async function GET() {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition":
-          'attachment; filename="Xtreme_Cardz_Affiliate_System_Guide.pdf"',
+          'attachment; filename="Identifine_Affiliate_System_Guide.pdf"',
         "Content-Length": String(fileBuffer.length),
       },
     });

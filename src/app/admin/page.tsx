@@ -98,7 +98,7 @@ export default function AdminPortalPage() {
       setItemQty(ref.invoiceItems[0].quantity);
       setItemUnitPrice(ref.invoiceItems[0].unitPrice);
     } else {
-      setItemDesc(ref.serviceInterested || "Xtreme Cardz Smart NFC Package");
+      setItemDesc(ref.serviceInterested || "Identifine Smart NFC Package");
       setItemQty(1);
       const foundPkg = settings.servicePackages?.find(
         (p: any) => p.name === ref.serviceInterested
@@ -245,7 +245,7 @@ export default function AdminPortalPage() {
 
   const copyWhatsAppInvoiceMessage = (ref: any) => {
     const invoiceUrl = `${origin}/invoice/${ref.invoiceNumber}`;
-    const text = `Hello ${ref.contactName} (${ref.businessName}),\n\nHere is your official *XTREME CARDZ* invoice (${ref.invoiceNumber}) for *${currency}${ref.invoiceTotal.toLocaleString()}*:\n\n${invoiceUrl}\n\nBank Transfer:\n• ${settings.companyBankName}\n• ${settings.companyAccountNumber}\n• ${settings.companyAccountName}`;
+    const text = `Hello ${ref.contactName} (${ref.businessName}),\n\nHere is your official *IDENTIFINE* invoice (${ref.invoiceNumber}) for *${currency}${ref.invoiceTotal.toLocaleString()}*:\n\n${invoiceUrl}\n\nBank Transfer:\n• ${settings.companyBankName}\n• ${settings.companyAccountNumber}\n• ${settings.companyAccountName}`;
     navigator.clipboard.writeText(text);
     setCopiedId(ref.id);
     setTimeout(() => setCopiedId(""), 2500);

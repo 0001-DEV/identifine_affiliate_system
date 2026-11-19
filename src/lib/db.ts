@@ -117,13 +117,13 @@ const DB_FILE_PATH = process.env.VERCEL
 
 const INITIAL_DB: DatabaseSchema = {
   settings: {
-    companyName: "XTREM CARDZ",
+    companyName: "IDENTIFINE",
     companyTagline: "Smart NFC Business Cards & Corporate Identity Solutions",
     companyWhatsapp: "2349030001851",
-    companyEmail: "billing@xtremcardz.com",
+    companyEmail: "billing@identifine.com",
     companyBankName: "Providus Bank / Moniepoint MFB",
     companyAccountNumber: "8012345678",
-    companyAccountName: "XTREM CARDZ TECHNOLOGIES LTD",
+    companyAccountName: "IDENTIFINE TECHNOLOGIES LTD",
     defaultCommissionRate: 10,
     minWithdrawalAmount: 50000,
     currencySymbol: "₦",
@@ -154,16 +154,16 @@ const INITIAL_DB: DatabaseSchema = {
   users: [
     {
       id: "usr_admin",
-      name: "Xtrem Cardz Admin",
-      email: "admin@xtremcardz.com",
+      name: "Identifine Admin",
+      email: "admin@identifine.com",
       phone: "+234 800 000 0000",
       password: "password123",
       role: "ADMIN",
-      referralCode: "xtrem-hq",
+      referralCode: "identifine-hq",
       commissionRate: 10,
       bankName: "Access Bank",
       accountNumber: "0011223344",
-      accountName: "XTREM CARDZ HQ",
+      accountName: "IDENTIFINE HQ",
       createdAt: "2026-10-01T09:00:00.000Z",
     },
     {

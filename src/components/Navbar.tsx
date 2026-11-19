@@ -130,9 +130,9 @@ export function Navbar() {
               onClick={() =>
                 switchDemoAccount(
                   "usr_admin",
-                  "Xtrem Cardz Admin",
+                  "Identifine Admin",
                   "ADMIN",
-                  "xtrem-hq",
+                  "identifine-hq",
                   "/admin"
                 )
               }

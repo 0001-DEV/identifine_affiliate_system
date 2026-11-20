@@ -32,6 +32,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const isPublicRoute =
     pathname === "/" ||
+    pathname === "/pricing" ||
+    pathname === "/faq" ||
+    pathname === "/portal" ||
     pathname === "/login" ||
     pathname === "/register" ||
     pathname === "/guide" ||
@@ -62,20 +65,29 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     router.push("/");
   };
 
+  // If on a public route, render directly without the authenticated app bar
   if (
     !currentUserId ||
     pathname === "/" ||
+    pathname === "/pricing" ||
+    pathname === "/faq" ||
+    pathname === "/portal" ||
     pathname === "/login" ||
     pathname === "/register" ||
     pathname === "/guide" ||
     pathname?.startsWith("/invoice/") ||
     pathname?.startsWith("/r/")
   ) {
+    const hasOwnNav =
+      pathname === "/" || pathname === "/pricing" || pathname === "/faq";
+
     return (
       <div className="min-h-screen bg-[#070708] text-white relative">
-        <div className="absolute top-4 right-4 z-50 no-print">
-          <ThemeToggle />
-        </div>
+        {!hasOwnNav && (
+          <div className="absolute top-4 right-4 z-50 no-print">
+            <ThemeToggle />
+          </div>
+        )}
         {children}
       </div>
     );

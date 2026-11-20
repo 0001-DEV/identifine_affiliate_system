@@ -49,16 +49,18 @@ html.light body {
   color: #0F172A !important;
 }
 
-html.light .bg-\[\#070708\],
-html.light .bg-\[\#09090B\],
-html.light .bg-\[\#070707\],
-html.light .bg-\[\#0D0D0D\] {
+html.light [class*="070708"],
+html.light [class*="09090B"],
+html.light [class*="070707"],
+html.light [class*="0D0D0D"],
+html.light [class*="0A0A0A"] {
   background-color: #F8FAFC !important;
   color: #0F172A !important;
 }
 
-html.light .bg-\[\#111113\],
-html.light .bg-neutral-900:not(.no-light-invert),
+html.light [class*="111113"],
+html.light [class*="141414"],
+html.light .bg-neutral-900,
 html.light .bg-neutral-950 {
   background-color: #FFFFFF !important;
   color: #0F172A !important;
@@ -73,7 +75,7 @@ html.light .bg-black:not(.keep-black) {
 }
 
 html.light header {
-  background-color: rgba(248, 250, 252, 0.88) !important;
+  background-color: rgba(248, 250, 252, 0.92) !important;
   border-color: #E2E8F0 !important;
 }
 
@@ -90,9 +92,7 @@ html.light textarea::placeholder {
   color: #94A3B8 !important;
 }
 
-html.light .border-white\/15,
-html.light .border-white\/10,
-html.light .border-white\/5,
+html.light [class*="border-white"],
 html.light .border-neutral-800 {
   border-color: #E2E8F0 !important;
 }

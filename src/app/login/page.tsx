@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { XtremLogo } from "@/components/XtremLogo";
-import { LogIn, AlertCircle, Lock, CheckCircle2, ShieldCheck } from "lucide-react";
+import { LogIn, AlertCircle } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -51,21 +51,6 @@ export default function LoginPage() {
       setError("Network error while signing in.");
       setLoading(false);
     }
-  };
-
-  const quickLogin = (
-    id: string,
-    name: string,
-    role: string,
-    code: string,
-    target: string
-  ) => {
-    localStorage.setItem("xtrem_user_id", id);
-    localStorage.setItem("xtrem_user_name", name);
-    localStorage.setItem("xtrem_user_role", role);
-    localStorage.setItem("xtrem_user_code", code);
-    window.dispatchEvent(new Event("xtrem-auth-change"));
-    router.push(target);
   };
 
   return (
@@ -127,78 +112,12 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* Instant 1-Click Demo Logins */}
-        <div className="mt-6 border-t border-neutral-800 pt-5 space-y-2.5">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-neutral-400">
-            Instant Demo Accounts (1-Click):
-          </div>
-
-          <button
-            type="button"
-            onClick={() =>
-              quickLogin(
-                "usr_aff_1",
-                "Joshua Olusola",
-                "AFFILIATE",
-                "joshua-842",
-                "/dashboard"
-              )
-            }
-            className="flex w-full items-center justify-between rounded-lg border border-neutral-800 bg-neutral-950 px-3.5 py-2.5 text-xs text-neutral-200 hover:bg-neutral-900 hover:border-neutral-700 transition"
-          >
-            <span className="flex items-center gap-2 font-medium">
-              <Lock className="w-3.5 h-3.5 text-neutral-400" />
-              Joshua Olusola (Affiliate • ₦35k Balance / Below Threshold)
-            </span>
-            <span className="font-mono text-[10px] text-neutral-400">Open →</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() =>
-              quickLogin(
-                "usr_aff_2",
-                "Tunde Bakare",
-                "AFFILIATE",
-                "tunde-510",
-                "/dashboard"
-              )
-            }
-            className="flex w-full items-center justify-between rounded-lg border border-neutral-800 bg-neutral-950 px-3.5 py-2.5 text-xs text-neutral-200 hover:bg-neutral-900 hover:border-neutral-700 transition"
-          >
-            <span className="flex items-center gap-2 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-              Tunde Bakare (Affiliate • ₦68k Balance / Withdrawal Unlocked)
-            </span>
-            <span className="font-mono text-[10px] text-neutral-400">Open →</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() =>
-              quickLogin(
-                "usr_admin",
-                "Identifine Admin",
-                "ADMIN",
-                "identifine-hq",
-                "/admin"
-              )
-            }
-            className="flex w-full items-center justify-between rounded-lg border border-neutral-800 bg-neutral-950 px-3.5 py-2.5 text-xs text-neutral-200 hover:bg-neutral-900 hover:border-neutral-700 transition"
-          >
-            <span className="flex items-center gap-2 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-white" />
-              Identifine Admin (Generate Invoices & Approve Payouts)
-            </span>
-            <span className="font-mono text-[10px] text-neutral-400">Open →</span>
-          </button>
-        </div>
-
+        {/* Switch to Register */}
         <div className="mt-6 border-t border-neutral-800 pt-4 text-center text-xs text-neutral-400">
           New to Identifine Partner Network?{" "}
           <Link
             href="/register"
-            className="font-semibold text-white underline underline-offset-4"
+            className="font-semibold text-white underline underline-offset-4 hover:text-neutral-200"
           >
             Create an Affiliate Account
           </Link>

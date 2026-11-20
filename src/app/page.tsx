@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
@@ -33,10 +33,17 @@ import {
   Mail,
   Phone,
   Globe,
+  Rocket,
+  Diamond,
+  Handshake,
+  UserPlus,
+  Link as LinkIcon,
+  Wallet,
+  Star,
 } from "lucide-react";
 
 export default function MarketingHomePage() {
-  // Hero Carousel Card Images (Pure Cards Visual Carousel - No text overlay yet)
+  // Hero Carousel Card Images (Concept 10 Split Screen)
   const heroCardImages = [
     {
       id: "gold-metal",
@@ -78,7 +85,6 @@ export default function MarketingHomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-play timer matching okomuoil.com (5.5s per slide)
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -128,17 +134,56 @@ export default function MarketingHomePage() {
     router.push(`/portal?${params.toString()}`);
   };
 
-  // Interactive Earnings Calculator State
-  const [executivePacks, setExecutivePacks] = useState(1); // 250k each -> 25k comm
-  const [enterprisePacks, setEnterprisePacks] = useState(1); // 650k each -> 65k comm
-  const [metalSuites, setMetalSuites] = useState(1); // 180k each -> 18k comm
+  // 6 Products from the Mockup
+  const showcaseProducts = [
+    {
+      id: "de-titan",
+      name: "De-Titan Smart Cards",
+      image: "/images/products/de-titan-3in1.webp",
+      tag: "Smart Badge",
+    },
+    {
+      id: "du-plex",
+      name: "Du-Plex Smart Cards",
+      image: "/images/products/gold-mirror-metal.webp",
+      tag: "Dual NFC",
+    },
+    {
+      id: "corporate-id",
+      name: "Corporate ID Cards",
+      image: "/images/products/corporate-id-system.webp",
+      tag: "Enterprise",
+    },
+    {
+      id: "business-cards",
+      name: "Business Cards",
+      image: "/images/products/black-matte-metal.webp",
+      tag: "Laser Metal",
+    },
+    {
+      id: "access-membership",
+      name: "Access & Membership Cards",
+      image: "/images/products/identifine-rfid-suite.webp",
+      tag: "RFID + Door",
+    },
+    {
+      id: "digital-qr",
+      name: "Digital Identity & QR Solutions",
+      image: "/images/products/identifine-smart-id.webp",
+      tag: "Cloud vCard",
+    },
+  ];
 
-  const totalOrderValue =
-    executivePacks * 250000 + enterprisePacks * 650000 + metalSuites * 180000;
-  const affiliateCommission = Math.round(totalOrderValue * 0.1);
+  const productScrollRef = useRef<HTMLDivElement>(null);
+  const scrollProducts = (dir: "left" | "right") => {
+    if (productScrollRef.current) {
+      const offset = dir === "left" ? -300 : 300;
+      productScrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-white selection:text-black transition-colors duration-200">
+    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-[#F59E0B] selection:text-black transition-colors duration-200">
       <MarketingNav />
 
       <main className="flex-1">
@@ -225,10 +270,10 @@ export default function MarketingHomePage() {
           </div>
 
           {/* ---------- RIGHT: Affiliate Onboarding Panel ---------- */}
-          <div className="relative bg-[#eef1f5] text-neutral-900 flex items-center justify-center px-4 sm:px-8 py-12 lg:py-10">
-            <div className="w-full max-w-[480px] rounded-3xl bg-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)] border border-black/5 p-7 sm:p-9 animate-[slideUpFade_0.8s_ease-out]">
-              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-[11px] font-bold text-emerald-700">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="relative bg-[#F8F9FA] text-neutral-900 flex items-center justify-center px-4 sm:px-8 py-12 lg:py-10">
+            <div className="w-full max-w-[480px] rounded-3xl bg-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.18)] border border-black/5 p-7 sm:p-9 animate-[slideUpFade_0.8s_ease-out]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
                 Xtreme Cardz &amp; Identifine Affiliate Programme
               </div>
 
@@ -248,7 +293,7 @@ export default function MarketingHomePage() {
                   <span className="text-neutral-600">
                     Refer <b className="text-neutral-900 font-mono text-base">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/month
                   </span>
-                  <span className="font-black text-xl text-neutral-900 font-mono tracking-tight">
+                  <span className="font-black text-xl text-[#B45309] font-mono tracking-tight">
                     ₦{(heroReferrals * 25000).toLocaleString()}
                   </span>
                 </div>
@@ -258,7 +303,7 @@ export default function MarketingHomePage() {
                   max={40}
                   value={heroReferrals}
                   onChange={(e) => setHeroReferrals(Number(e.target.value))}
-                  className="mt-3 w-full accent-black cursor-pointer"
+                  className="mt-3 w-full accent-[#F59E0B] cursor-pointer"
                   aria-label="Number of referrals per month"
                 />
                 <p className="mt-1 text-[11px] text-neutral-500">
@@ -269,11 +314,11 @@ export default function MarketingHomePage() {
               {/* Guarantees */}
               <div className="mt-6 grid grid-cols-3 gap-3 text-center">
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
-                  <Zap className="w-5 h-5 text-emerald-600" />
+                  <Zap className="w-5 h-5 text-[#F59E0B]" />
                   <span className="text-[12px] font-semibold leading-tight">Instant Paystack<br />Settlement</span>
                 </div>
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
-                  <DollarSign className="w-5 h-5 text-amber-600" />
+                  <DollarSign className="w-5 h-5 text-emerald-600" />
                   <span className="text-[12px] font-semibold leading-tight">10% Cash<br />Commission</span>
                 </div>
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
@@ -309,7 +354,7 @@ export default function MarketingHomePage() {
                 />
                 <button
                   type="submit"
-                  className="group w-full rounded-xl bg-black text-[#E9CF7E] font-bold py-3.5 border-2 border-[#C9A13B] hover:bg-neutral-900 hover:shadow-[0_12px_36px_-10px_rgba(201,161,59,0.55)] transition-magnetic flex items-center justify-center gap-2 cursor-pointer"
+                  className="group w-full rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-3.5 shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Activate Affiliate Link</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 duration-300" />
@@ -331,11 +376,11 @@ export default function MarketingHomePage() {
           <div className="animate-ticker flex items-center gap-8 text-xs font-bold tracking-widest text-white/80 uppercase">
             {[1, 2].map((i) => (
               <div key={i} className="flex items-center gap-8 shrink-0">
-                <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-400" /> 10% Flat Cash Commission</span>
+                <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-[#F59E0B]" /> 10% Flat Cash Commission</span>
                 <span className="text-white/20">•</span>
                 <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-emerald-400" /> Instant Paystack Settlement</span>
                 <span className="text-white/20">•</span>
-                <span className="flex items-center gap-2"><Award className="w-4 h-4 text-amber-300" /> 24K Brushed Gold &amp; Titanium NFC Cards</span>
+                <span className="flex items-center gap-2"><Award className="w-4 h-4 text-[#F59E0B]" /> 24K Brushed Gold &amp; Titanium NFC Cards</span>
                 <span className="text-white/20">•</span>
                 <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-blue-400" /> Zero Inventory Required</span>
                 <span className="text-white/20">•</span>
@@ -348,522 +393,352 @@ export default function MarketingHomePage() {
           </div>
         </section>
 
-        {/* Core Trust Indicators Below Hero */}
-        <section className="py-6 border-b border-white/10 bg-neutral-950">
+        {/* =========================================================================
+            2. 4 VALUE PILLARS (WHITE HIGH-CONTRAST CARD FROM MOCKUP)
+           ========================================================================= */}
+        <section className="py-8 bg-black">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="rounded-3xl bg-white text-neutral-900 p-8 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-6 items-center text-center">
+              <div className="flex flex-col items-center gap-2 p-2 group">
+                <div className="h-12 w-12 rounded-2xl bg-neutral-100 flex items-center justify-center text-neutral-900 group-hover:bg-[#F59E0B] group-hover:text-black transition">
+                  <Handshake className="w-6 h-6" />
+                </div>
+                <div className="font-extrabold text-sm sm:text-base text-neutral-900">
+                  Trusted Brands
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 p-2 group">
+                <div className="h-12 w-12 rounded-2xl bg-neutral-100 flex items-center justify-center text-neutral-900 group-hover:bg-[#F59E0B] group-hover:text-black transition">
+                  <Diamond className="w-6 h-6" />
+                </div>
+                <div className="font-extrabold text-sm sm:text-base text-neutral-900">
+                  Premium Quality
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 p-2 group">
+                <div className="h-12 w-12 rounded-2xl bg-neutral-100 flex items-center justify-center text-neutral-900 group-hover:bg-[#F59E0B] group-hover:text-black transition">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <div className="font-extrabold text-sm sm:text-base text-neutral-900">
+                  Growing Demand
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 p-2 group">
+                <div className="h-12 w-12 rounded-2xl bg-neutral-100 flex items-center justify-center text-neutral-900 group-hover:bg-[#F59E0B] group-hover:text-black transition">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div className="font-extrabold text-sm sm:text-base text-neutral-900">
+                  Earn with Confidence
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            3. OUR PRODUCTS & SERVICES (WEARECHECK HORIZONTAL CAROUSEL FROM MOCKUP)
+           ========================================================================= */}
+        <section id="products" className="py-16 md:py-24 bg-white text-neutral-900 border-b border-neutral-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-2xl border border-white/10 bg-neutral-900/60 p-4 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
-                  <DollarSign className="w-6 h-6 text-emerald-400" />
-                </div>
-                <div>
-                  <div className="text-xl font-black text-white">10% Flat Cash</div>
-                  <div className="text-xs text-neutral-400">Paid immediately upon client invoice settlement</div>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-neutral-900/60 p-4 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
-                  <CreditCard className="w-6 h-6 text-amber-400" />
-                </div>
-                <div>
-                  <div className="text-xl font-black text-white">₦50,000 Threshold</div>
-                  <div className="text-xs text-neutral-400">Instant withdrawal request from your dashboard</div>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-neutral-900/60 p-4 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
-                  <Clock className="w-6 h-6 text-sky-400" />
-                </div>
-                <div>
-                  <div className="text-xl font-black text-white">3 Hours Payout</div>
-                  <div className="text-xs text-neutral-400">Direct credit to all Nigerian commercial banks</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            CLIENT TRUST STRIP (COMPANIES & EXECUTIVES USING OUR CARDS)
-           ========================================================================= */}
-        <section className="py-12 border-b border-amber-500/20 bg-gradient-to-r from-[#0C0A06] via-[#100D08] to-[#0A090D] relative overflow-hidden">
-          <div className="absolute inset-0 bg-executive-grid opacity-20 pointer-events-none" />
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-6 relative z-10">
-            <div className="flex items-center justify-center gap-2">
-              <span className="h-px w-12 bg-gradient-to-r from-transparent to-amber-500/40" />
-              <p className="text-center text-xs font-mono font-bold tracking-widest text-amber-300 uppercase">
-                Trusted by Executives & Teams at Nigeria&apos;s Leading Enterprises
-              </p>
-              <span className="h-px w-12 bg-gradient-to-l from-transparent to-amber-500/40" />
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 items-center justify-items-center">
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/seplat-energy.webp" alt="Seplat Energy" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/guinness-nigeria.webp" alt="Guinness Nigeria" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/rainoil.webp" alt="Rainoil" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/sapetro-oil.webp" alt="Sapetro Oil" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/ikeja-electric.webp" alt="Ikeja Electric" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/nova-bank.webp" alt="Nova Bank" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/tvc-communications.webp" alt="TVC Communications" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-              <div className="w-full h-14 rounded-2xl border border-amber-500/20 bg-white/[0.04] backdrop-blur-md p-2 flex items-center justify-center hover:border-amber-400/50 hover:bg-amber-500/10 transition-all hover:scale-105 shadow-sm">
-                <img src="/images/clients/neca-nigeria.webp" alt="NECA Nigeria" className="max-h-8 max-w-[100px] object-contain" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            2. INTERACTIVE EARNINGS SIMULATOR
-           ========================================================================= */}
-        <section className="py-16 md:py-24 border-b border-white/10 bg-[#09090D] relative">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <div className="text-center space-y-3 max-w-2xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold text-emerald-400">
-                <Calculator className="w-3.5 h-3.5" />
-                <span>Affiliate Earnings Simulator</span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Calculate Exactly How Much You Can Earn
-              </h2>
-              <p className="text-xs sm:text-sm text-neutral-400">
-                Move the sliders to project your monthly 10% commission when organizations in your network order.
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-white/15 bg-[#121216] p-6 sm:p-10 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Sliders */}
-              <div className="lg:col-span-7 space-y-6">
-                {/* 1. Executive Team NFC Pack */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-white">
-                      Executive Team NFC Packs (₦250k each)
-                    </span>
-                    <span className="font-mono text-amber-400 font-bold">
-                      {executivePacks} Referral{executivePacks > 1 ? "s" : ""} (₦{(executivePacks * 25000).toLocaleString()} comm.)
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value={executivePacks}
-                    onChange={(e) => setExecutivePacks(Number(e.target.value))}
-                    className="w-full accent-amber-400 bg-neutral-800 h-2 rounded-lg cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[10px] text-neutral-500 font-mono">
-                    <span>0</span>
-                    <span>5</span>
-                    <span>10 orders</span>
-                  </div>
-                </div>
-
-                {/* 2. Corporate Enterprise Identity Pack */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-white">
-                      Corporate Enterprise Packs (₦650k each)
-                    </span>
-                    <span className="font-mono text-amber-400 font-bold">
-                      {enterprisePacks} Referral{enterprisePacks > 1 ? "s" : ""} (₦{(enterprisePacks * 65000).toLocaleString()} comm.)
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value={enterprisePacks}
-                    onChange={(e) => setEnterprisePacks(Number(e.target.value))}
-                    className="w-full accent-amber-400 bg-neutral-800 h-2 rounded-lg cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[10px] text-neutral-500 font-mono">
-                    <span>0</span>
-                    <span>5</span>
-                    <span>10 orders</span>
-                  </div>
-                </div>
-
-                {/* 3. VIP Custom Metal Suites */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-white">
-                      VIP Custom Metal Suites (₦180k each)
-                    </span>
-                    <span className="font-mono text-amber-400 font-bold">
-                      {metalSuites} Referral{metalSuites > 1 ? "s" : ""} (₦{(metalSuites * 18000).toLocaleString()} comm.)
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value={metalSuites}
-                    onChange={(e) => setMetalSuites(Number(e.target.value))}
-                    className="w-full accent-amber-400 bg-neutral-800 h-2 rounded-lg cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[10px] text-neutral-500 font-mono">
-                    <span>0</span>
-                    <span>5</span>
-                    <span>10 orders</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Total Summary Output */}
-              <div className="lg:col-span-5 rounded-3xl border border-amber-400/50 bg-gradient-to-b from-amber-500/20 via-amber-950/20 to-[#0F0E14] p-6 sm:p-8 text-center space-y-5 shadow-2xl shadow-amber-500/15">
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider text-amber-300">
-                  <DollarSign className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Estimated Cash You Take Home</span>
-                </div>
-                <div className="text-4xl sm:text-5xl font-black text-amber-300 tracking-tight drop-shadow-sm">
-                  ₦{affiliateCommission.toLocaleString()}
-                </div>
-                <p className="text-xs text-neutral-300 leading-relaxed">
-                  Earned from <strong className="text-white">₦{totalOrderValue.toLocaleString()}</strong> in gross client billing.
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+                  Our Products &amp; Services
+                </h2>
+                <p className="text-sm text-neutral-600 mt-1">
+                  Promote a wide range of identity and card solutions
                 </p>
-
-                <div className="pt-2">
-                  <Link
-                    href="/portal?tab=register"
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 px-5 py-3.5 text-xs font-black text-neutral-950 hover:brightness-110 transition shadow-lg shadow-amber-500/30 hover:scale-[1.02]"
-                  >
-                    <span>Start Earning This Now</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-
-                <div className="text-[11px] text-amber-200/70 font-mono pt-1">
-                  Paid within 3 working hours into any Nigerian Bank account upon withdrawal.
-                </div>
               </div>
+
+              {/* Navigation Arrows */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => scrollProducts("left")}
+                  aria-label="Scroll left"
+                  className="h-10 w-10 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => scrollProducts("right")}
+                  aria-label="Scroll right"
+                  className="h-10 w-10 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Horizontal Product Track */}
+            <div
+              ref={productScrollRef}
+              className="flex items-stretch gap-5 overflow-x-auto pb-4 scroll-smooth no-scrollbar"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {showcaseProducts.map((prod) => (
+                <div
+                  key={prod.id}
+                  className="w-[240px] sm:w-[260px] shrink-0 rounded-2xl border border-neutral-200 bg-neutral-50 overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all hover:-translate-y-1 duration-300 group"
+                >
+                  <div className="h-44 bg-neutral-900 overflow-hidden relative">
+                    <img
+                      src={prod.image}
+                      alt={prod.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-2.5 left-2.5">
+                      <span className="rounded-full bg-black/80 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-bold text-white uppercase tracking-wider">
+                        {prod.tag}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4 bg-white border-t border-neutral-100 flex-1 flex flex-col justify-between">
+                    <h3 className="font-bold text-sm text-neutral-900 group-hover:text-[#B45309] transition">
+                      {prod.name}
+                    </h3>
+                    <div className="mt-3 flex items-center justify-between text-xs text-neutral-500">
+                      <span className="font-semibold text-emerald-700">10% Commission</span>
+                      <Link
+                        href="/portal?tab=register"
+                        className="text-neutral-900 font-bold hover:underline inline-flex items-center gap-1"
+                      >
+                        Refer <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* =========================================================================
-            3. PRODUCT SHOWCASE (WHAT YOU ARE PROMOTING)
+            4. HOW IT WORKS (5-STEP FLOW FROM MOCKUP)
            ========================================================================= */}
-        <section id="products" className="py-20 md:py-28 border-b border-white/10 bg-[#070708]">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-14">
-            <div className="text-center space-y-3 max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-bold text-neutral-300">
-                <Briefcase className="w-3.5 h-3.5 text-amber-400" />
-                <span>High-Value Products & Corporate Solutions</span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-                Why Companies & Executives Spend Millions on Our Cards
+        <section
+          id="how-it-works"
+          className="py-20 md:py-28 bg-[#0C0C0E] text-white border-b border-white/10 relative overflow-hidden"
+        >
+          {/* Ambient Gold Waves */}
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-b from-[#F59E0B]/15 to-transparent blur-3xl pointer-events-none" />
+
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+            <div className="text-center space-y-2 mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                How It Works
               </h2>
-              <p className="text-xs sm:text-base text-neutral-400 leading-relaxed">
-                When you share your affiliate link or referral code, you are introducing clients to Nigeria&apos;s most sought-after corporate technology and physical luxury identity products.
+              <p className="text-sm sm:text-base text-neutral-300 font-medium">
+                Join. Refer. Earn. It&apos;s that simple!
               </p>
             </div>
 
-            {/* 4 Feature Cards with Distinct Color-Coded Themes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Product 1: Black Matte Metal NFC */}
-              <div className="rounded-3xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 via-[#111116] to-[#0A0A0D] overflow-hidden flex flex-col justify-between hover:border-amber-400/60 transition hover:-translate-y-1.5 duration-300 group shadow-xl">
-                <div className="h-44 w-full bg-neutral-900 overflow-hidden relative">
-                  <img
-                    src="/images/products/black-matte-metal.webp"
-                    alt="Black Matte Metal NFC Card"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-full bg-black/80 backdrop-blur-md border border-amber-400/50 px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300">
-                      VIP METAL
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="space-y-1">
-                      <h3 className="text-base font-extrabold text-white">
-                        Black Matte Metal NFC
-                      </h3>
-                      <p className="text-xs text-amber-400 font-mono font-bold">
-                        Starting ₦180,000 / Suite
-                      </p>
-                    </div>
-                    <p className="text-xs text-neutral-300 leading-relaxed">
-                      Precision laser-engraved stainless steel cards finished with luxury brushed matte coating and gold foil elements for CEOs, partners, and business owners.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-amber-500/20 text-[11px] text-emerald-400 font-mono font-bold">
-                    Affiliate Cut: ₦18,000 per order
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 2: Gunmetal Titanium Smart Card */}
-              <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-b from-indigo-500/10 via-[#111116] to-[#0A0A0D] overflow-hidden flex flex-col justify-between hover:border-indigo-400/60 transition hover:-translate-y-1.5 duration-300 group shadow-xl">
-                <div className="h-44 w-full bg-neutral-900 overflow-hidden relative">
-                  <img
-                    src="/images/products/gunmetal-titanium.webp"
-                    alt="Gunmetal Titanium Smart Card"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-full bg-black/80 backdrop-blur-md border border-indigo-400/50 px-2.5 py-1 text-[10px] font-mono font-bold text-indigo-300">
-                      GUNMETAL TITANIUM
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="space-y-1">
-                      <h3 className="text-base font-extrabold text-white">
-                        Gunmetal Titanium Smart NFC
-                      </h3>
-                      <p className="text-xs text-indigo-300 font-mono font-bold">
-                        Aerospace-Grade Alloy
-                      </p>
-                    </div>
-                    <p className="text-xs text-neutral-300 leading-relaxed">
-                      Ultra-durable, scratch-resistant titanium cards with precision laser-etched insignia and contactless NFC chip integration for top-tier executives.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-indigo-500/20 text-[11px] text-emerald-400 font-mono font-bold">
-                    Affiliate Cut: ₦22,000 per order
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 3: Corporate Enterprise 100-Pack */}
-              <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-emerald-500/10 via-[#111116] to-[#0A0A0D] overflow-hidden flex flex-col justify-between hover:border-emerald-400/60 transition hover:-translate-y-1.5 duration-300 group shadow-xl">
-                <div className="h-44 w-full bg-neutral-900 overflow-hidden relative">
-                  <img
-                    src="/images/products/corporate-id-system.webp"
-                    alt="Corporate Enterprise Identity Pack"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-full bg-black/80 backdrop-blur-md border border-emerald-400/50 px-2.5 py-1 text-[10px] font-mono font-bold text-emerald-300">
-                      ENTERPRISE 100
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="space-y-1">
-                      <h3 className="text-base font-extrabold text-white">
-                        Corporate Enterprise Pack
-                      </h3>
-                      <p className="text-xs text-emerald-300 font-mono font-bold">
-                        ₦650,000 / 100 Units
-                      </p>
-                    </div>
-                    <p className="text-xs text-neutral-300 leading-relaxed">
-                      Full company rollout with centralized administrative dashboard to manage all team member contact profiles, update titles, and track sales team networking.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-emerald-500/20 text-[11px] text-emerald-400 font-mono font-bold">
-                    Affiliate Cut: ₦65,000 cash in bank
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 4: Luxury Presentation & VIP Suite */}
-              <div className="rounded-3xl border border-yellow-500/40 bg-gradient-to-b from-yellow-500/15 via-[#111116] to-[#0A0A0D] overflow-hidden flex flex-col justify-between hover:border-amber-300/80 transition hover:-translate-y-1.5 duration-300 group shadow-xl shadow-amber-500/5">
-                <div className="h-44 w-full bg-neutral-900 overflow-hidden relative">
-                  <img
-                    src="/images/products/gold-mirror-metal.webp"
-                    alt="24K Gold & VIP Unboxing"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-full bg-black/80 backdrop-blur-md border border-amber-300/60 px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300">
-                      24K GOLD VIP
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="space-y-1">
-                      <h3 className="text-base font-extrabold text-white">
-                        24K Gold & Luxury Unboxing
-                      </h3>
-                      <p className="text-xs text-amber-300 font-mono font-bold">
-                        Starting ₦250,000
-                      </p>
-                    </div>
-                    <p className="text-xs text-neutral-300 leading-relaxed">
-                      Mirror-finish 24K gold cards packaged in handcrafted magnetic presentation cases with individual velvet interior. Unmatched prestige for high-net-worth clients.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-amber-500/20 text-[11px] text-emerald-400 font-mono font-bold">
-                    Affiliate Cut: ₦25,000+ per suite
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            4. HOW IT WORKS (3 SIMPLE STEPS)
-           ========================================================================= */}
-        <section id="how-it-works" className="py-20 md:py-28 border-b border-white/10 bg-[#09090D]">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-16">
-            <div className="text-center space-y-3 max-w-2xl mx-auto">
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-300">
-                <Zap className="w-3.5 h-3.5" />
-                <span>Simple 3-Step Earning Mechanism</span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                How You Make Money as an Affiliate
-              </h2>
-              <p className="text-xs sm:text-sm text-neutral-400">
-                No complex paperwork. Everything is transparent, real-time, and tracked by software.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            {/* 5 Steps connected with arrows */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 relative">
               {/* Step 1 */}
-              <div className="rounded-3xl border border-amber-500/25 bg-gradient-to-b from-amber-500/10 via-[#121217] to-[#0A0A0D] p-8 space-y-5 relative hover:border-amber-400/50 transition shadow-xl">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-black font-black text-lg shadow-lg shadow-amber-500/30 border border-amber-300">
-                    1
-                  </span>
-                  <span className="text-[11px] font-mono uppercase text-amber-300 font-bold">
-                    Takes 30 Seconds
-                  </span>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center space-y-3 hover:border-[#F59E0B]/50 transition group">
+                <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-black font-black text-base flex items-center justify-center mx-auto shadow-lg shadow-[#F59E0B]/25">
+                  1
                 </div>
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-white">
-                    Sign Up & Get Your Code
-                  </h3>
-                  <p className="text-xs text-neutral-300 leading-relaxed">
-                    Create your free account. You instantly get your personal referral code (e.g. <code className="text-amber-300 font-mono bg-black px-1.5 py-0.5 rounded border border-amber-500/30">LOVEOLAO-114</code>) and shareable referral link (<code className="text-white font-mono bg-black px-1.5 py-0.5 rounded border border-white/20">/r/your-code</code>).
-                  </p>
-                </div>
-                <div className="pt-2 text-xs text-emerald-400 font-medium">
-                  ✓ Free forever • Instant activation
-                </div>
+                <h3 className="font-extrabold text-base text-white">Register</h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  Create your free affiliate account
+                </p>
               </div>
 
               {/* Step 2 */}
-              <div className="rounded-3xl border border-sky-500/25 bg-gradient-to-b from-sky-500/10 via-[#121217] to-[#0A0A0D] p-8 space-y-5 relative hover:border-sky-400/50 transition shadow-xl">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white font-black text-lg shadow-lg shadow-sky-500/30 border border-sky-300">
-                    2
-                  </span>
-                  <span className="text-[11px] font-mono uppercase text-sky-300 font-bold">
-                    Share Code or Link
-                  </span>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center space-y-3 hover:border-[#F59E0B]/50 transition group">
+                <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-black font-black text-base flex items-center justify-center mx-auto shadow-lg shadow-[#F59E0B]/25">
+                  2
                 </div>
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-white">
-                    Introduce Businesses & Clients
-                  </h3>
-                  <p className="text-xs text-neutral-300 leading-relaxed">
-                    When you speak with colleagues, corporate executives, realtors, or business owners, give them your code or link. When they click or enter your code, our system locks them under your account and opens WhatsApp to consult with our sales desk.
-                  </p>
-                </div>
-                <div className="pt-2 text-xs text-amber-300 font-medium">
-                  ✓ Our WhatsApp team closes the sale for you
-                </div>
+                <h3 className="font-extrabold text-base text-white">Get Your Link</h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  Receive a unique referral link
+                </p>
               </div>
 
               {/* Step 3 */}
-              <div className="rounded-3xl border border-emerald-500/25 bg-gradient-to-b from-emerald-500/10 via-[#121217] to-[#0A0A0D] p-8 space-y-5 relative hover:border-emerald-400/50 transition shadow-xl">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-white font-black text-lg shadow-lg shadow-emerald-500/30 border border-emerald-300">
-                    3
-                  </span>
-                  <span className="text-[11px] font-mono uppercase text-emerald-300 font-bold">
-                    Direct Bank Credit
-                  </span>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center space-y-3 hover:border-[#F59E0B]/50 transition group">
+                <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-black font-black text-base flex items-center justify-center mx-auto shadow-lg shadow-[#F59E0B]/25">
+                  3
                 </div>
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-white">
-                    Get 10% Cash Commission
-                  </h3>
-                  <p className="text-xs text-neutral-300 leading-relaxed">
-                    When the client pays for their cards, 10% is immediately credited to your live dashboard wallet. Request a withdrawal anytime once you have ₦50,000—credited within 3 working hours into your Nigerian bank.
-                  </p>
-                </div>
-                <div className="pt-2 text-xs text-emerald-400 font-medium">
-                  ✓ Paid to GTB, Zenith, Access, Kuda, Moniepoint, etc.
-                </div>
+                <h3 className="font-extrabold text-base text-white">Refer Business</h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  Share with businesses and contacts
+                </p>
               </div>
-            </div>
 
-            {/* Middle Action Bar */}
-            <div className="text-center">
-              <Link
-                href="/portal?tab=register"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 px-8 py-4 text-sm font-black text-neutral-950 hover:brightness-110 transition shadow-xl shadow-amber-500/25 hover:scale-[1.02] border border-amber-200/60"
-              >
-                <span>Get Your Referral Code Now (Free)</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              {/* Step 4 */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center space-y-3 hover:border-[#F59E0B]/50 transition group">
+                <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-black font-black text-base flex items-center justify-center mx-auto shadow-lg shadow-[#F59E0B]/25">
+                  4
+                </div>
+                <h3 className="font-extrabold text-base text-white">Earn Commission</h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  When they purchase, you earn 10%
+                </p>
+              </div>
+
+              {/* Step 5 */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center space-y-3 hover:border-[#F59E0B]/50 transition group">
+                <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-black font-black text-base flex items-center justify-center mx-auto shadow-lg shadow-[#F59E0B]/25">
+                  5
+                </div>
+                <h3 className="font-extrabold text-base text-white">Withdraw</h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  Request payout once eligible
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* =========================================================================
-            5. FINAL CALL TO ACTION
+            5. YOUR EARNINGS AT A GLANCE (3D BAR CHART FROM MOCKUP)
            ========================================================================= */}
-        <section className="py-20 md:py-28 bg-gradient-to-t from-[#141008] via-[#0E0C14] to-[#07070A] text-center border-t border-amber-500/20 relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-amber-500/15 blur-[120px] rounded-full pointer-events-none" />
+        <section className="py-20 bg-white text-neutral-900 border-b border-neutral-200">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-8 sm:p-12 shadow-lg grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+              {/* Left Graphic: 3D Gold Bar Chart */}
+              <div className="relative flex items-center justify-center">
+                <img
+                  src="/images/products/earnings-bar-chart.png"
+                  alt="10% Commission Chart"
+                  className="max-h-[220px] w-auto object-contain drop-shadow-xl"
+                />
+              </div>
 
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 space-y-8 relative z-10">
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-amber-500/25 to-yellow-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 mx-auto shadow-lg shadow-amber-500/20 animate-bounce">
-              <Sparkles className="w-7 h-7 text-amber-400 fill-amber-400" />
+              {/* Right Content */}
+              <div className="space-y-4">
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+                  Your Earnings at a Glance
+                </h2>
+                <p className="text-base text-neutral-600 leading-relaxed">
+                  Earn 10% commission on qualifying sales, with a minimum withdrawal of ₦50,000.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/pricing"
+                    className="inline-flex items-center gap-2 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black px-7 py-3.5 text-sm font-extrabold transition shadow-md hover:scale-[1.02]"
+                  >
+                    <span>View Detailed Breakdown</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
 
-            <div className="space-y-3">
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-                Start Earning 10% on Every Corporate Card Introduction
-              </h2>
-              <p className="text-xs sm:text-base text-neutral-300 max-w-xl mx-auto leading-relaxed">
-                Join our network of professionals, corporate executives, and consultants across Nigeria. Free registration takes less than 30 seconds.
-              </p>
+        {/* =========================================================================
+            6. WHY BECOME AN AFFILIATE? (CHECKLIST & TESTIMONIAL FROM MOCKUP)
+           ========================================================================= */}
+        <section className="py-20 md:py-28 bg-black text-white border-b border-white/10">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Left Column: Why Become an Affiliate? */}
+              <div className="space-y-6">
+                <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                  Why Become an Affiliate?
+                </h2>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="h-6 w-6 rounded-full bg-[#F59E0B] text-black flex items-center justify-center shrink-0 font-black text-xs">
+                      ✓
+                    </div>
+                    <span className="text-base sm:text-lg font-semibold text-white">
+                      Attractive 10% commission
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="h-6 w-6 rounded-full bg-[#F59E0B] text-black flex items-center justify-center shrink-0 font-black text-xs">
+                      ✓
+                    </div>
+                    <span className="text-base sm:text-lg font-semibold text-white">
+                      Trusted brands
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="h-6 w-6 rounded-full bg-[#F59E0B] text-black flex items-center justify-center shrink-0 font-black text-xs">
+                      ✓
+                    </div>
+                    <span className="text-base sm:text-lg font-semibold text-white">
+                      Easy sign-up &amp; tracking
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="h-6 w-6 rounded-full bg-[#F59E0B] text-black flex items-center justify-center shrink-0 font-black text-xs">
+                      ✓
+                    </div>
+                    <span className="text-base sm:text-lg font-semibold text-white">
+                      Flexible withdrawal options
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Testimonial & Smiling Affiliate */}
+              <div className="relative rounded-3xl border border-white/15 bg-neutral-900/80 p-7 sm:p-9 shadow-2xl flex flex-col sm:flex-row items-center gap-6 overflow-hidden">
+                <div className="space-y-4 flex-1">
+                  <p className="text-sm sm:text-base italic text-neutral-200 leading-relaxed">
+                    &ldquo;The Identifine Affiliate Programme is a great opportunity to earn while promoting world-class products.&rdquo;
+                  </p>
+                  <div>
+                    <div className="flex items-center gap-1 text-[#F59E0B]">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-[#F59E0B]" />
+                      ))}
+                    </div>
+                    <div className="text-xs text-neutral-400 font-medium mt-1">
+                      Happy Affiliate
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-36 h-36 shrink-0 rounded-2xl overflow-hidden border border-white/10 shadow-lg">
+                  <img
+                    src="/images/products/happy-affiliate.png"
+                    alt="Happy Affiliate"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        {/* =========================================================================
+            7. READY TO START EARNING? (GOLD RIBBON CTA FROM MOCKUP)
+           ========================================================================= */}
+        <section className="bg-black py-10 px-4 sm:px-6">
+          <div className="mx-auto max-w-6xl">
+            <div className="rounded-2xl bg-gradient-to-r from-[#F59E0B] via-[#E5A826] to-[#D97706] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+              <div className="flex items-center gap-4 text-neutral-950">
+                <div className="h-12 w-12 rounded-full bg-black/15 flex items-center justify-center shrink-0">
+                  <Rocket className="w-6 h-6 text-black" />
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-extrabold text-black">
+                    Ready to Start Earning?
+                  </h3>
+                  <p className="text-xs sm:text-sm text-black/80 font-medium">
+                    Join the Identifine &amp; Xtreme Cardz Affiliate Programme today!
+                  </p>
+                </div>
+              </div>
+
               <Link
                 href="/portal?tab=register"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 px-8 py-4 text-sm font-black text-neutral-950 hover:brightness-110 transition shadow-[0_0_35px_rgba(245,158,11,0.35)] hover:scale-[1.02] border border-amber-200/80"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-900 text-white px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
               >
-                <span>Create Your Free Affiliate Account</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Become an Affiliate</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-
-              <Link
-                href="/pricing"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-amber-400/40 bg-neutral-900/90 px-6 py-4 text-sm font-bold text-amber-200 hover:bg-amber-500/15 transition shadow-sm"
-              >
-                <span>Review Commission Table</span>
-              </Link>
-            </div>
-
-            <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-neutral-400 font-mono">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 100% Free Signup
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" /> ₦50k Threshold
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 3-Hour Bank Payout
-              </span>
             </div>
           </div>
         </section>

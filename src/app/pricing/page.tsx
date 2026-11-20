@@ -7,321 +7,245 @@ import { MarketingFooter } from "@/components/MarketingFooter";
 import {
   DollarSign,
   ArrowRight,
-  CheckCircle2,
-  Building2,
-  CreditCard,
   ShieldCheck,
-  Smartphone,
-  Clock,
+  FileText,
+  Landmark,
+  Zap,
   Sparkles,
-  Award,
   Layers,
-  HelpCircle,
 } from "lucide-react";
 
 export default function PricingEarningsPage() {
-  const [selectedPack, setSelectedPack] = useState<number>(1);
+  const [salesInput, setSalesInput] = useState<string>("500000");
+  const [calculatedCommission, setCalculatedCommission] = useState<number>(50000);
 
-  const packages = [
-    {
-      id: "vip-metal",
-      name: "VIP Custom Metal Card Suite",
-      units: "10 Luxury Units",
-      price: 180000,
-      commission: 18000,
-      image: "/images/products/gold-mirror-metal.webp",
-      description: "24K Brushed Gold, Rose Gold, or Gunmetal Stainless Steel smart NFC cards for C-Suite executives, founders, and VIP partners.",
-      features: [
-        "Aircraft-Grade Stainless Steel",
-        "Laser Engraved Logo & Details",
-        "Contactless Tap-to-Share Profile",
-        "Lifetime Digital Cloud Hosting",
-        "Luxury Individual Presentation Boxes",
-      ],
-      badge: "C-Suite Favorite",
-    },
-    {
-      id: "exec-team",
-      name: "Executive Team Smart NFC Pack",
-      units: "25 Units",
-      price: 250000,
-      commission: 25000,
-      image: "/images/products/black-matte-metal.webp",
-      description: "Custom laser-engraved matte black PVC & Metal Hybrid smart cards tailored for executive sales teams, directors, and partners.",
-      features: [
-        "Premium Matte Black Finish",
-        "Dynamic Contact & vCard Sharing",
-        "Embedded NTAG High-Frequency Chip",
-        "Full Brand Identity Alignment",
-        "Dedicated Account Setup Assistance",
-      ],
-      badge: "Most Popular",
-    },
-    {
-      id: "corp-enterprise",
-      name: "Corporate Enterprise Identity Pack",
-      units: "100 Units",
-      price: 650000,
-      commission: 65000,
-      image: "/images/products/corporate-id-system.webp",
-      description: "Full corporate rollout for medium to large enterprises, law firms, logistics groups, and institutions with central team management.",
-      features: [
-        "100 Smart NFC Corporate Cards",
-        "Centralized Admin Management Portal",
-        "CRM & Lead Capture Integration",
-        "Dynamic Team Title & Profile Updates",
-        "Priority Nationwide Express Dispatch",
-      ],
-      badge: "Highest Commission",
-    },
-    {
-      id: "bespoke-b2b",
-      name: "Bespoke Corporate Rollout / Smart Access Suite",
-      units: "150 – 500+ Units",
-      price: 1200000,
-      commission: 120000,
-      image: "/images/products/gunmetal-titanium.webp",
-      description: "Custom RFID/NFC integrated door access badges, hotel keycards, event access systems, and large enterprise solutions.",
-      features: [
-        "Physical ID + RFID + Smart NFC",
-        "Door & Turnstile Access System Encoding",
-        "Custom Hologram / Foil Security Seals",
-        "Enterprise API & Webhook Hooks",
-        "Dedicated Enterprise Account Manager",
-      ],
-      badge: "Enterprise Custom",
-    },
+  const handleCalculate = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanNum = Number(salesInput.replace(/[^0-9]/g, ""));
+    if (!isNaN(cleanNum)) {
+      setCalculatedCommission(Math.round(cleanNum * 0.1));
+    }
+  };
+
+  const exampleTable = [
+    { sales: "₦100,000", commission: "₦10,000" },
+    { sales: "₦500,000", commission: "₦50,000" },
+    { sales: "₦1,000,000", commission: "₦100,000" },
+    { sales: "₦5,000,000", commission: "₦500,000" },
   ];
 
   return (
-    <div className="min-h-screen bg-[#070708] text-white flex flex-col selection:bg-white selection:text-black transition-colors duration-200">
+    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-[#F59E0B] selection:text-black transition-colors duration-200">
       <MarketingNav />
 
       <main className="flex-1">
-        {/* Header */}
-        <section className="py-16 md:py-24 border-b border-white/10 bg-gradient-to-b from-neutral-950 via-[#070708] to-[#0A0A0E] text-center">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 space-y-5">
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 text-xs font-semibold text-amber-300">
-              <DollarSign className="w-3.5 h-3.5 text-amber-400" />
-              <span>Transparent 10% Cash Commission Structure</span>
+        {/* =========================================================================
+            1. HERO: EARNINGS & COMMISSION (EXACT MATCH TO MOCKUP)
+           ========================================================================= */}
+        <section className="py-16 md:py-20 border-b border-white/10 bg-black relative overflow-hidden">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Left Title */}
+              <div className="space-y-3">
+                <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight">
+                  Earnings &amp; Commission
+                </h1>
+                <p className="text-sm sm:text-base text-neutral-300 font-medium">
+                  Know exactly how you earn and how to get paid.
+                </p>
+              </div>
+
+              {/* Right Hero Graphic: Black & Gold card with stacked coins */}
+              <div className="flex justify-center md:justify-end">
+                <img
+                  src="/images/products/earnings-coins-card.png"
+                  alt="Earnings and Commission"
+                  className="max-h-[180px] w-auto object-contain drop-shadow-2xl"
+                />
+              </div>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-              Product Pricing & Affiliate Earnings
-            </h1>
-            <p className="text-xs sm:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed">
-              Every package is priced transparently. When your referred client pays their invoice, 10% of their total spend is automatically credited to your wallet in cash.
-            </p>
           </div>
         </section>
 
-        {/* Packages Grid */}
-        <section className="py-16 md:py-24 border-b border-white/10 bg-[#070708]">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {packages.map((pkg) => (
-                <div
-                  key={pkg.id}
-                  className="rounded-3xl border border-white/15 bg-[#111115] overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition shadow-xl relative group"
-                >
-                  <div className="h-44 w-full bg-neutral-900 overflow-hidden relative">
-                    <img
-                      src={pkg.image}
-                      alt={pkg.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className="rounded-full bg-black/70 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300">
-                        {pkg.badge}
-                      </span>
-                    </div>
-                    <div className="absolute top-3 right-3">
-                      <span className="rounded-full bg-black/70 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-mono font-bold text-neutral-300">
-                        {pkg.units}
-                      </span>
-                    </div>
-                  </div>
+        {/* =========================================================================
+            2. TWO BIG STAT CARDS (10% & ₦50,000)
+           ========================================================================= */}
+        <section className="py-10 bg-white text-neutral-900 border-b border-neutral-200">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Card 1: Commission Rate */}
+              <div className="rounded-3xl border border-neutral-200 bg-neutral-50/80 p-8 text-center space-y-2 shadow-sm">
+                <div className="text-sm font-bold text-neutral-600">
+                  Commission Rate
+                </div>
+                <div className="text-5xl sm:text-6xl font-black text-[#D97706] tracking-tight">
+                  10%
+                </div>
+                <div className="text-xs text-neutral-500 font-medium">
+                  on qualifying sales
+                </div>
+              </div>
 
-                  <div className="p-6 space-y-6 flex-1 flex flex-col justify-between">
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="text-lg font-extrabold text-white">
-                          {pkg.name}
-                        </h3>
-                        <div className="mt-2 text-2xl font-black text-white">
-                          ₦{pkg.price.toLocaleString()}
-                        </div>
-                        <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
-                          {pkg.description}
-                        </p>
-                      </div>
-                    </div>
+              {/* Card 2: Minimum Withdrawal */}
+              <div className="rounded-3xl border border-neutral-200 bg-neutral-50/80 p-8 text-center space-y-2 shadow-sm">
+                <div className="text-sm font-bold text-neutral-600">
+                  Minimum Withdrawal
+                </div>
+                <div className="text-5xl sm:text-6xl font-black text-[#D97706] tracking-tight">
+                  ₦50,000
+                </div>
+                <div className="text-xs text-neutral-500 font-medium">
+                  per request
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                    {/* Affiliate Callout Banner */}
-                    <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 space-y-0.5">
-                      <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-300 font-bold">
-                        YOUR 10% COMMISSION
-                      </div>
-                      <div className="text-xl font-black text-emerald-400">
-                        +₦{pkg.commission.toLocaleString()} CASH
-                      </div>
-                    </div>
+        {/* =========================================================================
+            3. ESTIMATE YOUR EARNINGS (CALCULATOR + TABLE)
+           ========================================================================= */}
+        <section className="py-16 md:py-20 bg-white text-neutral-900 border-b border-neutral-200">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-10">
+            <div className="text-center space-y-1">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
+                Estimate Your Earnings
+              </h2>
+              <p className="text-sm text-neutral-600">
+                Enter a sales amount to see your potential commission.
+              </p>
+            </div>
 
-                    {/* Feature list */}
-                    <div className="space-y-2 pt-2 border-t border-white/10 text-xs">
-                      {pkg.features.map((feat, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-neutral-300">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </div>
+            {/* Input + Calculate Form */}
+            <form onSubmit={handleCalculate} className="max-w-xl mx-auto flex items-center gap-3">
+              <input
+                type="text"
+                value={salesInput}
+                onChange={(e) => setSalesInput(e.target.value)}
+                placeholder="Enter sales amount (₦)"
+                className="flex-1 rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+              />
+              <button
+                type="submit"
+                className="rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold px-7 py-3 text-sm transition shadow-sm cursor-pointer"
+              >
+                Calculate
+              </button>
+            </form>
+
+            {/* Calculator Results Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-4xl mx-auto">
+              {/* Left Result Card */}
+              <div className="rounded-2xl border border-amber-200 bg-amber-50/80 p-8 flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
+                <div className="text-xs sm:text-sm font-bold text-neutral-600">
+                  Your Estimated Commission
+                </div>
+                <div className="text-4xl sm:text-5xl font-black text-neutral-950 font-mono">
+                  ₦{calculatedCommission.toLocaleString()}
+                </div>
+                <div className="text-xs text-neutral-500 font-medium">
+                  (10% of your sales)
+                </div>
+              </div>
+
+              {/* Right Example Earnings Table */}
+              <div className="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-6 shadow-sm">
+                <div className="font-extrabold text-sm text-neutral-900 mb-3">
+                  Example Earnings
+                </div>
+                <div className="overflow-hidden rounded-xl border border-neutral-200">
+                  <table className="w-full text-xs text-left">
+                    <thead className="bg-neutral-100 text-neutral-700 font-bold border-b border-neutral-200">
+                      <tr>
+                        <th className="py-2.5 px-4">Sales Amount</th>
+                        <th className="py-2.5 px-4">Your Commission</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-neutral-200 bg-white">
+                      {exampleTable.map((row, idx) => (
+                        <tr key={idx} className="hover:bg-neutral-50 transition">
+                          <td className="py-2.5 px-4 font-mono font-medium text-neutral-900">{row.sales}</td>
+                          <td className="py-2.5 px-4 font-mono font-bold text-emerald-700">{row.commission}</td>
+                        </tr>
                       ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-4">
-                    <Link
-                      href="/portal?tab=register"
-                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-white py-2.5 text-xs font-bold text-black hover:bg-neutral-200 transition"
-                    >
-                      <span>Earn ₦{pkg.commission.toLocaleString()}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
+                    </tbody>
+                  </table>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Earning Scenarios */}
-        <section className="py-16 md:py-24 border-b border-white/10 bg-[#09090D]">
+        {/* =========================================================================
+            4. HOW YOU GET PAID (3 STEPS + PAYSTACK BADGE)
+           ========================================================================= */}
+        <section className="py-16 md:py-24 bg-white text-neutral-900 border-b border-neutral-200">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-12">
-            <div className="text-center space-y-3 max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Realistic Monthly Earnings Models
-              </h2>
-              <p className="text-xs sm:text-sm text-neutral-400">
-                How our partners scale their income based on their network and referral volume.
-              </p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-neutral-950">
+              How You Get Paid
+            </h2>
+
+            {/* 3 Step Icons */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
+              <div className="flex flex-col items-center gap-3">
+                <div className="h-16 w-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-[#D97706] shadow-sm">
+                  <FileText className="w-8 h-8" />
+                </div>
+                <div className="text-xs font-bold text-neutral-500">1</div>
+                <p className="text-sm font-bold text-neutral-900 max-w-[200px]">
+                  Reach the minimum threshold (₦50,000)
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center gap-3">
+                <div className="h-16 w-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-[#D97706] shadow-sm">
+                  <Landmark className="w-8 h-8" />
+                </div>
+                <div className="text-xs font-bold text-neutral-500">2</div>
+                <p className="text-sm font-bold text-neutral-900 max-w-[200px]">
+                  Request a withdrawal
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center gap-3">
+                <div className="h-16 w-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-[#D97706] shadow-sm">
+                  <Zap className="w-8 h-8" />
+                </div>
+                <div className="text-xs font-bold text-neutral-500">3</div>
+                <p className="text-sm font-bold text-neutral-900 max-w-[200px]">
+                  Receive payment into your bank account
+                </p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Level 1 */}
-              <div className="rounded-3xl border border-white/10 bg-[#121216] p-7 space-y-4">
-                <div className="text-xs font-mono uppercase tracking-wider text-neutral-400 font-bold">
-                  LEVEL 1: CASUAL INTRODUCER
-                </div>
-                <div className="text-3xl font-black text-amber-400">
-                  ₦75,000 / mo
-                </div>
-                <p className="text-xs text-neutral-300 leading-relaxed">
-                  Refers just <strong>3 executive packs</strong> or <strong>1 corporate enterprise order</strong> a month simply by showing friends or posting on WhatsApp status.
-                </p>
-                <div className="pt-3 border-t border-white/10 text-xs text-neutral-400 space-y-1">
-                  <div>• 3 × Executive Team (₦25k comm)</div>
-                  <div>• Effort: ~1 hour a week</div>
-                </div>
+            {/* Paystack Security Badge */}
+            <div className="max-w-2xl mx-auto rounded-2xl bg-neutral-950 text-white p-5 flex items-center gap-4 shadow-xl">
+              <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 text-[#F59E0B]">
+                <ShieldCheck className="w-6 h-6" />
               </div>
-
-              {/* Level 2 */}
-              <div className="rounded-3xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 to-[#121216] p-7 space-y-4">
-                <div className="text-xs font-mono uppercase tracking-wider text-amber-300 font-bold">
-                  LEVEL 2: ACTIVE NETWORKER
-                </div>
-                <div className="text-3xl font-black text-white">
-                  ₦260,000 / mo
-                </div>
-                <p className="text-xs text-neutral-300 leading-relaxed">
-                  Actively recommends Identifine to <strong>4 corporate companies</strong> and <strong>2 VIP clients</strong> each month through professional circles, LinkedIn, or business meetings.
-                </p>
-                <div className="pt-3 border-t border-white/10 text-xs text-neutral-400 space-y-1">
-                  <div>• 4 × Corporate Enterprise (₦65k comm each)</div>
-                  <div>• Effort: Part-time consulting</div>
-                </div>
-              </div>
-
-              {/* Level 3 */}
-              <div className="rounded-3xl border border-white/10 bg-[#121216] p-7 space-y-4">
-                <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">
-                  LEVEL 3: B2B CONSULTANT / AGENCY
-                </div>
-                <div className="text-3xl font-black text-emerald-400">
-                  ₦650,000+ / mo
-                </div>
-                <p className="text-xs text-neutral-300 leading-relaxed">
-                  Partners who introduce large corporate rollouts, law firms, banking branches, or universities ordering 100 to 500+ cards for their organization.
-                </p>
-                <div className="pt-3 border-t border-white/10 text-xs text-neutral-400 space-y-1">
-                  <div>• 10 × Enterprise Packs / Bespoke Deployments</div>
-                  <div>• Effort: High-value corporate introductions</div>
-                </div>
-              </div>
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                Withdrawals are processed securely via Paystack, with your safety and convenience in mind.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Withdrawal Policy & Banking Rules */}
-        <section className="py-16 md:py-24 border-b border-white/10 bg-[#070708]">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 space-y-10">
-            <div className="text-center space-y-3">
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Withdrawal Rules & Banking Terms
-              </h2>
-              <p className="text-xs sm:text-sm text-neutral-400">
-                Clear, transparent, and direct payout policies for all Nigerian partners.
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-white/15 bg-[#111115] p-6 sm:p-10 space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-white font-bold text-sm">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span>₦50,000 Minimum Payout Threshold</span>
-                  </div>
-                  <p className="text-xs text-neutral-400 leading-relaxed">
-                    Once your available commission reaches ₦50,000, your withdrawal button unlocks automatically. You can withdraw all or part of your balance anytime.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-white font-bold text-sm">
-                    <Clock className="w-4 h-4 text-amber-400" />
-                    <span>3 Working Hours Crediting Window</span>
-                  </div>
-                  <p className="text-xs text-neutral-400 leading-relaxed">
-                    Withdrawal requests submitted during regular Nigerian banking hours (9:00 AM – 5:00 PM) are reviewed and credited directly to your registered bank account within 3 working hours.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-white font-bold text-sm">
-                    <Building2 className="w-4 h-4 text-indigo-400" />
-                    <span>All Nigerian Banks Supported</span>
-                  </div>
-                  <p className="text-xs text-neutral-400 leading-relaxed">
-                    We support all CBN-licensed commercial banks and digital microfinance banks, including GTBank, Zenith Bank, Access Bank, First Bank, UBA, Moniepoint, Kuda Bank, OPay, and Providus.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-white font-bold text-sm">
-                    <CheckCircle2 className="w-4 h-4 text-purple-400" />
-                    <span>Zero Withdrawal Fees</span>
-                  </div>
-                  <p className="text-xs text-neutral-400 leading-relaxed">
-                    There are no hidden administrative or bank deduction fees. If you request ₦100,000, exactly ₦100,000 arrives in your bank account.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center pt-2">
+        {/* Quick CTA */}
+        <section className="bg-black py-12 px-4 sm:px-6 text-center">
+          <div className="mx-auto max-w-4xl space-y-4">
+            <h3 className="text-2xl sm:text-3xl font-black text-white">
+              Ready to Start Earning?
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-400">
+              Join thousands of professionals introducing luxury NFC smart cards in Nigeria.
+            </p>
+            <div className="pt-2">
               <Link
                 href="/portal?tab=register"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-extrabold text-black hover:bg-neutral-200 transition shadow-xl"
+                className="inline-flex items-center gap-2 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
               >
-                <span>Join Now & Start Earning</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Become an Affiliate</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>

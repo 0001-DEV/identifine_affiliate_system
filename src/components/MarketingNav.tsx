@@ -13,23 +13,28 @@ export function MarketingNav() {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Products", href: "/#products" },
-    { label: "Earnings & Pricing", href: "/pricing" },
     { label: "How It Works", href: "/#how-it-works" },
+    { label: "Products", href: "/#products" },
+    { label: "Earnings", href: "/pricing" },
     { label: "FAQ", href: "/faq" },
-    { label: "System Guide", href: "/guide" },
   ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black text-white backdrop-blur-md transition-colors duration-200">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <XtremLogo size="md" showSubtitle={false} />
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-4">
+        {/* Brand Dual Logo: IDENTIFINE | XTREME CARDZ */}
+        <Link href="/" className="flex items-center gap-2 select-none group">
+          <span className="font-extrabold tracking-wider text-sm sm:text-base text-white">
+            IDENTIFINE
+          </span>
+          <span className="text-white/30 font-light text-base sm:text-lg">|</span>
+          <span className="font-extrabold tracking-wider text-sm sm:text-base text-white flex items-center">
+            <span className="text-[#F59E0B] font-black">X</span>TREME CARDZ
+          </span>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-7 text-xs font-semibold">
+        <nav className="hidden md:flex items-center gap-8 text-xs font-semibold">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -38,7 +43,7 @@ export function MarketingNav() {
                 href={link.href}
                 className={`transition-colors duration-150 ${
                   isActive
-                    ? "text-white font-bold"
+                    ? "text-[#F59E0B] font-bold"
                     : "text-neutral-300 hover:text-white"
                 }`}
               >
@@ -50,20 +55,17 @@ export function MarketingNav() {
 
         {/* Actions & CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle showLabel={false} />
-
           <Link
             href="/portal?tab=login"
             className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold text-white hover:bg-white/10 transition"
           >
-            Partner Sign In
+            Sign In
           </Link>
 
           <Link
             href="/portal?tab=register"
-            className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-xs font-extrabold text-black hover:bg-neutral-200 transition shadow-sm hover:scale-[1.02]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-6 py-2 text-xs font-extrabold transition shadow-md hover:scale-[1.02]"
           >
-            <Sparkles className="w-3.5 h-3.5 text-black fill-black" />
             <span>Become an Affiliate</span>
           </Link>
         </div>

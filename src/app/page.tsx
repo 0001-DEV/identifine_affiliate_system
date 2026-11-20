@@ -86,7 +86,7 @@ export default function MarketingHomePage() {
                 {/* Main Headline with Glowing Multi-Stop Metallic Gold */}
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]">
                   Turn Corporate Introductions into{" "}
-                  <span className="block mt-1 bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] via-amber-300 to-[#D97706] bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(245,158,11,0.35)]">
+                  <span className="block mt-1 bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] to-[#D97706] bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(245,158,11,0.35)]">
                     10% Instant Cash Commission
                   </span>
                 </h1>
@@ -184,7 +184,7 @@ export default function MarketingHomePage() {
                     onClick={triggerTapSimulation}
                     className={`cursor-pointer relative z-20 w-full rounded-3xl p-6 transition-all duration-500 shadow-2xl overflow-hidden select-none animate-float border group ${
                       activeCardType === "gold"
-                        ? "bg-gradient-to-br from-[#F5D061] via-[#E2B857] via-[#C89B33] to-[#7A5612] border-amber-200 text-neutral-950 shadow-2xl shadow-amber-500/40"
+                        ? "bg-gradient-to-br from-[#F5D061] via-[#E2B857] to-[#7A5612] border-amber-200 text-neutral-950 shadow-2xl shadow-amber-500/40"
                         : activeCardType === "de-titan"
                         ? "bg-gradient-to-br from-[#1E3A8A] via-[#1E293B] to-[#0A0F1D] border-sky-400/50 text-white shadow-2xl shadow-sky-500/30"
                         : activeCardType === "emerald"

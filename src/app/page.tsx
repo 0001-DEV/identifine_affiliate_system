@@ -102,6 +102,21 @@ export default function MarketingHomePage() {
   const [heroEmail, setHeroEmail] = useState("");
   const [heroPhone, setHeroPhone] = useState("");
 
+  // 3D Card Interactive Tilt & Specular Light (Residence / Buff Motion style)
+  const [cardTilt, setCardTilt] = useState({ x: 0, y: 0, active: false });
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setCardTilt({ x: x * 12, y: -y * 12, active: true });
+  };
+
+  const handleCardMouseLeave = () => {
+    setIsPaused(false);
+    setCardTilt({ x: 0, y: 0, active: false });
+  };
+
   const handleHeroSignup = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams({
@@ -129,14 +144,15 @@ export default function MarketingHomePage() {
       <main className="flex-1">
         {/* =========================================================================
             1. HERO SECTION: CONCEPT 10 — 50/50 SPLIT SCREEN
-               Left: full-height card photo carousel | Right: instant affiliate onboarding
+               Left: full-height card photo carousel with 3D tilt | Right: instant affiliate onboarding
            ========================================================================= */}
         <section className="relative grid lg:grid-cols-2 w-full lg:min-h-[calc(100vh-64px)] border-b border-white/10">
-          {/* ---------- LEFT: Product Carousel ---------- */}
+          {/* ---------- LEFT: Product Carousel with 3D Tilt ---------- */}
           <div
-            className="relative h-[460px] sm:h-[560px] lg:h-auto overflow-hidden bg-black"
+            className="relative h-[460px] sm:h-[560px] lg:h-auto overflow-hidden bg-black select-none"
             onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            onMouseMove={handleCardMouseMove}
+            onMouseLeave={handleCardMouseLeave}
           >
             {heroCardImages.map((slide, index) => (
               <div
@@ -146,12 +162,25 @@ export default function MarketingHomePage() {
                 }`}
               >
                 <div
-                  className={`w-full h-full bg-cover bg-center bg-no-repeat ${
+                  className={`w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-300 ${
                     index === currentSlide ? "animate-ken-burns" : ""
                   }`}
-                  style={{ backgroundImage: `url(${slide.image})` }}
+                  style={{
+                    backgroundImage: `url(${slide.image})`,
+                    transform: cardTilt.active
+                      ? `perspective(1000px) rotateY(${cardTilt.x}deg) rotateX(${cardTilt.y}deg) scale(1.03)`
+                      : "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)",
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none" />
+                {/* Dynamic Specular Sheen Layer reacting to tilt */}
+                <div
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+                  style={{
+                    background: cardTilt.active
+                      ? `radial-gradient(circle at ${50 + cardTilt.x * 3}% ${50 - cardTilt.y * 3}%, rgba(255,255,255,0.18) 0%, transparent 60%), linear-gradient(to top, rgba(0,0,0,0.85), transparent 45%, rgba(0,0,0,0.3))`
+                      : "linear-gradient(to top, rgba(0,0,0,0.85), transparent 45%, rgba(0,0,0,0.3))",
+                  }}
+                />
               </div>
             ))}
 
@@ -173,7 +202,7 @@ export default function MarketingHomePage() {
                 <button
                   onClick={prevSlide}
                   aria-label="Previous slide"
-                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition"
+                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition-magnetic"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -187,7 +216,7 @@ export default function MarketingHomePage() {
                 <button
                   onClick={nextSlide}
                   aria-label="Next slide"
-                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition"
+                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition-magnetic"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -202,19 +231,24 @@ export default function MarketingHomePage() {
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Xtreme Cardz &amp; Identifine Affiliate Programme
               </div>
-              <h1 className="mt-4 text-3xl sm:text-[2.6rem] leading-[1.08] tracking-tight">
-                <span className="font-light">Become an</span>
-                <br />
-                <span className="font-black">Executive Partner</span>
-              </h1>
+
+              {/* Residence style Masked Reveal Headline */}
+              <div className="mt-4 overflow-hidden">
+                <h1 className="animate-mask-rise text-3xl sm:text-[2.6rem] leading-[1.08] tracking-tight">
+                  <span className="font-light block">Become an</span>
+                  <span className="font-black block bg-gradient-to-r from-neutral-900 via-black to-neutral-800 bg-clip-text text-transparent">
+                    Executive Partner
+                  </span>
+                </h1>
+              </div>
 
               {/* Live earnings slider */}
-              <div className="mt-6 rounded-2xl bg-neutral-50 border border-neutral-200 p-4">
+              <div className="mt-6 rounded-2xl bg-neutral-50 border border-neutral-200 p-4 transition-magnetic">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-neutral-600">
-                    Refer <b className="text-neutral-900">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/month
+                    Refer <b className="text-neutral-900 font-mono text-base">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/month
                   </span>
-                  <span className="font-black text-lg text-neutral-900">
+                  <span className="font-black text-xl text-neutral-900 font-mono tracking-tight">
                     ₦{(heroReferrals * 25000).toLocaleString()}
                   </span>
                 </div>
@@ -234,16 +268,16 @@ export default function MarketingHomePage() {
 
               {/* Guarantees */}
               <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-                <div className="flex flex-col items-center gap-1.5">
-                  <Zap className="w-5 h-5" />
+                <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
+                  <Zap className="w-5 h-5 text-emerald-600" />
                   <span className="text-[12px] font-semibold leading-tight">Instant Paystack<br />Settlement</span>
                 </div>
-                <div className="flex flex-col items-center gap-1.5">
-                  <DollarSign className="w-5 h-5" />
+                <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
+                  <DollarSign className="w-5 h-5 text-amber-600" />
                   <span className="text-[12px] font-semibold leading-tight">10% Cash<br />Commission</span>
                 </div>
-                <div className="flex flex-col items-center gap-1.5">
-                  <Layers className="w-5 h-5" />
+                <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
+                  <Layers className="w-5 h-5 text-blue-600" />
                   <span className="text-[12px] font-semibold leading-tight">Zero<br />Inventory</span>
                 </div>
               </div>
@@ -275,9 +309,10 @@ export default function MarketingHomePage() {
                 />
                 <button
                   type="submit"
-                  className="w-full rounded-xl bg-black text-[#E9CF7E] font-bold py-3.5 border-2 border-[#C9A13B] hover:bg-neutral-900 hover:shadow-[0_10px_30px_-10px_rgba(201,161,59,0.6)] transition flex items-center justify-center gap-2"
+                  className="group w-full rounded-xl bg-black text-[#E9CF7E] font-bold py-3.5 border-2 border-[#C9A13B] hover:bg-neutral-900 hover:shadow-[0_12px_36px_-10px_rgba(201,161,59,0.55)] transition-magnetic flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  Activate Affiliate Link <ArrowRight className="w-4 h-4" />
+                  <span>Activate Affiliate Link</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 duration-300" />
                 </button>
               </form>
               <p className="mt-4 text-center text-xs text-neutral-500">
@@ -288,6 +323,28 @@ export default function MarketingHomePage() {
                 · <Link href="/pricing" className="font-semibold text-neutral-900 underline underline-offset-2">See earnings</Link>
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Buff Motion style Infinite Marquee Ticker */}
+        <section className="border-b border-white/10 bg-black py-4 overflow-hidden select-none">
+          <div className="animate-ticker flex items-center gap-8 text-xs font-bold tracking-widest text-white/80 uppercase">
+            {[1, 2].map((i) => (
+              <div key={i} className="flex items-center gap-8 shrink-0">
+                <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-400" /> 10% Flat Cash Commission</span>
+                <span className="text-white/20">•</span>
+                <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-emerald-400" /> Instant Paystack Settlement</span>
+                <span className="text-white/20">•</span>
+                <span className="flex items-center gap-2"><Award className="w-4 h-4 text-amber-300" /> 24K Brushed Gold &amp; Titanium NFC Cards</span>
+                <span className="text-white/20">•</span>
+                <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-blue-400" /> Zero Inventory Required</span>
+                <span className="text-white/20">•</span>
+                <span className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-emerald-400" /> ₦50,000 Minimum Bank Withdrawal</span>
+                <span className="text-white/20">•</span>
+                <span className="flex items-center gap-2"><Building2 className="w-4 h-4 text-purple-400" /> Enterprise Corporate Rollouts</span>
+                <span className="text-white/20">•</span>
+              </div>
+            ))}
           </div>
         </section>
 

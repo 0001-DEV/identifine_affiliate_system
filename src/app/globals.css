@@ -229,4 +229,65 @@ html.light [class*="from-amber-400"] {
   color: #0A0A0A !important;
 }
 
+/* ==========================================================================
+   LENIS & BUFF MOTION / RESIDENCE KINETIC STYLING
+   ========================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Buff Motion style continuous marquee ticker */
+@keyframes tickerSlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: tickerSlide 25s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Residence style masked text reveal */
+@keyframes maskRise {
+  0% {
+    transform: translateY(115%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.animate-mask-rise {
+  animation: maskRise 0.9s cubic-bezier(0.76, 0.007, 0.25, 1) forwards;
+}
+
+/* Magnetic subtle hover pulse */
+.transition-magnetic {
+  transition: transform 0.4s cubic-bezier(0.76, 0.007, 0.25, 1), box-shadow 0.4s cubic-bezier(0.76, 0.007, 0.25, 1);
+}
+
+
 

@@ -35,63 +35,42 @@ import {
 } from "lucide-react";
 
 export default function MarketingHomePage() {
-  // Hero Carousel Slides (Images from Xtreme Cardz & Identifine)
-  const heroSlides = [
+  // Hero Carousel Card Images (Pure Cards Visual Carousel - No text overlay yet)
+  const heroCardImages = [
     {
       id: "gold-metal",
-      tag: "VIP 24K BRUSHED GOLD METAL",
-      badgeColor: "bg-amber-400 text-black border-amber-300",
-      title: "Turn Corporate Introductions into 10% Cash Commission",
-      description:
-        "Partner with Nigeria's premier producer of luxury laser-engraved 24K gold, rose gold, and stainless steel smart business cards. Earn a flat 10% cash payout on every paid client invoice.",
+      title: "VIP 24K Brushed Gold Metal NFC Suite",
       image: "/images/products/gold-mirror-metal.webp",
-      highlight: "Earn ₦18,000 to ₦120,000+ per referred client",
-      ctaText: "Become an Affiliate Partner",
-      ctaLink: "/portal?tab=register",
-      secondaryText: "Earnings & Package Breakdown",
-      secondaryLink: "/pricing",
     },
     {
       id: "black-matte",
-      tag: "BLACK MATTE STEALTH METAL NFC",
-      badgeColor: "bg-neutral-800 text-white border-neutral-600",
-      title: "Black Matte Metal NFC Cards for CEOs & Directors",
-      description:
-        "Aerospace-grade stainless steel with luxury matte stealth coating. One contactless tap against any smartphone instantly shares contact details, WhatsApp, and company catalog without any app.",
+      title: "Black Matte Stealth Metal NFC Card",
       image: "/images/products/black-matte-metal.webp",
-      highlight: "Instant Tap • Zero Mobile App Required",
-      ctaText: "Become an Affiliate Partner",
-      ctaLink: "/portal?tab=register",
-      secondaryText: "View Card Specifications",
-      secondaryLink: "/pricing",
     },
     {
       id: "corporate-pack",
-      tag: "CORPORATE ENTERPRISE 100-PACK",
-      badgeColor: "bg-emerald-600 text-white border-emerald-400",
-      title: "Full Enterprise Team Identity Rollout & Cloud Portal",
-      description:
-        "Equip entire sales teams, directors, and field executives with centralized administrative control, real-time title updates, lead capture, and priority nationwide courier delivery.",
+      title: "Corporate Enterprise Identity Rollout",
       image: "/images/products/corporate-id-system.webp",
-      highlight: "₦65,000 cash commission on every 100-unit rollout",
-      ctaText: "Register as an Affiliate",
-      ctaLink: "/portal?tab=register",
-      secondaryText: "Calculate Your Payouts",
-      secondaryLink: "#calculator",
     },
     {
       id: "luxury-unboxing",
-      tag: "BESPOKE VIP PRESENTATION SUITES",
-      badgeColor: "bg-purple-600 text-white border-purple-400",
-      title: "Unrivaled First Impressions for High-Net-Worth Clients",
-      description:
-        "Each VIP card is delivered in handcrafted magnetic presentation cases with individual molded velvet interior. Unmatched prestige that clients proudly show colleagues.",
+      title: "Handcrafted Luxury Presentation Suite",
       image: "/images/products/luxury-unboxing.webp",
-      highlight: "₦50,000 minimum withdrawal paid to all Nigerian banks",
-      ctaText: "Join Our Affiliate Network",
-      ctaLink: "/portal?tab=register",
-      secondaryText: "Frequently Asked Questions",
-      secondaryLink: "/faq",
+    },
+    {
+      id: "gunmetal-titanium",
+      title: "Gunmetal Titanium Smart NFC Card",
+      image: "/images/products/gunmetal-titanium.webp",
+    },
+    {
+      id: "elite-gold",
+      title: "Elite Pass 24K Gold VIP Card",
+      image: "/images/products/elite-pass-gold.webp",
+    },
+    {
+      id: "elite-black",
+      title: "Elite Pass Black Matte Executive Card",
+      image: "/images/products/elite-pass-black.webp",
     },
   ];
 
@@ -102,21 +81,18 @@ export default function MarketingHomePage() {
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+      setCurrentSlide((prev) => (prev + 1) % heroCardImages.length);
     }, 5500);
     return () => clearInterval(interval);
-  }, [isPaused, heroSlides.length]);
+  }, [isPaused, heroCardImages.length]);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    setCurrentSlide((prev) => (prev + 1) % heroCardImages.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    setCurrentSlide((prev) => (prev - 1 + heroCardImages.length) % heroCardImages.length);
   };
-
-  // Tap simulation state
-  const [hasTapped, setHasTapped] = useState(false);
 
   // Interactive Earnings Calculator State
   const [executivePacks, setExecutivePacks] = useState(1); // 250k each -> 25k comm
@@ -127,28 +103,22 @@ export default function MarketingHomePage() {
     executivePacks * 250000 + enterprisePacks * 650000 + metalSuites * 180000;
   const affiliateCommission = Math.round(totalOrderValue * 0.1);
 
-  const triggerTapSimulation = () => {
-    setHasTapped(true);
-    setTimeout(() => setHasTapped(false), 4500);
-  };
-
-  const activeSlideData = heroSlides[currentSlide];
-
   return (
     <div className="min-h-screen bg-black text-white flex flex-col selection:bg-white selection:text-black transition-colors duration-200">
       <MarketingNav />
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: FULL-WIDTH CARDS CAROUSEL (OKOMUOIL.COM STYLE ANIMATION)
+            1. HERO SECTION: PURE CARDS PICTURE CAROUSEL (OKOMUOIL.COM STYLE ANIMATION)
+               (Clean visual carousel of our cards pictures with no text overlay yet)
            ========================================================================= */}
         <section
-          className="relative min-h-[640px] md:min-h-[720px] lg:min-h-[780px] w-full overflow-hidden bg-black flex items-center justify-center border-b border-white/10"
+          className="relative h-[480px] sm:h-[580px] md:h-[680px] lg:h-[780px] w-full overflow-hidden bg-black flex items-center justify-center border-b border-white/10"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Background Images Carousel with Ken Burns Zoom & Smooth Fade */}
-          {heroSlides.map((slide, index) => (
+          {heroCardImages.map((slide, index) => (
             <div
               key={slide.id}
               className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
@@ -157,140 +127,22 @@ export default function MarketingHomePage() {
             >
               {/* Product Background Image with Ken Burns Scale */}
               <div
-                className={`w-full h-full bg-cover bg-center ${
+                className={`w-full h-full bg-contain md:bg-cover bg-center bg-no-repeat ${
                   index === currentSlide ? "animate-ken-burns" : ""
                 }`}
                 style={{ backgroundImage: `url(${slide.image})` }}
               />
 
-              {/* Deep Cinematic Contrast Vignette Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/60 z-10" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70 z-10" />
+              {/* Subtle Ambient Vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
             </div>
           ))}
-
-          {/* Foreground Slide Content Container */}
-          <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 py-20 md:py-28 w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* Slide Text Content (Animated Slide Up on Change) */}
-              <div
-                key={currentSlide}
-                className="lg:col-span-8 space-y-6 text-center lg:text-left animate-slide-up"
-              >
-                {/* Category Pill Tag */}
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-white shadow-lg">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                  <span>{activeSlideData.tag}</span>
-                </div>
-
-                {/* Main Headline */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] drop-shadow-md">
-                  {activeSlideData.title}
-                </h1>
-
-                {/* Description Paragraph */}
-                <p className="text-sm sm:text-lg text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0 drop-shadow">
-                  {activeSlideData.description}
-                </p>
-
-                {/* Affiliate Earning Highlight Pill */}
-                <div className="inline-flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 px-3.5 py-1.5 text-xs font-mono font-bold text-emerald-400">
-                  <DollarSign className="w-4 h-4 text-emerald-400" />
-                  <span>{activeSlideData.highlight}</span>
-                </div>
-
-                {/* CTA Buttons: High-Contrast White Button with Black Text */}
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                  <Link
-                    href={activeSlideData.ctaLink}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-extrabold text-black hover:bg-neutral-200 transition shadow-2xl hover:scale-[1.02] active:scale-[0.98] group"
-                  >
-                    <span>{activeSlideData.ctaText}</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-
-                  <Link
-                    href={activeSlideData.secondaryLink}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-black/60 backdrop-blur-md px-6 py-4 text-sm font-bold text-white hover:bg-white/10 hover:border-white transition shadow-sm"
-                  >
-                    <span>{activeSlideData.secondaryText}</span>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Column: Active Card Real Photo Showcase & Tap Simulator */}
-              <div className="lg:col-span-4 flex flex-col items-center">
-                <div
-                  onClick={triggerTapSimulation}
-                  className="cursor-pointer group relative w-full max-w-sm rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-neutral-950 p-4 transition-all duration-300 hover:border-white/50 hover:scale-[1.02]"
-                >
-                  <div className="h-56 sm:h-64 w-full rounded-2xl overflow-hidden relative bg-neutral-900">
-                    <img
-                      src={activeSlideData.image}
-                      alt={activeSlideData.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className="rounded-full bg-black/80 backdrop-blur-md border border-white/20 px-3 py-1 text-[11px] font-mono font-bold text-white">
-                        {activeSlideData.tag}
-                      </span>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
-                      <div className="flex items-center justify-between w-full text-xs font-mono">
-                        <span className="text-neutral-300">NFC TAP • QR READY</span>
-                        <span className="text-amber-400 font-bold underline flex items-center gap-1">
-                          {hasTapped ? "✓ Card Tapped" : "Click to Test Tap →"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Pulsating NFC Radio Waves when tapped */}
-                  {hasTapped && (
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
-                      <div className="w-48 h-48 rounded-full border-2 border-emerald-400 animate-nfc-wave" />
-                    </div>
-                  )}
-
-                  {/* Mini Contact Handshake Preview */}
-                  <div
-                    className={`mt-3 rounded-xl border p-3 text-left transition-all duration-300 ${
-                      hasTapped
-                        ? "border-emerald-500 bg-neutral-900 ring-2 ring-emerald-500/30"
-                        : "border-white/10 bg-neutral-900/60"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10 text-xs">
-                      <span className="font-bold text-white flex items-center gap-1.5">
-                        <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
-                        {hasTapped ? "⚡ Instant Profile Connected" : "Smartphone Handshake"}
-                      </span>
-                      <span className="text-[10px] font-mono text-emerald-400 font-bold">
-                        NO APP NEEDED
-                      </span>
-                    </div>
-                    <div className="pt-2 flex items-center justify-between text-xs">
-                      <div>
-                        <div className="font-bold text-white">Chidi Nwosu</div>
-                        <div className="text-[11px] text-neutral-400 font-mono">Managing Director</div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="rounded-lg bg-emerald-600 px-2.5 py-1 text-[10px] font-bold text-white">
-                          Save Contact
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* Navigation Arrows (Left & Right) */}
           <button
             onClick={prevSlide}
             aria-label="Previous Slide"
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/20 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/30 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -298,7 +150,7 @@ export default function MarketingHomePage() {
           <button
             onClick={nextSlide}
             aria-label="Next Slide"
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/20 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/30 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -307,35 +159,35 @@ export default function MarketingHomePage() {
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
             {/* Dots / Indicators */}
             <div className="flex items-center gap-2">
-              {heroSlides.map((_, idx) => (
+              {heroCardImages.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
                   aria-label={`Go to slide ${idx + 1}`}
                   className={`h-2.5 rounded-full transition-all duration-300 ${
                     idx === currentSlide
-                      ? "w-8 bg-white shadow"
-                      : "w-2.5 bg-white/30 hover:bg-white/60"
+                      ? "w-8 bg-white shadow-lg"
+                      : "w-2.5 bg-white/40 hover:bg-white/80"
                   }`}
                 />
               ))}
             </div>
 
             {/* Mini Card Thumbnails for Direct Click */}
-            <div className="hidden sm:flex items-center gap-2 p-1 rounded-2xl bg-black/70 backdrop-blur-md border border-white/10">
-              {heroSlides.map((slide, idx) => (
+            <div className="hidden sm:flex items-center gap-2 p-1.5 rounded-2xl bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl">
+              {heroCardImages.map((slide, idx) => (
                 <button
                   key={slide.id}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`relative h-11 w-16 rounded-xl overflow-hidden border transition-all duration-200 ${
+                  className={`relative h-12 w-20 rounded-xl overflow-hidden border transition-all duration-200 ${
                     idx === currentSlide
-                      ? "border-white ring-2 ring-white/50 scale-105"
+                      ? "border-white ring-2 ring-white/60 scale-105"
                       : "border-white/20 opacity-50 hover:opacity-100"
                   }`}
                 >
                   <img
                     src={slide.image}
-                    alt={slide.tag}
+                    alt={slide.title}
                     className="w-full h-full object-cover"
                   />
                 </button>

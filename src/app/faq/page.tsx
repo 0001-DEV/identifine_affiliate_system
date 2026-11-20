@@ -27,7 +27,7 @@ export default function FAQPage() {
   const faqItems = [
     {
       q: "What is the Identifine and Xtreme Cardz Affiliate Programme?",
-      a: "It is an exclusive partner network that allows professionals, executives, agencies, and consultants to earn a flat 10% cash commission by introducing businesses, executives, and organizations to Identifine and Xtreme Cardz luxury smart NFC business cards, corporate identity suites, and RFID badge systems.",
+      a: "It is an exclusive partner network that allows professionals, executives, agencies, and consultants to earn a flat 7.5% cash commission by introducing businesses, executives, and organizations to Identifine and Xtreme Cardz luxury smart NFC business cards, corporate identity suites, and RFID badge systems.",
     },
     {
       q: "Who can become an affiliate?",
@@ -47,7 +47,7 @@ export default function FAQPage() {
     },
     {
       q: "How much commission do I earn?",
-      a: "You earn a flat 10% cash commission on every qualifying paid invoice. For example, on a ₦500,000 corporate order, your take-home cash commission is ₦50,000. On a ₦5,000,000 enterprise rollout, you earn ₦500,000.",
+      a: "You earn a flat 7.5% cash commission on every qualifying paid invoice. For example, on a ₦500,000 corporate order, your take-home cash commission is ₦37,500. On a ₦5,000,000 enterprise rollout, you earn ₦375,000.",
     },
     {
       q: "When is my commission approved?",

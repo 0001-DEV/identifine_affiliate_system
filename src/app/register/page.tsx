@@ -79,7 +79,7 @@ export default function RegisterPage() {
               Create Your Affiliate Account
             </h1>
             <p className="text-xs text-neutral-400 mt-1">
-              Get your unique referral link immediately and earn 10% on every paid client invoice.
+              Get your unique referral link immediately and earn 7.5% on every paid client invoice.
             </p>
           </div>
           <div className="hidden sm:block">

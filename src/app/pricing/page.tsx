@@ -11,27 +11,25 @@ import {
   FileText,
   Landmark,
   Zap,
-  Sparkles,
-  Layers,
 } from "lucide-react";
 
 export default function PricingEarningsPage() {
   const [salesInput, setSalesInput] = useState<string>("500000");
-  const [calculatedCommission, setCalculatedCommission] = useState<number>(50000);
+  const [calculatedCommission, setCalculatedCommission] = useState<number>(37500);
 
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
     const cleanNum = Number(salesInput.replace(/[^0-9]/g, ""));
     if (!isNaN(cleanNum)) {
-      setCalculatedCommission(Math.round(cleanNum * 0.1));
+      setCalculatedCommission(Math.round(cleanNum * 0.075));
     }
   };
 
   const exampleTable = [
-    { sales: "₦100,000", commission: "₦10,000" },
-    { sales: "₦500,000", commission: "₦50,000" },
-    { sales: "₦1,000,000", commission: "₦100,000" },
-    { sales: "₦5,000,000", commission: "₦500,000" },
+    { sales: "₦100,000", commission: "₦7,500" },
+    { sales: "₦500,000", commission: "₦37,500" },
+    { sales: "₦1,000,000", commission: "₦75,000" },
+    { sales: "₦5,000,000", commission: "₦375,000" },
   ];
 
   return (
@@ -40,7 +38,7 @@ export default function PricingEarningsPage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO: EARNINGS & COMMISSION (EXACT MATCH TO MOCKUP)
+            1. HERO: EARNINGS & COMMISSION (7.5%)
            ========================================================================= */}
         <section className="py-16 md:py-20 border-b border-white/10 bg-black relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -68,7 +66,7 @@ export default function PricingEarningsPage() {
         </section>
 
         {/* =========================================================================
-            2. TWO BIG STAT CARDS (10% & ₦50,000)
+            2. TWO BIG STAT CARDS (7.5% & ₦50,000)
            ========================================================================= */}
         <section className="py-10 bg-white text-neutral-900 border-b border-neutral-200">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -79,7 +77,7 @@ export default function PricingEarningsPage() {
                   Commission Rate
                 </div>
                 <div className="text-5xl sm:text-6xl font-black text-[#D97706] tracking-tight">
-                  10%
+                  7.5%
                 </div>
                 <div className="text-xs text-neutral-500 font-medium">
                   on qualifying sales
@@ -144,7 +142,7 @@ export default function PricingEarningsPage() {
                   ₦{calculatedCommission.toLocaleString()}
                 </div>
                 <div className="text-xs text-neutral-500 font-medium">
-                  (10% of your sales)
+                  (7.5% of your sales)
                 </div>
               </div>
 
@@ -158,7 +156,7 @@ export default function PricingEarningsPage() {
                     <thead className="bg-neutral-100 text-neutral-700 font-bold border-b border-neutral-200">
                       <tr>
                         <th className="py-2.5 px-4">Sales Amount</th>
-                        <th className="py-2.5 px-4">Your Commission</th>
+                        <th className="py-2.5 px-4">Your Commission (7.5%)</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-neutral-200 bg-white">

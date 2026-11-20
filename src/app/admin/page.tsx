@@ -176,7 +176,7 @@ export default function AdminPortalPage() {
         );
         setPaymentTarget(null);
         setBannerMsg(
-          `Payment confirmed! +${currency}${credited.toLocaleString()} (10%) added to ${json.referral.affiliateName}'s balance.`
+          `Payment confirmed! +${currency}${credited.toLocaleString()} (${settings.defaultCommissionRate}%) added to ${json.referral.affiliateName}'s balance.`
         );
         setTimeout(() => setBannerMsg(""), 4500);
         await loadAdminData();
@@ -415,7 +415,7 @@ export default function AdminPortalPage() {
 
                     <div>
                       <span className="text-neutral-500">
-                        Affiliate 10% Commission:{" "}
+                        Affiliate {settings.defaultCommissionRate}% Commission:{" "}
                       </span>
                       <strong
                         className={`font-mono ${
@@ -426,7 +426,7 @@ export default function AdminPortalPage() {
                           ? `+${currency}${ref.earnedCommission.toLocaleString()} (Credited)`
                           : ref.expectedCommission > 0
                           ? `${currency}${ref.expectedCommission.toLocaleString()} (Waiting for payment)`
-                          : "10% once billed"}
+                          : `${settings.defaultCommissionRate}% once billed`}
                       </strong>
                     </div>
 
@@ -479,7 +479,7 @@ export default function AdminPortalPage() {
                       className="inline-flex items-center gap-1.5 rounded-xl bg-white px-4 py-2.5 text-xs font-black text-black hover:bg-neutral-200 transition shadow"
                     >
                       <CreditCard className="w-3.5 h-3.5" />
-                      <span>Step 2: Mark Paid (Credit 10%)</span>
+                      <span>Step 2: Mark Paid (Credit {settings.defaultCommissionRate}%)</span>
                     </button>
                   )}
                 </div>
@@ -875,7 +875,7 @@ export default function AdminPortalPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-neutral-400">
-                    Affiliate&apos;s 10% Commission:
+                    Affiliate&apos;s {settings.defaultCommissionRate}% Commission:
                   </span>
                   <span className="font-mono font-black text-emerald-400">
                     {currency}
@@ -943,7 +943,7 @@ export default function AdminPortalPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-neutral-400">
-                    10% Added to Their Balance:
+                    {settings.defaultCommissionRate}% Added to Their Balance:
                   </span>
                   <span className="font-mono text-sm font-black text-emerald-400">
                     +{currency}
@@ -961,7 +961,7 @@ export default function AdminPortalPage() {
               >
                 {submitting
                   ? "Confirming..."
-                  : "Confirm Paid & Credit 10% to Affiliate"}
+                  : `Confirm Paid & Credit ${settings.defaultCommissionRate}% to Affiliate`}
               </button>
             </form>
           </div>

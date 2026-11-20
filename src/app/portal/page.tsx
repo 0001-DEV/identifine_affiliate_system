@@ -405,7 +405,7 @@ function PortalContent() {
           {/* Quick Perks Bar */}
           <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-neutral-400">
             <span className="flex items-center gap-1 text-emerald-400 font-semibold">
-              <DollarSign className="w-3.5 h-3.5" /> 10% Cash Commission
+              <DollarSign className="w-3.5 h-3.5" /> 7.5% Cash Commission
             </span>
             <span>•</span>
             <span>₦50k Bank Payout</span>

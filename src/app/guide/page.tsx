@@ -66,7 +66,7 @@ export default function SystemGuidePage() {
               <div className="text-xs font-bold uppercase tracking-widest text-neutral-300">
                 COMMISSION RATE
               </div>
-              <div className="text-2xl font-black mt-0.5">10%</div>
+              <div className="text-2xl font-black mt-0.5">7.5%</div>
             </div>
           </div>
 
@@ -77,7 +77,7 @@ export default function SystemGuidePage() {
             </div>
             <p className="text-base sm:text-lg font-bold text-white mt-2 leading-relaxed">
               People sign up to get a personal Referral Code, give that code to
-              clients who want Identifine products, earn 10% of whatever
+              clients who want Identifine products, earn 7.5% of whatever
               those clients pay you, and withdraw their money once their
               earnings reach ₦50,000.
             </p>
@@ -100,7 +100,7 @@ export default function SystemGuidePage() {
                 <p className="text-sm font-medium text-neutral-700 leading-relaxed">
                   Someone who signs up on the platform to earn a{" "}
                   <strong className="font-extrabold text-black">
-                    10% commission
+                    7.5% commission
                   </strong>{" "}
                   by bringing paying clients to Identifine.
                 </p>
@@ -282,9 +282,9 @@ export default function SystemGuidePage() {
                       </li>
                       <li>
                         <strong className="font-extrabold text-black">
-                          Expected 10% Commission:
+                          Expected 7.5% Commission:
                         </strong>{" "}
-                        ₦30,000 (Invoice Sent)
+                        ₦22,500 (Invoice Sent)
                       </li>
                     </ul>
                   </li>
@@ -298,7 +298,7 @@ export default function SystemGuidePage() {
                     4
                   </span>
                   <h3 className="text-base sm:text-lg font-extrabold text-black">
-                    The Client Pays & the Affiliate Earns 10%
+                    The Client Pays & the Affiliate Earns 7.5%
                   </h3>
                 </div>
                 <ul className="space-y-2 text-sm sm:text-base font-medium text-neutral-800 list-disc pl-6">
@@ -306,15 +306,15 @@ export default function SystemGuidePage() {
                     Once the client pays for their order, you open the Admin
                     Portal and click{" "}
                     <strong className="font-extrabold text-black">
-                      Step 2: Mark Paid (Credit 10%)
+                      Step 2: Mark Paid (Credit 7.5%)
                     </strong>
                     .
                   </li>
                   <li>
                     The system automatically calculates{" "}
-                    <strong className="font-extrabold text-black">10%</strong>{" "}
-                    (₦30,000) and adds{" "}
-                    <strong className="font-black">+₦30,000</strong> directly into
+                    <strong className="font-extrabold text-black">7.5%</strong>{" "}
+                    (₦22,500) and adds{" "}
+                    <strong className="font-black">+₦22,500</strong> directly into
                     Joshua&apos;s wallet balance.
                   </li>
                 </ul>
@@ -407,7 +407,7 @@ export default function SystemGuidePage() {
                     button.
                   </li>
                   <li>
-                    You copy their account number, transfer their 10% commission
+                    You copy their account number, transfer their 7.5% commission
                     from your banking app, and click{" "}
                     <strong className="font-extrabold text-black">
                       ✓ Confirm Transferred

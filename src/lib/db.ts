@@ -93,7 +93,7 @@ export interface PlatformSettings {
   companyBankName: string;
   companyAccountNumber: string;
   companyAccountName: string;
-  defaultCommissionRate: number; // 10%
+  defaultCommissionRate: number; // 7.5%
   minWithdrawalAmount: number; // e.g. 50000
   currencySymbol: string; // "₦" or "$"
   currencyCode: string; // "NGN" or "USD"
@@ -124,7 +124,7 @@ const INITIAL_DB: DatabaseSchema = {
     companyBankName: "Providus Bank / Moniepoint MFB",
     companyAccountNumber: "8012345678",
     companyAccountName: "IDENTIFINE TECHNOLOGIES LTD",
-    defaultCommissionRate: 10,
+    defaultCommissionRate: 7.5,
     minWithdrawalAmount: 50000,
     currencySymbol: "₦",
     currencyCode: "NGN",

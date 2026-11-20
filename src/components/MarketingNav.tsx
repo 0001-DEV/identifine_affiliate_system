@@ -117,7 +117,7 @@ export function MarketingNav() {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center rounded-xl bg-white py-2.5 text-xs font-extrabold text-black hover:bg-neutral-200 transition flex items-center justify-center gap-1.5 shadow-sm"
             >
-              <span>Become an Affiliate (10% Cash)</span>
+              <span>Become an Affiliate (7.5% Cash)</span>
               <ArrowRight className="w-3.5 h-3.5 text-black" />
             </Link>
 

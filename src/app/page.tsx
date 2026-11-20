@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
+import { SitePreloader } from "@/components/SitePreloader";
 import {
   Sparkles,
   ArrowRight,
@@ -40,88 +41,23 @@ import {
   Link as LinkIcon,
   Wallet,
   Star,
+  Play,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 
 export default function MarketingHomePage() {
-  // Hero Carousel Card Images (Concept 10 Split Screen)
-  const heroCardImages = [
-    {
-      id: "gold-metal",
-      title: "VIP 24K Brushed Gold Metal NFC Suite",
-      image: "/images/products/gold-mirror-metal.webp",
-    },
-    {
-      id: "black-matte",
-      title: "Black Matte Stealth Metal NFC Card",
-      image: "/images/products/black-matte-metal.webp",
-    },
-    {
-      id: "corporate-pack",
-      title: "Corporate Enterprise Identity Rollout",
-      image: "/images/products/corporate-id-system.webp",
-    },
-    {
-      id: "luxury-unboxing",
-      title: "Handcrafted Luxury Presentation Suite",
-      image: "/images/products/luxury-unboxing.webp",
-    },
-    {
-      id: "gunmetal-titanium",
-      title: "Gunmetal Titanium Smart NFC Card",
-      image: "/images/products/gunmetal-titanium.webp",
-    },
-    {
-      id: "elite-gold",
-      title: "Elite Pass 24K Gold VIP Card",
-      image: "/images/products/elite-pass-gold.webp",
-    },
-    {
-      id: "elite-black",
-      title: "Elite Pass Black Matte Executive Card",
-      image: "/images/products/elite-pass-black.webp",
-    },
-  ];
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroCardImages.length);
-    }, 5500);
-    return () => clearInterval(interval);
-  }, [isPaused, heroCardImages.length]);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroCardImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroCardImages.length) % heroCardImages.length);
-  };
-
-  // Hero split-screen onboarding panel state
   const router = useRouter();
+
+  // Hero split-screen onboarding panel state (7.5% commission rate)
   const [heroReferrals, setHeroReferrals] = useState(6);
   const [heroName, setHeroName] = useState("");
   const [heroEmail, setHeroEmail] = useState("");
   const [heroPhone, setHeroPhone] = useState("");
+  const [isMuted, setIsMuted] = useState(true);
 
-  // 3D Card Interactive Tilt & Specular Light (Residence / Buff Motion style)
-  const [cardTilt, setCardTilt] = useState({ x: 0, y: 0, active: false });
-
-  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setCardTilt({ x: x * 12, y: -y * 12, active: true });
-  };
-
-  const handleCardMouseLeave = () => {
-    setIsPaused(false);
-    setCardTilt({ x: 0, y: 0, active: false });
-  };
+  // 7.5% commission on average ₦250k order = ₦18,750 per referral
+  const heroEstimatedCommission = Math.round(heroReferrals * 250000 * 0.075);
 
   const handleHeroSignup = (e: React.FormEvent) => {
     e.preventDefault();
@@ -184,199 +120,165 @@ export default function MarketingHomePage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col selection:bg-[#F59E0B] selection:text-black transition-colors duration-200">
+      {/* 1 to 8, XTREME, IDENTIFINE Preloader with Broken Wine & White Line */}
+      <SitePreloader />
+
       <MarketingNav />
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: CONCEPT 10 — 50/50 SPLIT SCREEN
-               Left: full-height card photo carousel with 3D tilt | Right: instant affiliate onboarding
+            1. HERO SECTION: 70% XTREME CARDZ VIDEO + 30% AFFILIATE ONBOARDING
            ========================================================================= */}
-        <section className="relative grid lg:grid-cols-2 w-full lg:min-h-[calc(100vh-64px)] border-b border-white/10">
-          {/* ---------- LEFT: Product Carousel with 3D Tilt ---------- */}
-          <div
-            className="relative h-[460px] sm:h-[560px] lg:h-auto overflow-hidden bg-black select-none"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseMove={handleCardMouseMove}
-            onMouseLeave={handleCardMouseLeave}
-          >
-            {heroCardImages.map((slide, index) => (
-              <div
-                key={slide.id}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                  index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                }`}
+        <section className="relative w-full border-b border-white/10 bg-black overflow-hidden">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-10 min-h-[580px] lg:min-h-[calc(100vh-68px)]">
+            {/* ---------- 70% WIDTH: XTREME CARDZ VIDEO SHOWCASE ---------- */}
+            <div className="lg:col-span-7 relative h-[440px] sm:h-[540px] lg:h-auto overflow-hidden bg-[#0A0709] flex items-center justify-center">
+              <video
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                className="w-full h-full object-cover object-center"
               >
-                <div
-                  className={`w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-300 ${
-                    index === currentSlide ? "animate-ken-burns" : ""
-                  }`}
-                  style={{
-                    backgroundImage: `url(${slide.image})`,
-                    transform: cardTilt.active
-                      ? `perspective(1000px) rotateY(${cardTilt.x}deg) rotateX(${cardTilt.y}deg) scale(1.03)`
-                      : "perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)",
-                  }}
-                />
-                {/* Dynamic Specular Sheen Layer reacting to tilt */}
-                <div
-                  className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-                  style={{
-                    background: cardTilt.active
-                      ? `radial-gradient(circle at ${50 + cardTilt.x * 3}% ${50 - cardTilt.y * 3}%, rgba(255,255,255,0.18) 0%, transparent 60%), linear-gradient(to top, rgba(0,0,0,0.85), transparent 45%, rgba(0,0,0,0.3))`
-                      : "linear-gradient(to top, rgba(0,0,0,0.85), transparent 45%, rgba(0,0,0,0.3))",
-                  }}
-                />
-              </div>
-            ))}
+                <source src="/videos/hero-section.webm" type="video/webm" />
+                <source src="/videos/hero-section.mp4" type="video/mp4" />
+                <source src="/videos/xtreme-cardz-showcase.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
 
-            {/* Bottom controls: dots, counter + title, arrows */}
-            <div className="absolute bottom-0 inset-x-0 z-30 px-6 sm:px-10 pb-8">
-              <div className="flex justify-center gap-2 mb-5">
-                {heroCardImages.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentSlide(idx)}
-                    aria-label={`Go to slide ${idx + 1}`}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      idx === currentSlide ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
-                    }`}
-                  />
-                ))}
-              </div>
-              <div className="flex items-center justify-between gap-4">
-                <button
-                  onClick={prevSlide}
-                  aria-label="Previous slide"
-                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition-magnetic"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <div key={currentSlide} className="text-center text-sm sm:text-base text-white/90 font-medium animate-[slideUpFade_0.6s_ease-out]">
-                  <span className="font-mono text-white/60">
-                    {String(currentSlide + 1).padStart(2, "0")} / {String(heroCardImages.length).padStart(2, "0")}
-                  </span>
-                  <span className="mx-2 text-white/40">—</span>
-                  {heroCardImages[currentSlide].title}
-                </div>
-                <button
-                  onClick={nextSlide}
-                  aria-label="Next slide"
-                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition-magnetic"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
+              {/* Ambient Dark Gradient Vignette Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
+
+              {/* Broken Wine and White Line Subtle Top Edge Accent */}
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#800020] via-white to-[#800020] opacity-80" />
+
+              {/* Floating Video Audio Toggle Button */}
+              <button
+                onClick={() => setIsMuted(!isMuted)}
+                aria-label={isMuted ? "Unmute video" : "Mute video"}
+                className="absolute top-5 left-5 z-20 h-9 w-9 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-black transition backdrop-blur-md cursor-pointer"
+              >
+                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              </button>
+
+              {/* Live Badge over Video */}
+              <div className="absolute bottom-6 left-6 z-20 hidden sm:flex items-center gap-3 bg-black/70 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl">
+                <span className="flex h-2.5 w-2.5 rounded-full bg-[#800020] animate-ping" />
+                <span className="text-xs font-mono font-bold text-white tracking-wider">
+                  XTREME CARDZ SHOWCASE • 7.5% COMMISSION
+                </span>
               </div>
             </div>
-          </div>
 
-          {/* ---------- RIGHT: Affiliate Onboarding Panel ---------- */}
-          <div className="relative bg-[#F8F9FA] text-neutral-900 flex items-center justify-center px-4 sm:px-8 py-12 lg:py-10">
-            <div className="w-full max-w-[480px] rounded-3xl bg-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.18)] border border-black/5 p-7 sm:p-9 animate-[slideUpFade_0.8s_ease-out]">
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
-                Xtreme Cardz &amp; Identifine Affiliate Programme
-              </div>
-
-              {/* Residence style Masked Reveal Headline */}
-              <div className="mt-4 overflow-hidden">
-                <h1 className="animate-mask-rise text-3xl sm:text-[2.6rem] leading-[1.08] tracking-tight">
-                  <span className="font-light block">Become an</span>
-                  <span className="font-black block bg-gradient-to-r from-neutral-900 via-black to-neutral-800 bg-clip-text text-transparent">
-                    Executive Partner
-                  </span>
-                </h1>
-              </div>
-
-              {/* Live earnings slider */}
-              <div className="mt-6 rounded-2xl bg-neutral-50 border border-neutral-200 p-4 transition-magnetic">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-neutral-600">
-                    Refer <b className="text-neutral-900 font-mono text-base">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/month
-                  </span>
-                  <span className="font-black text-xl text-[#B45309] font-mono tracking-tight">
-                    ₦{(heroReferrals * 25000).toLocaleString()}
-                  </span>
+            {/* ---------- 30% WIDTH: AFFILIATE ONBOARDING PORTAL ---------- */}
+            <div className="lg:col-span-3 relative bg-[#F8F9FA] text-neutral-900 flex items-center justify-center p-6 sm:p-8 lg:p-7 border-t lg:border-t-0 lg:border-l border-neutral-200">
+              <div className="w-full max-w-[420px] rounded-3xl bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] border border-black/5 p-6 sm:p-7">
+                <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
+                  Identifine &amp; Xtreme Cardz Partner
                 </div>
-                <input
-                  type="range"
-                  min={1}
-                  max={40}
-                  value={heroReferrals}
-                  onChange={(e) => setHeroReferrals(Number(e.target.value))}
-                  className="mt-3 w-full accent-[#F59E0B] cursor-pointer"
-                  aria-label="Number of referrals per month"
-                />
-                <p className="mt-1 text-[11px] text-neutral-500">
-                  Based on an average ₦25,000 commission (10% of a ₦250,000 executive order).
+
+                {/* Residence style Masked Reveal Headline */}
+                <div className="mt-3 overflow-hidden">
+                  <h1 className="animate-mask-rise text-2xl sm:text-3xl font-black leading-[1.1] tracking-tight">
+                    <span className="font-light block text-neutral-800">Become an</span>
+                    <span className="block text-black">
+                      Executive Partner
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Live earnings slider (7.5%) */}
+                <div className="mt-5 rounded-2xl bg-neutral-50 border border-neutral-200 p-3.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-neutral-600 font-medium">
+                      Refer <b className="text-neutral-900 font-mono text-sm">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo
+                    </span>
+                    <span className="font-black text-lg text-[#B45309] font-mono tracking-tight">
+                      ₦{heroEstimatedCommission.toLocaleString()}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={1}
+                    max={40}
+                    value={heroReferrals}
+                    onChange={(e) => setHeroReferrals(Number(e.target.value))}
+                    className="mt-2.5 w-full accent-[#F59E0B] cursor-pointer"
+                    aria-label="Number of referrals per month"
+                  />
+                  <p className="mt-1 text-[10px] text-neutral-500">
+                    7.5% cash commission on executive client orders.
+                  </p>
+                </div>
+
+                {/* Guarantees */}
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
+                    <Zap className="w-4 h-4 text-[#F59E0B]" />
+                    <span className="text-[10px] font-bold leading-tight">Paystack<br />Instant</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
+                    <DollarSign className="w-4 h-4 text-emerald-600" />
+                    <span className="text-[10px] font-bold leading-tight">7.5% Flat<br />Cash</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
+                    <Layers className="w-4 h-4 text-blue-600" />
+                    <span className="text-[10px] font-bold leading-tight">Zero<br />Inventory</span>
+                  </div>
+                </div>
+
+                {/* Quick start form -> continues on /portal register */}
+                <form onSubmit={handleHeroSignup} className="mt-4 space-y-2.5">
+                  <input
+                    required
+                    value={heroName}
+                    onChange={(e) => setHeroName(e.target.value)}
+                    placeholder="Full Name"
+                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  />
+                  <input
+                    required
+                    type="email"
+                    value={heroEmail}
+                    onChange={(e) => setHeroEmail(e.target.value)}
+                    placeholder="Email Address"
+                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  />
+                  <input
+                    required
+                    type="tel"
+                    value={heroPhone}
+                    onChange={(e) => setHeroPhone(e.target.value)}
+                    placeholder="Phone / WhatsApp Number"
+                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  />
+                  <button
+                    type="submit"
+                    className="group w-full rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-3 text-xs shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span>Activate Affiliate Link</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-300" />
+                  </button>
+                </form>
+                <p className="mt-3 text-center text-[11px] text-neutral-500">
+                  Already registered?{" "}
+                  <Link href="/portal?tab=login" className="font-bold text-neutral-900 underline underline-offset-2">
+                    Sign in
+                  </Link>{" "}
+                  · <Link href="/pricing" className="font-bold text-neutral-900 underline underline-offset-2">7.5% Earnings</Link>
                 </p>
               </div>
-
-              {/* Guarantees */}
-              <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-                <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
-                  <Zap className="w-5 h-5 text-[#F59E0B]" />
-                  <span className="text-[12px] font-semibold leading-tight">Instant Paystack<br />Settlement</span>
-                </div>
-                <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
-                  <DollarSign className="w-5 h-5 text-emerald-600" />
-                  <span className="text-[12px] font-semibold leading-tight">10% Cash<br />Commission</span>
-                </div>
-                <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-neutral-50 transition">
-                  <Layers className="w-5 h-5 text-blue-600" />
-                  <span className="text-[12px] font-semibold leading-tight">Zero<br />Inventory</span>
-                </div>
-              </div>
-
-              {/* Quick start form -> continues on /portal register */}
-              <form onSubmit={handleHeroSignup} className="mt-6 space-y-3">
-                <input
-                  required
-                  value={heroName}
-                  onChange={(e) => setHeroName(e.target.value)}
-                  placeholder="Full Name"
-                  className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
-                />
-                <input
-                  required
-                  type="email"
-                  value={heroEmail}
-                  onChange={(e) => setHeroEmail(e.target.value)}
-                  placeholder="Email Address"
-                  className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
-                />
-                <input
-                  required
-                  type="tel"
-                  value={heroPhone}
-                  onChange={(e) => setHeroPhone(e.target.value)}
-                  placeholder="Phone / WhatsApp Number"
-                  className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
-                />
-                <button
-                  type="submit"
-                  className="group w-full rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-3.5 shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>Activate Affiliate Link</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 duration-300" />
-                </button>
-              </form>
-              <p className="mt-4 text-center text-xs text-neutral-500">
-                Already a partner?{" "}
-                <Link href="/portal?tab=login" className="font-semibold text-neutral-900 underline underline-offset-2">
-                  Sign in
-                </Link>{" "}
-                · <Link href="/pricing" className="font-semibold text-neutral-900 underline underline-offset-2">See earnings</Link>
-              </p>
             </div>
           </div>
         </section>
 
-        {/* Buff Motion style Infinite Marquee Ticker */}
+        {/* Buff Motion style Infinite Marquee Ticker (7.5%) */}
         <section className="border-b border-white/10 bg-black py-4 overflow-hidden select-none">
           <div className="animate-ticker flex items-center gap-8 text-xs font-bold tracking-widest text-white/80 uppercase">
             {[1, 2].map((i) => (
               <div key={i} className="flex items-center gap-8 shrink-0">
-                <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-[#F59E0B]" /> 10% Flat Cash Commission</span>
+                <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-[#F59E0B]" /> 7.5% Flat Cash Commission</span>
                 <span className="text-white/20">•</span>
                 <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-emerald-400" /> Instant Paystack Settlement</span>
                 <span className="text-white/20">•</span>
@@ -500,7 +402,7 @@ export default function MarketingHomePage() {
                       {prod.name}
                     </h3>
                     <div className="mt-3 flex items-center justify-between text-xs text-neutral-500">
-                      <span className="font-semibold text-emerald-700">10% Commission</span>
+                      <span className="font-semibold text-emerald-700">7.5% Commission</span>
                       <Link
                         href="/portal?tab=register"
                         className="text-neutral-900 font-bold hover:underline inline-flex items-center gap-1"
@@ -522,8 +424,8 @@ export default function MarketingHomePage() {
           id="how-it-works"
           className="py-20 md:py-28 bg-[#0C0C0E] text-white border-b border-white/10 relative overflow-hidden"
         >
-          {/* Ambient Gold Waves */}
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-b from-[#F59E0B]/15 to-transparent blur-3xl pointer-events-none" />
+          {/* Ambient Wine/Gold Waves */}
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-b from-[#800020]/20 via-[#F59E0B]/10 to-transparent blur-3xl pointer-events-none" />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
             <div className="text-center space-y-2 mb-16">
@@ -577,7 +479,7 @@ export default function MarketingHomePage() {
                 </div>
                 <h3 className="font-extrabold text-base text-white">Earn Commission</h3>
                 <p className="text-xs text-neutral-400 leading-relaxed">
-                  When they purchase, you earn 10%
+                  When they purchase, you earn 7.5%
                 </p>
               </div>
 
@@ -596,7 +498,7 @@ export default function MarketingHomePage() {
         </section>
 
         {/* =========================================================================
-            5. YOUR EARNINGS AT A GLANCE (3D BAR CHART FROM MOCKUP)
+            5. YOUR EARNINGS AT A GLANCE (7.5%)
            ========================================================================= */}
         <section className="py-20 bg-white text-neutral-900 border-b border-neutral-200">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -605,7 +507,7 @@ export default function MarketingHomePage() {
               <div className="relative flex items-center justify-center">
                 <img
                   src="/images/products/earnings-bar-chart.png"
-                  alt="10% Commission Chart"
+                  alt="7.5% Commission Chart"
                   className="max-h-[220px] w-auto object-contain drop-shadow-xl"
                 />
               </div>
@@ -616,7 +518,7 @@ export default function MarketingHomePage() {
                   Your Earnings at a Glance
                 </h2>
                 <p className="text-base text-neutral-600 leading-relaxed">
-                  Earn 10% commission on qualifying sales, with a minimum withdrawal of ₦50,000.
+                  Earn 7.5% commission on qualifying sales, with a minimum withdrawal of ₦50,000.
                 </p>
                 <div className="pt-2">
                   <Link
@@ -633,7 +535,7 @@ export default function MarketingHomePage() {
         </section>
 
         {/* =========================================================================
-            6. WHY BECOME AN AFFILIATE? (CHECKLIST & TESTIMONIAL FROM MOCKUP)
+            6. WHY BECOME AN AFFILIATE? (7.5% ATTRACTIVE COMMISSION)
            ========================================================================= */}
         <section className="py-20 md:py-28 bg-black text-white border-b border-white/10">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -649,7 +551,7 @@ export default function MarketingHomePage() {
                       ✓
                     </div>
                     <span className="text-base sm:text-lg font-semibold text-white">
-                      Attractive 10% commission
+                      Attractive 7.5% commission
                     </span>
                   </div>
 

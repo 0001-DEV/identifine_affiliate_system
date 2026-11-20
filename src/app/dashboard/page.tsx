@@ -399,7 +399,7 @@ export default function AffiliateDashboardPage() {
 
         {referrals.length === 0 ? (
           <p className="py-8 text-center text-xs text-neutral-500">
-            No referrals yet. Share your link above to start earning 10%.
+            No referrals yet. Share your link above to start earning 7.5%.
           </p>
         ) : (
           <div className="divide-y divide-white/10">
@@ -440,7 +440,7 @@ export default function AffiliateDashboardPage() {
                           {ref.earnedCommission.toLocaleString()}
                         </div>
                         <span className="text-[10px] font-mono uppercase text-neutral-400">
-                          Paid (10%)
+                          Paid (7.5%)
                         </span>
                       </div>
                     ) : ref.expectedCommission > 0 ? (

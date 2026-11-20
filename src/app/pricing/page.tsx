@@ -29,6 +29,7 @@ export default function PricingEarningsPage() {
       units: "10 Luxury Units",
       price: 180000,
       commission: 18000,
+      image: "/images/products/gold-mirror-metal.webp",
       description: "24K Brushed Gold, Rose Gold, or Gunmetal Stainless Steel smart NFC cards for C-Suite executives, founders, and VIP partners.",
       features: [
         "Aircraft-Grade Stainless Steel",
@@ -45,6 +46,7 @@ export default function PricingEarningsPage() {
       units: "25 Units",
       price: 250000,
       commission: 25000,
+      image: "/images/products/black-matte-metal.webp",
       description: "Custom laser-engraved matte black PVC & Metal Hybrid smart cards tailored for executive sales teams, directors, and partners.",
       features: [
         "Premium Matte Black Finish",
@@ -61,6 +63,7 @@ export default function PricingEarningsPage() {
       units: "100 Units",
       price: 650000,
       commission: 65000,
+      image: "/images/products/corporate-id-system.webp",
       description: "Full corporate rollout for medium to large enterprises, law firms, logistics groups, and institutions with central team management.",
       features: [
         "100 Smart NFC Corporate Cards",
@@ -77,6 +80,7 @@ export default function PricingEarningsPage() {
       units: "150 – 500+ Units",
       price: 1200000,
       commission: 120000,
+      image: "/images/products/de-titan-3in1.webp",
       description: "Custom RFID/NFC integrated door access badges, hotel keycards, event access systems, and large enterprise solutions.",
       features: [
         "3-in-1 Physical ID + RFID + Smart NFC",
@@ -117,28 +121,39 @@ export default function PricingEarningsPage() {
               {packages.map((pkg) => (
                 <div
                   key={pkg.id}
-                  className="rounded-3xl border border-white/15 bg-[#111115] p-6 space-y-6 flex flex-col justify-between hover:border-amber-500/40 transition shadow-xl relative"
+                  className="rounded-3xl border border-white/15 bg-[#111115] overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition shadow-xl relative group"
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="rounded-full bg-amber-400/10 border border-amber-400/30 px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300">
+                  <div className="h-44 w-full bg-neutral-900 overflow-hidden relative">
+                    <img
+                      src={pkg.image}
+                      alt={pkg.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <span className="rounded-full bg-black/70 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-mono font-bold text-amber-300">
                         {pkg.badge}
                       </span>
-                      <span className="text-[11px] font-mono text-neutral-400 font-bold">
+                    </div>
+                    <div className="absolute top-3 right-3">
+                      <span className="rounded-full bg-black/70 backdrop-blur-md border border-white/20 px-2.5 py-1 text-[10px] font-mono font-bold text-neutral-300">
                         {pkg.units}
                       </span>
                     </div>
+                  </div>
 
-                    <div>
-                      <h3 className="text-lg font-extrabold text-white">
-                        {pkg.name}
-                      </h3>
-                      <div className="mt-2 text-2xl font-black text-white">
-                        ₦{pkg.price.toLocaleString()}
+                  <div className="p-6 space-y-6 flex-1 flex flex-col justify-between">
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="text-lg font-extrabold text-white">
+                          {pkg.name}
+                        </h3>
+                        <div className="mt-2 text-2xl font-black text-white">
+                          ₦{pkg.price.toLocaleString()}
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
+                          {pkg.description}
+                        </p>
                       </div>
-                      <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
-                        {pkg.description}
-                      </p>
                     </div>
 
                     {/* Affiliate Callout Banner */}

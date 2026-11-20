@@ -22,6 +22,81 @@ body {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
+/* ==========================================================================
+   INTERACTIVE ANIMATIONS & METALLIC SHIMMERS
+   ========================================================================== */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-0.5deg);
+  }
+}
+
+@keyframes metallicShimmer {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  50%, 100% {
+    transform: translateX(200%) skewX(-20deg);
+  }
+}
+
+@keyframes nfcPulseWave {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseGlowSlow {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: metallicShimmer 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-nfc-wave {
+  animation: nfcPulseWave 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-glow-slow {
+  animation: pulseGlowSlow 4s ease-in-out infinite;
+}
+
 @media print {
   header,
   .no-print {

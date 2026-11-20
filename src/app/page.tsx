@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
@@ -18,6 +18,7 @@ import {
   Award,
   Zap,
   Building2,
+  ChevronLeft,
   ChevronRight,
   Calculator,
   Layers,
@@ -34,10 +35,99 @@ import {
 } from "lucide-react";
 
 export default function MarketingHomePage() {
-  // Card Visualizer Tab: 'matte-black' | 'gold' | 'de-titan' | 'emerald'
-  const [activeCardType, setActiveCardType] = useState<
-    "matte-black" | "gold" | "de-titan" | "emerald"
-  >("matte-black");
+  // Hero Carousel Slides (Images from Xtreme Cardz & Identifine)
+  const heroSlides = [
+    {
+      id: "gold-metal",
+      tag: "VIP 24K BRUSHED GOLD METAL",
+      badgeColor: "bg-amber-400 text-black border-amber-300",
+      title: "Turn Corporate Introductions into 10% Cash Commission",
+      description:
+        "Partner with Nigeria's premier producer of luxury laser-engraved 24K gold, rose gold, and stainless steel smart business cards. Earn a flat 10% cash payout on every paid client invoice.",
+      image: "/images/products/gold-mirror-metal.webp",
+      highlight: "Earn ₦18,000 to ₦120,000+ per referred client",
+      ctaText: "Become an Affiliate Partner",
+      ctaLink: "/portal?tab=register",
+      secondaryText: "Earnings & Package Breakdown",
+      secondaryLink: "/pricing",
+    },
+    {
+      id: "black-matte",
+      tag: "BLACK MATTE STEALTH METAL NFC",
+      badgeColor: "bg-neutral-800 text-white border-neutral-600",
+      title: "Black Matte Metal NFC Cards for CEOs & Directors",
+      description:
+        "Aerospace-grade stainless steel with luxury matte stealth coating. One contactless tap against any smartphone instantly shares contact details, WhatsApp, and company catalog without any app.",
+      image: "/images/products/black-matte-metal.webp",
+      highlight: "Instant Tap • Zero Mobile App Required",
+      ctaText: "Become an Affiliate Partner",
+      ctaLink: "/portal?tab=register",
+      secondaryText: "View Card Specifications",
+      secondaryLink: "/pricing",
+    },
+    {
+      id: "de-titan",
+      tag: "DE-TITAN 3-IN-1 HYBRID SMART BADGE",
+      badgeColor: "bg-blue-600 text-white border-blue-400",
+      title: "Corporate Photo ID + RFID Access + Digital NFC vCard",
+      description:
+        "Consolidate physical employee photo identification, building door & turnstile access control, and digital tap-to-connect vCard networking into a single intelligent hybrid smart badge.",
+      image: "/images/products/de-titan-3in1.webp",
+      highlight: "High-value B2B enterprise contracts with 3-hour payouts",
+      ctaText: "Start Referring Companies",
+      ctaLink: "/portal?tab=register",
+      secondaryText: "Review Enterprise Solutions",
+      secondaryLink: "/pricing",
+    },
+    {
+      id: "corporate-pack",
+      tag: "CORPORATE ENTERPRISE 100-PACK",
+      badgeColor: "bg-emerald-600 text-white border-emerald-400",
+      title: "Full Enterprise Team Identity Rollout & Cloud Portal",
+      description:
+        "Equip entire sales teams, directors, and field executives with centralized administrative control, real-time title updates, lead capture, and priority nationwide courier delivery.",
+      image: "/images/products/corporate-id-system.webp",
+      highlight: "₦65,000 cash commission on every 100-unit rollout",
+      ctaText: "Register as an Affiliate",
+      ctaLink: "/portal?tab=register",
+      secondaryText: "Calculate Your Payouts",
+      secondaryLink: "#calculator",
+    },
+    {
+      id: "luxury-unboxing",
+      tag: "BESPOKE VIP PRESENTATION SUITES",
+      badgeColor: "bg-purple-600 text-white border-purple-400",
+      title: "Unrivaled First Impressions for High-Net-Worth Clients",
+      description:
+        "Each VIP card is delivered in handcrafted magnetic presentation cases with individual molded velvet interior. Unmatched prestige that clients proudly show colleagues.",
+      image: "/images/products/luxury-unboxing.webp",
+      highlight: "₦50,000 minimum withdrawal paid to all Nigerian banks",
+      ctaText: "Join Our Affiliate Network",
+      ctaLink: "/portal?tab=register",
+      secondaryText: "Frequently Asked Questions",
+      secondaryLink: "/faq",
+    },
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-play timer matching okomuoil.com (5.5s per slide)
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [isPaused, heroSlides.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
 
   // Tap simulation state
   const [hasTapped, setHasTapped] = useState(false);
@@ -56,304 +146,249 @@ export default function MarketingHomePage() {
     setTimeout(() => setHasTapped(false), 4500);
   };
 
+  const activeSlideData = heroSlides[currentSlide];
+
   return (
-    <div className="min-h-screen bg-[#07070A] text-white flex flex-col selection:bg-amber-400 selection:text-black transition-colors duration-200">
+    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-white selection:text-black transition-colors duration-200">
       <MarketingNav />
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION WITH VIBRANT LUXURY PALETTE & 3D INTERACTIVE CARD
+            1. HERO SECTION: FULL-WIDTH CARDS CAROUSEL (OKOMUOIL.COM STYLE ANIMATION)
            ========================================================================= */}
-        <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-32 border-b border-amber-500/20 bg-gradient-to-b from-[#141008] via-[#09080E] to-[#050508]">
-          {/* Multi-layered Colored Ambient Glows */}
-          <div className="absolute -top-24 right-1/4 w-[650px] h-[500px] bg-gradient-to-br from-amber-500/25 via-yellow-600/15 to-transparent blur-[140px] rounded-full pointer-events-none animate-glow-slow" />
-          <div className="absolute top-1/4 -left-20 w-[550px] h-[450px] bg-gradient-to-tr from-emerald-600/20 via-teal-500/10 to-transparent blur-[130px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-0 right-10 w-[450px] h-[350px] bg-indigo-600/15 blur-[120px] rounded-full pointer-events-none" />
+        <section
+          className="relative min-h-[640px] md:min-h-[720px] lg:min-h-[780px] w-full overflow-hidden bg-black flex items-center justify-center border-b border-white/10"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Background Images Carousel with Ken Burns Zoom & Smooth Fade */}
+          {heroSlides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              {/* Product Background Image with Ken Burns Scale */}
+              <div
+                className={`w-full h-full bg-cover bg-center ${
+                  index === currentSlide ? "animate-ken-burns" : ""
+                }`}
+                style={{ backgroundImage: `url(${slide.image})` }}
+              />
 
-          {/* Luxury Executive Grid Lines */}
-          <div className="absolute inset-0 bg-executive-grid opacity-30 pointer-events-none" />
+              {/* Deep Cinematic Contrast Vignette Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/60 z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70 z-10" />
+            </div>
+          ))}
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-              {/* Left Column: Core Value Proposition */}
-              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                {/* Badge with Gold & Emerald Accents */}
-                <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-emerald-500/15 px-4 py-1.5 text-xs font-bold text-amber-200 shadow-lg shadow-amber-500/10 backdrop-blur-md">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400 animate-pulse" />
-                  <span>Official Identifine & Xtreme Cardz Partner Network</span>
+          {/* Foreground Slide Content Container */}
+          <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 py-20 md:py-28 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Slide Text Content (Animated Slide Up on Change) */}
+              <div
+                key={currentSlide}
+                className="lg:col-span-8 space-y-6 text-center lg:text-left animate-slide-up"
+              >
+                {/* Category Pill Tag */}
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-white shadow-lg">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                  <span>{activeSlideData.tag}</span>
                 </div>
 
-                {/* Main Headline with Glowing Multi-Stop Metallic Gold */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]">
-                  Turn Corporate Introductions into{" "}
-                  <span className="block mt-1 bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] to-[#D97706] bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(245,158,11,0.35)]">
-                    10% Instant Cash Commission
-                  </span>
+                {/* Main Headline */}
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] drop-shadow-md">
+                  {activeSlideData.title}
                 </h1>
 
-                {/* Subtitle / Clear Explanation */}
-                <p className="text-sm sm:text-lg text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  Partner with Nigeria&apos;s premier producer of luxury <strong className="text-amber-300">Black Matte Metal NFC Cards</strong>, <strong className="text-indigo-300">De-Titan 3-in-1 Access Badges</strong>, and <strong className="text-emerald-300">Corporate Identity Suites</strong>. Earn a flat 10% on every paid client invoice—our WhatsApp sales desk handles all consultations, custom proofs, and nationwide delivery.
+                {/* Description Paragraph */}
+                <p className="text-sm sm:text-lg text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0 drop-shadow">
+                  {activeSlideData.description}
                 </p>
 
-                {/* CTA Buttons: Radiant Gold Primary + Frosted Gold Glass Secondary */}
+                {/* Affiliate Earning Highlight Pill */}
+                <div className="inline-flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 px-3.5 py-1.5 text-xs font-mono font-bold text-emerald-400">
+                  <DollarSign className="w-4 h-4 text-emerald-400" />
+                  <span>{activeSlideData.highlight}</span>
+                </div>
+
+                {/* CTA Buttons: High-Contrast White Button with Black Text */}
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                   <Link
-                    href="/portal?tab=register"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 px-8 py-4 text-sm font-black text-neutral-950 hover:brightness-110 transition shadow-[0_0_30px_rgba(245,158,11,0.35)] hover:shadow-[0_0_45px_rgba(245,158,11,0.55)] hover:scale-[1.03] active:scale-[0.98] border border-yellow-200/80 group"
+                    href={activeSlideData.ctaLink}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-extrabold text-black hover:bg-neutral-200 transition shadow-2xl hover:scale-[1.02] active:scale-[0.98] group"
                   >
-                    <span>Become an Affiliate Partner</span>
+                    <span>{activeSlideData.ctaText}</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
 
                   <Link
-                    href="/pricing"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-amber-400/40 bg-neutral-900/80 px-6 py-4 text-sm font-bold text-amber-200 hover:bg-amber-500/20 hover:text-white hover:border-amber-400 transition backdrop-blur-md shadow-sm"
+                    href={activeSlideData.secondaryLink}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-black/60 backdrop-blur-md px-6 py-4 text-sm font-bold text-white hover:bg-white/10 hover:border-white transition shadow-sm"
                   >
-                    <span>Earnings & Package Breakdown</span>
+                    <span>{activeSlideData.secondaryText}</span>
                   </Link>
-                </div>
-
-                {/* Core Trust Indicators (Rich Colored Micro-Cards) */}
-                <div className="pt-6 border-t border-amber-500/20 grid grid-cols-3 gap-3.5 text-left max-w-xl mx-auto lg:mx-0">
-                  <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-b from-amber-500/15 via-amber-500/5 to-transparent p-3.5 space-y-1 shadow-sm">
-                    <div className="text-2xl sm:text-3xl font-black text-amber-300">10%</div>
-                    <div className="text-[11px] font-semibold text-neutral-300">Flat Cash Payout</div>
-                  </div>
-                  <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-b from-emerald-500/15 via-emerald-500/5 to-transparent p-3.5 space-y-1 shadow-sm">
-                    <div className="text-2xl sm:text-3xl font-black text-emerald-400">₦50,000</div>
-                    <div className="text-[11px] font-semibold text-neutral-300">Min. Withdrawal</div>
-                  </div>
-                  <div className="rounded-2xl border border-sky-500/30 bg-gradient-to-b from-sky-500/15 via-sky-500/5 to-transparent p-3.5 space-y-1 shadow-sm">
-                    <div className="text-2xl sm:text-3xl font-black text-sky-400">3 Hours</div>
-                    <div className="text-[11px] font-semibold text-neutral-300">Bank Credit Speed</div>
-                  </div>
                 </div>
               </div>
 
-              {/* Right Column: Animated Interactive Smart Card & Phone Tap Simulator */}
-              <div className="lg:col-span-5 flex flex-col items-center">
-                {/* Card Type Selector Tabs with Rich Vibrant Colors */}
-                <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-black/80 border border-amber-500/30 text-[11px] font-bold mb-4 shadow-xl backdrop-blur-md">
-                  <button
-                    onClick={() => setActiveCardType("matte-black")}
-                    className={`px-3 py-1.5 rounded-xl transition font-bold ${
-                      activeCardType === "matte-black"
-                        ? "bg-neutral-800 text-amber-300 border border-amber-400/40 shadow-sm"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
-                  >
-                    Stealth Black
-                  </button>
-                  <button
-                    onClick={() => setActiveCardType("gold")}
-                    className={`px-3 py-1.5 rounded-xl transition font-bold ${
-                      activeCardType === "gold"
-                        ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow-md shadow-amber-500/30"
-                        : "text-neutral-400 hover:text-amber-300"
-                    }`}
-                  >
-                    24K Gold
-                  </button>
-                  <button
-                    onClick={() => setActiveCardType("de-titan")}
-                    className={`px-3 py-1.5 rounded-xl transition font-bold ${
-                      activeCardType === "de-titan"
-                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/30"
-                        : "text-neutral-400 hover:text-blue-300"
-                    }`}
-                  >
-                    De-Titan 3-in-1
-                  </button>
-                  <button
-                    onClick={() => setActiveCardType("emerald")}
-                    className={`px-3 py-1.5 rounded-xl transition font-bold ${
-                      activeCardType === "emerald"
-                        ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md shadow-emerald-500/30"
-                        : "text-neutral-400 hover:text-emerald-300"
-                    }`}
-                  >
-                    Royal Jade
-                  </button>
-                </div>
-
-                {/* 3D Visual Stage */}
-                <div className="relative w-full max-w-sm sm:max-w-md flex flex-col items-center">
-                  {/* Floating Smart Card with Metallic Shimmer */}
-                  <div
-                    onClick={triggerTapSimulation}
-                    className={`cursor-pointer relative z-20 w-full rounded-3xl p-6 transition-all duration-500 shadow-2xl overflow-hidden select-none animate-float border group ${
-                      activeCardType === "gold"
-                        ? "bg-gradient-to-br from-[#F5D061] via-[#E2B857] to-[#7A5612] border-amber-200 text-neutral-950 shadow-2xl shadow-amber-500/40"
-                        : activeCardType === "de-titan"
-                        ? "bg-gradient-to-br from-[#1E3A8A] via-[#1E293B] to-[#0A0F1D] border-sky-400/50 text-white shadow-2xl shadow-sky-500/30"
-                        : activeCardType === "emerald"
-                        ? "bg-gradient-to-br from-[#065F46] via-[#044E39] to-[#022C22] border-emerald-400/50 text-white shadow-2xl shadow-emerald-500/30"
-                        : "bg-gradient-to-br from-[#1F1F26] via-[#131318] to-[#09090C] border-amber-500/35 text-white shadow-2xl shadow-black/80"
-                    }`}
-                  >
-                    {/* Metallic Light Reflection Shimmer Animation */}
-                    <div className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer pointer-events-none" />
-
-                    {/* Card Real Product Image Preview Overlay */}
-                    <div className="absolute right-0 bottom-0 w-44 h-44 opacity-30 group-hover:opacity-45 transition-opacity duration-300 pointer-events-none overflow-hidden rounded-br-3xl">
-                      <img
-                        src={
-                          activeCardType === "gold"
-                            ? "/images/products/gold-mirror-metal.webp"
-                            : activeCardType === "de-titan"
-                            ? "/images/products/de-titan-3in1.webp"
-                            : activeCardType === "emerald"
-                            ? "/images/products/corporate-id-system.webp"
-                            : "/images/products/black-matte-metal.webp"
-                        }
-                        alt="Smart NFC Card Preview"
-                        className="w-full h-full object-cover transform translate-x-4 translate-y-4 rotate-[-6deg]"
-                      />
+              {/* Right Column: Active Card Real Photo Showcase & Tap Simulator */}
+              <div className="lg:col-span-4 flex flex-col items-center">
+                <div
+                  onClick={triggerTapSimulation}
+                  className="cursor-pointer group relative w-full max-w-sm rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-neutral-950 p-4 transition-all duration-300 hover:border-white/50 hover:scale-[1.02]"
+                >
+                  <div className="h-56 sm:h-64 w-full rounded-2xl overflow-hidden relative bg-neutral-900">
+                    <img
+                      src={activeSlideData.image}
+                      alt={activeSlideData.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <span className="rounded-full bg-black/80 backdrop-blur-md border border-white/20 px-3 py-1 text-[11px] font-mono font-bold text-white">
+                        {activeSlideData.tag}
+                      </span>
                     </div>
-
-                    {/* Card Header */}
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="flex items-center gap-2">
-                        <div
-                          className={`h-7 w-7 rounded-full flex items-center justify-center shadow ${
-                            activeCardType === "gold"
-                              ? "bg-neutral-950 text-amber-300"
-                              : "bg-gradient-to-tr from-amber-400 to-amber-200 text-black font-bold"
-                          }`}
-                        >
-                          <Wifi className="w-4 h-4 rotate-90" />
-                        </div>
-                        <span
-                          className={`font-mono text-xs uppercase tracking-widest font-black ${
-                            activeCardType === "gold" ? "text-neutral-950" : "text-amber-300"
-                          }`}
-                        >
-                          IDENTIFINE
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
+                      <div className="flex items-center justify-between w-full text-xs font-mono">
+                        <span className="text-neutral-300">NFC TAP • QR READY</span>
+                        <span className="text-amber-400 font-bold underline flex items-center gap-1">
+                          {hasTapped ? "✓ Card Tapped" : "Click to Test Tap →"}
                         </span>
                       </div>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase border ${
-                          activeCardType === "gold"
-                            ? "bg-black/20 border-black/30 text-neutral-950"
-                            : activeCardType === "emerald"
-                            ? "bg-emerald-950/60 border-emerald-400/40 text-emerald-200"
-                            : activeCardType === "de-titan"
-                            ? "bg-sky-950/60 border-sky-400/40 text-sky-200"
-                            : "bg-amber-500/10 border-amber-500/30 text-amber-300"
-                        }`}
-                      >
-                        {activeCardType === "gold"
-                          ? "24K VIP METAL"
-                          : activeCardType === "de-titan"
-                          ? "3-IN-1 HYBRID"
-                          : activeCardType === "emerald"
-                          ? "ROYAL JADE"
-                          : "BLACK MATTE NFC"}
-                      </span>
-                    </div>
-
-                    {/* Chip and Hologram Feature Row */}
-                    <div className="pt-4 flex items-center gap-3 relative z-10">
-                      {/* Brass Microchip */}
-                      <div className="w-9 h-7 rounded-md bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 border border-amber-300/80 p-1 flex flex-col justify-between shadow-inner">
-                        <div className="h-0.5 bg-amber-700/60 rounded" />
-                        <div className="h-0.5 bg-amber-700/60 rounded" />
-                        <div className="h-0.5 bg-amber-700/60 rounded" />
-                      </div>
-                      {/* Security Seal */}
-                      <span className="rounded-full bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 border border-purple-400/40 px-2 py-0.5 text-[9px] font-mono font-bold text-neutral-200">
-                        NTAG216 CHIP
-                      </span>
-                    </div>
-
-                    {/* Card Body */}
-                    <div className="pt-3 pb-2 space-y-1 relative z-10">
-                      <div
-                        className={`text-lg sm:text-xl font-black tracking-wider uppercase ${
-                          activeCardType === "gold" ? "text-neutral-950" : "text-white"
-                        }`}
-                      >
-                        CHIEF EXECUTIVE OFFICER
-                      </div>
-                      <div
-                        className={`text-xs font-mono ${
-                          activeCardType === "gold" ? "text-neutral-900 font-semibold" : "text-neutral-300"
-                        }`}
-                      >
-                        VANGUARD STERLING LOGISTICS LTD
-                      </div>
-                    </div>
-
-                    {/* Card Bottom Meta */}
-                    <div className="pt-3 flex items-center justify-between text-[11px] font-mono opacity-90 relative z-10">
-                      <span className="font-semibold text-neutral-300">NFC TAP • QR READY</span>
-                      <span className="font-bold underline text-amber-300 flex items-center gap-1">
-                        <span>{hasTapped ? "✓ Card Tapped" : "Click to Tap Phone"}</span>
-                        <ArrowRight className="w-3 h-3" />
-                      </span>
                     </div>
                   </div>
 
                   {/* Pulsating NFC Radio Waves when tapped */}
                   {hasTapped && (
-                    <div className="absolute top-28 left-1/2 -translate-x-1/2 -translate-y-1/2 z-15 pointer-events-none">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
                       <div className="w-48 h-48 rounded-full border-2 border-emerald-400 animate-nfc-wave" />
-                      <div className="w-36 h-36 rounded-full border-2 border-amber-400 animate-nfc-wave" style={{ animationDelay: '0.3s' }} />
                     </div>
                   )}
 
-                  {/* Phone Simulator Displaying Instant Digital Profile */}
+                  {/* Mini Contact Handshake Preview */}
                   <div
-                    className={`mt-4 w-[94%] rounded-2xl border transition-all duration-300 p-4 shadow-2xl text-left backdrop-blur-md ${
+                    className={`mt-3 rounded-xl border p-3 text-left transition-all duration-300 ${
                       hasTapped
-                        ? "border-emerald-400 bg-gradient-to-b from-neutral-900 to-[#0A1A12] ring-2 ring-emerald-400/40 shadow-emerald-500/20"
-                        : "border-amber-500/20 bg-gradient-to-b from-neutral-900/90 to-[#0C0C12]"
+                        ? "border-emerald-500 bg-neutral-900 ring-2 ring-emerald-500/30"
+                        : "border-white/10 bg-neutral-900/60"
                     }`}
                   >
-                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                      <div className="flex items-center gap-2">
-                        <Smartphone className="w-4 h-4 text-emerald-400" />
-                        <span className="text-xs font-bold text-white">
-                          {hasTapped ? "⚡ Card Tapped! Profile Connected" : "Client Smartphone Interface"}
-                        </span>
-                      </div>
-                      <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-                        {hasTapped ? "INSTANT READ" : "NO APP REQUIRED"}
+                    <div className="flex items-center justify-between pb-2 border-b border-white/10 text-xs">
+                      <span className="font-bold text-white flex items-center gap-1.5">
+                        <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
+                        {hasTapped ? "⚡ Instant Profile Connected" : "Smartphone Handshake"}
+                      </span>
+                      <span className="text-[10px] font-mono text-emerald-400 font-bold">
+                        NO APP NEEDED
                       </span>
                     </div>
-
-                    <div className="pt-3 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-400 to-amber-600 text-black font-extrabold flex items-center justify-center text-sm shadow-md border border-amber-200">
-                          CN
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-extrabold text-white text-xs sm:text-sm">Chidi Nwosu</span>
-                            <span className="text-[10px] font-bold text-sky-400">✓ Verified</span>
-                          </div>
-                          <div className="text-neutral-400 font-mono text-[11px]">Managing Director • Sterling Energy</div>
-                        </div>
+                    <div className="pt-2 flex items-center justify-between text-xs">
+                      <div>
+                        <div className="font-bold text-white">Chidi Nwosu</div>
+                        <div className="text-[11px] text-neutral-400 font-mono">Managing Director</div>
                       </div>
-
-                      {/* Action buttons in vibrant authentic brand colors */}
-                      <div className="grid grid-cols-3 gap-2 pt-1">
-                        <div className="rounded-xl bg-emerald-600 hover:bg-emerald-500 py-2 px-2 text-center text-[10px] font-extrabold text-white flex items-center justify-center gap-1 shadow-md shadow-emerald-600/30 transition">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>Save Contact</span>
-                        </div>
-                        <div className="rounded-xl bg-[#25D366] hover:bg-[#20ba5a] py-2 px-2 text-center text-[10px] font-extrabold text-white flex items-center justify-center gap-1 shadow-md shadow-[#25D366]/30 transition">
-                          <Phone className="w-3.5 h-3.5" />
-                          <span>WhatsApp</span>
-                        </div>
-                        <div className="rounded-xl bg-sky-600 hover:bg-sky-500 py-2 px-2 text-center text-[10px] font-extrabold text-white flex items-center justify-center gap-1 shadow-md shadow-sky-600/30 transition">
-                          <Globe className="w-3.5 h-3.5" />
-                          <span>Website</span>
-                        </div>
+                      <div className="flex items-center gap-1">
+                        <span className="rounded-lg bg-emerald-600 px-2.5 py-1 text-[10px] font-bold text-white">
+                          Save Contact
+                        </span>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Arrows (Left & Right) */}
+          <button
+            onClick={prevSlide}
+            aria-label="Previous Slide"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/20 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            aria-label="Next Slide"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/20 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Bottom Thumbnails & Progress Bar Navigation */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
+            {/* Dots / Indicators */}
+            <div className="flex items-center gap-2">
+              {heroSlides.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentSlide(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    idx === currentSlide
+                      ? "w-8 bg-white shadow"
+                      : "w-2.5 bg-white/30 hover:bg-white/60"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Mini Card Thumbnails for Direct Click */}
+            <div className="hidden sm:flex items-center gap-2 p-1 rounded-2xl bg-black/70 backdrop-blur-md border border-white/10">
+              {heroSlides.map((slide, idx) => (
+                <button
+                  key={slide.id}
+                  onClick={() => setCurrentSlide(idx)}
+                  className={`relative h-11 w-16 rounded-xl overflow-hidden border transition-all duration-200 ${
+                    idx === currentSlide
+                      ? "border-white ring-2 ring-white/50 scale-105"
+                      : "border-white/20 opacity-50 hover:opacity-100"
+                  }`}
+                >
+                  <img
+                    src={slide.image}
+                    alt={slide.tag}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Core Trust Indicators Below Hero */}
+        <section className="py-6 border-b border-white/10 bg-neutral-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="rounded-2xl border border-white/10 bg-neutral-900/60 p-4 flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
+                  <DollarSign className="w-6 h-6 text-emerald-400" />
+                </div>
+                <div>
+                  <div className="text-xl font-black text-white">10% Flat Cash</div>
+                  <div className="text-xs text-neutral-400">Paid immediately upon client invoice settlement</div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-neutral-900/60 p-4 flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
+                  <CreditCard className="w-6 h-6 text-amber-400" />
+                </div>
+                <div>
+                  <div className="text-xl font-black text-white">₦50,000 Threshold</div>
+                  <div className="text-xs text-neutral-400">Instant withdrawal request from your dashboard</div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-neutral-900/60 p-4 flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
+                  <Clock className="w-6 h-6 text-sky-400" />
+                </div>
+                <div>
+                  <div className="text-xl font-black text-white">3 Hours Payout</div>
+                  <div className="text-xs text-neutral-400">Direct credit to all Nigerian commercial banks</div>
                 </div>
               </div>
             </div>

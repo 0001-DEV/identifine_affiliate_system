@@ -77,6 +77,26 @@ body {
   }
 }
 
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.09);
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-float {
   animation: floatSlow 5s ease-in-out infinite;
 }
@@ -95,6 +115,14 @@ body {
 
 .animate-glow-slow {
   animation: pulseGlowSlow 4s ease-in-out infinite;
+}
+
+.animate-ken-burns {
+  animation: kenBurns 6.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @media print {

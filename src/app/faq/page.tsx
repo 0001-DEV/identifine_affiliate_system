@@ -109,7 +109,7 @@ export default function FAQPage() {
       questions: [
         {
           q: "What products does Identifine & Xtreme Cardz produce?",
-          a: "We produce physical Black Matte Metal NFC Cards, VIP 24K Brushed Gold Cards, De-Titan 3-in-1 Smart Access Badges (ID + RFID access + digital vCard), Corporate Team PVC packs, and custom laser-engraved NFC products.",
+          a: "We produce physical Black Matte Metal NFC Cards, VIP 24K Brushed Gold Cards, Titanium & Smart RFID Access Badges (ID + RFID access + digital vCard), Corporate Team PVC packs, and custom laser-engraved NFC products.",
         },
         {
           q: "Do smartphones need an app to read the smart cards?",

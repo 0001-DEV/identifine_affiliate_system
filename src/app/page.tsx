@@ -66,20 +66,6 @@ export default function MarketingHomePage() {
       secondaryLink: "/pricing",
     },
     {
-      id: "de-titan",
-      tag: "DE-TITAN 3-IN-1 HYBRID SMART BADGE",
-      badgeColor: "bg-blue-600 text-white border-blue-400",
-      title: "Corporate Photo ID + RFID Access + Digital NFC vCard",
-      description:
-        "Consolidate physical employee photo identification, building door & turnstile access control, and digital tap-to-connect vCard networking into a single intelligent hybrid smart badge.",
-      image: "/images/products/de-titan-3in1.webp",
-      highlight: "High-value B2B enterprise contracts with 3-hour payouts",
-      ctaText: "Start Referring Companies",
-      ctaLink: "/portal?tab=register",
-      secondaryText: "Review Enterprise Solutions",
-      secondaryLink: "/pricing",
-    },
-    {
       id: "corporate-pack",
       tag: "CORPORATE ENTERPRISE 100-PACK",
       badgeColor: "bg-emerald-600 text-white border-emerald-400",
@@ -620,17 +606,17 @@ export default function MarketingHomePage() {
                 </div>
               </div>
 
-              {/* Product 2: De-Titan 3-in-1 Identity Cards */}
+              {/* Product 2: Gunmetal Titanium Smart Card */}
               <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-b from-indigo-500/10 via-[#111116] to-[#0A0A0D] overflow-hidden flex flex-col justify-between hover:border-indigo-400/60 transition hover:-translate-y-1.5 duration-300 group shadow-xl">
                 <div className="h-44 w-full bg-neutral-900 overflow-hidden relative">
                   <img
-                    src="/images/products/de-titan-3in1.webp"
-                    alt="De-Titan 3-in-1 Smart Badge"
+                    src="/images/products/gunmetal-titanium.webp"
+                    alt="Gunmetal Titanium Smart Card"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3">
                     <span className="rounded-full bg-black/80 backdrop-blur-md border border-indigo-400/50 px-2.5 py-1 text-[10px] font-mono font-bold text-indigo-300">
-                      3-IN-1 HYBRID
+                      GUNMETAL TITANIUM
                     </span>
                   </div>
                 </div>
@@ -638,18 +624,18 @@ export default function MarketingHomePage() {
                   <div className="space-y-2">
                     <div className="space-y-1">
                       <h3 className="text-base font-extrabold text-white">
-                        De-Titan 3-in-1 Smart Badge
+                        Gunmetal Titanium Smart NFC
                       </h3>
                       <p className="text-xs text-indigo-300 font-mono font-bold">
-                        Multi-Functional Corporate
+                        Aerospace-Grade Alloy
                       </p>
                     </div>
                     <p className="text-xs text-neutral-300 leading-relaxed">
-                      Combines physical company photo identification, RFID door and turnstile access control, and digital tap-to-connect vCard sharing in one sleek card.
+                      Ultra-durable, scratch-resistant titanium cards with precision laser-etched insignia and contactless NFC chip integration for top-tier executives.
                     </p>
                   </div>
                   <div className="pt-2 border-t border-indigo-500/20 text-[11px] text-emerald-400 font-mono font-bold">
-                    Affiliate Cut: 10% on total project
+                    Affiliate Cut: ₦22,000 per order
                   </div>
                 </div>
               </div>

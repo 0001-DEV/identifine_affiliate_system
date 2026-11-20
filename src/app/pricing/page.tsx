@@ -76,14 +76,14 @@ export default function PricingEarningsPage() {
     },
     {
       id: "bespoke-b2b",
-      name: "Bespoke Corporate Rollout / De-Titan",
+      name: "Bespoke Corporate Rollout / Smart Access Suite",
       units: "150 – 500+ Units",
       price: 1200000,
       commission: 120000,
-      image: "/images/products/de-titan-3in1.webp",
+      image: "/images/products/gunmetal-titanium.webp",
       description: "Custom RFID/NFC integrated door access badges, hotel keycards, event access systems, and large enterprise solutions.",
       features: [
-        "3-in-1 Physical ID + RFID + Smart NFC",
+        "Physical ID + RFID + Smart NFC",
         "Door & Turnstile Access System Encoding",
         "Custom Hologram / Foil Security Seals",
         "Enterprise API & Webhook Hooks",

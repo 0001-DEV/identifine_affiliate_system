@@ -42,6 +42,14 @@ function PortalContent() {
     else if (tab === "referee") setMode("REFEREE");
     else if (tab === "login") setMode("LOGIN");
 
+    // Prefill from homepage quick-start form
+    const preName = searchParams.get("name");
+    const preEmail = searchParams.get("email");
+    const prePhone = searchParams.get("phone");
+    if (preName) setName(preName);
+    if (preEmail) setEmail(preEmail);
+    if (prePhone) setPhone(prePhone);
+
     const code = searchParams.get("code");
     if (code) {
       setRefCodeInput(code);

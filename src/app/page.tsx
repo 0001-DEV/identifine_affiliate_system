@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
 import {
@@ -94,6 +95,24 @@ export default function MarketingHomePage() {
     setCurrentSlide((prev) => (prev - 1 + heroCardImages.length) % heroCardImages.length);
   };
 
+  // Hero split-screen onboarding panel state
+  const router = useRouter();
+  const [heroReferrals, setHeroReferrals] = useState(6);
+  const [heroName, setHeroName] = useState("");
+  const [heroEmail, setHeroEmail] = useState("");
+  const [heroPhone, setHeroPhone] = useState("");
+
+  const handleHeroSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    const params = new URLSearchParams({
+      tab: "register",
+      name: heroName,
+      email: heroEmail,
+      phone: heroPhone,
+    });
+    router.push(`/portal?${params.toString()}`);
+  };
+
   // Interactive Earnings Calculator State
   const [executivePacks, setExecutivePacks] = useState(1); // 250k each -> 25k comm
   const [enterprisePacks, setEnterprisePacks] = useState(1); // 650k each -> 65k comm
@@ -109,89 +128,165 @@ export default function MarketingHomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: PURE CARDS PICTURE CAROUSEL (OKOMUOIL.COM STYLE ANIMATION)
-               (Clean visual carousel of our cards pictures with no text overlay yet)
+            1. HERO SECTION: CONCEPT 10 — 50/50 SPLIT SCREEN
+               Left: full-height card photo carousel | Right: instant affiliate onboarding
            ========================================================================= */}
-        <section
-          className="relative h-[480px] sm:h-[580px] md:h-[680px] lg:h-[780px] w-full overflow-hidden bg-black flex items-center justify-center border-b border-white/10"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {/* Background Images Carousel with Ken Burns Zoom & Smooth Fade */}
-          {heroCardImages.map((slide, index) => (
-            <div
-              key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-              }`}
-            >
-              {/* Product Background Image with Ken Burns Scale */}
+        <section className="relative grid lg:grid-cols-2 w-full lg:min-h-[calc(100vh-64px)] border-b border-white/10">
+          {/* ---------- LEFT: Product Carousel ---------- */}
+          <div
+            className="relative h-[460px] sm:h-[560px] lg:h-auto overflow-hidden bg-black"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {heroCardImages.map((slide, index) => (
               <div
-                className={`w-full h-full bg-contain md:bg-cover bg-center bg-no-repeat ${
-                  index === currentSlide ? "animate-ken-burns" : ""
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
                 }`}
-                style={{ backgroundImage: `url(${slide.image})` }}
-              />
-
-              {/* Subtle Ambient Vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
-            </div>
-          ))}
-
-          {/* Navigation Arrows (Left & Right) */}
-          <button
-            onClick={prevSlide}
-            aria-label="Previous Slide"
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/30 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={nextSlide}
-            aria-label="Next Slide"
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/60 border border-white/30 text-white hover:bg-white hover:text-black flex items-center justify-center transition shadow-2xl backdrop-blur-md"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Bottom Thumbnails & Progress Bar Navigation */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
-            {/* Dots / Indicators */}
-            <div className="flex items-center gap-2">
-              {heroCardImages.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentSlide(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    idx === currentSlide
-                      ? "w-8 bg-white shadow-lg"
-                      : "w-2.5 bg-white/40 hover:bg-white/80"
+              >
+                <div
+                  className={`w-full h-full bg-cover bg-center bg-no-repeat ${
+                    index === currentSlide ? "animate-ken-burns" : ""
                   }`}
+                  style={{ backgroundImage: `url(${slide.image})` }}
                 />
-              ))}
-            </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none" />
+              </div>
+            ))}
 
-            {/* Mini Card Thumbnails for Direct Click */}
-            <div className="hidden sm:flex items-center gap-2 p-1.5 rounded-2xl bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl">
-              {heroCardImages.map((slide, idx) => (
-                <button
-                  key={slide.id}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`relative h-12 w-20 rounded-xl overflow-hidden border transition-all duration-200 ${
-                    idx === currentSlide
-                      ? "border-white ring-2 ring-white/60 scale-105"
-                      : "border-white/20 opacity-50 hover:opacity-100"
-                  }`}
-                >
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="w-full h-full object-cover"
+            {/* Bottom controls: dots, counter + title, arrows */}
+            <div className="absolute bottom-0 inset-x-0 z-30 px-6 sm:px-10 pb-8">
+              <div className="flex justify-center gap-2 mb-5">
+                {heroCardImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      idx === currentSlide ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
+                    }`}
                   />
+                ))}
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <button
+                  onClick={prevSlide}
+                  aria-label="Previous slide"
+                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition"
+                >
+                  <ChevronLeft className="w-5 h-5" />
                 </button>
-              ))}
+                <div key={currentSlide} className="text-center text-sm sm:text-base text-white/90 font-medium animate-[slideUpFade_0.6s_ease-out]">
+                  <span className="font-mono text-white/60">
+                    {String(currentSlide + 1).padStart(2, "0")} / {String(heroCardImages.length).padStart(2, "0")}
+                  </span>
+                  <span className="mx-2 text-white/40">—</span>
+                  {heroCardImages[currentSlide].title}
+                </div>
+                <button
+                  onClick={nextSlide}
+                  aria-label="Next slide"
+                  className="h-11 w-11 shrink-0 rounded-full border border-white/30 bg-black/40 backdrop-blur text-white hover:bg-white hover:text-black flex items-center justify-center transition"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* ---------- RIGHT: Affiliate Onboarding Panel ---------- */}
+          <div className="relative bg-[#eef1f5] text-neutral-900 flex items-center justify-center px-4 sm:px-8 py-12 lg:py-10">
+            <div className="w-full max-w-[480px] rounded-3xl bg-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)] border border-black/5 p-7 sm:p-9 animate-[slideUpFade_0.8s_ease-out]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-[11px] font-bold text-emerald-700">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Xtreme Cardz &amp; Identifine Affiliate Programme
+              </div>
+              <h1 className="mt-4 text-3xl sm:text-[2.6rem] leading-[1.08] tracking-tight">
+                <span className="font-light">Become an</span>
+                <br />
+                <span className="font-black">Executive Partner</span>
+              </h1>
+
+              {/* Live earnings slider */}
+              <div className="mt-6 rounded-2xl bg-neutral-50 border border-neutral-200 p-4">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-neutral-600">
+                    Refer <b className="text-neutral-900">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/month
+                  </span>
+                  <span className="font-black text-lg text-neutral-900">
+                    ₦{(heroReferrals * 25000).toLocaleString()}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={1}
+                  max={40}
+                  value={heroReferrals}
+                  onChange={(e) => setHeroReferrals(Number(e.target.value))}
+                  className="mt-3 w-full accent-black cursor-pointer"
+                  aria-label="Number of referrals per month"
+                />
+                <p className="mt-1 text-[11px] text-neutral-500">
+                  Based on an average ₦25,000 commission (10% of a ₦250,000 executive order).
+                </p>
+              </div>
+
+              {/* Guarantees */}
+              <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+                <div className="flex flex-col items-center gap-1.5">
+                  <Zap className="w-5 h-5" />
+                  <span className="text-[12px] font-semibold leading-tight">Instant Paystack<br />Settlement</span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5">
+                  <DollarSign className="w-5 h-5" />
+                  <span className="text-[12px] font-semibold leading-tight">10% Cash<br />Commission</span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5">
+                  <Layers className="w-5 h-5" />
+                  <span className="text-[12px] font-semibold leading-tight">Zero<br />Inventory</span>
+                </div>
+              </div>
+
+              {/* Quick start form -> continues on /portal register */}
+              <form onSubmit={handleHeroSignup} className="mt-6 space-y-3">
+                <input
+                  required
+                  value={heroName}
+                  onChange={(e) => setHeroName(e.target.value)}
+                  placeholder="Full Name"
+                  className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                />
+                <input
+                  required
+                  type="email"
+                  value={heroEmail}
+                  onChange={(e) => setHeroEmail(e.target.value)}
+                  placeholder="Email Address"
+                  className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                />
+                <input
+                  required
+                  type="tel"
+                  value={heroPhone}
+                  onChange={(e) => setHeroPhone(e.target.value)}
+                  placeholder="Phone / WhatsApp Number"
+                  className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                />
+                <button
+                  type="submit"
+                  className="w-full rounded-xl bg-black text-[#E9CF7E] font-bold py-3.5 border-2 border-[#C9A13B] hover:bg-neutral-900 hover:shadow-[0_10px_30px_-10px_rgba(201,161,59,0.6)] transition flex items-center justify-center gap-2"
+                >
+                  Activate Affiliate Link <ArrowRight className="w-4 h-4" />
+                </button>
+              </form>
+              <p className="mt-4 text-center text-xs text-neutral-500">
+                Already a partner?{" "}
+                <Link href="/portal?tab=login" className="font-semibold text-neutral-900 underline underline-offset-2">
+                  Sign in
+                </Link>{" "}
+                · <Link href="/pricing" className="font-semibold text-neutral-900 underline underline-offset-2">See earnings</Link>
+              </p>
             </div>
           </div>
         </section>

@@ -116,88 +116,89 @@ nextjs-portal,
 }
 
 /* ==========================================================================
-   LIGHT MODE DESIGN SYSTEM
+   LIGHT MODE DESIGN SYSTEM (WARM IDENTIFINE OYSTER STONE & GOLD)
    ========================================================================== */
 html.light,
 html.light body {
-  background-color: #F8FAFC !important;
-  color: #0F172A !important;
+  background-color: #FAF8F5 !important;
+  color: #111111 !important;
 }
 
 html.light [class*="070708"],
+html.light [class*="07070A"],
 html.light [class*="09090B"],
 html.light [class*="070707"],
 html.light [class*="0D0D0D"],
-html.light [class*="0A0A0A"] {
-  background-color: #F8FAFC !important;
-  color: #0F172A !important;
+html.light [class*="0A0A0A"],
+html.light [class*="050508"],
+html.light [class*="0A090D"],
+html.light [class*="0C0A06"] {
+  background-color: #FAF8F5 !important;
+  color: #111111 !important;
 }
 
 html.light [class*="111113"],
+html.light [class*="111116"],
 html.light [class*="141414"],
+html.light [class*="121216"],
+html.light [class*="121217"],
 html.light .bg-neutral-900,
 html.light .bg-neutral-950 {
   background-color: #FFFFFF !important;
-  color: #0F172A !important;
-  border-color: #E2E8F0 !important;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
+  color: #111111 !important;
+  border-color: #E8E4DA !important;
+  box-shadow: 0 4px 20px -2px rgba(30, 20, 10, 0.06) !important;
 }
 
 html.light .bg-black:not(.keep-black) {
-  background-color: #F1F5F9 !important;
-  color: #0F172A !important;
-  border-color: #CBD5E1 !important;
+  background-color: #F3EFE6 !important;
+  color: #111111 !important;
+  border-color: #DDD8CD !important;
 }
 
 html.light header {
-  background-color: rgba(248, 250, 252, 0.92) !important;
-  border-color: #E2E8F0 !important;
+  background-color: rgba(250, 248, 245, 0.94) !important;
+  border-color: #E8E4DA !important;
 }
 
 html.light input:not([type="checkbox"]):not([type="radio"]),
 html.light select,
 html.light textarea {
   background-color: #FFFFFF !important;
-  color: #0F172A !important;
-  border-color: #CBD5E1 !important;
+  color: #111111 !important;
+  border-color: #DDD8CD !important;
 }
 
 html.light input::placeholder,
 html.light textarea::placeholder {
-  color: #94A3B8 !important;
+  color: #8C887B !important;
 }
 
 html.light [class*="border-white"],
 html.light .border-neutral-800 {
-  border-color: #E2E8F0 !important;
+  border-color: #E8E4DA !important;
 }
 
 html.light .text-white {
-  color: #0F172A !important;
+  color: #111111 !important;
 }
 
 html.light .text-neutral-400,
 html.light .text-neutral-300 {
-  color: #475569 !important;
+  color: #55524A !important;
 }
 
 html.light .text-neutral-200 {
-  color: #1E293B !important;
+  color: #222222 !important;
 }
 
 html.light .text-neutral-500 {
-  color: #64748B !important;
+  color: #77746C !important;
 }
 
-html.light button.bg-white,
-html.light a.bg-white:not(.no-light-invert) {
-  background-color: #0F172A !important;
-  color: #FFFFFF !important;
-}
-
-html.light button.bg-white:hover,
-html.light a.bg-white:not(.no-light-invert):hover {
-  background-color: #1E293B !important;
+/* Ensure Gold Gradient Buttons preserve gold richness in Light Mode */
+html.light [class*="from-amber-400"] {
+  color: #0A0A0A !important;
 }
 
 

@@ -8,9 +8,10 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
   const [isFinished, setIsFinished] = useState(false);
   const [typedTitle, setTypedTitle] = useState("");
   const [typedSubtext, setTypedSubtext] = useState("");
+  const [isLogoRolledLeft, setIsLogoRolledLeft] = useState(false);
   const hasStartedRef = useRef(false);
 
-  // Sequence controller: 1 to 8 fast, then reduced speed for 9 & 10
+  // Sequence controller: 1 to 8 fast, then cinematic deliberate pacing on 9 & 10
   useEffect(() => {
     if (hasStartedRef.current) return;
     hasStartedRef.current = true;
@@ -24,32 +25,37 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         setCurrentStep(step);
       } else if (step === 9) {
         clearInterval(interval);
-        // REDUCE SPEED for step 9 (XTREME CARDZ)
+        // Stage 9: XTREME CARDZ
         setCurrentStep(9);
 
-        // Hold Step 9 for 2000ms so logo descends & text is typed out completely
+        // At 2.8s: Roll Xtreme logo to the left side of text
         setTimeout(() => {
-          // REDUCE SPEED for step 10 (IDENTIFINE)
+          setIsLogoRolledLeft(true);
+        }, 2800);
+
+        // At 4.5s: Transition to Stage 10 (IDENTIFINE)
+        setTimeout(() => {
+          setIsLogoRolledLeft(false);
           setCurrentStep(10);
 
-          // Hold Step 10 for 2100ms so Identifine logo descends & text is typed out
+          // Hold IDENTIFINE for 3.2s so full typing and reading complete comfortably
           setTimeout(() => {
             setIsExiting(true);
-          }, 2100);
+          }, 3200);
 
-          // Remove from DOM after smooth slide up
+          // Finish and remove from DOM after smooth slide up (850ms)
           setTimeout(() => {
             setIsFinished(true);
             onComplete?.();
-          }, 2950);
-        }, 2000);
+          }, 4050);
+        }, 4500);
       }
     }, 130);
 
     return () => clearInterval(interval);
   }, [onComplete]);
 
-  // Simultaneous typing effect when reaching 9 & 10
+  // Deliberate typewriter effect: slower and clearly visible letter-by-letter
   useEffect(() => {
     if (currentStep === 9) {
       setTypedTitle("");
@@ -58,20 +64,22 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
       const sub = "Crafted For The Exceptional • Smart & Metal Cards";
 
       let i = 0;
+      // 90ms per letter so the writing effect is clearly noticed
       const titleTimer = setInterval(() => {
         i++;
         setTypedTitle(title.slice(0, i));
         if (i >= title.length) {
           clearInterval(titleTimer);
 
+          // Subtitle starts typing after title completes (30ms per char)
           let j = 0;
           const subTimer = setInterval(() => {
-            j += 2;
+            j += 1;
             setTypedSubtext(sub.slice(0, j));
             if (j >= sub.length) clearInterval(subTimer);
-          }, 20);
+          }, 30);
         }
-      }, 45);
+      }, 90);
 
       return () => clearInterval(titleTimer);
     } else if (currentStep === 10) {
@@ -81,20 +89,22 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
       const sub = "Define. Secure. Belong.";
 
       let i = 0;
+      // 100ms per letter for deliberate, prestigious reveal
       const titleTimer = setInterval(() => {
         i++;
         setTypedTitle(title.slice(0, i));
         if (i >= title.length) {
           clearInterval(titleTimer);
 
+          // Subtitle typing (45ms per char)
           let j = 0;
           const subTimer = setInterval(() => {
             j += 1;
             setTypedSubtext(sub.slice(0, j));
             if (j >= sub.length) clearInterval(subTimer);
-          }, 28);
+          }, 45);
         }
-      }, 50);
+      }, 100);
 
       return () => clearInterval(titleTimer);
     }
@@ -120,9 +130,15 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             </span>
           </div>
         ) : currentStep === 9 ? (
-          <div className="flex flex-col items-center text-center px-4 max-w-3xl">
-            {/* XTREME LOGO: Descends from above and stays right on top of text */}
-            <div className="animate-descend-from-top mb-5 sm:mb-6">
+          <div className="relative flex flex-col items-center text-center px-4 max-w-4xl">
+            {/* XTREME LOGO: Descends from above on top of text, then rolls to left side of text */}
+            <div
+              className={`transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                isLogoRolledLeft
+                  ? "-translate-x-[115px] sm:-translate-x-[175px] md:-translate-x-[235px] lg:-translate-x-[285px] translate-y-[56px] sm:translate-y-[76px] md:translate-y-[96px] rotate-[-360deg] scale-[0.75] sm:scale-[0.82] z-20"
+                  : "animate-descend-from-top translate-x-0 translate-y-0 rotate-0 mb-5 sm:mb-6"
+              }`}
+            >
               <img
                 src="/xtreme-cardz-logo.png"
                 alt="Xtreme Cardz Logo"
@@ -142,17 +158,20 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
                   typedTitle
                 )}
                 {typedTitle.length < 12 && (
-                  <span className="inline-block w-1 h-7 sm:h-10 md:h-14 bg-[#F59E0B] ml-2 animate-pulse" />
+                  <span className="inline-block w-1.5 h-7 sm:h-10 md:h-14 bg-[#F59E0B] ml-2 animate-pulse" />
                 )}
               </h2>
             </div>
 
             <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-semibold tracking-[0.25em] uppercase text-neutral-300 min-h-[28px] drop-shadow">
               {typedSubtext}
+              {typedTitle.length >= 12 && typedSubtext.length < 47 && (
+                <span className="inline-block w-1 h-3.5 sm:h-4 bg-white/70 ml-1.5 animate-pulse" />
+              )}
             </p>
           </div>
         ) : (
-          <div className="flex flex-col items-center text-center px-4 max-w-3xl">
+          <div className="relative flex flex-col items-center text-center px-4 max-w-4xl">
             {/* IDENTIFINE LOGO: Descends from above and stays right on top of text */}
             <div className="animate-descend-from-top mb-5 sm:mb-6">
               <img
@@ -167,13 +186,16 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
               <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-widest text-[#F59E0B] drop-shadow-[0_0_40px_rgba(245,158,11,0.35)] flex items-center justify-center">
                 {typedTitle}
                 {typedTitle.length < 10 && (
-                  <span className="inline-block w-1 h-7 sm:h-10 md:h-14 bg-white ml-2 animate-pulse" />
+                  <span className="inline-block w-1.5 h-7 sm:h-10 md:h-14 bg-white ml-2 animate-pulse" />
                 )}
               </h2>
             </div>
 
             <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-neutral-300 min-h-[28px] drop-shadow">
               {typedSubtext}
+              {typedTitle.length >= 10 && typedSubtext.length < 23 && (
+                <span className="inline-block w-1 h-3.5 sm:h-4 bg-white/70 ml-1.5 animate-pulse" />
+              )}
             </p>
           </div>
         )}

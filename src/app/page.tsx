@@ -127,124 +127,12 @@ export default function MarketingHomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: CONTAINER ON LEFT TAKING SPACE + REDUCED WIDTH VIDEO ON RIGHT
+            1. HERO SECTION: 50% XTREME CARDZ VIDEO + 50% AFFILIATE ONBOARDING
            ========================================================================= */}
         <section className="relative w-full border-b border-white/10 bg-black overflow-hidden">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 min-h-[560px] lg:h-[790px] xl:h-[810px]">
-            {/* ---------- LEFT CONTAINER: TAKES THE SPACE (AFFILIATE ONBOARDING & HERO CONTENT) ---------- */}
-            <div className="lg:col-span-7 relative bg-[#0D0B0E] text-white flex flex-col justify-center p-6 sm:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 z-10 overflow-y-auto">
-              {/* Subtle Ambient Gold Glow */}
-              <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#F59E0B]/10 blur-[120px] pointer-events-none" />
-
-              <div className="max-w-xl space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 border border-amber-500/30 px-3.5 py-1 text-xs font-bold text-amber-400">
-                  <span className="h-2 w-2 rounded-full bg-[#F59E0B] animate-pulse" />
-                  Identifine &amp; Xtreme Cardz Official Partner Programme
-                </div>
-
-                {/* Exact Headline from Mockup with Masked Rise */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight text-white">
-                  Turn Business Connections Into{" "}
-                  <span className="text-[#F59E0B] drop-shadow-[0_0_35px_rgba(245,158,11,0.35)]">
-                    Earnings.
-                  </span>
-                </h1>
-
-                <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
-                  Introduce businesses to Identifine and Xtreme Cardz products and services. When your referrals become paying customers, you earn a <b>7.5% cash commission</b>.
-                </p>
-
-                {/* Action Buttons from Mockup */}
-                <div className="flex flex-wrap items-center gap-3 pt-1">
-                  <Link
-                    href="/portal?tab=register"
-                    className="inline-flex items-center gap-2 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-black px-6 py-3 text-xs sm:text-sm shadow-lg hover:shadow-xl transition-magnetic cursor-pointer"
-                  >
-                    <span>Become an Affiliate</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-
-                  <Link
-                    href="#how-it-works"
-                    className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold px-6 py-3 text-xs sm:text-sm backdrop-blur-md transition cursor-pointer"
-                  >
-                    <span>Explore How It Works</span>
-                  </Link>
-                </div>
-
-                {/* Compact Live 7.5% Earnings Estimator Box */}
-                <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-4">
-                  <div className="flex items-center justify-between text-xs sm:text-sm">
-                    <span className="text-neutral-300 font-medium">
-                      Estimated earnings for <b className="text-white font-mono text-sm">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo:
-                    </span>
-                    <span className="font-black text-lg sm:text-xl text-[#F59E0B] font-mono tracking-tight drop-shadow">
-                      ₦{heroEstimatedCommission.toLocaleString()}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={1}
-                    max={40}
-                    value={heroReferrals}
-                    onChange={(e) => setHeroReferrals(Number(e.target.value))}
-                    className="mt-2.5 w-full accent-[#F59E0B] cursor-pointer"
-                    aria-label="Number of referrals per month"
-                  />
-                  <div className="mt-2 flex items-center justify-between text-[11px] text-neutral-400">
-                    <span>7.5% Cash Commission</span>
-                    <span>Min. Payout: ₦50,000</span>
-                    <Link href="/pricing" className="text-[#F59E0B] font-bold hover:underline">
-                      View Pricing Table →
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Quick Start Activation Form */}
-                <form onSubmit={handleHeroSignup} className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
-                  <input
-                    required
-                    value={heroName}
-                    onChange={(e) => setHeroName(e.target.value)}
-                    placeholder="Full Name"
-                    className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-neutral-500 outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30 transition"
-                  />
-                  <input
-                    required
-                    type="email"
-                    value={heroEmail}
-                    onChange={(e) => setHeroEmail(e.target.value)}
-                    placeholder="Email Address"
-                    className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-neutral-500 outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30 transition"
-                  />
-                  <input
-                    required
-                    type="tel"
-                    value={heroPhone}
-                    onChange={(e) => setHeroPhone(e.target.value)}
-                    placeholder="WhatsApp Number"
-                    className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-neutral-500 outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30 transition"
-                  />
-                  <button
-                    type="submit"
-                    className="sm:col-span-3 group rounded-xl bg-gradient-to-r from-[#F59E0B] to-[#D97706] hover:from-[#D97706] hover:to-[#B45309] text-black font-black py-2.5 text-xs shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-1.5 cursor-pointer mt-1"
-                  >
-                    <span>Activate Affiliate Account</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-300" />
-                  </button>
-                </form>
-
-                <p className="text-[11px] text-neutral-400">
-                  Already registered?{" "}
-                  <Link href="/portal?tab=login" className="font-bold text-[#F59E0B] underline underline-offset-2">
-                    Sign in here
-                  </Link>
-                </p>
-              </div>
-            </div>
-
-            {/* ---------- RIGHT CONTAINER: VIDEO SHOWCASE WITH REDUCED WIDTH ---------- */}
-            <div className="lg:col-span-5 relative h-[380px] sm:h-[480px] lg:h-full overflow-hidden bg-[#0A0709] flex items-center justify-center">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[560px] lg:h-[790px] xl:h-[810px]">
+            {/* ---------- 50% WIDTH: XTREME CARDZ VIDEO SHOWCASE ---------- */}
+            <div className="lg:col-span-1 relative h-[420px] sm:h-[540px] lg:h-full overflow-hidden bg-[#0A0709] flex items-center justify-center">
               <video
                 key="xtreme-cardz-showcase-video"
                 autoPlay
@@ -264,7 +152,7 @@ export default function MarketingHomePage() {
               <button
                 onClick={() => setIsMuted(!isMuted)}
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
-                className="absolute top-6 right-6 z-20 h-10 w-10 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-black transition backdrop-blur-md cursor-pointer"
+                className="absolute top-6 left-6 z-20 h-10 w-10 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-black transition backdrop-blur-md cursor-pointer"
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
               </button>
@@ -275,6 +163,107 @@ export default function MarketingHomePage() {
                 <span className="text-xs font-mono font-bold text-white tracking-wider">
                   XTREME CARDZ SHOWCASE • 7.5% COMMISSION
                 </span>
+              </div>
+            </div>
+
+            {/* ---------- 50% WIDTH: AFFILIATE ONBOARDING PORTAL ---------- */}
+            <div className="lg:col-span-1 relative bg-[#F8F9FA] text-neutral-900 flex items-center justify-center p-6 sm:p-10 lg:p-8 xl:p-12 border-t lg:border-t-0 lg:border-l border-neutral-200">
+              <div className="w-full max-w-[460px] rounded-3xl bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] border border-black/5 p-7 sm:p-8">
+                <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
+                  Identifine &amp; Xtreme Cardz Partner
+                </div>
+
+                {/* Residence style Masked Reveal Headline */}
+                <div className="mt-3 overflow-hidden">
+                  <h1 className="animate-mask-rise text-2xl sm:text-3xl font-black leading-[1.1] tracking-tight">
+                    <span className="font-light block text-neutral-800">Become an</span>
+                    <span className="block text-black">
+                      Executive Partner
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Live earnings slider (7.5%) */}
+                <div className="mt-5 rounded-2xl bg-neutral-50 border border-neutral-200 p-3.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-neutral-600 font-medium">
+                      Refer <b className="text-neutral-900 font-mono text-sm">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo
+                    </span>
+                    <span className="font-black text-lg text-[#B45309] font-mono tracking-tight">
+                      ₦{heroEstimatedCommission.toLocaleString()}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={1}
+                    max={40}
+                    value={heroReferrals}
+                    onChange={(e) => setHeroReferrals(Number(e.target.value))}
+                    className="mt-2.5 w-full accent-[#F59E0B] cursor-pointer"
+                    aria-label="Number of referrals per month"
+                  />
+                  <p className="mt-1 text-[10px] text-neutral-500">
+                    7.5% cash commission on executive client orders.
+                  </p>
+                </div>
+
+                {/* Guarantees */}
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
+                    <Zap className="w-4 h-4 text-[#F59E0B]" />
+                    <span className="text-[10px] font-bold leading-tight">Paystack<br />Instant</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
+                    <DollarSign className="w-4 h-4 text-emerald-600" />
+                    <span className="text-[10px] font-bold leading-tight">7.5% Flat<br />Cash</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
+                    <Layers className="w-4 h-4 text-blue-600" />
+                    <span className="text-[10px] font-bold leading-tight">Zero<br />Inventory</span>
+                  </div>
+                </div>
+
+                {/* Quick start form -> continues on /portal register */}
+                <form onSubmit={handleHeroSignup} className="mt-4 space-y-2.5">
+                  <input
+                    required
+                    value={heroName}
+                    onChange={(e) => setHeroName(e.target.value)}
+                    placeholder="Full Name"
+                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  />
+                  <input
+                    required
+                    type="email"
+                    value={heroEmail}
+                    onChange={(e) => setHeroEmail(e.target.value)}
+                    placeholder="Email Address"
+                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  />
+                  <input
+                    required
+                    type="tel"
+                    value={heroPhone}
+                    onChange={(e) => setHeroPhone(e.target.value)}
+                    placeholder="Phone / WhatsApp Number"
+                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  />
+                  <button
+                    type="submit"
+                    className="group w-full rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-3 text-xs shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span>Activate Affiliate Link</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-300" />
+                  </button>
+                </form>
+                <p className="mt-3 text-center text-[11px] text-neutral-500">
+                  Already registered?{" "}
+                  <Link href="/portal?tab=login" className="font-bold text-neutral-900 underline underline-offset-2">
+                    Sign in
+                  </Link>{" "}
+                  · <Link href="/pricing" className="font-bold text-neutral-900 underline underline-offset-2">7.5% Earnings</Link>
+                </p>
               </div>
             </div>
           </div>

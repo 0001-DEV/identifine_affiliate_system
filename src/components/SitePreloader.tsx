@@ -1,56 +1,47 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isExiting, setIsExiting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const hasStartedRef = useRef(false);
 
   useEffect(() => {
-    // Sequence: 1 to 8, then 9 (XTREME CARDZ), then 10 (IDENTIFINE)
-    const timers: NodeJS.Timeout[] = [];
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
 
-    // Rapid pulse 1 to 8 (~140ms each = ~1.12s)
-    for (let i = 1; i <= 8; i++) {
-      timers.push(
+    let step = 1;
+
+    // Tick 1 to 8 rapidly every 150ms
+    const interval = setInterval(() => {
+      step++;
+      if (step <= 8) {
+        setCurrentStep(step);
+      } else if (step === 9) {
+        setCurrentStep(9); // XTREME CARDZ
+      } else if (step === 10) {
+        setCurrentStep(10); // IDENTIFINE
+        clearInterval(interval);
+
+        // Allow reading IDENTIFINE tagline (1.1s)
         setTimeout(() => {
-          setCurrentStep(i);
-        }, (i - 1) * 140)
-      );
-    }
+          setIsExiting(true);
+        }, 1100);
 
-    // Step 9: XTREME CARDZ at ~1.15s
-    timers.push(
-      setTimeout(() => {
-        setCurrentStep(9);
-      }, 8 * 140)
-    );
+        // Complete transition and remove from DOM (850ms exit)
+        setTimeout(() => {
+          setIsFinished(true);
+          onComplete?.();
+        }, 1950);
+      }
+    }, 150);
 
-    // Step 10: IDENTIFINE at ~1.95s (+800ms)
-    timers.push(
-      setTimeout(() => {
-        setCurrentStep(10);
-      }, 8 * 140 + 800)
-    );
-
-    // Slide up exit at ~2.85s (+900ms)
-    timers.push(
-      setTimeout(() => {
-        setIsExiting(true);
-      }, 8 * 140 + 1700)
-    );
-
-    // Remove from DOM after exit animation (850ms)
-    timers.push(
-      setTimeout(() => {
-        setIsFinished(true);
-        if (onComplete) onComplete();
-      }, 8 * 140 + 2550)
-    );
-
-    return () => timers.forEach(clearTimeout);
-  }, [onComplete]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []); // Run strictly once on mount
 
   if (isFinished) return null;
 
@@ -66,7 +57,7 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
       {/* Center Countdown Display: 1-8, then XTREME CARDZ, then IDENTIFINE */}
       <div className="flex flex-col items-center justify-center my-auto">
         {currentStep <= 8 ? (
-          <div className="flex flex-col items-center animate-[pulseGlowSlow_1s_infinite]">
+          <div key={currentStep} className="flex flex-col items-center animate-[pulseGlowSlow_1s_infinite]">
             <span className="font-mono text-8xl sm:text-[11rem] md:text-[14rem] font-black tracking-tighter text-white drop-shadow-[0_0_50px_rgba(245,158,11,0.25)]">
               {currentStep}
             </span>

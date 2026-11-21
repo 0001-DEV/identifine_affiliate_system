@@ -68,20 +68,20 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
           </div>
         ) : currentStep === 9 ? (
           <div className="flex flex-col items-center justify-center animate-descend-from-top px-4">
-            {/* Pure XTREME Logo without text or write-ups */}
+            {/* Pure XTREME Logo: Extra Large Cinematic Display */}
             <img
               src="/xtreme-cardz-logo.png"
               alt="Xtreme Cardz"
-              className="h-20 sm:h-28 md:h-36 w-auto object-contain drop-shadow-[0_20px_50px_rgba(245,158,11,0.4)]"
+              className="h-32 sm:h-44 md:h-56 lg:h-64 max-w-[85vw] w-auto object-contain drop-shadow-[0_25px_60px_rgba(245,158,11,0.5)]"
             />
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center animate-descend-from-top px-4">
-            {/* Pure IDENTIFINE Logo without text or write-ups */}
+            {/* Pure IDENTIFINE Logo: Extra Large Cinematic Display */}
             <img
               src="/identifine_logo.webp"
               alt="Identifine"
-              className="h-16 sm:h-24 md:h-32 w-auto object-contain drop-shadow-[0_20px_50px_rgba(255,255,255,0.35)]"
+              className="h-24 sm:h-36 md:h-48 lg:h-56 max-w-[85vw] w-auto object-contain drop-shadow-[0_25px_60px_rgba(255,255,255,0.4)]"
             />
           </div>
         )}

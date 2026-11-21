@@ -100,13 +100,36 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center animate-slide-in-right-slow px-4">
-            {/* Pure IDENTIFINE Logo: comes in smoothly from the right */}
-            <img
-              src="/identifine_logo.webp"
-              alt="Identifine"
-              className="h-24 sm:h-36 md:h-48 lg:h-56 max-w-[85vw] w-auto object-contain drop-shadow-[0_25px_60px_rgba(255,255,255,0.4)]"
-            />
+          <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-7 lg:gap-8 animate-slide-in-right-slow px-4 max-w-[92vw]">
+            {/* 1. SEPARATE IDENTIFINE ICON (Circle + Body) */}
+            <div className="relative flex flex-col items-center justify-between h-20 sm:h-28 md:h-36 lg:h-44 aspect-[89/192] flex-shrink-0">
+              {/* Circle shape: bounces above the body */}
+              <div className="w-[96.6%] animate-circle-bounce flex-shrink-0">
+                <img
+                  src="/identifine-icon-circle.png"
+                  alt="Identifine Dot"
+                  className="w-full h-auto object-contain drop-shadow-[0_10px_25px_rgba(211,162,42,0.65)]"
+                />
+              </div>
+
+              {/* Body shape: fingerprint / signal lines */}
+              <div className="w-full flex-shrink-0">
+                <img
+                  src="/identifine-icon-body.png"
+                  alt="Identifine Body"
+                  className="w-full h-auto object-contain drop-shadow-[0_10px_25px_rgba(211,162,42,0.45)]"
+                />
+              </div>
+            </div>
+
+            {/* 2. SEPARATE IDENTIFINE TEXT */}
+            <div className="flex items-center flex-shrink-1">
+              <img
+                src="/identifine-text.png"
+                alt="Identifine"
+                className="h-12 sm:h-18 md:h-24 lg:h-30 max-w-[68vw] w-auto object-contain drop-shadow-[0_20px_50px_rgba(255,255,255,0.4)]"
+              />
+            </div>
           </div>
         )}
       </div>

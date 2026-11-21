@@ -6,10 +6,10 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isExiting, setIsExiting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const [isXtremeLogoLeft, setIsXtremeLogoLeft] = useState(false);
+  const [isXtremeIconLeft, setIsXtremeIconLeft] = useState(false);
   const hasStartedRef = useRef(false);
 
-  // Sequence: 1 to 8 rapid countdown, then XTREME logo (9), then IDENTIFINE logo (10)
+  // Sequence: 1 to 8 rapid countdown, then XTREME Cardz (9), then IDENTIFINE (10)
   useEffect(() => {
     if (hasStartedRef.current) return;
     hasStartedRef.current = true;
@@ -23,17 +23,17 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         setCurrentStep(step);
       } else if (step === 9) {
         clearInterval(interval);
-        // Stage 9: Pure XTREME Logo enters center
+        // Stage 9: XTREME Cardz (Icon + Text come in stacked)
         setCurrentStep(9);
 
-        // After the logo comes in (~750ms), glide it smoothly to the left
+        // After the logo comes in (~800ms), move the icon to the left of the text
         setTimeout(() => {
-          setIsXtremeLogoLeft(true);
-        }, 750);
+          setIsXtremeIconLeft(true);
+        }, 800);
 
-        // Transition to Stage 10: IDENTIFINE Logo after holding on the left
+        // Transition to Stage 10: IDENTIFINE after holding horizontal lockup
         setTimeout(() => {
-          setIsXtremeLogoLeft(false);
+          setIsXtremeIconLeft(false);
           setCurrentStep(10);
 
           // Hold Identifine Logo for 1.8s
@@ -46,7 +46,7 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             setIsFinished(true);
             onComplete?.();
           }, 2650);
-        }, 2250);
+        }, 2500);
       }
     }, 130);
 
@@ -64,8 +64,8 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         transitionTimingFunction: "cubic-bezier(0.76, 0.007, 0.25, 1)",
       }}
     >
-      {/* Center Countdown Display: 1-8, then XTREME Logo (9), then IDENTIFINE Logo (10) */}
-      <div className="flex flex-col items-center justify-center my-auto">
+      {/* Center Countdown Display: 1-8, then XTREME (9), then IDENTIFINE (10) */}
+      <div className="flex flex-col items-center justify-center my-auto w-full">
         {currentStep <= 8 ? (
           <div key={currentStep} className="flex flex-col items-center animate-[pulseGlowSlow_1s_infinite]">
             <span className="font-mono text-8xl sm:text-[11rem] md:text-[14rem] font-black tracking-tighter text-white drop-shadow-[0_0_50px_rgba(245,158,11,0.25)]">
@@ -73,25 +73,35 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             </span>
           </div>
         ) : currentStep === 9 ? (
-          <div className="flex flex-col items-center justify-center animate-descend-from-top px-4">
-            {/* Pure XTREME Logo: Extra Large Cinematic Display, smoothly glides to the left after entry */}
-            <div
-              className={`transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                isXtremeLogoLeft
-                  ? "-translate-x-16 sm:-translate-x-28 md:-translate-x-44 lg:-translate-x-64"
-                  : "translate-x-0"
-              }`}
-            >
+          <div className="relative flex flex-col items-center justify-center animate-descend-from-top px-4 w-full">
+            {/* XTREME CARDZ: Icon and Text as two entities; Icon moves to the left of the text */}
+            <div className="relative flex items-center justify-center w-full max-w-4xl h-44 sm:h-64">
+              {/* 1. XTREME ICON: starts centered above, then moves to the left */}
               <img
-                src="/xtreme-cardz-logo.png"
-                alt="Xtreme Cardz"
-                className="h-32 sm:h-44 md:h-56 lg:h-64 max-w-[85vw] w-auto object-contain drop-shadow-[0_25px_60px_rgba(245,158,11,0.5)]"
+                src="/xtreme-cardz-icon.png"
+                alt="Xtreme Cardz Icon"
+                className={`absolute transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] object-contain drop-shadow-[0_20px_50px_rgba(245,158,11,0.5)] ${
+                  isXtremeIconLeft
+                    ? "h-14 sm:h-20 md:h-28 -translate-x-[120px] sm:-translate-x-[180px] md:-translate-x-[240px] lg:-translate-x-[300px] translate-y-0"
+                    : "h-24 sm:h-36 md:h-44 translate-x-0 -translate-y-12 sm:-translate-y-16 md:-translate-y-20"
+                }`}
+              />
+
+              {/* 2. XTREME TEXT: starts centered below, aligns beside icon */}
+              <img
+                src="/xtreme-cardz-text.png"
+                alt="Xtreme Cardz Text"
+                className={`absolute transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] object-contain drop-shadow-[0_15px_35px_rgba(255,255,255,0.25)] ${
+                  isXtremeIconLeft
+                    ? "h-8 sm:h-12 md:h-16 translate-x-[40px] sm:translate-x-[60px] md:translate-x-[80px] lg:translate-x-[100px] translate-y-0"
+                    : "h-9 sm:h-14 md:h-18 translate-x-0 translate-y-12 sm:translate-y-16 md:translate-y-20"
+                }`}
               />
             </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center animate-descend-from-top px-4">
-            {/* Pure IDENTIFINE Logo: Extra Large Cinematic Display */}
+            {/* Pure IDENTIFINE Logo */}
             <img
               src="/identifine_logo.webp"
               alt="Identifine"

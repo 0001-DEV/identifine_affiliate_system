@@ -54,6 +54,7 @@ export default function MarketingHomePage() {
   const [heroName, setHeroName] = useState("");
   const [heroEmail, setHeroEmail] = useState("");
   const [heroPhone, setHeroPhone] = useState("");
+  const [heroReferralCode, setHeroReferralCode] = useState("");
   const [isMuted, setIsMuted] = useState(true);
 
   // 7.5% commission on average ₦250k order = ₦18,750 per referral
@@ -66,6 +67,7 @@ export default function MarketingHomePage() {
       name: heroName,
       email: heroEmail,
       phone: heroPhone,
+      ...(heroReferralCode.trim() ? { code: heroReferralCode.trim().toLowerCase() } : {}),
     });
     router.push(`/portal?${params.toString()}`);
   };
@@ -248,6 +250,12 @@ export default function MarketingHomePage() {
                     onChange={(e) => setHeroPhone(e.target.value)}
                     placeholder="Phone / WhatsApp Number"
                     className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  />
+                  <input
+                    value={heroReferralCode}
+                    onChange={(e) => setHeroReferralCode(e.target.value.toUpperCase())}
+                    placeholder="Referral Code (Optional, e.g. JOSHUA-842)"
+                    className="w-full rounded-xl border border-neutral-300 bg-neutral-50/50 px-3.5 py-2.5 text-xs font-mono uppercase tracking-wider outline-none focus:border-black focus:bg-white focus:ring-2 focus:ring-black/10 transition placeholder:normal-case placeholder:font-sans placeholder:tracking-normal placeholder:text-neutral-400"
                   />
                   <button
                     type="submit"

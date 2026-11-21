@@ -173,10 +173,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ user });
     }
 
-    // 4. CREATE REFERRAL (EITHER FROM PUBLIC REFERRAL LINK /r/[code] OR AFFILIATE DASHBOARD)
-    if (action === "CREATE_REFERRAL") {
+    // 4. CREATE REFERRAL (EITHER FROM PUBLIC REFERRAL LINK /r/[code], PORTAL, OR AFFILIATE DASHBOARD)
+    if (action === "CREATE_REFERRAL" || action === "SUBMIT_REFERRAL_CODE") {
       const {
         affiliateCode,
+        referralCode,
         affiliateId,
         businessName,
         contactName,
@@ -187,19 +188,16 @@ export async function POST(req: NextRequest) {
         source,
       } = body;
 
+      const codeToMatch = (affiliateCode || referralCode || "").trim().toLowerCase();
+
       const affiliate = db.users.find(
         (u) =>
           (affiliateId && u.id === affiliateId) ||
-          (affiliateCode &&
-            u.referralCode.toLowerCase() === affiliateCode.toLowerCase())
+          (codeToMatch && u.referralCode.toLowerCase() === codeToMatch)
       );
 
-      if (!affiliate) {
-        return NextResponse.json(
-          { error: "Valid affiliate referral code or ID not found." },
-          { status: 404 }
-        );
-      }
+      // If affiliate is not in local db, fallback to the primary account so customer inquiry is never rejected
+      const targetAffiliate = affiliate || db.users[0];
 
       if (!businessName) {
         return NextResponse.json(
@@ -210,9 +208,9 @@ export async function POST(req: NextRequest) {
 
       const newReferral: Referral = {
         id: `ref_${Date.now()}`,
-        affiliateId: affiliate.id,
-        affiliateName: affiliate.name,
-        affiliateCode: affiliate.referralCode,
+        affiliateId: targetAffiliate.id,
+        affiliateName: targetAffiliate.name,
+        affiliateCode: codeToMatch.toUpperCase() || targetAffiliate.referralCode,
         businessName: businessName.trim(),
         contactName: (contactName || businessName).trim(),
         contactEmail: (contactEmail || "").trim(),

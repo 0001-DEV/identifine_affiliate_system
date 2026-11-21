@@ -140,13 +140,13 @@ function PortalContent() {
         return;
       }
 
-      const companyPhone = data.settings?.companyWhatsapp || "2349030001851";
+      const companyPhone = "2349030001851"; // Maps directly to 09030001851
       const msg = `Hello IDENTIFINE,\n\nI was referred with code *${cleanCode.toUpperCase()}*.\n• Name / Business: ${clientBusiness}`;
-      window.open(
-        `https://wa.me/${companyPhone}?text=${encodeURIComponent(msg)}`,
-        "_blank",
-        "noopener,noreferrer"
-      );
+      const whatsappUrl = `https://wa.me/${companyPhone}?text=${encodeURIComponent(msg)}`;
+      const newWin = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      if (!newWin || newWin.closed || typeof newWin.closed === "undefined") {
+        window.location.href = whatsappUrl;
+      }
       setRefereeSubmitted(true);
     } catch (err) {
       setError("Could not connect. Please try again.");

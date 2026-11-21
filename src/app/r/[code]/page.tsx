@@ -56,15 +56,15 @@ export default function ReferralLandingPage() {
       }
 
       setSubmitted(true);
-      const companyPhone = settings?.companyWhatsapp || "2349030001851";
+      const companyPhone = "2349030001851"; // Maps directly to 09030001851
       const msg = `Hello IDENTIFINE,\n\nI was referred with code *${refCode
         .trim()
         .toUpperCase()}*.\n• Name / Business: ${businessName}`;
-      window.open(
-        `https://wa.me/${companyPhone}?text=${encodeURIComponent(msg)}`,
-        "_blank",
-        "noopener,noreferrer"
-      );
+      const whatsappUrl = `https://wa.me/${companyPhone}?text=${encodeURIComponent(msg)}`;
+      const newWin = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      if (!newWin || newWin.closed || typeof newWin.closed === "undefined") {
+        window.location.href = whatsappUrl;
+      }
     } catch (err) {
       setError("Network error.");
     } finally {

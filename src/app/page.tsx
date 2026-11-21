@@ -130,9 +130,9 @@ export default function MarketingHomePage() {
             1. HERO SECTION: 70% XTREME CARDZ VIDEO + 30% AFFILIATE ONBOARDING
            ========================================================================= */}
         <section className="relative w-full border-b border-white/10 bg-black overflow-hidden">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-10 min-h-[720px] lg:h-[990px] xl:h-[1010px]">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-10 min-h-[560px] lg:h-[790px] xl:h-[810px]">
             {/* ---------- 70% WIDTH: XTREME CARDZ VIDEO SHOWCASE ---------- */}
-            <div className="lg:col-span-7 relative h-[500px] sm:h-[650px] lg:h-full overflow-hidden bg-[#0A0709] flex items-center justify-center">
+            <div className="lg:col-span-7 relative h-[420px] sm:h-[540px] lg:h-full overflow-hidden bg-[#0A0709] flex items-center justify-center">
               <video
                 key="xtreme-cardz-showcase-video"
                 autoPlay

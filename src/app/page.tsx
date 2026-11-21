@@ -134,14 +134,13 @@ export default function MarketingHomePage() {
             {/* ---------- 70% WIDTH: XTREME CARDZ VIDEO SHOWCASE ---------- */}
             <div className="lg:col-span-7 relative h-[440px] sm:h-[540px] lg:h-auto overflow-hidden bg-[#0A0709] flex items-center justify-center">
               <video
+                key="xtreme-cardz-showcase-video"
                 autoPlay
                 loop
                 muted={isMuted}
                 playsInline
                 className="w-full h-full object-cover object-center"
               >
-                <source src="/videos/hero-section.webm" type="video/webm" />
-                <source src="/videos/hero-section.mp4" type="video/mp4" />
                 <source src="/videos/xtreme-cardz-showcase.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>

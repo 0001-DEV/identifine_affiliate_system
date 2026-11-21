@@ -86,22 +86,18 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         )}
       </div>
 
-      {/* Bottom Broken Wine and White Segmented Line (Pure visual line, no text) */}
+      {/* Bottom Broken Wine and White Segmented Line (Steady aesthetic broken line, no progress filling or text updates) */}
       <div className="w-full max-w-md pb-6 sm:pb-8 flex flex-col items-center">
         <div className="w-full h-2.5 rounded-full bg-black/60 border border-white/10 p-0.5 overflow-hidden flex items-center gap-1.5 shadow-xl">
           {[...Array(12)].map((_, i) => {
             const isWine = i % 2 === 0;
-            const activeThreshold = Math.ceil((currentStep / 10) * 12);
-            const isLit = i < activeThreshold;
             return (
               <div
                 key={i}
-                className={`flex-1 h-full rounded-sm transition-all duration-200 ${
-                  isLit
-                    ? isWine
-                      ? "bg-[#800020] shadow-[0_0_10px_#800020]"
-                      : "bg-white shadow-[0_0_8px_#FFFFFF]"
-                    : "bg-white/10 opacity-30"
+                className={`flex-1 h-full rounded-sm ${
+                  isWine
+                    ? "bg-[#800020] shadow-[0_0_8px_#800020]"
+                    : "bg-white/90 shadow-[0_0_6px_#FFFFFF]"
                 }`}
               />
             );

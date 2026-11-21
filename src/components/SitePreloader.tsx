@@ -36,16 +36,16 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
           setIsXtremeIconLeft(false);
           setCurrentStep(10);
 
-          // Hold Identifine Logo for 1.8s
+          // Hold Identifine Logo for 2.2s so the slow glide from the right completes and settles smoothly
           setTimeout(() => {
             setIsExiting(true);
-          }, 1800);
+          }, 2200);
 
           // Remove preloader after smooth slide-up exit (850ms)
           setTimeout(() => {
             setIsFinished(true);
             onComplete?.();
-          }, 2650);
+          }, 3050);
         }, 2500);
       }
     }, 130);
@@ -57,7 +57,7 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] bg-[#0A0608] text-white flex flex-col items-center justify-center p-8 sm:p-14 select-none pointer-events-auto transition-transform duration-[850ms] ${
+      className={`fixed inset-0 z-[9999] bg-[#0A0608] text-white flex flex-col items-center justify-center p-8 sm:p-14 select-none pointer-events-auto overflow-hidden transition-transform duration-[850ms] ${
         isExiting ? "-translate-y-full" : "translate-y-0"
       }`}
       style={{
@@ -100,8 +100,8 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center animate-descend-from-top px-4">
-            {/* Pure IDENTIFINE Logo */}
+          <div className="flex flex-col items-center justify-center animate-slide-in-right-slow px-4">
+            {/* Pure IDENTIFINE Logo: comes in smoothly from the right */}
             <img
               src="/identifine_logo.webp"
               alt="Identifine"

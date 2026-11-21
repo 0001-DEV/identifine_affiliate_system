@@ -6,9 +6,10 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isExiting, setIsExiting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const [isXtremeDocked, setIsXtremeDocked] = useState(false);
+  const [isXtremeLogoLeft, setIsXtremeLogoLeft] = useState(false);
   const hasStartedRef = useRef(false);
 
+  // Sequence: 1 to 8 rapid countdown, then XTREME logo (9), then IDENTIFINE logo (10)
   useEffect(() => {
     if (hasStartedRef.current) return;
     hasStartedRef.current = true;
@@ -22,29 +23,30 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         setCurrentStep(step);
       } else if (step === 9) {
         clearInterval(interval);
-        // Stage 9: XTREME CARDZ begins (big in center)
+        // Stage 9: Pure XTREME Logo enters center
         setCurrentStep(9);
 
-        // After being big (~850ms), smoothly move logo icon to the left side beside text
+        // After the logo comes in (~750ms), glide it smoothly to the left
         setTimeout(() => {
-          setIsXtremeDocked(true);
-        }, 850);
+          setIsXtremeLogoLeft(true);
+        }, 750);
 
-        // Hold the docked lockup until 2700ms, then transition to IDENTIFINE
+        // Transition to Stage 10: IDENTIFINE Logo after holding on the left
         setTimeout(() => {
+          setIsXtremeLogoLeft(false);
           setCurrentStep(10);
 
-          // Hold Identifine Logo for 1.6s
+          // Hold Identifine Logo for 1.8s
           setTimeout(() => {
             setIsExiting(true);
-          }, 1600);
+          }, 1800);
 
           // Remove preloader after smooth slide-up exit (850ms)
           setTimeout(() => {
             setIsFinished(true);
             onComplete?.();
-          }, 2450);
-        }, 2700);
+          }, 2650);
+        }, 2250);
       }
     }, 130);
 
@@ -62,7 +64,7 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         transitionTimingFunction: "cubic-bezier(0.76, 0.007, 0.25, 1)",
       }}
     >
-      {/* Center Countdown Display: 1-8, then XTREME CARDZ Lockup (9), then IDENTIFINE Logo (10) */}
+      {/* Center Countdown Display: 1-8, then XTREME Logo (9), then IDENTIFINE Logo (10) */}
       <div className="flex flex-col items-center justify-center my-auto">
         {currentStep <= 8 ? (
           <div key={currentStep} className="flex flex-col items-center animate-[pulseGlowSlow_1s_infinite]">
@@ -71,40 +73,25 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             </span>
           </div>
         ) : currentStep === 9 ? (
-          <div className="flex flex-col items-center justify-center px-4 w-full max-w-5xl">
-            <div className="flex items-center justify-center">
-              {/* Logo Icon: Starts big in center, then smoothly moves to left beside text */}
-              <div
-                className={`transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center ${
-                  isXtremeDocked
-                    ? "scale-100 mr-4 sm:mr-6"
-                    : "scale-[1.4] sm:scale-[1.7] md:scale-[2.0] mr-0 animate-descend-from-top"
-                }`}
-              >
-                <img
-                  src="/xtreme-cardz-logo.png"
-                  alt="Xtreme Cardz"
-                  className="h-16 sm:h-22 md:h-28 lg:h-32 w-auto object-contain drop-shadow-[0_20px_50px_rgba(245,158,11,0.45)]"
-                />
-              </div>
-
-              {/* Text XTREME CARDZ: Reveals to the right of the logo icon once docked */}
-              <div
-                className={`overflow-hidden transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  isXtremeDocked
-                    ? "max-w-[700px] opacity-100 translate-x-0"
-                    : "max-w-0 opacity-0 -translate-x-12"
-                }`}
-              >
-                <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight text-white flex items-center whitespace-nowrap">
-                  <span className="text-[#F59E0B]">X</span>TREME&nbsp;CARDZ
-                </h2>
-              </div>
+          <div className="flex flex-col items-center justify-center animate-descend-from-top px-4">
+            {/* Pure XTREME Logo: Extra Large Cinematic Display, smoothly glides to the left after entry */}
+            <div
+              className={`transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                isXtremeLogoLeft
+                  ? "-translate-x-16 sm:-translate-x-28 md:-translate-x-44 lg:-translate-x-64"
+                  : "translate-x-0"
+              }`}
+            >
+              <img
+                src="/xtreme-cardz-logo.png"
+                alt="Xtreme Cardz"
+                className="h-32 sm:h-44 md:h-56 lg:h-64 max-w-[85vw] w-auto object-contain drop-shadow-[0_25px_60px_rgba(245,158,11,0.5)]"
+              />
             </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center animate-descend-from-top px-4">
-            {/* Pure IDENTIFINE Logo */}
+            {/* Pure IDENTIFINE Logo: Extra Large Cinematic Display */}
             <img
               src="/identifine_logo.webp"
               alt="Identifine"

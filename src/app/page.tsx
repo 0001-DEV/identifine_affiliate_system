@@ -130,9 +130,9 @@ export default function MarketingHomePage() {
             1. HERO SECTION: 70% XTREME CARDZ VIDEO + 30% AFFILIATE ONBOARDING
            ========================================================================= */}
         <section className="relative w-full border-b border-white/10 bg-black overflow-hidden">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-10 min-h-[580px] lg:min-h-[calc(100vh-68px)]">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-10 lg:h-[490px] xl:h-[510px]">
             {/* ---------- 70% WIDTH: XTREME CARDZ VIDEO SHOWCASE ---------- */}
-            <div className="lg:col-span-7 relative h-[440px] sm:h-[540px] lg:h-auto overflow-hidden bg-[#0A0709] flex items-center justify-center">
+            <div className="lg:col-span-7 relative h-[280px] sm:h-[360px] lg:h-full overflow-hidden bg-[#0A0709] flex items-center justify-center">
               <video
                 key="xtreme-cardz-showcase-video"
                 autoPlay
@@ -148,38 +148,35 @@ export default function MarketingHomePage() {
               {/* Ambient Dark Gradient Vignette Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
-              {/* Broken Wine and White Line Subtle Top Edge Accent */}
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#800020] via-white to-[#800020] opacity-80" />
-
               {/* Floating Video Audio Toggle Button */}
               <button
                 onClick={() => setIsMuted(!isMuted)}
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
-                className="absolute top-5 left-5 z-20 h-9 w-9 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-black transition backdrop-blur-md cursor-pointer"
+                className="absolute top-4 left-4 z-20 h-8 w-8 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-black transition backdrop-blur-md cursor-pointer"
               >
-                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
               </button>
 
               {/* Live Badge over Video */}
-              <div className="absolute bottom-6 left-6 z-20 hidden sm:flex items-center gap-3 bg-black/70 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl">
-                <span className="flex h-2.5 w-2.5 rounded-full bg-[#800020] animate-ping" />
-                <span className="text-xs font-mono font-bold text-white tracking-wider">
+              <div className="absolute bottom-5 left-5 z-20 hidden sm:flex items-center gap-2.5 bg-black/70 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-2xl">
+                <span className="flex h-2 w-2 rounded-full bg-[#F59E0B] animate-ping" />
+                <span className="text-[11px] font-mono font-bold text-white tracking-wider">
                   XTREME CARDZ SHOWCASE • 7.5% COMMISSION
                 </span>
               </div>
             </div>
 
             {/* ---------- 30% WIDTH: AFFILIATE ONBOARDING PORTAL ---------- */}
-            <div className="lg:col-span-3 relative bg-[#F8F9FA] text-neutral-900 flex items-center justify-center p-6 sm:p-8 lg:p-7 border-t lg:border-t-0 lg:border-l border-neutral-200">
-              <div className="w-full max-w-[420px] rounded-3xl bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] border border-black/5 p-6 sm:p-7">
-                <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
+            <div className="lg:col-span-3 relative bg-[#F8F9FA] text-neutral-900 flex items-center justify-center p-4 sm:p-5 lg:p-4 border-t lg:border-t-0 lg:border-l border-neutral-200">
+              <div className="w-full max-w-[390px] rounded-2xl bg-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.12)] border border-black/5 p-4 sm:p-5">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-[10px] font-bold text-amber-800">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
                   Identifine &amp; Xtreme Cardz Partner
                 </div>
 
                 {/* Residence style Masked Reveal Headline */}
-                <div className="mt-3 overflow-hidden">
-                  <h1 className="animate-mask-rise text-2xl sm:text-3xl font-black leading-[1.1] tracking-tight">
+                <div className="mt-2 overflow-hidden">
+                  <h1 className="animate-mask-rise text-xl sm:text-2xl font-black leading-tight tracking-tight">
                     <span className="font-light block text-neutral-800">Become an</span>
                     <span className="block text-black">
                       Executive Partner
@@ -188,12 +185,12 @@ export default function MarketingHomePage() {
                 </div>
 
                 {/* Live earnings slider (7.5%) */}
-                <div className="mt-5 rounded-2xl bg-neutral-50 border border-neutral-200 p-3.5">
+                <div className="mt-3 rounded-xl bg-neutral-50 border border-neutral-200 p-2.5">
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-neutral-600 font-medium">
-                      Refer <b className="text-neutral-900 font-mono text-sm">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo
+                      Refer <b className="text-neutral-900 font-mono text-xs">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo
                     </span>
-                    <span className="font-black text-lg text-[#B45309] font-mono tracking-tight">
+                    <span className="font-black text-base text-[#B45309] font-mono tracking-tight">
                       ₦{heroEstimatedCommission.toLocaleString()}
                     </span>
                   </div>
@@ -203,38 +200,38 @@ export default function MarketingHomePage() {
                     max={40}
                     value={heroReferrals}
                     onChange={(e) => setHeroReferrals(Number(e.target.value))}
-                    className="mt-2.5 w-full accent-[#F59E0B] cursor-pointer"
+                    className="mt-1.5 w-full accent-[#F59E0B] cursor-pointer"
                     aria-label="Number of referrals per month"
                   />
-                  <p className="mt-1 text-[10px] text-neutral-500">
+                  <p className="mt-0.5 text-[10px] text-neutral-500">
                     7.5% cash commission on executive client orders.
                   </p>
                 </div>
 
                 {/* Guarantees */}
-                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
-                    <Zap className="w-4 h-4 text-[#F59E0B]" />
-                    <span className="text-[10px] font-bold leading-tight">Paystack<br />Instant</span>
+                <div className="mt-2.5 grid grid-cols-3 gap-1.5 text-center">
+                  <div className="flex flex-col items-center gap-0.5 p-1 rounded-lg bg-neutral-50 border border-neutral-100">
+                    <Zap className="w-3.5 h-3.5 text-[#F59E0B]" />
+                    <span className="text-[9px] font-bold leading-tight">Paystack<br />Instant</span>
                   </div>
-                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
-                    <DollarSign className="w-4 h-4 text-emerald-600" />
-                    <span className="text-[10px] font-bold leading-tight">7.5% Flat<br />Cash</span>
+                  <div className="flex flex-col items-center gap-0.5 p-1 rounded-lg bg-neutral-50 border border-neutral-100">
+                    <DollarSign className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="text-[9px] font-bold leading-tight">7.5% Flat<br />Cash</span>
                   </div>
-                  <div className="flex flex-col items-center gap-1 p-1.5 rounded-xl bg-neutral-50 border border-neutral-100">
-                    <Layers className="w-4 h-4 text-blue-600" />
-                    <span className="text-[10px] font-bold leading-tight">Zero<br />Inventory</span>
+                  <div className="flex flex-col items-center gap-0.5 p-1 rounded-lg bg-neutral-50 border border-neutral-100">
+                    <Layers className="w-3.5 h-3.5 text-blue-600" />
+                    <span className="text-[9px] font-bold leading-tight">Zero<br />Inventory</span>
                   </div>
                 </div>
 
                 {/* Quick start form -> continues on /portal register */}
-                <form onSubmit={handleHeroSignup} className="mt-4 space-y-2.5">
+                <form onSubmit={handleHeroSignup} className="mt-2.5 space-y-2">
                   <input
                     required
                     value={heroName}
                     onChange={(e) => setHeroName(e.target.value)}
                     placeholder="Full Name"
-                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                    className="w-full rounded-lg border border-neutral-300 px-3 py-1.5 text-xs outline-none focus:border-black focus:ring-1 focus:ring-black/10 transition"
                   />
                   <input
                     required
@@ -242,7 +239,7 @@ export default function MarketingHomePage() {
                     value={heroEmail}
                     onChange={(e) => setHeroEmail(e.target.value)}
                     placeholder="Email Address"
-                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                    className="w-full rounded-lg border border-neutral-300 px-3 py-1.5 text-xs outline-none focus:border-black focus:ring-1 focus:ring-black/10 transition"
                   />
                   <input
                     required
@@ -250,17 +247,17 @@ export default function MarketingHomePage() {
                     value={heroPhone}
                     onChange={(e) => setHeroPhone(e.target.value)}
                     placeholder="Phone / WhatsApp Number"
-                    className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                    className="w-full rounded-lg border border-neutral-300 px-3 py-1.5 text-xs outline-none focus:border-black focus:ring-1 focus:ring-black/10 transition"
                   />
                   <button
                     type="submit"
-                    className="group w-full rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-3 text-xs shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="group w-full rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-2 text-xs shadow-sm hover:shadow transition-magnetic flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <span>Activate Affiliate Link</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-300" />
                   </button>
                 </form>
-                <p className="mt-3 text-center text-[11px] text-neutral-500">
+                <p className="mt-2 text-center text-[10px] text-neutral-500">
                   Already registered?{" "}
                   <Link href="/portal?tab=login" className="font-bold text-neutral-900 underline underline-offset-2">
                     Sign in

@@ -57,9 +57,9 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
 
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none select-none overflow-hidden">
-      {/* 1. LEFT BLACK SHUTTER: slides smoothly to the left when opening */}
+      {/* 1. LEFT BLACK SHUTTER: slides smoothly to the left when opening (seamless, no line) */}
       <div
-        className={`absolute inset-y-0 left-0 w-1/2 bg-[#0A0608] border-r border-amber-500/20 transition-transform duration-[1000ms] ${
+        className={`absolute inset-y-0 left-0 w-1/2 bg-[#0A0608] transition-transform duration-[1000ms] ${
           isExiting ? "-translate-x-full" : "translate-x-0"
         }`}
         style={{
@@ -67,9 +67,9 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         }}
       />
 
-      {/* 2. RIGHT BLACK SHUTTER: slides smoothly to the right when opening */}
+      {/* 2. RIGHT BLACK SHUTTER: slides smoothly to the right when opening (seamless, no line) */}
       <div
-        className={`absolute inset-y-0 right-0 w-1/2 bg-[#0A0608] border-l border-amber-500/20 transition-transform duration-[1000ms] ${
+        className={`absolute inset-y-0 right-0 w-1/2 bg-[#0A0608] transition-transform duration-[1000ms] ${
           isExiting ? "translate-x-full" : "translate-x-0"
         }`}
         style={{

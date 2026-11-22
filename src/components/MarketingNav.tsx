@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
@@ -21,24 +21,6 @@ export function MarketingNav() {
 
   // Active section tracking
   const [activeId, setActiveId] = useState<string>("hero");
-  const [pillStyle, setPillStyle] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
-
-  const navRef = useRef<HTMLElement | null>(null);
-  const itemRefs = useRef<Record<string, HTMLElement | null>>({});
-
-  // Update sliding white background coordinates to fill the full header height
-  const updatePillPosition = useCallback(() => {
-    const navEl = navRef.current;
-    const activeEl = itemRefs.current[activeId];
-    if (navEl && activeEl) {
-      const navRect = navEl.getBoundingClientRect();
-      const itemRect = activeEl.getBoundingClientRect();
-      setPillStyle({
-        left: itemRect.left - navRect.left,
-        width: itemRect.width,
-      });
-    }
-  }, [activeId]);
 
   // Handle route-specific active state and scrollspy on the home page
   useEffect(() => {
@@ -90,18 +72,6 @@ export function MarketingNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
-  // Recalculate pill position when activeId changes or window resizes
-  useEffect(() => {
-    updatePillPosition();
-    const timer = setTimeout(updatePillPosition, 60);
-    window.addEventListener("resize", updatePillPosition);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("resize", updatePillPosition);
-    };
-  }, [activeId, updatePillPosition]);
-
   // Smooth scroll handler for anchor links on the homepage
   const handleNavClick = (e: React.MouseEvent, link: (typeof navLinks)[0]) => {
     if (pathname === "/" && link.id !== "faq") {
@@ -118,9 +88,12 @@ export function MarketingNav() {
 
   return (
     <header className="sticky top-0 z-50 bg-black text-white border-b border-white/10 h-16 sm:h-[68px] transition-colors duration-200">
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6">
-        {/* Brand Dual Logo: Using actual logos for IDENTIFINE and XTREME CARDZ */}
-        <Link href="/" className="flex items-center gap-3 select-none group shrink-0">
+      <div className="w-full flex h-full items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
+        {/* Brand Dual Logo: Shifted to the far left as requested */}
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 sm:gap-3.5 select-none group shrink-0 -ml-1 sm:-ml-2"
+        >
           {/* 1. IDENTIFINE LOGO */}
           <img
             src="/identifine_logo.webp"
@@ -147,39 +120,37 @@ export function MarketingNav() {
         </Link>
 
         {/* Desktop Navigation Links:
-            - Full header height white background (no glassmorphism, no borders around text)
-            - Smoothly shifts horizontally to the section the user is in */}
-        <nav
-          ref={navRef}
-          className="relative hidden md:flex items-stretch h-full overflow-hidden"
-        >
-          {/* Solid White Background Filling the Full Header Height */}
-          <span
-            className="absolute inset-y-0 bg-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none"
-            style={{
-              left: `${pillStyle.left}px`,
-              width: `${pillStyle.width}px`,
-              opacity: pillStyle.width > 0 ? 1 : 0,
-            }}
-          />
-
+            - Full header height white background
+            - Expands from small width outwards until it fills the active feature
+            - No glassmorphism, no borders around texts */}
+        <nav className="relative hidden md:flex items-stretch h-full overflow-hidden">
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
               <Link
                 key={link.id}
                 href={link.href}
-                ref={(el) => {
-                  itemRefs.current[link.id] = el;
-                }}
                 onClick={(e) => handleNavClick(e, link)}
-                className={`relative z-10 h-full flex items-center px-5 sm:px-6 text-xs uppercase tracking-wider font-bold select-none transition-colors duration-300 ${
-                  isActive
-                    ? "text-black font-black"
-                    : "text-neutral-400 hover:text-white"
-                }`}
+                className="relative h-full flex items-center justify-center px-6 text-xs uppercase tracking-wider font-bold select-none group overflow-hidden"
               >
-                {link.label}
+                {/* Expanding White Background: starts small in center and expands till it fills the feature */}
+                {isActive && (
+                  <span
+                    key={`active-bg-${link.id}`}
+                    className="absolute inset-y-0 inset-x-0 bg-white animate-expand-width pointer-events-none"
+                  />
+                )}
+
+                {/* Nav Link Text */}
+                <span
+                  className={`relative z-10 transition-colors duration-200 ${
+                    isActive
+                      ? "text-black font-black"
+                      : "text-neutral-400 group-hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                </span>
               </Link>
             );
           })}

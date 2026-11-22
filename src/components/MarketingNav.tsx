@@ -133,11 +133,11 @@ export function MarketingNav() {
                 onClick={(e) => handleNavClick(e, link)}
                 className="relative h-full flex items-center justify-center px-6 text-xs uppercase tracking-wider font-bold select-none group overflow-hidden"
               >
-                {/* Expanding White Background: starts small in center and expands till it fills the feature */}
+                {/* Gradual White Background: starts small at 6px and gradually fills the feature */}
                 {isActive && (
                   <span
                     key={`active-bg-${link.id}`}
-                    className="absolute inset-y-0 inset-x-0 bg-white animate-expand-width pointer-events-none"
+                    className="absolute inset-y-0 left-1/2 -translate-x-1/2 bg-white animate-gradual-fill pointer-events-none"
                   />
                 )}
 

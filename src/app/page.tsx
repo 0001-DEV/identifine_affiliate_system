@@ -71,43 +71,51 @@ export default function MarketingHomePage() {
     router.push(`/portal?${params.toString()}`);
   };
 
-  // 6 Products from the Mockup
+  // 6 Products from the Mockup with rich descriptions for hover/click cards
+  const [activeProductCard, setActiveProductCard] = useState<string | null>(null);
+
   const showcaseProducts = [
     {
       id: "de-titan",
       name: "De-Titan Smart Cards",
       image: "/images/products/de-titan-3in1.webp",
       tag: "Smart Badge",
+      description: "Titanium-reinforced 3-in-1 hybrid credentials designed for executive identification, contactless NFC networking, and corporate access control.",
     },
     {
       id: "du-plex",
       name: "Du-Plex Smart Cards",
       image: "/images/products/gold-mirror-metal.webp",
       tag: "Dual NFC",
+      description: "Dual-chip 24K mirror gold metal cards combining digital NFC contact sharing with door access RFID encryption.",
     },
     {
       id: "corporate-id",
       name: "Corporate ID Cards",
       image: "/images/products/corporate-id-system.webp",
       tag: "Enterprise",
+      description: "Enterprise smart identification badges engineered for modern corporate organizations and secure staff tracking.",
     },
     {
       id: "business-cards",
       name: "Business Cards",
       image: "/images/products/black-matte-metal.webp",
       tag: "Laser Metal",
+      description: "Laser-engraved matte black metal cards designed to leave an unforgettable impression with every instant NFC tap.",
     },
     {
       id: "access-membership",
       name: "Access & Membership Cards",
       image: "/images/products/identifine-rfid-suite.webp",
       tag: "RFID + Door",
+      description: "Encrypted RFID credentials tailored for luxury private clubs, VIP lounges, gyms, and gated corporate campuses.",
     },
     {
       id: "digital-qr",
       name: "Digital Identity & QR Solutions",
       image: "/images/products/identifine-smart-id.webp",
       tag: "Cloud vCard",
+      description: "Dynamic cloud-powered digital vCards and encrypted QR solutions for real-time contact sharing without requiring an app.",
     },
   ];
 
@@ -128,192 +136,120 @@ export default function MarketingHomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: EXECUTIVE SMART CARD SHOWCASE + ONBOARDING CONTAINER
+            1. HERO SECTION: ONBOARDING CONTAINER POSITIONED ON THE RIGHT
            ========================================================================= */}
         <section
           id="hero"
-          className="relative w-full border-b border-white/10 bg-[#070707] py-12 sm:py-16 lg:py-20 overflow-hidden"
+          className="relative w-full border-b border-white/10 bg-[#070707] py-14 sm:py-20 lg:py-24 overflow-hidden"
         >
           {/* Subtle Ambient Radial Lighting */}
-          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[550px] bg-gradient-to-tr from-[#F59E0B]/10 via-[#800020]/15 to-transparent blur-3xl pointer-events-none" />
-          <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-[500px] h-[400px] bg-gradient-to-bl from-amber-500/10 via-transparent to-transparent blur-3xl pointer-events-none" />
+          <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[650px] h-[550px] bg-gradient-to-tr from-[#F59E0B]/10 via-[#800020]/15 to-transparent blur-3xl pointer-events-none" />
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-              {/* ---------- LEFT COLUMN (7 COLS): HEADLINE & LUXURY CARDS SHOWCASE ---------- */}
-              <div className="lg:col-span-7 space-y-6 text-left">
-                {/* Prestige Badge */}
-                <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1 text-xs font-bold text-[#F59E0B]">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Official Identifine &amp; Xtreme Cardz Partner Network</span>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10 flex justify-end items-center">
+            {/* The Container (Affiliate Onboarding Portal Card) */}
+            <div className="w-full max-w-[460px] rounded-3xl bg-white shadow-[0_25px_80px_-15px_rgba(0,0,0,0.6)] border border-neutral-200 p-7 sm:p-8 text-neutral-900">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
+                Identifine &amp; Xtreme Cardz Partner
+              </div>
+
+              {/* Residence style Masked Reveal Headline */}
+              <div className="mt-3 overflow-hidden">
+                <h2 className="animate-mask-rise text-2xl sm:text-3xl font-black leading-[1.15] tracking-tight">
+                  <span className="font-light block text-neutral-700">Become an</span>
+                  <span className="block text-black">
+                    Executive Partner
+                  </span>
+                </h2>
+              </div>
+
+              {/* Live earnings slider (7.5%) */}
+              <div className="mt-5 rounded-2xl bg-neutral-50 border border-neutral-200 p-3.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-neutral-600 font-medium">
+                    Refer <b className="text-neutral-900 font-mono text-sm">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo
+                  </span>
+                  <span className="font-black text-lg text-[#B45309] font-mono tracking-tight">
+                    ₦{heroEstimatedCommission.toLocaleString()}
+                  </span>
                 </div>
-
-                {/* Main Headline */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08]">
-                  Turn Your Network Into{" "}
-                  <span className="text-[#F59E0B]">7.5% Recurring Cash</span>
-                </h1>
-
-                {/* Subtitle */}
-                <p className="text-sm sm:text-base text-neutral-300 max-w-xl leading-relaxed">
-                  Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
+                <input
+                  type="range"
+                  min={1}
+                  max={40}
+                  value={heroReferrals}
+                  onChange={(e) => setHeroReferrals(Number(e.target.value))}
+                  className="mt-2.5 w-full accent-[#F59E0B] cursor-pointer"
+                  aria-label="Number of referrals per month"
+                />
+                <p className="mt-1 text-[10px] text-neutral-500">
+                  7.5% cash commission on executive client orders.
                 </p>
+              </div>
 
-                {/* Real Physical Product Visual Display: 24K Gold & Matte Black Titanium Cards */}
-                <div className="pt-2">
-                  <div className="flex flex-wrap sm:flex-nowrap items-center gap-4">
-                    {/* Card 1: 24K Gold Mirror Metal Card */}
-                    <div className="group relative w-full sm:w-56 rounded-2xl overflow-hidden border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-black p-2.5 shadow-2xl transition-transform hover:-translate-y-1 duration-300">
-                      <img
-                        src="/images/products/gold-mirror-metal.webp"
-                        alt="24K Gold Mirror Smart Card"
-                        className="w-full h-auto rounded-xl object-cover shadow-lg"
-                      />
-                      <div className="mt-2 flex items-center justify-between px-1">
-                        <span className="text-[11px] font-mono font-bold text-amber-400">24K Mirror Gold NFC</span>
-                        <span className="text-[10px] font-bold text-white/60">₦250k Order</span>
-                      </div>
-                    </div>
-
-                    {/* Card 2: Black Matte Titanium Card */}
-                    <div className="group relative w-full sm:w-56 rounded-2xl overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 to-black p-2.5 shadow-2xl transition-transform hover:-translate-y-1 duration-300">
-                      <img
-                        src="/images/products/black-matte-metal.webp"
-                        alt="Black Matte Laser Metal Card"
-                        className="w-full h-auto rounded-xl object-cover shadow-lg"
-                      />
-                      <div className="mt-2 flex items-center justify-between px-1">
-                        <span className="text-[11px] font-mono font-bold text-white">Laser Matte Titanium</span>
-                        <span className="text-[10px] font-bold text-white/60">Dual RFID</span>
-                      </div>
-                    </div>
-                  </div>
+              {/* Guarantees */}
+              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
+                  <Zap className="w-4 h-4 text-[#F59E0B]" />
+                  <span className="text-[10px] font-bold leading-tight">Paystack<br />Instant</span>
                 </div>
-
-                {/* Trust Metrics Bar */}
-                <div className="grid grid-cols-3 gap-3 max-w-lg pt-1">
-                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-center">
-                    <div className="text-base sm:text-xl font-mono font-black text-[#F59E0B]">7.5%</div>
-                    <div className="text-[10px] sm:text-[11px] text-neutral-400 font-medium">Flat Cash Rate</div>
-                  </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-center">
-                    <div className="text-base sm:text-xl font-mono font-black text-emerald-400">₦50,000</div>
-                    <div className="text-[10px] sm:text-[11px] text-neutral-400 font-medium">Min. Withdrawal</div>
-                  </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-center">
-                    <div className="text-base sm:text-xl font-mono font-black text-blue-400">Instant</div>
-                    <div className="text-[10px] sm:text-[11px] text-neutral-400 font-medium">Paystack Credit</div>
-                  </div>
+                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
+                  <DollarSign className="w-4 h-4 text-emerald-600" />
+                  <span className="text-[10px] font-bold leading-tight">7.5% Flat<br />Cash</span>
+                </div>
+                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
+                  <Layers className="w-4 h-4 text-blue-600" />
+                  <span className="text-[10px] font-bold leading-tight">Zero<br />Inventory</span>
                 </div>
               </div>
 
-              {/* ---------- RIGHT COLUMN (5 COLS): AFFILIATE ONBOARDING CONTAINER ---------- */}
-              <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
-                <div className="w-full max-w-[460px] rounded-3xl bg-white shadow-[0_25px_80px_-15px_rgba(0,0,0,0.6)] border border-neutral-200 p-7 sm:p-8 text-neutral-900">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
-                    Identifine &amp; Xtreme Cardz Partner
-                  </div>
+              {/* Quick start form -> continues on /portal register */}
+              <form onSubmit={handleHeroSignup} className="mt-4 space-y-2.5">
+                <input
+                  required
+                  value={heroName}
+                  onChange={(e) => setHeroName(e.target.value)}
+                  placeholder="Full Name"
+                  className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                />
+                <input
+                  required
+                  type="email"
+                  value={heroEmail}
+                  onChange={(e) => setHeroEmail(e.target.value)}
+                  placeholder="Email Address"
+                  className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                />
+                <input
+                  required
+                  type="tel"
+                  value={heroPhone}
+                  onChange={(e) => setHeroPhone(e.target.value)}
+                  placeholder="Phone / WhatsApp Number"
+                  className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                />
+                <input
+                  value={heroReferralCode}
+                  onChange={(e) => setHeroReferralCode(e.target.value.toUpperCase())}
+                  placeholder="Referral Code (Optional, e.g. JOSHUA-842)"
+                  className="w-full rounded-xl border border-neutral-300 bg-neutral-50/50 px-3.5 py-2.5 text-xs font-mono uppercase tracking-wider outline-none focus:border-black focus:bg-white focus:ring-2 focus:ring-black/10 transition placeholder:normal-case placeholder:font-sans placeholder:tracking-normal placeholder:text-neutral-400"
+                />
+                <button
+                  type="submit"
+                  className="group w-full rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-3.5 text-xs shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <span>Activate Affiliate Link</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-300" />
+                </button>
+              </form>
 
-                  {/* Residence style Masked Reveal Headline */}
-                  <div className="mt-3 overflow-hidden">
-                    <h2 className="animate-mask-rise text-2xl sm:text-3xl font-black leading-[1.15] tracking-tight">
-                      <span className="font-light block text-neutral-700">Become an</span>
-                      <span className="block text-black">
-                        Executive Partner
-                      </span>
-                    </h2>
-                  </div>
-
-                  {/* Live earnings slider (7.5%) */}
-                  <div className="mt-5 rounded-2xl bg-neutral-50 border border-neutral-200 p-3.5">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-neutral-600 font-medium">
-                        Refer <b className="text-neutral-900 font-mono text-sm">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo
-                      </span>
-                      <span className="font-black text-lg text-[#B45309] font-mono tracking-tight">
-                        ₦{heroEstimatedCommission.toLocaleString()}
-                      </span>
-                    </div>
-                    <input
-                      type="range"
-                      min={1}
-                      max={40}
-                      value={heroReferrals}
-                      onChange={(e) => setHeroReferrals(Number(e.target.value))}
-                      className="mt-2.5 w-full accent-[#F59E0B] cursor-pointer"
-                      aria-label="Number of referrals per month"
-                    />
-                    <p className="mt-1 text-[10px] text-neutral-500">
-                      7.5% cash commission on executive client orders.
-                    </p>
-                  </div>
-
-                  {/* Guarantees */}
-                  <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                    <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
-                      <Zap className="w-4 h-4 text-[#F59E0B]" />
-                      <span className="text-[10px] font-bold leading-tight">Paystack<br />Instant</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
-                      <DollarSign className="w-4 h-4 text-emerald-600" />
-                      <span className="text-[10px] font-bold leading-tight">7.5% Flat<br />Cash</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
-                      <Layers className="w-4 h-4 text-blue-600" />
-                      <span className="text-[10px] font-bold leading-tight">Zero<br />Inventory</span>
-                    </div>
-                  </div>
-
-                  {/* Quick start form -> continues on /portal register */}
-                  <form onSubmit={handleHeroSignup} className="mt-4 space-y-2.5">
-                    <input
-                      required
-                      value={heroName}
-                      onChange={(e) => setHeroName(e.target.value)}
-                      placeholder="Full Name"
-                      className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
-                    />
-                    <input
-                      required
-                      type="email"
-                      value={heroEmail}
-                      onChange={(e) => setHeroEmail(e.target.value)}
-                      placeholder="Email Address"
-                      className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
-                    />
-                    <input
-                      required
-                      type="tel"
-                      value={heroPhone}
-                      onChange={(e) => setHeroPhone(e.target.value)}
-                      placeholder="Phone / WhatsApp Number"
-                      className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
-                    />
-                    <input
-                      value={heroReferralCode}
-                      onChange={(e) => setHeroReferralCode(e.target.value.toUpperCase())}
-                      placeholder="Referral Code (Optional, e.g. JOSHUA-842)"
-                      className="w-full rounded-xl border border-neutral-300 bg-neutral-50/50 px-3.5 py-2.5 text-xs font-mono uppercase tracking-wider outline-none focus:border-black focus:bg-white focus:ring-2 focus:ring-black/10 transition placeholder:normal-case placeholder:font-sans placeholder:tracking-normal placeholder:text-neutral-400"
-                    />
-                    <button
-                      type="submit"
-                      className="group w-full rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold py-3.5 text-xs shadow-md hover:shadow-xl transition-magnetic flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      <span>Activate Affiliate Link</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-300" />
-                    </button>
-                  </form>
-
-                  <p className="mt-3.5 text-center text-[11px] text-neutral-500">
-                    Already registered?{" "}
-                    <Link href="/portal?tab=login" className="font-bold text-neutral-900 underline underline-offset-2">
-                      Sign in
-                    </Link>{" "}
-                    · <Link href="/pricing" className="font-bold text-neutral-900 underline underline-offset-2">7.5% Earnings</Link>
-                  </p>
-                </div>
-              </div>
+              <p className="mt-3.5 text-center text-[11px] text-neutral-500">
+                Already registered?{" "}
+                <Link href="/portal?tab=login" className="font-bold text-neutral-900 underline underline-offset-2">
+                  Sign in
+                </Link>{" "}
+                · <Link href="/pricing" className="font-bold text-neutral-900 underline underline-offset-2">7.5% Earnings</Link>
+              </p>
             </div>
           </div>
         </section>
@@ -386,9 +322,9 @@ export default function MarketingHomePage() {
         </section>
 
         {/* =========================================================================
-            3. OUR PRODUCTS & SERVICES (WEARECHECK HORIZONTAL CAROUSEL FROM MOCKUP)
+            3. OUR PRODUCTS & SERVICES (INCREASED HEIGHT BY 250PX, HOVER/CLICK WHITE BG)
            ========================================================================= */}
-        <section id="products" className="py-24 md:py-36 bg-white text-neutral-900 border-b border-neutral-200">
+        <section id="products" className="py-40 md:py-56 lg:py-64 min-h-[960px] bg-white text-neutral-900 border-b border-neutral-200 flex flex-col justify-center">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
               <div>
@@ -428,31 +364,61 @@ export default function MarketingHomePage() {
               {showcaseProducts.map((prod) => (
                 <div
                   key={prod.id}
-                  className="w-[270px] sm:w-[300px] shrink-0 rounded-2xl border border-neutral-200 bg-neutral-50 overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all hover:-translate-y-2 duration-300 group"
+                  onClick={() => setActiveProductCard(activeProductCard === prod.id ? null : prod.id)}
+                  className="w-[290px] sm:w-[350px] shrink-0 rounded-3xl bg-neutral-50 overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 duration-300 group cursor-pointer relative"
                 >
-                  <div className="h-52 bg-neutral-900 overflow-hidden relative">
+                  {/* Default View: Increased Image Height & No text on image */}
+                  <div className="h-80 sm:h-96 md:h-[420px] bg-neutral-950 overflow-hidden relative">
                     <img
                       src={prod.image}
                       alt={prod.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute top-3 left-3">
-                      <span className="rounded-full bg-black/80 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white uppercase tracking-wider">
-                        {prod.tag}
-                      </span>
-                    </div>
                   </div>
-                  <div className="p-5 bg-white border-t border-neutral-100 flex-1 flex flex-col justify-between">
-                    <h3 className="font-bold text-base text-neutral-900 group-hover:text-[#B45309] transition">
+
+                  {/* Card Bottom Bar */}
+                  <div className="p-6 bg-white flex items-center justify-between">
+                    <h3 className="font-extrabold text-base sm:text-lg text-neutral-900">
                       {prod.name}
                     </h3>
-                    <div className="mt-4 flex items-center justify-between text-xs text-neutral-500">
-                      <span className="font-bold text-emerald-700">7.5% Commission</span>
+                    <span className="text-xs font-bold text-emerald-700">7.5% Commission</span>
+                  </div>
+
+                  {/* Hover / Click Overlay: Changes to white background with card name and brief description */}
+                  <div
+                    className={`absolute inset-0 bg-white p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
+                      activeProductCard === prod.id
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+                    }`}
+                  >
+                    <div className="space-y-4">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
+                        <span>{prod.tag}</span>
+                        <span>•</span>
+                        <span>7.5% Payout</span>
+                      </div>
+
+                      <h3 className="font-black text-xl sm:text-2xl text-neutral-950 leading-tight">
+                        {prod.name}
+                      </h3>
+
+                      <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                        {prod.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
+                      <span className="font-mono font-bold text-sm text-emerald-700">
+                        7.5% Commission
+                      </span>
                       <Link
-                        href="/portal?tab=register"
-                        className="text-neutral-900 font-bold hover:underline inline-flex items-center gap-1"
+                        href={`/portal?tab=register&product=${prod.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-black text-white hover:bg-neutral-800 px-5 py-2.5 text-xs font-extrabold transition shadow-md"
                       >
-                        Refer <ArrowRight className="w-3.5 h-3.5" />
+                        <span>Refer Card</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>

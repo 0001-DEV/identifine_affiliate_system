@@ -136,18 +136,24 @@ export default function MarketingHomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: ONBOARDING CONTAINER POSITIONED ON THE RIGHT
+            1. HERO SECTION: VISUAL PATTERN EFFECT COVERS THE ENTIRE HERO WITH CONTAINER ON TOP
            ========================================================================= */}
         <section
           id="hero"
-          className="relative w-full border-b border-white/10 bg-[#121214] py-14 sm:py-20 lg:py-24 overflow-hidden"
+          className="relative w-full border-b border-white/10 bg-[#121214] py-14 sm:py-20 lg:py-28 overflow-hidden min-h-[640px] flex items-center"
         >
-          {/* Subtle Ambient Radial Lighting */}
-          <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[650px] h-[550px] bg-gradient-to-tr from-[#F59E0B]/10 via-[#800020]/15 to-transparent blur-3xl pointer-events-none" />
+          {/* Visual Effect covering the entire hero section */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+            <img
+              src="/images/hero-effect.png"
+              alt="Hero Section Effect"
+              className="w-full h-full object-cover object-left"
+            />
+          </div>
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10 flex justify-end items-center">
-            {/* The Container (Affiliate Onboarding Portal Card: Off-White) */}
-            <div className="w-full max-w-[460px] rounded-3xl bg-[#F8F9FA] shadow-[0_25px_80px_-15px_rgba(0,0,0,0.6)] border border-neutral-300/80 p-7 sm:p-8 text-neutral-900">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10 w-full flex justify-end items-center">
+            {/* The Container (Affiliate Onboarding Portal Card: Off-White) - On Top */}
+            <div className="w-full max-w-[460px] rounded-3xl bg-[#F8F9FA] shadow-[0_25px_80px_-15px_rgba(0,0,0,0.65),0_10px_30px_-5px_rgba(0,0,0,0.35)] border border-neutral-300/80 p-7 sm:p-8 text-neutral-900 relative z-20">
               <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
                 Identifine &amp; Xtreme Cardz Partner

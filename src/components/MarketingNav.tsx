@@ -87,7 +87,7 @@ export function MarketingNav() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-black text-white border-b border-white/10 h-16 sm:h-[68px] transition-colors duration-200">
+    <header className="sticky top-0 z-50 bg-[#121214] text-white border-b border-white/10 h-16 sm:h-[68px] transition-colors duration-200">
       <div className="w-full flex h-full items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
         {/* Brand Dual Logo: Shifted to the far left as requested */}
         <Link
@@ -121,7 +121,8 @@ export function MarketingNav() {
 
         {/* Desktop Navigation Links:
             - Full header height white background
-            - Expands from small width outwards until it fills the active feature
+            - Expands from small width on the left and moves left to right (e.g. from "Pr" across the word)
+            - Crisp black text revealed cleanly inside the sweep
             - No glassmorphism, no borders around texts */}
         <nav className="relative hidden md:flex items-stretch h-full overflow-hidden">
           {navLinks.map((link) => {
@@ -133,24 +134,28 @@ export function MarketingNav() {
                 onClick={(e) => handleNavClick(e, link)}
                 className="relative h-full flex items-center justify-center px-6 text-xs uppercase tracking-wider font-bold select-none group overflow-hidden"
               >
-                {/* Gradual White Background: starts small at 6px and gradually fills the feature */}
-                {isActive && (
-                  <span
-                    key={`active-bg-${link.id}`}
-                    className="absolute inset-y-0 left-1/2 -translate-x-1/2 bg-white animate-gradual-fill pointer-events-none"
-                  />
-                )}
-
-                {/* Nav Link Text */}
+                {/* Base Nav Link Text */}
                 <span
                   className={`relative z-10 transition-colors duration-200 ${
                     isActive
-                      ? "text-black font-black"
+                      ? "text-neutral-300 font-extrabold"
                       : "text-neutral-400 group-hover:text-white"
                   }`}
                 >
                   {link.label}
                 </span>
+
+                {/* Left-to-Right Expanding White Fill: starts at left and fills the entire feature */}
+                {isActive && (
+                  <div
+                    key={`active-bg-${link.id}`}
+                    className="absolute inset-0 bg-white z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none"
+                  >
+                    <span className="text-black font-black uppercase tracking-wider text-xs whitespace-nowrap">
+                      {link.label}
+                    </span>
+                  </div>
+                )}
               </Link>
             );
           })}
@@ -181,7 +186,7 @@ export function MarketingNav() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/10 bg-black text-white px-4 pt-2 pb-6 space-y-3">
+        <div className="md:hidden border-b border-white/10 bg-[#121214] text-white px-4 pt-2 pb-6 space-y-3">
           <div className="flex flex-col space-y-1.5 pt-2">
             {navLinks.map((link) => {
               const isActive = activeId === link.id;

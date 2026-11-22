@@ -33,14 +33,14 @@ export default function PricingEarningsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-[#F59E0B] selection:text-black transition-colors duration-200">
+    <div className="min-h-screen bg-[#121214] text-white flex flex-col selection:bg-[#F59E0B] selection:text-black transition-colors duration-200">
       <MarketingNav />
 
       <main className="flex-1">
         {/* =========================================================================
             1. HERO: EARNINGS & COMMISSION (7.5%)
            ========================================================================= */}
-        <section className="py-16 md:py-20 border-b border-white/10 bg-black relative overflow-hidden">
+        <section className="py-16 md:py-20 border-b border-white/10 bg-[#121214] relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Left Title */}
@@ -68,11 +68,11 @@ export default function PricingEarningsPage() {
         {/* =========================================================================
             2. TWO BIG STAT CARDS (7.5% & ₦50,000)
            ========================================================================= */}
-        <section className="py-10 bg-white text-neutral-900 border-b border-neutral-200">
+        <section className="py-10 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Card 1: Commission Rate */}
-              <div className="rounded-3xl border border-neutral-200 bg-neutral-50/80 p-8 text-center space-y-2 shadow-sm">
+              <div className="rounded-3xl border border-neutral-300/80 bg-white p-8 text-center space-y-2 shadow-sm">
                 <div className="text-sm font-bold text-neutral-600">
                   Commission Rate
                 </div>
@@ -85,7 +85,7 @@ export default function PricingEarningsPage() {
               </div>
 
               {/* Card 2: Minimum Withdrawal */}
-              <div className="rounded-3xl border border-neutral-200 bg-neutral-50/80 p-8 text-center space-y-2 shadow-sm">
+              <div className="rounded-3xl border border-neutral-300/80 bg-white p-8 text-center space-y-2 shadow-sm">
                 <div className="text-sm font-bold text-neutral-600">
                   Minimum Withdrawal
                 </div>
@@ -103,7 +103,7 @@ export default function PricingEarningsPage() {
         {/* =========================================================================
             3. ESTIMATE YOUR EARNINGS (CALCULATOR + TABLE)
            ========================================================================= */}
-        <section className="py-16 md:py-20 bg-white text-neutral-900 border-b border-neutral-200">
+        <section className="py-16 md:py-20 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-10">
             <div className="text-center space-y-1">
               <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
@@ -147,7 +147,7 @@ export default function PricingEarningsPage() {
               </div>
 
               {/* Right Example Earnings Table */}
-              <div className="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-6 shadow-sm">
+              <div className="rounded-2xl border border-neutral-300/80 bg-white p-6 shadow-sm">
                 <div className="font-extrabold text-sm text-neutral-900 mb-3">
                   Example Earnings
                 </div>
@@ -177,7 +177,7 @@ export default function PricingEarningsPage() {
         {/* =========================================================================
             4. HOW YOU GET PAID (3 STEPS + PAYSTACK BADGE)
            ========================================================================= */}
-        <section className="py-16 md:py-24 bg-white text-neutral-900 border-b border-neutral-200">
+        <section className="py-16 md:py-24 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-neutral-950">
               How You Get Paid
@@ -229,7 +229,7 @@ export default function PricingEarningsPage() {
         </section>
 
         {/* Quick CTA */}
-        <section className="bg-black py-12 px-4 sm:px-6 text-center">
+        <section className="bg-[#121214] py-12 px-4 sm:px-6 text-center">
           <div className="mx-auto max-w-4xl space-y-4">
             <h3 className="text-2xl sm:text-3xl font-black text-white">
               Ready to Start Earning?

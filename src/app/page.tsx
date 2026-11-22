@@ -128,7 +128,7 @@ export default function MarketingHomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-[#F59E0B] selection:text-black transition-colors duration-200">
+    <div className="min-h-screen bg-[#121214] text-white flex flex-col selection:bg-[#F59E0B] selection:text-black transition-colors duration-200">
       {/* 1 to 8, XTREME, IDENTIFINE Preloader with Broken Wine & White Line */}
       <SitePreloader />
 
@@ -140,14 +140,14 @@ export default function MarketingHomePage() {
            ========================================================================= */}
         <section
           id="hero"
-          className="relative w-full border-b border-white/10 bg-[#070707] py-14 sm:py-20 lg:py-24 overflow-hidden"
+          className="relative w-full border-b border-white/10 bg-[#121214] py-14 sm:py-20 lg:py-24 overflow-hidden"
         >
           {/* Subtle Ambient Radial Lighting */}
           <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[650px] h-[550px] bg-gradient-to-tr from-[#F59E0B]/10 via-[#800020]/15 to-transparent blur-3xl pointer-events-none" />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10 flex justify-end items-center">
-            {/* The Container (Affiliate Onboarding Portal Card) */}
-            <div className="w-full max-w-[460px] rounded-3xl bg-white shadow-[0_25px_80px_-15px_rgba(0,0,0,0.6)] border border-neutral-200 p-7 sm:p-8 text-neutral-900">
+            {/* The Container (Affiliate Onboarding Portal Card: Off-White) */}
+            <div className="w-full max-w-[460px] rounded-3xl bg-[#F8F9FA] shadow-[0_25px_80px_-15px_rgba(0,0,0,0.6)] border border-neutral-300/80 p-7 sm:p-8 text-neutral-900">
               <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
                 Identifine &amp; Xtreme Cardz Partner
@@ -164,7 +164,7 @@ export default function MarketingHomePage() {
               </div>
 
               {/* Live earnings slider (7.5%) */}
-              <div className="mt-5 rounded-2xl bg-neutral-50 border border-neutral-200 p-3.5">
+              <div className="mt-5 rounded-2xl bg-white border border-neutral-200 p-3.5 shadow-sm">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-neutral-600 font-medium">
                     Refer <b className="text-neutral-900 font-mono text-sm">{heroReferrals}</b> client{heroReferrals > 1 ? "s" : ""}/mo
@@ -189,15 +189,15 @@ export default function MarketingHomePage() {
 
               {/* Guarantees */}
               <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
+                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white border border-neutral-200 shadow-sm">
                   <Zap className="w-4 h-4 text-[#F59E0B]" />
                   <span className="text-[10px] font-bold leading-tight">Paystack<br />Instant</span>
                 </div>
-                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
+                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white border border-neutral-200 shadow-sm">
                   <DollarSign className="w-4 h-4 text-emerald-600" />
                   <span className="text-[10px] font-bold leading-tight">7.5% Flat<br />Cash</span>
                 </div>
-                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-neutral-50 border border-neutral-100">
+                <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white border border-neutral-200 shadow-sm">
                   <Layers className="w-4 h-4 text-blue-600" />
                   <span className="text-[10px] font-bold leading-tight">Zero<br />Inventory</span>
                 </div>
@@ -210,7 +210,7 @@ export default function MarketingHomePage() {
                   value={heroName}
                   onChange={(e) => setHeroName(e.target.value)}
                   placeholder="Full Name"
-                  className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  className="w-full rounded-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
                 />
                 <input
                   required
@@ -218,7 +218,7 @@ export default function MarketingHomePage() {
                   value={heroEmail}
                   onChange={(e) => setHeroEmail(e.target.value)}
                   placeholder="Email Address"
-                  className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  className="w-full rounded-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
                 />
                 <input
                   required
@@ -226,13 +226,13 @@ export default function MarketingHomePage() {
                   value={heroPhone}
                   onChange={(e) => setHeroPhone(e.target.value)}
                   placeholder="Phone / WhatsApp Number"
-                  className="w-full rounded-xl border border-neutral-300 px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
+                  className="w-full rounded-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-xs outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition"
                 />
                 <input
                   value={heroReferralCode}
                   onChange={(e) => setHeroReferralCode(e.target.value.toUpperCase())}
                   placeholder="Referral Code (Optional, e.g. JOSHUA-842)"
-                  className="w-full rounded-xl border border-neutral-300 bg-neutral-50/50 px-3.5 py-2.5 text-xs font-mono uppercase tracking-wider outline-none focus:border-black focus:bg-white focus:ring-2 focus:ring-black/10 transition placeholder:normal-case placeholder:font-sans placeholder:tracking-normal placeholder:text-neutral-400"
+                  className="w-full rounded-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-xs font-mono uppercase tracking-wider outline-none focus:border-black focus:ring-2 focus:ring-black/10 transition placeholder:normal-case placeholder:font-sans placeholder:tracking-normal placeholder:text-neutral-400"
                 />
                 <button
                   type="submit"
@@ -255,7 +255,7 @@ export default function MarketingHomePage() {
         </section>
 
         {/* Buff Motion style Infinite Marquee Ticker (7.5%) */}
-        <section className="border-b border-white/10 bg-black py-6 sm:py-8 overflow-hidden select-none">
+        <section className="border-b border-white/10 bg-[#121214] py-6 sm:py-8 overflow-hidden select-none">
           <div className="animate-ticker flex items-center gap-8 text-xs font-bold tracking-widest text-white/80 uppercase">
             {[1, 2].map((i) => (
               <div key={i} className="flex items-center gap-8 shrink-0">
@@ -277,11 +277,11 @@ export default function MarketingHomePage() {
         </section>
 
         {/* =========================================================================
-            2. 4 VALUE PILLARS (WHITE HIGH-CONTRAST CARD FROM MOCKUP)
+            2. 4 VALUE PILLARS (OFF-WHITE HIGH-CONTRAST CARD)
            ========================================================================= */}
-        <section className="py-20 md:py-28 bg-black">
+        <section className="py-20 md:py-28 bg-[#121214]">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="rounded-3xl bg-white text-neutral-900 p-10 md:p-14 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-8 items-center text-center">
+            <div className="rounded-3xl bg-[#F8F9FA] text-neutral-900 p-10 md:p-14 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-8 items-center text-center border border-neutral-300/60">
               <div className="flex flex-col items-center gap-3 p-3 group">
                 <div className="h-14 w-14 rounded-2xl bg-neutral-100 flex items-center justify-center text-neutral-900 group-hover:bg-[#F59E0B] group-hover:text-black transition shadow-sm">
                   <Handshake className="w-7 h-7" />
@@ -322,9 +322,9 @@ export default function MarketingHomePage() {
         </section>
 
         {/* =========================================================================
-            3. OUR PRODUCTS & SERVICES (INCREASED FONT SIZE, NO BORDERS, UNSPACED, NAME UNDER IMAGE)
+            3. OUR PRODUCTS & SERVICES (INCREASED FONT SIZE, NO BORDERS, 50PX DOWN OFFSET, 20PX MARGIN)
            ========================================================================= */}
-        <section id="products" className="py-36 md:py-52 lg:py-60 min-h-[960px] bg-white text-neutral-900 border-b border-neutral-200 flex flex-col justify-center">
+        <section id="products" className="py-36 md:py-52 lg:py-60 min-h-[960px] bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60 flex flex-col justify-center">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
               <div>
@@ -341,50 +341,50 @@ export default function MarketingHomePage() {
                 <button
                   onClick={() => scrollProducts("left")}
                   aria-label="Scroll left"
-                  className="h-14 w-14 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                  className="h-14 w-14 rounded-full border border-neutral-300 bg-[#F8F9FA] text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
                 >
                   <ChevronLeft className="w-7 h-7" />
                 </button>
                 <button
                   onClick={() => scrollProducts("right")}
                   aria-label="Scroll right"
-                  className="h-14 w-14 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                  className="h-14 w-14 rounded-full border border-neutral-300 bg-[#F8F9FA] text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
                 >
                   <ChevronRight className="w-7 h-7" />
                 </button>
               </div>
             </div>
 
-            {/* Horizontal Product Track: No spacing between containers (gap-0), no borders */}
+            {/* Horizontal Product Track: Shifted down by 50px as requested (mt-[50px]) */}
             <div
               ref={productScrollRef}
-              className="flex items-stretch gap-0 overflow-x-auto pb-8 scroll-smooth no-scrollbar"
+              className="flex items-stretch overflow-x-auto pb-8 scroll-smooth no-scrollbar mt-[50px]"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {showcaseProducts.map((prod) => (
                 <div
                   key={prod.id}
                   onClick={() => setActiveProductCard(activeProductCard === prod.id ? null : prod.id)}
-                  className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-transparent flex flex-col group cursor-pointer"
+                  className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-transparent flex flex-col group cursor-pointer m-[20px]"
                 >
                   {/* Container: ONLY the image shows inside (no borders, no text on image) */}
-                  <div className="relative h-80 sm:h-96 md:h-[440px] w-full bg-neutral-950 overflow-hidden">
+                  <div className="relative h-80 sm:h-96 md:h-[440px] w-full bg-neutral-950 overflow-hidden rounded-2xl shadow-md">
                     <img
                       src={prod.image}
                       alt={prod.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
 
-                    {/* Hover / Click Overlay: Changes to white background with card name and description (NO ICONS IN TEXT) */}
+                    {/* Hover / Click Overlay: Changes to off-white background with card name and description (NO ICONS IN TEXT) */}
                     <div
-                      className={`absolute inset-0 bg-white p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
+                      className={`absolute inset-0 bg-[#F8F9FA] p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
                         activeProductCard === prod.id
                           ? "opacity-100 pointer-events-auto"
                           : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
                       }`}
                     >
                       <div className="space-y-4">
-                        <div className="inline-block rounded-full bg-amber-50 px-3.5 py-1 text-xs sm:text-sm font-bold text-amber-800">
+                        <div className="inline-block rounded-full bg-neutral-200/80 px-3.5 py-1 text-xs sm:text-sm font-bold text-neutral-500">
                           {prod.tag} — 7.5% Cash Commission
                         </div>
 
@@ -397,8 +397,8 @@ export default function MarketingHomePage() {
                         </p>
                       </div>
 
-                      <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
-                        <span className="font-mono font-bold text-sm sm:text-base text-emerald-700">
+                      <div className="pt-6 border-t border-neutral-200 flex items-center justify-between">
+                        <span className="font-mono font-bold text-sm sm:text-base text-neutral-500">
                           7.5% Cash Payout
                         </span>
                         <Link
@@ -413,11 +413,11 @@ export default function MarketingHomePage() {
                   </div>
 
                   {/* Name of each container is under the image */}
-                  <div className="pt-4 pb-2 px-3">
+                  <div className="pt-4 pb-2 px-1">
                     <h3 className="font-black text-xl sm:text-2xl lg:text-3xl text-neutral-900 tracking-tight">
                       {prod.name}
                     </h3>
-                    <p className="text-sm sm:text-base font-bold text-amber-600 mt-1">
+                    <p className="text-sm sm:text-base font-bold text-neutral-500 mt-1">
                       7.5% Cash Commission
                     </p>
                   </div>
@@ -432,7 +432,7 @@ export default function MarketingHomePage() {
            ========================================================================= */}
         <section
           id="how-it-works"
-          className="py-28 md:py-40 bg-[#0C0C0E] text-white border-b border-white/10 relative overflow-hidden"
+          className="py-28 md:py-40 bg-[#141416] text-white border-b border-white/10 relative overflow-hidden"
         >
           {/* Ambient Wine/Gold Waves */}
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-b from-[#800020]/20 via-[#F59E0B]/10 to-transparent blur-3xl pointer-events-none" />
@@ -520,9 +520,9 @@ export default function MarketingHomePage() {
         {/* =========================================================================
             5. YOUR EARNINGS AT A GLANCE (7.5%)
            ========================================================================= */}
-        <section id="earnings" className="py-28 md:py-40 bg-white text-neutral-900 border-b border-neutral-200">
+        <section id="earnings" className="py-28 md:py-40 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-10 sm:p-16 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="rounded-3xl border border-neutral-300/80 bg-white p-10 sm:p-16 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Left Graphic: 3D Gold Bar Chart */}
               <div className="relative flex items-center justify-center">
                 <img
@@ -557,7 +557,7 @@ export default function MarketingHomePage() {
         {/* =========================================================================
             6. WHY BECOME AN AFFILIATE? (7.5% ATTRACTIVE COMMISSION)
            ========================================================================= */}
-        <section className="py-28 md:py-40 bg-black text-white border-b border-white/10">
+        <section className="py-28 md:py-40 bg-[#121214] text-white border-b border-white/10">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
               {/* Left Column: Why Become an Affiliate? */}
@@ -637,7 +637,7 @@ export default function MarketingHomePage() {
         {/* =========================================================================
             7. READY TO START EARNING? (GOLD RIBBON CTA FROM MOCKUP)
            ========================================================================= */}
-        <section className="bg-black py-20 md:py-28 px-4 sm:px-6">
+        <section className="bg-[#121214] py-20 md:py-28 px-4 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <div className="rounded-3xl bg-gradient-to-r from-[#F59E0B] via-[#E5A826] to-[#D97706] p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-2xl">
               <div className="flex items-center gap-5 text-neutral-950">

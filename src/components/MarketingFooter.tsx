@@ -4,7 +4,7 @@ import { Facebook, Linkedin, Youtube } from "lucide-react";
 
 export function MarketingFooter() {
   return (
-    <footer className="border-t border-white/10 bg-black text-neutral-400 text-xs py-10 transition-colors duration-200">
+    <footer className="border-t border-white/10 bg-[#121214] text-neutral-400 text-xs py-10 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
           {/* Dual Brand Logo */}

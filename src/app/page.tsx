@@ -322,105 +322,104 @@ export default function MarketingHomePage() {
         </section>
 
         {/* =========================================================================
-            3. OUR PRODUCTS & SERVICES (INCREASED HEIGHT BY 250PX, HOVER/CLICK WHITE BG)
+            3. OUR PRODUCTS & SERVICES (INCREASED FONT SIZE, NO BORDERS, UNSPACED, NAME UNDER IMAGE)
            ========================================================================= */}
-        <section id="products" className="py-40 md:py-56 lg:py-64 min-h-[960px] bg-white text-neutral-900 border-b border-neutral-200 flex flex-col justify-center">
+        <section id="products" className="py-36 md:py-52 lg:py-60 min-h-[960px] bg-white text-neutral-900 border-b border-neutral-200 flex flex-col justify-center">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
               <div>
-                <h2 className="text-3xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight">
+                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-neutral-950 tracking-tight leading-none">
                   Our Products &amp; Services
                 </h2>
-                <p className="text-base text-neutral-600 mt-2">
+                <p className="text-lg sm:text-2xl text-neutral-600 mt-4 font-medium">
                   Promote a wide range of identity and card solutions
                 </p>
               </div>
 
               {/* Navigation Arrows */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <button
                   onClick={() => scrollProducts("left")}
                   aria-label="Scroll left"
-                  className="h-12 w-12 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                  className="h-14 w-14 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ChevronLeft className="w-7 h-7" />
                 </button>
                 <button
                   onClick={() => scrollProducts("right")}
                   aria-label="Scroll right"
-                  className="h-12 w-12 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                  className="h-14 w-14 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ChevronRight className="w-7 h-7" />
                 </button>
               </div>
             </div>
 
-            {/* Horizontal Product Track */}
+            {/* Horizontal Product Track: No spacing between containers (gap-0), no borders */}
             <div
               ref={productScrollRef}
-              className="flex items-stretch gap-6 overflow-x-auto pb-6 scroll-smooth no-scrollbar"
+              className="flex items-stretch gap-0 overflow-x-auto pb-8 scroll-smooth no-scrollbar"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {showcaseProducts.map((prod) => (
                 <div
                   key={prod.id}
                   onClick={() => setActiveProductCard(activeProductCard === prod.id ? null : prod.id)}
-                  className="w-[290px] sm:w-[350px] shrink-0 rounded-3xl bg-neutral-50 overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 duration-300 group cursor-pointer relative"
+                  className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-transparent flex flex-col group cursor-pointer"
                 >
-                  {/* Default View: Increased Image Height & No text on image */}
-                  <div className="h-80 sm:h-96 md:h-[420px] bg-neutral-950 overflow-hidden relative">
+                  {/* Container: ONLY the image shows inside (no borders, no text on image) */}
+                  <div className="relative h-80 sm:h-96 md:h-[440px] w-full bg-neutral-950 overflow-hidden">
                     <img
                       src={prod.image}
                       alt={prod.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                  </div>
 
-                  {/* Card Bottom Bar */}
-                  <div className="p-6 bg-white flex items-center justify-between">
-                    <h3 className="font-extrabold text-base sm:text-lg text-neutral-900">
-                      {prod.name}
-                    </h3>
-                    <span className="text-xs font-bold text-emerald-700">7.5% Commission</span>
-                  </div>
+                    {/* Hover / Click Overlay: Changes to white background with card name and description (NO ICONS IN TEXT) */}
+                    <div
+                      className={`absolute inset-0 bg-white p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
+                        activeProductCard === prod.id
+                          ? "opacity-100 pointer-events-auto"
+                          : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+                      }`}
+                    >
+                      <div className="space-y-4">
+                        <div className="inline-block rounded-full bg-amber-50 px-3.5 py-1 text-xs sm:text-sm font-bold text-amber-800">
+                          {prod.tag} — 7.5% Cash Commission
+                        </div>
 
-                  {/* Hover / Click Overlay: Changes to white background with card name and brief description */}
-                  <div
-                    className={`absolute inset-0 bg-white p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
-                      activeProductCard === prod.id
-                        ? "opacity-100 pointer-events-auto"
-                        : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
-                    }`}
-                  >
-                    <div className="space-y-4">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-800">
-                        <span>{prod.tag}</span>
-                        <span>•</span>
-                        <span>7.5% Payout</span>
+                        <h3 className="font-black text-2xl sm:text-3xl lg:text-4xl text-neutral-950 leading-tight">
+                          {prod.name}
+                        </h3>
+
+                        <p className="text-base sm:text-lg lg:text-xl text-neutral-700 leading-relaxed font-medium">
+                          {prod.description}
+                        </p>
                       </div>
 
-                      <h3 className="font-black text-xl sm:text-2xl text-neutral-950 leading-tight">
-                        {prod.name}
-                      </h3>
-
-                      <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
-                        {prod.description}
-                      </p>
+                      <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
+                        <span className="font-mono font-bold text-sm sm:text-base text-emerald-700">
+                          7.5% Cash Payout
+                        </span>
+                        <Link
+                          href={`/portal?tab=register&product=${prod.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="rounded-full bg-black text-white hover:bg-neutral-800 px-6 py-2.5 text-xs sm:text-sm font-extrabold transition shadow-md"
+                        >
+                          Refer Card
+                        </Link>
+                      </div>
                     </div>
+                  </div>
 
-                    <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
-                      <span className="font-mono font-bold text-sm text-emerald-700">
-                        7.5% Commission
-                      </span>
-                      <Link
-                        href={`/portal?tab=register&product=${prod.id}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-black text-white hover:bg-neutral-800 px-5 py-2.5 text-xs font-extrabold transition shadow-md"
-                      >
-                        <span>Refer Card</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
+                  {/* Name of each container is under the image */}
+                  <div className="pt-4 pb-2 px-3">
+                    <h3 className="font-black text-xl sm:text-2xl lg:text-3xl text-neutral-900 tracking-tight">
+                      {prod.name}
+                    </h3>
+                    <p className="text-sm sm:text-base font-bold text-amber-600 mt-1">
+                      7.5% Cash Commission
+                    </p>
                   </div>
                 </div>
               ))}

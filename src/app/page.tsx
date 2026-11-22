@@ -131,7 +131,7 @@ export default function MarketingHomePage() {
         {/* =========================================================================
             1. HERO SECTION: 50% XTREME CARDZ VIDEO + 50% AFFILIATE ONBOARDING
            ========================================================================= */}
-        <section className="relative w-full border-b border-white/10 bg-black overflow-hidden">
+        <section id="hero" className="relative w-full border-b border-white/10 bg-black overflow-hidden">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[560px] lg:h-[790px] xl:h-[810px]">
             {/* ---------- 50% WIDTH: XTREME CARDZ VIDEO SHOWCASE ---------- */}
             <div className="lg:col-span-1 relative h-[420px] sm:h-[540px] lg:h-full overflow-hidden bg-[#0A0709] flex items-center justify-center">
@@ -158,14 +158,6 @@ export default function MarketingHomePage() {
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
               </button>
-
-              {/* Live Badge over Video */}
-              <div className="absolute bottom-8 left-8 z-20 hidden sm:flex items-center gap-3 bg-black/75 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl shadow-xl">
-                <span className="flex h-2.5 w-2.5 rounded-full bg-[#F59E0B] animate-ping" />
-                <span className="text-xs font-mono font-bold text-white tracking-wider">
-                  XTREME CARDZ SHOWCASE • 7.5% COMMISSION
-                </span>
-              </div>
             </div>
 
             {/* ---------- 50% WIDTH: AFFILIATE ONBOARDING PORTAL ---------- */}
@@ -514,7 +506,7 @@ export default function MarketingHomePage() {
         {/* =========================================================================
             5. YOUR EARNINGS AT A GLANCE (7.5%)
            ========================================================================= */}
-        <section className="py-28 md:py-40 bg-white text-neutral-900 border-b border-neutral-200">
+        <section id="earnings" className="py-28 md:py-40 bg-white text-neutral-900 border-b border-neutral-200">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-10 sm:p-16 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Left Graphic: 3D Gold Bar Chart */}

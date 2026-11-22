@@ -40,12 +40,13 @@ export function HeroGoldLinesEffect({
             <stop offset="100%" stopColor="#D97706" stopOpacity="0.7" />
           </linearGradient>
 
-          {/* Golden Horizontal Line Stroke Gradient */}
+          {/* Golden Horizontal Line Stroke Gradient: Full-width vibrant gold across the entire screen */}
           <linearGradient id="goldLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.95" />
-            <stop offset="25%" stopColor="#FBBF24" stopOpacity="0.8" />
-            <stop offset="60%" stopColor="#D97706" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.15" />
+            <stop offset="25%" stopColor="#FBBF24" stopOpacity="0.85" />
+            <stop offset="50%" stopColor="#F59E0B" stopOpacity="0.75" />
+            <stop offset="75%" stopColor="#FBBF24" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.95" />
           </linearGradient>
 
           {/* Gold Shimmer Glow Filter */}
@@ -121,9 +122,8 @@ export function HeroGoldLinesEffect({
         })}
       </svg>
 
-      {/* Subtle radial vignette overlay to blend edges seamlessly */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/60 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#121214] to-transparent pointer-events-none" />
+      {/* Subtle edge fade at the bottom to blend seamlessly into the next section */}
+      <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#121214] to-transparent pointer-events-none" />
     </div>
   );
 }

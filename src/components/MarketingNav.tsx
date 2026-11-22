@@ -26,7 +26,7 @@ export function MarketingNav() {
   const navRef = useRef<HTMLElement | null>(null);
   const itemRefs = useRef<Record<string, HTMLElement | null>>({});
 
-  // Update sliding white pill coordinates based on the active element
+  // Update sliding white background coordinates to fill the full header height
   const updatePillPosition = useCallback(() => {
     const navEl = navRef.current;
     const activeEl = itemRefs.current[activeId];
@@ -108,7 +108,7 @@ export function MarketingNav() {
       const el = document.getElementById(link.id);
       if (el) {
         e.preventDefault();
-        const navOffset = 80;
+        const navOffset = 70;
         const targetY = el.getBoundingClientRect().top + window.scrollY - navOffset;
         window.scrollTo({ top: targetY, behavior: "smooth" });
         setActiveId(link.id);
@@ -117,27 +117,45 @@ export function MarketingNav() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 text-white backdrop-blur-md transition-colors duration-200">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5">
-        {/* Brand Dual Logo: IDENTIFINE | XTREME CARDZ */}
-        <Link href="/" className="flex items-center gap-2 select-none group">
-          <span className="font-extrabold tracking-wider text-sm sm:text-base text-white">
-            IDENTIFINE
-          </span>
-          <span className="text-white/30 font-light text-base sm:text-lg">|</span>
-          <span className="font-extrabold tracking-wider text-sm sm:text-base text-white flex items-center">
-            <span className="text-[#F59E0B] font-black">X</span>TREME CARDZ
-          </span>
+    <header className="sticky top-0 z-50 bg-black text-white border-b border-white/10 h-16 sm:h-[68px] transition-colors duration-200">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6">
+        {/* Brand Dual Logo: Using actual logos for IDENTIFINE and XTREME CARDZ */}
+        <Link href="/" className="flex items-center gap-3 select-none group shrink-0">
+          {/* 1. IDENTIFINE LOGO */}
+          <img
+            src="/identifine_logo.webp"
+            alt="Identifine Logo"
+            className="h-6 sm:h-7 w-auto object-contain transition-opacity group-hover:opacity-90"
+          />
+
+          {/* Elegant Divider */}
+          <span className="text-white/20 font-light text-base sm:text-lg">|</span>
+
+          {/* 2. XTREME CARDZ LOGO (Icon + Text Horizontal Lockup) */}
+          <div className="flex items-center gap-1.5 h-6 sm:h-7">
+            <img
+              src="/xtreme-cardz-icon.png"
+              alt="Xtreme Cardz Icon"
+              className="h-6 sm:h-7 w-auto object-contain transition-transform group-hover:scale-105 duration-200"
+            />
+            <img
+              src="/xtreme-cardz-text.png"
+              alt="Xtreme Cardz Text"
+              className="h-3 sm:h-3.5 w-auto object-contain brightness-125"
+            />
+          </div>
         </Link>
 
-        {/* Desktop Navigation Links with Smooth Sliding White Background Pill */}
+        {/* Desktop Navigation Links:
+            - Full header height white background (no glassmorphism, no borders around text)
+            - Smoothly shifts horizontally to the section the user is in */}
         <nav
           ref={navRef}
-          className="relative hidden md:flex items-center bg-white/[0.07] p-1 rounded-full border border-white/10 backdrop-blur-md shadow-inner"
+          className="relative hidden md:flex items-stretch h-full overflow-hidden"
         >
-          {/* Moving White Background Pill */}
+          {/* Solid White Background Filling the Full Header Height */}
           <span
-            className="absolute top-1 bottom-1 bg-white rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-[0_2px_12px_rgba(255,255,255,0.25)] pointer-events-none"
+            className="absolute inset-y-0 bg-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none"
             style={{
               left: `${pillStyle.left}px`,
               width: `${pillStyle.width}px`,
@@ -155,10 +173,10 @@ export function MarketingNav() {
                   itemRefs.current[link.id] = el;
                 }}
                 onClick={(e) => handleNavClick(e, link)}
-                className={`relative z-10 px-4 py-1.5 text-xs rounded-full select-none transition-colors duration-300 font-semibold ${
+                className={`relative z-10 h-full flex items-center px-5 sm:px-6 text-xs uppercase tracking-wider font-bold select-none transition-colors duration-300 ${
                   isActive
-                    ? "text-black font-extrabold"
-                    : "text-neutral-300 hover:text-white"
+                    ? "text-black font-black"
+                    : "text-neutral-400 hover:text-white"
                 }`}
               >
                 {link.label}
@@ -168,10 +186,10 @@ export function MarketingNav() {
         </nav>
 
         {/* Actions & CTA (Sign In button removed as requested) */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3 shrink-0">
           <Link
             href="/portal?tab=register"
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-6 py-2 text-xs font-extrabold transition shadow-md hover:scale-[1.02]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-6 py-2.5 text-xs font-extrabold transition shadow-md hover:scale-[1.02]"
           >
             <span>Become an Affiliate</span>
           </Link>

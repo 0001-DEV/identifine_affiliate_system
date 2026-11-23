@@ -158,28 +158,28 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: TEXT ONLY (Regular font size, affiliate-focused copy)
+            1. HERO SECTION: TEXT ONLY (Increased text height, affiliate copy)
            ========================================================================= */}
         <section id="hero" className="pt-24 sm:pt-28 pb-3 px-4 sm:px-6 bg-white">
-          <div className="mx-auto max-w-4xl text-center space-y-4 sm:space-y-5">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black tracking-tight leading-tight">
+          <div className="mx-auto max-w-4xl text-center space-y-5 sm:space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold text-black tracking-tight leading-[1.14]">
               Turn Your Network Into 7.5% Recurring Cash
             </h1>
 
-            <p className="text-sm sm:text-base text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-neutral-700 font-normal leading-relaxed md:leading-[1.7] max-w-3xl mx-auto">
               Join our high-earning affiliate program. Refer corporate clients, creative agencies, and luxury establishments to custom metal smart cards and digital identity suites. Earn 7.5% affiliate commission on every closed deal with automated referral tracking and instant payouts.
             </p>
 
             <div className="flex items-center justify-center gap-3 sm:gap-4 pt-1">
               <Link
                 href="/portal?tab=register"
-                className="rounded-full bg-black hover:bg-neutral-800 text-white px-7 py-3 text-xs sm:text-sm font-semibold shadow-md hover:scale-105 transition"
+                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-semibold shadow-md hover:scale-105 transition"
               >
                 Join Affiliate Program
               </Link>
               <Link
                 href="/pricing"
-                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-6 py-3 text-xs sm:text-sm font-semibold transition"
+                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold transition"
               >
                 Affiliate Commission Guide
               </Link>
@@ -187,7 +187,7 @@ export default function HomePage() {
 
             {/* people that can partner with us: reduced space to images directly below */}
             <div className="pt-2 pb-0">
-              <p className="text-xs sm:text-sm text-gray-500 font-medium lowercase">
+              <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
                 people that can partner with us
               </p>
             </div>

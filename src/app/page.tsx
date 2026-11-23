@@ -158,45 +158,38 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: TEXT ONLY (Increased text height, affiliate copy)
+            1. HERO SECTION: TEXT ONLY (Not bold, larger font size, no 7.5%)
            ========================================================================= */}
-        <section id="hero" className="pt-24 sm:pt-28 pb-3 px-4 sm:px-6 bg-white">
-          <div className="mx-auto max-w-4xl text-center space-y-5 sm:space-y-6">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-extrabold text-black tracking-tight leading-[1.14]">
-              Turn Your Network Into 7.5% Recurring Cash
+        <section id="hero" className="pt-24 sm:pt-32 pb-8 sm:pb-10 px-4 sm:px-6 bg-white">
+          <div className="mx-auto max-w-5xl text-center space-y-6 sm:space-y-7">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[70px] font-normal text-black tracking-tight leading-[1.12]">
+              Turn Your Network Into Recurring Cash
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-neutral-700 font-normal leading-relaxed md:leading-[1.7] max-w-3xl mx-auto">
-              Join our high-earning affiliate program. Refer corporate clients, creative agencies, and luxury establishments to custom metal smart cards and digital identity suites. Earn 7.5% affiliate commission on every closed deal with automated referral tracking and instant payouts.
+            <p className="text-lg sm:text-xl md:text-2xl text-neutral-600 font-normal leading-relaxed md:leading-[1.6] max-w-3xl mx-auto">
+              Join our high-earning affiliate program. Refer corporate clients, creative agencies, and luxury establishments to custom metal smart cards and digital identity suites. Earn high-yield recurring commissions on every closed deal with automated referral tracking and instant payouts.
             </p>
 
-            <div className="flex items-center justify-center gap-3 sm:gap-4 pt-1">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 pt-2">
               <Link
                 href="/portal?tab=register"
-                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-semibold shadow-md hover:scale-105 transition"
+                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
               >
                 Join Affiliate Program
               </Link>
               <Link
                 href="/pricing"
-                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold transition"
+                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-medium transition"
               >
                 Affiliate Commission Guide
               </Link>
-            </div>
-
-            {/* people that can partner with us: reduced space to images directly below */}
-            <div className="pt-2 pb-0">
-              <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
-                people that can partner with us
-              </p>
             </div>
           </div>
         </section>
 
         {/* =========================================================================
             1B. PINNED HORIZONTAL CONTAINER OF PICTURES (MOVES ON SCROLL)
-                High image heights, reduced image count (4), bold names visible
+                "people that can partner with us" placed directly with the images
            ========================================================================= */}
         <section
           ref={heroSectionRef}
@@ -205,7 +198,14 @@ export default function HomePage() {
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
           <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
-            <div className="relative w-full overflow-hidden py-2">
+            {/* people that can partner with us: directly attached to the images */}
+            <div className="px-8 sm:px-16 mb-3 sm:mb-4">
+              <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
+                people that can partner with us
+              </p>
+            </div>
+
+            <div className="relative w-full overflow-hidden py-1">
               <div
                 ref={trackRef}
                 className="flex items-start gap-8 sm:gap-10 px-8 sm:px-16 will-change-transform transition-transform duration-75"
@@ -218,7 +218,7 @@ export default function HomePage() {
                     key={partner.id}
                     className="w-[320px] sm:w-[380px] md:w-[440px] lg:w-[480px] shrink-0 flex flex-col group"
                   >
-                    {/* Picture Container: INCREASED HEIGHT as requested, NO text on image */}
+                    {/* Picture Container: High image height, clean with NO text on image */}
                     <div className="relative h-80 sm:h-96 md:h-[420px] lg:h-[460px] xl:h-[490px] w-full rounded-3xl overflow-hidden bg-neutral-950 shadow-xl group-hover:shadow-2xl transition-all duration-500">
                       <img
                         src={partner.image}
@@ -229,7 +229,7 @@ export default function HomePage() {
 
                     {/* Text outside the container: PROMINENT NAME OF WHAT IT REPRESENTS */}
                     <div className="pt-4 pb-1 px-1">
-                      <h3 className="font-black text-lg sm:text-xl md:text-2xl text-black tracking-tight">
+                      <h3 className="font-semibold text-lg sm:text-xl md:text-2xl text-black tracking-tight">
                         {partner.role}
                       </h3>
                     </div>

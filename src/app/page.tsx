@@ -65,7 +65,7 @@ export default function HomePage() {
     };
   }, []);
 
-  // 7 Partner Persona Cards (People we can partner with)
+  // 4 Focused Partner Establishment Cards
   const partnerShowcase = [
     {
       id: "office-colleagues",
@@ -78,11 +78,6 @@ export default function HomePage() {
       image: "/images/partners/executive-boardroom-meeting.jpg",
     },
     {
-      id: "workplace-lounge",
-      role: "Workplace Lounges & Networking Hubs",
-      image: "/images/partners/office-lounge-discussion.jpg",
-    },
-    {
       id: "creative-agency",
       role: "Creative Agencies & Studios",
       image: "/images/partners/creative-agency-studio.jpg",
@@ -91,16 +86,6 @@ export default function HomePage() {
       id: "tech-startups",
       role: "Tech Startups & Teams",
       image: "/images/partners/tech-startup-team.jpg",
-    },
-    {
-      id: "hospitality-venues",
-      role: "Luxury Hotels & Hospitality Venues",
-      image: "/images/partners/hospitality-hotel-establishment.jpg",
-    },
-    {
-      id: "enterprise-firms",
-      role: "Enterprise & Advisory Establishments",
-      image: "/images/partners/corporate-conference-group.jpg",
     },
   ];
 
@@ -173,36 +158,36 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: TEXT ONLY (Spacious, bold, beautiful typography)
+            1. HERO SECTION: TEXT ONLY (Regular font size, affiliate-focused copy)
            ========================================================================= */}
-        <section id="hero" className="pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 bg-white">
-          <div className="mx-auto max-w-5xl text-center space-y-6 sm:space-y-7">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black tracking-tight leading-[1.04]">
+        <section id="hero" className="pt-24 sm:pt-28 pb-3 px-4 sm:px-6 bg-white">
+          <div className="mx-auto max-w-4xl text-center space-y-4 sm:space-y-5">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black tracking-tight leading-tight">
               Turn Your Network Into 7.5% Recurring Cash
             </h1>
 
-            <p className="text-base sm:text-xl md:text-2xl text-black font-medium leading-relaxed max-w-3xl mx-auto">
-              Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
+            <p className="text-sm sm:text-base text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">
+              Join our high-earning affiliate program. Refer corporate clients, creative agencies, and luxury establishments to custom metal smart cards and digital identity suites. Earn 7.5% affiliate commission on every closed deal with automated referral tracking and instant payouts.
             </p>
 
-            <div className="flex items-center justify-center gap-4 sm:gap-5 pt-1">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 pt-1">
               <Link
                 href="/portal?tab=register"
-                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-10 sm:py-4 text-xs sm:text-sm font-extrabold shadow-lg hover:scale-105 transition"
+                className="rounded-full bg-black hover:bg-neutral-800 text-white px-7 py-3 text-xs sm:text-sm font-semibold shadow-md hover:scale-105 transition"
               >
-                Become an Affiliate
+                Join Affiliate Program
               </Link>
               <Link
                 href="/pricing"
-                className="rounded-full border-2 border-black bg-white hover:bg-neutral-100 text-black px-7 py-3.5 sm:px-9 sm:py-4 text-xs sm:text-sm font-bold transition"
+                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-6 py-3 text-xs sm:text-sm font-semibold transition"
               >
-                Explore 7.5% Earnings
+                Affiliate Commission Guide
               </Link>
             </div>
 
-            {/* people that can partner with us: gray color and lowercase */}
-            <div className="pt-2">
-              <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
+            {/* people that can partner with us: reduced space to images directly below */}
+            <div className="pt-2 pb-0">
+              <p className="text-xs sm:text-sm text-gray-500 font-medium lowercase">
                 people that can partner with us
               </p>
             </div>
@@ -211,16 +196,16 @@ export default function HomePage() {
 
         {/* =========================================================================
             1B. PINNED HORIZONTAL CONTAINER OF PICTURES (MOVES ON SCROLL)
-                High image heights, bold names visible below each image
+                High image heights, reduced image count (4), bold names visible
            ========================================================================= */}
         <section
           ref={heroSectionRef}
           id="partners-scroll"
-          className="relative w-full h-[450vh] bg-white border-b border-neutral-200"
+          className="relative w-full h-[280vh] bg-white border-b border-neutral-200"
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
           <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
-            <div className="relative w-full overflow-hidden py-4">
+            <div className="relative w-full overflow-hidden py-2">
               <div
                 ref={trackRef}
                 className="flex items-start gap-8 sm:gap-10 px-8 sm:px-16 will-change-transform transition-transform duration-75"

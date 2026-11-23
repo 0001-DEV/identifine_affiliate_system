@@ -173,55 +173,57 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: TEXT ONLY + PINNED HORIZONTAL CONTAINER OF PICTURES
-               MOVES ON SCROLL, THEN UNPINS AND CONTINUES TO NEXT SECTION
+            1. HERO SECTION: TEXT ONLY (Spacious, bold, beautiful typography)
+           ========================================================================= */}
+        <section id="hero" className="pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 bg-white">
+          <div className="mx-auto max-w-5xl text-center space-y-6 sm:space-y-7">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black tracking-tight leading-[1.04]">
+              Turn Your Network Into 7.5% Recurring Cash
+            </h1>
+
+            <p className="text-base sm:text-xl md:text-2xl text-black font-medium leading-relaxed max-w-3xl mx-auto">
+              Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
+            </p>
+
+            <div className="flex items-center justify-center gap-4 sm:gap-5 pt-1">
+              <Link
+                href="/portal?tab=register"
+                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-10 sm:py-4 text-xs sm:text-sm font-extrabold shadow-lg hover:scale-105 transition"
+              >
+                Become an Affiliate
+              </Link>
+              <Link
+                href="/pricing"
+                className="rounded-full border-2 border-black bg-white hover:bg-neutral-100 text-black px-7 py-3.5 sm:px-9 sm:py-4 text-xs sm:text-sm font-bold transition"
+              >
+                Explore 7.5% Earnings
+              </Link>
+            </div>
+
+            {/* people that can partner with us: gray color and lowercase */}
+            <div className="pt-2">
+              <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
+                people that can partner with us
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            1B. PINNED HORIZONTAL CONTAINER OF PICTURES (MOVES ON SCROLL)
+                High image heights, bold names visible below each image
            ========================================================================= */}
         <section
           ref={heroSectionRef}
-          id="hero"
-          className="relative w-full h-[480vh] bg-white border-b border-neutral-200"
+          id="partners-scroll"
+          className="relative w-full h-[450vh] bg-white border-b border-neutral-200"
         >
-          {/* Sticky Viewport: Stays fixed as user scrolls, animating the horizontal container */}
-          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-6 sm:pt-10 pb-4 sm:pb-6 overflow-hidden bg-white">
-            
-            {/* Top Area: HERO TEXT ONLY (Increased heights, same color, spaced paragraphs) */}
-            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-5 sm:space-y-6 shrink-0 z-10">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black tracking-tight leading-[1.04]">
-                Turn Your Network Into 7.5% Recurring Cash
-              </h1>
-
-              <p className="text-base sm:text-xl md:text-2xl text-black font-medium leading-relaxed max-w-3xl mx-auto">
-                Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
-              </p>
-
-              <div className="flex items-center justify-center gap-4 sm:gap-5 pt-1">
-                <Link
-                  href="/portal?tab=register"
-                  className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-10 sm:py-4 text-xs sm:text-sm font-extrabold shadow-lg hover:scale-105 transition"
-                >
-                  Become an Affiliate
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="rounded-full border-2 border-black bg-white hover:bg-neutral-100 text-black px-7 py-3.5 sm:px-9 sm:py-4 text-xs sm:text-sm font-bold transition"
-                >
-                  Explore 7.5% Earnings
-                </Link>
-              </div>
-
-              {/* people that can partner with us: gray color and lowercase */}
-              <div className="pt-1">
-                <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
-                  people that can partner with us
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Area: HORIZONTAL CONTAINER OF PICTURES THAT MOVES ON SCROLL */}
-            <div className="relative w-full overflow-hidden mt-3 sm:mt-4 pb-2">
+          {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
+          <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
+            <div className="relative w-full overflow-hidden py-4">
               <div
                 ref={trackRef}
-                className="flex items-start gap-6 sm:gap-8 px-6 sm:px-12 will-change-transform transition-transform duration-75"
+                className="flex items-start gap-8 sm:gap-10 px-8 sm:px-16 will-change-transform transition-transform duration-75"
                 style={{
                   transform: `translateX(-${scrollProgress * maxTranslate}px)`,
                 }}
@@ -229,10 +231,10 @@ export default function HomePage() {
                 {partnerShowcase.map((partner) => (
                   <div
                     key={partner.id}
-                    className="w-[280px] sm:w-[320px] md:w-[360px] lg:w-[390px] shrink-0 flex flex-col group"
+                    className="w-[320px] sm:w-[380px] md:w-[440px] lg:w-[480px] shrink-0 flex flex-col group"
                   >
-                    {/* Picture Container: People in establishments / offices gisting, NO text on image */}
-                    <div className="relative h-56 sm:h-64 md:h-72 lg:h-[300px] xl:h-[320px] w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-neutral-950 shadow-md group-hover:shadow-2xl transition-all duration-500">
+                    {/* Picture Container: INCREASED HEIGHT as requested, NO text on image */}
+                    <div className="relative h-80 sm:h-96 md:h-[420px] lg:h-[460px] xl:h-[490px] w-full rounded-3xl overflow-hidden bg-neutral-950 shadow-xl group-hover:shadow-2xl transition-all duration-500">
                       <img
                         src={partner.image}
                         alt={partner.role}
@@ -240,9 +242,9 @@ export default function HomePage() {
                       />
                     </div>
 
-                    {/* Text outside the container: NAMES ONLY OF WHAT THEY REPRESENT */}
-                    <div className="pt-3 pb-1 px-1">
-                      <h3 className="font-black text-base sm:text-lg md:text-xl text-black tracking-tight">
+                    {/* Text outside the container: PROMINENT NAME OF WHAT IT REPRESENTS */}
+                    <div className="pt-4 pb-1 px-1">
+                      <h3 className="font-black text-lg sm:text-xl md:text-2xl text-black tracking-tight">
                         {partner.role}
                       </h3>
                     </div>
@@ -251,7 +253,7 @@ export default function HomePage() {
               </div>
 
               {/* Scroll Progress Bar indicator */}
-              <div className="mx-auto max-w-xs mt-3 h-1 bg-neutral-100 rounded-full overflow-hidden">
+              <div className="mx-auto max-w-xs mt-6 h-1.5 bg-neutral-100 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-black transition-all duration-75 rounded-full"
                   style={{ width: `${Math.max(5, scrollProgress * 100)}%` }}

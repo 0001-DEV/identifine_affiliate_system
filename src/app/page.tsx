@@ -211,15 +211,28 @@ export default function ImpactPartnerHomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. IMPACT.COM HERO SECTION (HIGH CONVERSION DUAL COLUMN)
+            1. IMPACT.COM HERO SECTION (BACKGROUND VIDEO & LEFT-SCROLLING CLIENTS)
            ========================================================================= */}
         <section
           id="hero"
-          className="relative w-full bg-[#0B132B] text-white py-16 sm:py-24 lg:py-28 overflow-hidden border-b border-white/10"
+          className="relative w-full bg-[#0B132B] text-white pt-16 sm:pt-24 pb-12 sm:pb-16 overflow-hidden border-b border-white/10"
         >
-          {/* Impact-style Ambient Violet/Blue Radial Lighting */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-indigo-500/15 via-[#FF5B37]/10 to-transparent blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 w-[600px] h-[400px] bg-gradient-to-tl from-[#FF5B37]/15 to-transparent blur-3xl pointer-events-none" />
+          {/* Background Cinematic Video with Impact.com Navy Overlay */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover object-center"
+            >
+              <source src="/videos/hero-section.mp4" type="video/mp4" />
+              <source src="/videos/hero-section.webm" type="video/webm" />
+            </video>
+            {/* Deep Midnight Navy Overlay to preserve high contrast and readability */}
+            <div className="absolute inset-0 bg-[#0B132B]/85 backdrop-blur-[1.5px]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-transparent to-[#0B132B]/75" />
+          </div>
 
           {/* Micro Grid Background Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
@@ -401,31 +414,62 @@ export default function ImpactPartnerHomePage() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* =========================================================================
-            2. IMPACT.COM SECTION 1: TRUST MARQUEE & ENTERPRISE BADGES
-           ========================================================================= */}
-        <section className="py-8 bg-slate-50 border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <span className="text-xs font-bold uppercase tracking-widest text-slate-500 text-center md:text-left">
-                Trusted by Top Corporate Firms, VIP Venues &amp; Private Networks:
-              </span>
-              <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-slate-400 font-extrabold text-xs sm:text-sm tracking-wider uppercase">
-                <span className="hover:text-slate-800 transition">Access Corporate</span>
-                <span className="hover:text-slate-800 transition">Transcorp VIP</span>
-                <span className="hover:text-slate-800 transition">Eko Suites</span>
-                <span className="hover:text-slate-800 transition">Prime Capital</span>
-                <span className="hover:text-slate-800 transition">Genesis Group</span>
+            {/* Clients We Have Worked With: Continuously Scrolling to the Left */}
+            <div className="pt-12 sm:pt-16 border-t border-white/10 mt-12 sm:mt-16 overflow-hidden">
+              <div className="text-center mb-4">
+                <span className="text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
+                  Clients We Have Worked With
+                </span>
+              </div>
+
+              {/* Infinite Continuous Left-Scrolling Marquee Track */}
+              <div className="overflow-hidden select-none py-2 relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+                <div className="animate-ticker flex items-center gap-12 text-xs sm:text-sm font-extrabold tracking-wider uppercase text-slate-300">
+                  {[1, 2, 3].map((setIndex) => (
+                    <div key={setIndex} className="flex items-center gap-12 shrink-0">
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <Building2 className="w-4 h-4 text-[#FF5B37]" /> Access Bank Corporate
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <Crown className="w-4 h-4 text-amber-400" /> Transcorp Hilton VIP
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <Star className="w-4 h-4 text-indigo-400" /> Eko Hotels &amp; Suites
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <ShieldCheck className="w-4 h-4 text-emerald-400" /> Prime Capital Management
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <Award className="w-4 h-4 text-cyan-400" /> Genesis Luxury Club
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <Briefcase className="w-4 h-4 text-[#FF5B37]" /> Vanguard Executive Consulting
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <Zap className="w-4 h-4 text-amber-400" /> Stanbic IBTC Wealth
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="flex items-center gap-2.5 hover:text-white transition">
+                        <Building2 className="w-4 h-4 text-purple-400" /> Zenith Bank Enterprise
+                      </span>
+                      <span className="text-white/20">•</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* =========================================================================
-            3. IMPACT.COM SECTION 2: INTERACTIVE AUDIENCE SWITCHER (HALLMARK FEATURE)
+            2. IMPACT.COM SECTION 2: INTERACTIVE AUDIENCE SWITCHER (HALLMARK FEATURE)
            ========================================================================= */}
         <section id="solutions" className="py-20 lg:py-28 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">

@@ -207,46 +207,42 @@ export default function HomePage() {
         <section
           ref={heroSectionRef}
           id="hero"
-          className="relative w-full h-[280vh] bg-white border-b border-neutral-200"
+          className="relative w-full h-[360vh] bg-white border-b border-neutral-200"
         >
           {/* Sticky Viewport: Stays fixed as user scrolls, animating the horizontal container */}
-          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden bg-white">
+          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-10 sm:pt-14 pb-8 sm:pb-12 overflow-hidden bg-white">
             
-            {/* Top Area: HERO TEXT ONLY (Clean, Centered, Display Typography) */}
-            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-4 shrink-0 z-10">
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-4 py-1 text-xs font-bold text-amber-800">
-                <span className="h-2 w-2 rounded-full bg-[#F59E0B] animate-pulse" />
-                <span>Identifine &amp; Xtreme Cardz Partner Network</span>
-              </div>
-
+            {/* Top Area: HERO TEXT ONLY (Spaced paragraphs, clean black text) */}
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-7 shrink-0 z-10">
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-black tracking-tight leading-[1.08]">
                 Turn Your Network Into{" "}
                 <span className="text-[#F59E0B]">7.5% Recurring Cash</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">
+              <p className="text-base sm:text-xl text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">
                 Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
               </p>
 
-              <div className="flex items-center justify-center gap-4 pt-1">
+              <div className="flex items-center justify-center gap-4 pt-2">
                 <Link
                   href="/portal?tab=register"
-                  className="rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-8 py-3.5 text-xs sm:text-sm font-extrabold shadow-md hover:scale-105 transition"
+                  className="rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-9 py-4 text-xs sm:text-sm font-extrabold shadow-md hover:scale-105 transition"
                 >
                   Become an Affiliate
                 </Link>
                 <Link
                   href="/pricing"
-                  className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 text-xs sm:text-sm font-bold transition"
+                  className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-8 py-4 text-xs sm:text-sm font-bold transition"
                 >
                   Explore 7.5% Earnings
                 </Link>
               </div>
 
-              <div className="pt-2 flex items-center justify-center gap-2 text-xs font-semibold text-neutral-400">
-                <span>People You Can Partner With</span>
-                <span className="text-neutral-300">•</span>
-                <span className="text-neutral-500">Scroll down to explore &rarr;</span>
+              {/* People that can partner with us: Black color */}
+              <div className="pt-3 flex items-center justify-center">
+                <span className="text-xs sm:text-sm font-black text-black uppercase tracking-wider">
+                  people that can partner with us
+                </span>
               </div>
             </div>
 
@@ -254,7 +250,7 @@ export default function HomePage() {
             <div className="relative w-full overflow-hidden mt-6">
               <div
                 ref={trackRef}
-                className="flex items-center gap-6 px-6 sm:px-12 will-change-transform transition-transform duration-75"
+                className="flex items-start gap-6 px-6 sm:px-12 will-change-transform transition-transform duration-75"
                 style={{
                   transform: `translateX(-${scrollProgress * maxTranslate}px)`,
                 }}
@@ -262,40 +258,22 @@ export default function HomePage() {
                 {partnerShowcase.map((partner) => (
                   <div
                     key={partner.id}
-                    className="w-[300px] sm:w-[360px] md:w-[400px] shrink-0 rounded-3xl bg-neutral-50 border border-neutral-200 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group"
+                    className="w-[280px] sm:w-[340px] md:w-[380px] shrink-0 flex flex-col group cursor-pointer"
                   >
-                    {/* Picture Container */}
-                    <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-neutral-900">
+                    {/* Picture Container: ONLY the image inside, increased height, NO text on image */}
+                    <div className="relative h-[320px] sm:h-[380px] md:h-[430px] w-full rounded-3xl overflow-hidden shadow-md group-hover:shadow-2xl transition-all duration-300 bg-neutral-950">
                       <img
                         src={partner.image}
                         alt={partner.role}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute top-4 left-4 rounded-full bg-white/95 backdrop-blur-md px-3.5 py-1 text-xs font-black text-black shadow-md">
-                        {partner.badge}
-                      </div>
-                      <div className="absolute bottom-4 right-4 rounded-full bg-black/90 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white shadow-md">
-                        {partner.commission}
-                      </div>
                     </div>
 
-                    {/* Card Content */}
-                    <div className="p-6 space-y-3 bg-white flex-1 flex flex-col justify-between">
-                      <div className="space-y-1.5">
-                        <h3 className="font-black text-lg sm:text-xl text-black">
-                          {partner.role}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                          {partner.opportunity}
-                        </p>
-                      </div>
-
-                      <div className="pt-3 border-t border-neutral-100 flex items-center justify-between text-xs">
-                        <span className="text-neutral-500">Avg. Order Value:</span>
-                        <span className="font-mono font-black text-neutral-900">
-                          {partner.avgOrder}
-                        </span>
-                      </div>
+                    {/* Text Section OUTSIDE the container: Just the people */}
+                    <div className="pt-3.5 pb-1 px-1">
+                      <h3 className="font-black text-base sm:text-lg md:text-xl text-black tracking-tight group-hover:text-[#F59E0B] transition-colors">
+                        {partner.role}
+                      </h3>
                     </div>
                   </div>
                 ))}

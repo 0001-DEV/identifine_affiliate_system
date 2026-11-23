@@ -3,26 +3,25 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 export function MarketingNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Navigation items corresponding to the main landing page sections & FAQ
+  // Navigation items corresponding to Impact.com's architectural layout
   const navLinks = [
-    { id: "hero", label: "Home", href: "/#hero" },
+    { id: "hero", label: "Overview", href: "/#hero" },
+    { id: "solutions", label: "Solutions", href: "/#solutions" },
+    { id: "lifecycle", label: "Partnership Lifecycle", href: "/#lifecycle" },
     { id: "products", label: "Products", href: "/#products" },
-    { id: "how-it-works", label: "How It Works", href: "/#how-it-works" },
-    { id: "earnings", label: "Earnings", href: "/#earnings" },
+    { id: "earnings", label: "Earnings", href: "/pricing" },
     { id: "faq", label: "FAQ", href: "/faq" },
   ];
 
   // Active section tracking
   const [activeId, setActiveId] = useState<string>("hero");
 
-  // Handle route-specific active state and scrollspy on the home page
   useEffect(() => {
     if (pathname === "/faq") {
       setActiveId("faq");
@@ -36,34 +35,21 @@ export function MarketingNav() {
       return;
     }
 
-    const sectionIds = ["hero", "products", "how-it-works", "earnings"];
+    const sectionIds = ["hero", "solutions", "lifecycle", "products", "earnings"];
 
     const onScroll = () => {
       const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      const scrollBottom = scrollY + viewportHeight;
-      const docHeight = document.documentElement.scrollHeight;
-
-      // Bottom of page: highlight the last section (earnings)
-      if (scrollBottom >= docHeight - 120) {
-        setActiveId("earnings");
-        return;
-      }
-
-      // Check sections from top to bottom
-      let current = "hero";
-      const targetOffset = scrollY + 160;
+      const targetOffset = scrollY + 140;
 
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
           const top = el.offsetTop;
           if (targetOffset >= top) {
-            current = id;
+            setActiveId(id);
           }
         }
       }
-      setActiveId(current);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -72,9 +58,8 @@ export function MarketingNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
-  // Smooth scroll handler for anchor links on the homepage
   const handleNavClick = (e: React.MouseEvent, link: (typeof navLinks)[0]) => {
-    if (pathname === "/" && link.id !== "faq") {
+    if (pathname === "/" && link.id !== "faq" && link.id !== "earnings") {
       const el = document.getElementById(link.id);
       if (el) {
         e.preventDefault();
@@ -87,12 +72,12 @@ export function MarketingNav() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#121214] text-white border-b border-white/10 h-16 sm:h-[68px] transition-colors duration-200">
-      <div className="w-full flex h-full items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
-        {/* Brand Dual Logo: Shifted to the far left as requested */}
+    <header className="sticky top-0 z-50 bg-[#0B132B]/95 backdrop-blur-md text-white border-b border-white/10 h-16 sm:h-[70px] transition-colors duration-200">
+      <div className="w-full flex h-full items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Brand Dual Logo: Identifine | Xtreme Cardz */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3.5 select-none group shrink-0 -ml-1 sm:-ml-2"
+          className="flex items-center gap-2.5 sm:gap-3.5 select-none group shrink-0"
         >
           {/* 1. IDENTIFINE LOGO */}
           <img
@@ -119,12 +104,8 @@ export function MarketingNav() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links:
-            - Full header height white background
-            - Expands from small width on the left and moves left to right (e.g. from "Pr" across the word)
-            - Crisp black text revealed cleanly inside the sweep
-            - No glassmorphism, no borders around texts */}
-        <nav className="relative hidden md:flex items-stretch h-full overflow-hidden">
+        {/* Desktop Navigation Links (Impact.com Style: Clean, Modern, Elegant Indicators) */}
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
           {navLinks.map((link) => {
             const isActive = activeId === link.id;
             return (
@@ -132,51 +113,44 @@ export function MarketingNav() {
                 key={link.id}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link)}
-                className="relative h-full flex items-center justify-center px-6 text-xs uppercase tracking-wider font-bold select-none group overflow-hidden"
+                className={`relative px-3.5 py-2 text-[13px] font-semibold transition-colors duration-200 rounded-lg group ${
+                  isActive
+                    ? "text-white"
+                    : "text-slate-300 hover:text-white hover:bg-white/5"
+                }`}
               >
-                {/* Base Nav Link Text */}
-                <span
-                  className={`relative z-10 transition-colors duration-200 ${
-                    isActive
-                      ? "text-neutral-300 font-extrabold"
-                      : "text-neutral-400 group-hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                </span>
-
-                {/* Left-to-Right Expanding White Fill: starts at left and fills the entire feature */}
+                <span>{link.label}</span>
                 {isActive && (
-                  <div
-                    key={`active-bg-${link.id}`}
-                    className="absolute inset-0 bg-white z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none"
-                  >
-                    <span className="text-black font-black uppercase tracking-wider text-xs whitespace-nowrap">
-                      {link.label}
-                    </span>
-                  </div>
+                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#FF5B37] rounded-full animate-fade-in" />
                 )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Actions & CTA (Sign In button removed as requested) */}
-        <div className="hidden md:flex items-center gap-3 shrink-0">
+        {/* Impact.com CTAs (Right-Aligned: Ghost "Sign In" + Vibrant Coral "Become a Partner" Pill) */}
+        <div className="hidden md:flex items-center gap-4 shrink-0">
+          <Link
+            href="/portal?tab=login"
+            className="text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition"
+          >
+            Sign In
+          </Link>
+
           <Link
             href="/portal?tab=register"
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-6 py-2.5 text-xs font-extrabold transition shadow-md hover:scale-[1.02]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#FF5B37] hover:bg-[#E04824] text-white px-5 sm:px-6 py-2.5 text-xs font-bold transition shadow-lg shadow-orange-500/20 hover:scale-[1.02] active:scale-[0.98]"
           >
-            <span>Become an Affiliate</span>
+            <span>Become a Partner</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className="flex md:hidden items-center gap-2">
-          <ThemeToggle showLabel={false} />
+        <div className="flex lg:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-lg p-2 text-neutral-300 hover:text-white focus:outline-none"
+            className="rounded-lg p-2 text-slate-300 hover:text-white focus:outline-none"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -184,10 +158,10 @@ export function MarketingNav() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Impact.com Deep Navy Slate Theme) */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/10 bg-[#121214] text-white px-4 pt-2 pb-6 space-y-3">
-          <div className="flex flex-col space-y-1.5 pt-2">
+        <div className="lg:hidden border-b border-white/10 bg-[#0B132B] text-white px-4 pt-3 pb-6 space-y-3 animate-fade-in">
+          <div className="flex flex-col space-y-1">
             {navLinks.map((link) => {
               const isActive = activeId === link.id;
               return (
@@ -198,34 +172,34 @@ export function MarketingNav() {
                     handleNavClick(e, link);
                     setMobileMenuOpen(false);
                   }}
-                  className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors duration-200 ${
+                  className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors duration-200 flex items-center justify-between ${
                     isActive
-                      ? "bg-white text-black font-extrabold"
-                      : "text-neutral-200 hover:bg-white/10 hover:text-white"
+                      ? "bg-white/10 text-[#FF5B37] font-bold"
+                      : "text-slate-300 hover:bg-white/5 hover:text-white"
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  {isActive && <span className="h-1.5 w-1.5 rounded-full bg-[#FF5B37]" />}
                 </Link>
               );
             })}
           </div>
 
-          <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+          <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
+            <Link
+              href="/portal?tab=login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-2.5 text-sm font-semibold text-slate-300 hover:text-white"
+            >
+              Sign In
+            </Link>
             <Link
               href="/portal?tab=register"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center rounded-xl bg-[#F59E0B] hover:bg-[#D97706] py-2.5 text-xs font-extrabold text-black transition flex items-center justify-center gap-1.5 shadow-sm"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#FF5B37] text-white py-3 text-sm font-bold shadow-md"
             >
-              <span>Become an Affiliate (7.5% Cash)</span>
-              <ArrowRight className="w-3.5 h-3.5 text-black" />
-            </Link>
-
-            <Link
-              href="/portal?tab=referee"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center rounded-xl bg-neutral-900 py-2.5 text-xs font-bold text-neutral-200 border border-white/10 hover:bg-neutral-800 transition"
-            >
-              Have a Referral Code? Enter Here
+              <span>Become a Partner</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
 import { SitePreloader } from "@/components/SitePreloader";
-import { HeroGoldLinesEffect } from "@/components/HeroGoldLinesEffect";
 import {
   Sparkles,
   ArrowRight,
@@ -208,53 +207,50 @@ export default function HomePage() {
         <section
           ref={heroSectionRef}
           id="hero"
-          className="relative w-full h-[360vh] bg-[#09090B] border-b border-neutral-800"
+          className="relative w-full h-[380vh] bg-white border-b border-neutral-200"
         >
           {/* Sticky Viewport: Stays fixed as user scrolls, animating the horizontal container */}
-          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-10 sm:pt-14 pb-8 sm:pb-12 overflow-hidden bg-[#09090B]">
+          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-8 sm:pt-12 pb-6 sm:pb-8 overflow-hidden bg-white">
             
-            {/* Full-width Black & Gold Tapered Lines Effect in Background */}
-            <HeroGoldLinesEffect />
-
-            {/* Top Area: HERO TEXT ONLY (Spaced paragraphs, clean crisp typography) */}
-            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-7 shrink-0 z-10 relative">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] drop-shadow-sm">
+            {/* Top Area: HERO TEXT ONLY (Spaced paragraphs, Badge removed, Black typography) */}
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-6 sm:space-y-7 shrink-0 z-10">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-black tracking-tight leading-[1.08]">
                 Turn Your Network Into{" "}
                 <span className="text-[#F59E0B]">7.5% Recurring Cash</span>
               </h1>
 
-              <p className="text-base sm:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-neutral-700 font-medium leading-relaxed max-w-2xl mx-auto">
                 Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
               </p>
 
-              <div className="flex items-center justify-center gap-4 pt-2">
+              <div className="flex items-center justify-center gap-4 pt-1">
                 <Link
                   href="/portal?tab=register"
-                  className="rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-9 py-4 text-xs sm:text-sm font-extrabold shadow-lg shadow-amber-500/20 hover:scale-105 transition"
+                  className="rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-8 py-3.5 text-xs sm:text-sm font-extrabold shadow-md hover:scale-105 transition"
                 >
                   Become an Affiliate
                 </Link>
                 <Link
                   href="/pricing"
-                  className="rounded-full border border-neutral-700 bg-black/60 hover:bg-neutral-900 text-neutral-200 hover:text-white px-8 py-4 text-xs sm:text-sm font-bold backdrop-blur-sm transition"
+                  className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 text-xs sm:text-sm font-bold transition"
                 >
                   Explore 7.5% Earnings
                 </Link>
               </div>
 
-              {/* People that can partner with us: Crisp white text */}
-              <div className="pt-3 flex items-center justify-center">
-                <span className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
-                  people that can partner with us
-                </span>
+              {/* People that can partner with us: Black text color matching hero text */}
+              <div className="pt-2">
+                <p className="text-xs sm:text-sm font-black text-black tracking-widest uppercase">
+                  People that can partner with us
+                </p>
               </div>
             </div>
 
             {/* Bottom Area: HORIZONTAL CONTAINER OF PICTURES THAT MOVES ON SCROLL */}
-            <div className="relative w-full overflow-hidden mt-6 z-10">
+            <div className="relative w-full overflow-hidden mt-4">
               <div
                 ref={trackRef}
-                className="flex items-start gap-6 px-6 sm:px-12 will-change-transform transition-transform duration-75"
+                className="flex items-start gap-8 px-6 sm:px-12 will-change-transform transition-transform duration-75"
                 style={{
                   transform: `translateX(-${scrollProgress * maxTranslate}px)`,
                 }}
@@ -262,20 +258,20 @@ export default function HomePage() {
                 {partnerShowcase.map((partner) => (
                   <div
                     key={partner.id}
-                    className="w-[280px] sm:w-[340px] md:w-[380px] shrink-0 flex flex-col group cursor-pointer"
+                    className="w-[280px] sm:w-[340px] md:w-[380px] shrink-0 flex flex-col group"
                   >
-                    {/* Picture Container: ONLY the image inside, increased height, NO text on image */}
-                    <div className="relative h-[320px] sm:h-[380px] md:h-[430px] w-full rounded-3xl overflow-hidden shadow-2xl border border-neutral-800/80 group-hover:border-[#F59E0B]/50 transition-all duration-300 bg-neutral-950">
+                    {/* Picture Container: Increased height, clean with NO text on image */}
+                    <div className="relative h-72 sm:h-84 md:h-[400px] lg:h-[440px] w-full rounded-3xl overflow-hidden bg-neutral-950 shadow-md group-hover:shadow-2xl transition-all duration-500">
                       <img
                         src={partner.image}
                         alt={partner.role}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     </div>
 
-                    {/* Text Section OUTSIDE the container: Just the people */}
+                    {/* Text outside the container: JUST THE PEOPLE */}
                     <div className="pt-3.5 pb-1 px-1">
-                      <h3 className="font-black text-base sm:text-lg md:text-xl text-white tracking-tight group-hover:text-[#F59E0B] transition-colors">
+                      <h3 className="font-black text-base sm:text-lg md:text-xl text-black tracking-tight">
                         {partner.role}
                       </h3>
                     </div>
@@ -284,9 +280,9 @@ export default function HomePage() {
               </div>
 
               {/* Scroll Progress Bar indicator */}
-              <div className="mx-auto max-w-xs mt-4 h-1 bg-neutral-800 rounded-full overflow-hidden">
+              <div className="mx-auto max-w-xs mt-3 h-1 bg-neutral-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#F59E0B] transition-all duration-75 rounded-full"
+                  className="h-full bg-black transition-all duration-75 rounded-full"
                   style={{ width: `${Math.max(5, scrollProgress * 100)}%` }}
                 />
               </div>

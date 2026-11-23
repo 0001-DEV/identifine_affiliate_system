@@ -81,11 +81,11 @@ export function MarketingNav() {
           href="/"
           className="flex items-center gap-2.5 sm:gap-3.5 select-none group shrink-0 -ml-1 sm:-ml-2"
         >
-          {/* 1. IDENTIFINE LOGO */}
+          {/* 1. IDENTIFINE LOGO (Dark text version for white header) */}
           <img
-            src="/identifine_logo.webp"
+            src="/identifine_logo_dark.webp"
             alt="Identifine Logo"
-            className="h-6 sm:h-7 w-auto object-contain transition-opacity group-hover:opacity-90"
+            className="h-7 sm:h-8 w-auto object-contain transition-opacity group-hover:opacity-90"
           />
 
           {/* Elegant Divider */}

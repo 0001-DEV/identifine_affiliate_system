@@ -158,15 +158,15 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: TEXT ONLY (Not bold, larger font size, no 7.5%)
+            1. HERO SECTION: TEXT ONLY (Increased headline height, reduced copy height)
            ========================================================================= */}
         <section id="hero" className="pt-24 sm:pt-32 pb-8 sm:pb-10 px-4 sm:px-6 bg-white">
-          <div className="mx-auto max-w-5xl text-center space-y-6 sm:space-y-7">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[70px] font-normal text-black tracking-tight leading-[1.12]">
+          <div className="mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05]">
               Turn Your Network Into Recurring Cash
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-neutral-600 font-normal leading-relaxed md:leading-[1.6] max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base md:text-[17px] text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">
               Join our high-earning affiliate program. Refer corporate clients, creative agencies, and luxury establishments to custom metal smart cards and digital identity suites. Earn high-yield recurring commissions on every closed deal with automated referral tracking and instant payouts.
             </p>
 

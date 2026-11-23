@@ -198,8 +198,8 @@ export default function HomePage() {
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
           <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
-            {/* people that can partner with us: directly attached to the images */}
-            <div className="px-8 sm:px-16 mb-3 sm:mb-4">
+            {/* people that can partner with us: CENTER ALIGNED directly attached to images */}
+            <div className="w-full text-center px-4 mb-3 sm:mb-4">
               <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
                 people that can partner with us
               </p>
@@ -237,12 +237,29 @@ export default function HomePage() {
                 ))}
               </div>
 
-              {/* Scroll Progress Bar indicator */}
-              <div className="mx-auto max-w-xs mt-6 h-1.5 bg-neutral-100 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-black transition-all duration-75 rounded-full"
-                  style={{ width: `${Math.max(5, scrollProgress * 100)}%` }}
-                />
+              {/* Custom Animated Scroll Indicator */}
+              <div className="flex flex-col items-center justify-center mt-6 sm:mt-7 gap-2 select-none">
+                {/* Animated Scroll Device Pill */}
+                <div className="flex items-center gap-3 px-4 py-1.5 rounded-full bg-neutral-50 border border-neutral-200 shadow-sm">
+                  {/* Animated Mouse Capsule with Rolling Wheel */}
+                  <div className="relative w-4 h-6 rounded-full border-[1.5px] border-neutral-800 flex justify-center pt-1 overflow-hidden shrink-0">
+                    <span className="w-1 h-1.5 bg-black rounded-full animate-scroll-wheel" />
+                  </div>
+
+                  {/* Swipe/Scroll Text with Animated Directional Glide */}
+                  <div className="flex items-center gap-1.5 text-xs text-neutral-600 font-medium">
+                    <span>scroll to explore</span>
+                    <span className="inline-block animate-swipe-glide text-black font-bold">→</span>
+                  </div>
+                </div>
+
+                {/* Dynamic Horizontal Progress Bar */}
+                <div className="w-36 h-1 bg-neutral-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-black transition-all duration-75 rounded-full"
+                    style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
+                  />
+                </div>
               </div>
             </div>
           </div>

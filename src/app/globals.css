@@ -409,5 +409,43 @@ html.lenis, html.lenis body {
   transition: transform 0.4s cubic-bezier(0.76, 0.007, 0.25, 1), box-shadow 0.4s cubic-bezier(0.76, 0.007, 0.25, 1);
 }
 
+/* ==========================================================================
+   ANIMATED SCROLL ICON & INDICATOR
+   ========================================================================== */
+@keyframes scrollWheelDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+}
+
+@keyframes horizontalSwipeGlide {
+  0%, 100% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-scroll-wheel {
+  animation: scrollWheelDrop 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.animate-swipe-glide {
+  animation: horizontalSwipeGlide 1.8s ease-in-out infinite;
+}
+
 
 

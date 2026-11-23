@@ -179,49 +179,49 @@ export default function HomePage() {
         <section
           ref={heroSectionRef}
           id="hero"
-          className="relative w-full h-[380vh] bg-white border-b border-neutral-200"
+          className="relative w-full h-[480vh] bg-white border-b border-neutral-200"
         >
           {/* Sticky Viewport: Stays fixed as user scrolls, animating the horizontal container */}
-          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-8 sm:pt-12 pb-6 sm:pb-8 overflow-hidden bg-white">
+          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-6 sm:pt-10 pb-4 sm:pb-6 overflow-hidden bg-white">
             
             {/* Top Area: HERO TEXT ONLY (Increased heights, same color, spaced paragraphs) */}
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 text-center space-y-7 shrink-0 z-10">
-              <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-[86px] font-black text-black tracking-tight leading-[1.03]">
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-5 sm:space-y-6 shrink-0 z-10">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black tracking-tight leading-[1.04]">
                 Turn Your Network Into 7.5% Recurring Cash
               </h1>
 
-              <p className="text-lg sm:text-2xl text-black font-medium leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base sm:text-xl md:text-2xl text-black font-medium leading-relaxed max-w-3xl mx-auto">
                 Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
               </p>
 
-              <div className="flex items-center justify-center gap-4 sm:gap-5 pt-2">
+              <div className="flex items-center justify-center gap-4 sm:gap-5 pt-1">
                 <Link
                   href="/portal?tab=register"
-                  className="rounded-full bg-black hover:bg-neutral-800 text-white px-9 py-4 sm:px-11 sm:py-4.5 text-sm sm:text-base font-extrabold shadow-xl hover:scale-105 transition"
+                  className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-10 sm:py-4 text-xs sm:text-sm font-extrabold shadow-lg hover:scale-105 transition"
                 >
                   Become an Affiliate
                 </Link>
                 <Link
                   href="/pricing"
-                  className="rounded-full border-2 border-black bg-white hover:bg-neutral-100 text-black px-8 py-4 sm:px-10 sm:py-4.5 text-sm sm:text-base font-bold transition"
+                  className="rounded-full border-2 border-black bg-white hover:bg-neutral-100 text-black px-7 py-3.5 sm:px-9 sm:py-4 text-xs sm:text-sm font-bold transition"
                 >
                   Explore 7.5% Earnings
                 </Link>
               </div>
 
-              {/* People that can partner with us: Increased height, same black color */}
-              <div className="pt-2">
-                <p className="text-sm sm:text-base font-black text-black tracking-widest uppercase">
-                  People that can partner with us
+              {/* people that can partner with us: gray color and lowercase */}
+              <div className="pt-1">
+                <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
+                  people that can partner with us
                 </p>
               </div>
             </div>
 
             {/* Bottom Area: HORIZONTAL CONTAINER OF PICTURES THAT MOVES ON SCROLL */}
-            <div className="relative w-full overflow-hidden mt-6">
+            <div className="relative w-full overflow-hidden mt-3 sm:mt-4 pb-2">
               <div
                 ref={trackRef}
-                className="flex items-start gap-8 px-6 sm:px-12 will-change-transform transition-transform duration-75"
+                className="flex items-start gap-6 sm:gap-8 px-6 sm:px-12 will-change-transform transition-transform duration-75"
                 style={{
                   transform: `translateX(-${scrollProgress * maxTranslate}px)`,
                 }}
@@ -229,10 +229,10 @@ export default function HomePage() {
                 {partnerShowcase.map((partner) => (
                   <div
                     key={partner.id}
-                    className="w-[300px] sm:w-[360px] md:w-[420px] shrink-0 flex flex-col group"
+                    className="w-[280px] sm:w-[320px] md:w-[360px] lg:w-[390px] shrink-0 flex flex-col group"
                   >
                     {/* Picture Container: People in establishments / offices gisting, NO text on image */}
-                    <div className="relative h-72 sm:h-84 md:h-[400px] lg:h-[440px] w-full rounded-3xl overflow-hidden bg-neutral-950 shadow-md group-hover:shadow-2xl transition-all duration-500">
+                    <div className="relative h-56 sm:h-64 md:h-72 lg:h-[300px] xl:h-[320px] w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-neutral-950 shadow-md group-hover:shadow-2xl transition-all duration-500">
                       <img
                         src={partner.image}
                         alt={partner.role}
@@ -241,7 +241,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Text outside the container: NAMES ONLY OF WHAT THEY REPRESENT */}
-                    <div className="pt-3.5 pb-1 px-1">
+                    <div className="pt-3 pb-1 px-1">
                       <h3 className="font-black text-base sm:text-lg md:text-xl text-black tracking-tight">
                         {partner.role}
                       </h3>

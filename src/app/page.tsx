@@ -292,46 +292,6 @@ export default function MarketingHomePage() {
           </div>
         </section>
 
-        {/* Buff Motion style Infinite Marquee Ticker (7.5%) */}
-        <section className="border-b border-white/10 bg-[#121214] py-6 sm:py-8 overflow-hidden select-none">
-          <div className="animate-ticker flex items-center gap-8 text-xs font-bold tracking-widest text-white/80 uppercase">
-            {[1, 2].map((i) => (
-              <div key={i} className="flex items-center gap-8 shrink-0">
-                <span className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#F59E0B]" /> 7.5% Flat Cash
-                  Commission
-                </span>
-                <span className="text-white/20">•</span>
-                <span className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-emerald-400" /> Instant Paystack
-                  Settlement
-                </span>
-                <span className="text-white/20">•</span>
-                <span className="flex items-center gap-2">
-                  <Award className="w-4 h-4 text-[#F59E0B]" /> 24K Brushed Gold
-                  &amp; Titanium NFC Cards
-                </span>
-                <span className="text-white/20">•</span>
-                <span className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-blue-400" /> Zero
-                  Inventory Required
-                </span>
-                <span className="text-white/20">•</span>
-                <span className="flex items-center gap-2">
-                  <DollarSign className="w-4 h-4 text-emerald-400" /> ₦50,000
-                  Minimum Bank Withdrawal
-                </span>
-                <span className="text-white/20">•</span>
-                <span className="flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-purple-400" /> Enterprise
-                  Corporate Rollouts
-                </span>
-                <span className="text-white/20">•</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* =========================================================================
             2. 4 VALUE PILLARS (OFF-WHITE HIGH-CONTRAST CARD)
            ========================================================================= */}

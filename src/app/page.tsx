@@ -68,67 +68,39 @@ export default function HomePage() {
   // 7 Partner Persona Cards (People we can partner with)
   const partnerShowcase = [
     {
-      id: "corporate",
-      role: "Corporate Executives & C-Suite",
-      badge: "Corporate Identity",
-      opportunity: "Batch rollouts of smart staff badges, encrypted facility passes, and executive credentials.",
-      avgOrder: "₦500k – ₦5M",
-      commission: "7.5% Cash Payout",
-      image: "/images/partners/corporate-executive.jpg",
+      id: "office-colleagues",
+      role: "Corporate Offices & Coworkers",
+      image: "/images/partners/office-colleagues-chatting.jpg",
     },
     {
-      id: "creators",
-      role: "Luxury Creators & Influencers",
-      badge: "Creator Economy",
-      opportunity: "Tap-and-share networking demos with custom 24K mirror gold cards to personal audiences.",
-      avgOrder: "₦150k – ₦600k",
-      commission: "7.5% Cash Payout",
-      image: "/images/partners/luxury-creator.jpg",
+      id: "executive-boardroom",
+      role: "Executive Boardrooms & C-Suite",
+      image: "/images/partners/executive-boardroom-meeting.jpg",
     },
     {
-      id: "hospitality",
-      role: "VIP Hospitality & Venues",
-      badge: "VIP Access",
-      opportunity: "Encrypted RFID membership cards, VIP lounge credentials, and dynamic vCard passes.",
-      avgOrder: "₦350k – ₦1.8M",
-      commission: "7.5% Cash Payout",
-      image: "/images/partners/club-manager.jpg",
+      id: "workplace-lounge",
+      role: "Workplace Lounges & Networking Hubs",
+      image: "/images/partners/office-lounge-discussion.jpg",
     },
     {
-      id: "realestate",
-      role: "Real Estate Developers",
-      badge: "Property Access",
-      opportunity: "Smart keycard credentials and VIP homeowner identity cards for luxury developments.",
-      avgOrder: "₦800k – ₦3M",
-      commission: "7.5% Cash Payout",
-      image: "/images/partners/hospitality-director.jpg",
+      id: "creative-agency",
+      role: "Creative Agencies & Studios",
+      image: "/images/partners/creative-agency-studio.jpg",
     },
     {
-      id: "tech",
-      role: "Tech Founders & Startups",
-      badge: "Tech Networking",
-      opportunity: "De-Titan 3-in-1 hybrid cards for investor pitches, tech conferences, and team rollouts.",
-      avgOrder: "₦250k – ₦1.2M",
-      commission: "7.5% Cash Payout",
-      image: "/images/partners/tech-founder.jpg",
+      id: "tech-startups",
+      role: "Tech Startups & Teams",
+      image: "/images/partners/tech-startup-team.jpg",
     },
     {
-      id: "agency",
-      role: "Creative Agencies & PR",
-      badge: "Agency Resellers",
-      opportunity: "Turnkey client smart card branding and VIP executive gifts without inventory risk.",
-      avgOrder: "₦400k – ₦2.5M",
-      commission: "7.5% Cash Payout",
-      image: "/images/partners/agency-consultant.jpg",
+      id: "hospitality-venues",
+      role: "Luxury Hotels & Hospitality Venues",
+      image: "/images/partners/hospitality-hotel-establishment.jpg",
     },
     {
-      id: "bankers",
-      role: "Private Wealth Advisors",
-      badge: "Private Banking",
-      opportunity: "Custom laser-engraved titanium credentials for high-net-worth client onboarding.",
-      avgOrder: "₦600k – ₦4M",
-      commission: "7.5% Cash Payout",
-      image: "/images/partners/private-banker.jpg",
+      id: "enterprise-firms",
+      role: "Enterprise & Advisory Establishments",
+      image: "/images/partners/corporate-conference-group.jpg",
     },
   ];
 
@@ -212,42 +184,41 @@ export default function HomePage() {
           {/* Sticky Viewport: Stays fixed as user scrolls, animating the horizontal container */}
           <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-8 sm:pt-12 pb-6 sm:pb-8 overflow-hidden bg-white">
             
-            {/* Top Area: HERO TEXT ONLY (Spaced paragraphs, Badge removed, Black typography) */}
-            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-6 sm:space-y-7 shrink-0 z-10">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-black tracking-tight leading-[1.08]">
-                Turn Your Network Into{" "}
-                <span className="text-[#F59E0B]">7.5% Recurring Cash</span>
+            {/* Top Area: HERO TEXT ONLY (Increased heights, same color, spaced paragraphs) */}
+            <div className="mx-auto max-w-6xl px-4 sm:px-6 text-center space-y-7 shrink-0 z-10">
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-[86px] font-black text-black tracking-tight leading-[1.03]">
+                Turn Your Network Into 7.5% Recurring Cash
               </h1>
 
-              <p className="text-base sm:text-lg text-neutral-700 font-medium leading-relaxed max-w-2xl mx-auto">
+              <p className="text-lg sm:text-2xl text-black font-medium leading-relaxed max-w-3xl mx-auto">
                 Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
               </p>
 
-              <div className="flex items-center justify-center gap-4 pt-1">
+              <div className="flex items-center justify-center gap-4 sm:gap-5 pt-2">
                 <Link
                   href="/portal?tab=register"
-                  className="rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-8 py-3.5 text-xs sm:text-sm font-extrabold shadow-md hover:scale-105 transition"
+                  className="rounded-full bg-black hover:bg-neutral-800 text-white px-9 py-4 sm:px-11 sm:py-4.5 text-sm sm:text-base font-extrabold shadow-xl hover:scale-105 transition"
                 >
                   Become an Affiliate
                 </Link>
                 <Link
                   href="/pricing"
-                  className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 text-xs sm:text-sm font-bold transition"
+                  className="rounded-full border-2 border-black bg-white hover:bg-neutral-100 text-black px-8 py-4 sm:px-10 sm:py-4.5 text-sm sm:text-base font-bold transition"
                 >
                   Explore 7.5% Earnings
                 </Link>
               </div>
 
-              {/* People that can partner with us: Black text color matching hero text */}
+              {/* People that can partner with us: Increased height, same black color */}
               <div className="pt-2">
-                <p className="text-xs sm:text-sm font-black text-black tracking-widest uppercase">
+                <p className="text-sm sm:text-base font-black text-black tracking-widest uppercase">
                   People that can partner with us
                 </p>
               </div>
             </div>
 
             {/* Bottom Area: HORIZONTAL CONTAINER OF PICTURES THAT MOVES ON SCROLL */}
-            <div className="relative w-full overflow-hidden mt-4">
+            <div className="relative w-full overflow-hidden mt-6">
               <div
                 ref={trackRef}
                 className="flex items-start gap-8 px-6 sm:px-12 will-change-transform transition-transform duration-75"
@@ -258,9 +229,9 @@ export default function HomePage() {
                 {partnerShowcase.map((partner) => (
                   <div
                     key={partner.id}
-                    className="w-[280px] sm:w-[340px] md:w-[380px] shrink-0 flex flex-col group"
+                    className="w-[300px] sm:w-[360px] md:w-[420px] shrink-0 flex flex-col group"
                   >
-                    {/* Picture Container: Increased height, clean with NO text on image */}
+                    {/* Picture Container: People in establishments / offices gisting, NO text on image */}
                     <div className="relative h-72 sm:h-84 md:h-[400px] lg:h-[440px] w-full rounded-3xl overflow-hidden bg-neutral-950 shadow-md group-hover:shadow-2xl transition-all duration-500">
                       <img
                         src={partner.image}
@@ -269,7 +240,7 @@ export default function HomePage() {
                       />
                     </div>
 
-                    {/* Text outside the container: JUST THE PEOPLE */}
+                    {/* Text outside the container: NAMES ONLY OF WHAT THEY REPRESENT */}
                     <div className="pt-3.5 pb-1 px-1">
                       <h3 className="font-black text-base sm:text-lg md:text-xl text-black tracking-tight">
                         {partner.role}

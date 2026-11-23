@@ -6,7 +6,7 @@ import { ShieldCheck, Lock, ExternalLink, ArrowRight } from "lucide-react";
 
 export function MarketingFooter() {
   return (
-    <footer className="border-t border-slate-200/80 bg-[#0B132B] text-slate-300 text-xs py-16 transition-colors duration-200">
+    <footer className="border-t border-white/10 bg-[#121214] text-neutral-400 text-xs py-16 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Main 5-Column Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-14 border-b border-white/10">
@@ -18,18 +18,18 @@ export function MarketingFooter() {
               </span>
               <span className="text-white/30 font-light text-lg">|</span>
               <span className="font-black tracking-wider text-base text-white flex items-center">
-                <span className="text-[#FF5B37]">X</span>TREME CARDZ
+                <span className="text-[#F59E0B]">X</span>TREME CARDZ
               </span>
             </Link>
-            <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
-              The leading luxury smart card and digital identity partnership management cloud in Nigeria. Connecting enterprise brands, VIP venues, and affiliates with instant Paystack commission payouts.
+            <p className="text-neutral-400 text-xs leading-relaxed max-w-sm">
+              The premier luxury smart card and digital identity affiliate network in Nigeria. Connecting enterprise brands, VIP venues, and affiliates with instant Paystack commission payouts.
             </p>
             <div className="flex items-center gap-2 pt-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-slate-300 font-medium">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-300 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Paystack Instant Settlement
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-slate-300 font-medium">
-                <Lock className="w-3.5 h-3.5 text-cyan-400" /> 256-Bit SSL
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-300 font-medium">
+                <Lock className="w-3.5 h-3.5 text-amber-400" /> 256-Bit SSL
               </span>
             </div>
           </div>
@@ -37,17 +37,12 @@ export function MarketingFooter() {
           {/* Column 2: Platform */}
           <div className="space-y-3">
             <h4 className="text-white font-bold text-xs uppercase tracking-wider">
-              Platform
+              Navigation
             </h4>
-            <ul className="space-y-2 text-slate-400 font-medium">
+            <ul className="space-y-2 text-neutral-400 font-medium">
               <li>
                 <Link href="/#hero" className="hover:text-white transition">
                   Overview
-                </Link>
-              </li>
-              <li>
-                <Link href="/#lifecycle" className="hover:text-white transition">
-                  Partnership Lifecycle
                 </Link>
               </li>
               <li>
@@ -56,8 +51,13 @@ export function MarketingFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/#how-it-works" className="hover:text-white transition">
+                  How It Works
+                </Link>
+              </li>
+              <li>
                 <Link href="/pricing" className="hover:text-white transition">
-                  Commission Calculator
+                  7.5% Earnings
                 </Link>
               </li>
               <li>
@@ -71,32 +71,32 @@ export function MarketingFooter() {
           {/* Column 3: Solutions */}
           <div className="space-y-3">
             <h4 className="text-white font-bold text-xs uppercase tracking-wider">
-              Solutions
+              Products
             </h4>
-            <ul className="space-y-2 text-slate-400 font-medium">
+            <ul className="space-y-2 text-neutral-400 font-medium">
               <li>
-                <Link href="/#solutions" className="hover:text-white transition">
-                  Corporate ID Badges
+                <Link href="/#products" className="hover:text-white transition">
+                  De-Titan Hybrid Cards
                 </Link>
               </li>
               <li>
-                <Link href="/#solutions" className="hover:text-white transition">
+                <Link href="/#products" className="hover:text-white transition">
                   24K Gold Mirror Cards
                 </Link>
               </li>
               <li>
-                <Link href="/#solutions" className="hover:text-white transition">
-                  Private VIP Venue Access
+                <Link href="/#products" className="hover:text-white transition">
+                  Corporate ID Systems
                 </Link>
               </li>
               <li>
-                <Link href="/#solutions" className="hover:text-white transition">
-                  Agencies &amp; Resellers
+                <Link href="/#products" className="hover:text-white transition">
+                  Black Matte Titanium
                 </Link>
               </li>
               <li>
-                <Link href="/portal?tab=register" className="hover:text-white transition">
-                  Creator Network
+                <Link href="/#products" className="hover:text-white transition">
+                  RFID VIP Suites
                 </Link>
               </li>
             </ul>
@@ -107,7 +107,7 @@ export function MarketingFooter() {
             <h4 className="text-white font-bold text-xs uppercase tracking-wider">
               Resources
             </h4>
-            <ul className="space-y-2 text-slate-400 font-medium">
+            <ul className="space-y-2 text-neutral-400 font-medium">
               <li>
                 <Link href="/faq" className="hover:text-white transition">
                   Partner FAQ
@@ -115,7 +115,7 @@ export function MarketingFooter() {
               </li>
               <li>
                 <Link href="/pricing" className="hover:text-white transition">
-                  7.5% Earning Tiers
+                  Commission Calculator
                 </Link>
               </li>
               <li>
@@ -124,8 +124,8 @@ export function MarketingFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/#contact" className="hover:text-white transition">
-                  Enterprise Support
+                <Link href="/portal?tab=register" className="hover:text-white transition">
+                  Activate Affiliate Link
                 </Link>
               </li>
             </ul>
@@ -133,19 +133,19 @@ export function MarketingFooter() {
         </div>
 
         {/* Bottom Sub-bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-neutral-500 text-[11px]">
           <div>
             &copy; {new Date().getFullYear()} Identifine &amp; Xtreme Cardz Partner Network. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/faq" className="hover:text-slate-300 transition">
+            <Link href="/faq" className="hover:text-neutral-300 transition">
               Privacy Policy
             </Link>
-            <Link href="/faq" className="hover:text-slate-300 transition">
+            <Link href="/faq" className="hover:text-neutral-300 transition">
               Terms of Service
             </Link>
-            <Link href="/portal?tab=register" className="text-[#FF5B37] hover:underline font-bold">
-              Join Partner Cloud &rarr;
+            <Link href="/portal?tab=register" className="text-[#F59E0B] hover:underline font-bold">
+              Become an Affiliate &rarr;
             </Link>
           </div>
         </div>

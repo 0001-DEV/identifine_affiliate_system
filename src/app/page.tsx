@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
@@ -10,866 +10,407 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  TrendingUp,
-  CheckCircle2,
-  Users,
-  Award,
   Zap,
-  Building2,
-  Layers,
   DollarSign,
-  Lock,
   Star,
-  Check,
-  Copy,
+  Users,
+  Building2,
   Briefcase,
-  Crown,
-  Share2,
-  Eye,
-  Sliders,
   ChevronRight,
-  CreditCard,
-  FileCheck,
+  ChevronLeft,
+  CheckCircle2,
 } from "lucide-react";
 
-export default function ImpactPartnerHomePage() {
+export default function HomePage() {
   const router = useRouter();
 
-  // 1. Hero Live Referral Calculator state (7.5% flat cash commission)
-  const [heroReferrals, setHeroReferrals] = useState<number>(6);
-  const [heroName, setHeroName] = useState("");
-  const [heroEmail, setHeroEmail] = useState("");
-  const [heroPhone, setHeroPhone] = useState("");
-  const [heroReferralCode, setHeroReferralCode] = useState("");
-  const [copiedLink, setCopiedLink] = useState(false);
+  // =========================================================================
+  // PINNED HORIZONTAL SCROLL FOR HERO SECTION (PARTNER IMAGES MOVE ON SCROLL)
+  // =========================================================================
+  const heroSectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [maxTranslate, setMaxTranslate] = useState(1600);
 
-  // 7.5% commission on average ₦250k order = ₦18,750 per referral
-  const heroEstimatedCommission = Math.round(heroReferrals * 250000 * 0.075);
+  useEffect(() => {
+    const updateMaxTranslate = () => {
+      if (trackRef.current) {
+        const fullWidth = trackRef.current.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        setMaxTranslate(Math.max(0, fullWidth - viewportWidth + 80));
+      }
+    };
 
-  const handleHeroSignup = (e: React.FormEvent) => {
-    e.preventDefault();
-    const params = new URLSearchParams({
-      tab: "register",
-      name: heroName,
-      email: heroEmail,
-      phone: heroPhone,
-      ...(heroReferralCode.trim()
-        ? { code: heroReferralCode.trim().toLowerCase() }
-        : {}),
-    });
-    router.push(`/portal?${params.toString()}`);
-  };
+    updateMaxTranslate();
+    window.addEventListener("resize", updateMaxTranslate);
 
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText("https://identifine.com/partner/XTREME-842");
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
-  };
+    const handleScroll = () => {
+      if (!heroSectionRef.current) return;
+      const section = heroSectionRef.current;
+      const rect = section.getBoundingClientRect();
+      const totalScrollableDistance = section.offsetHeight - window.innerHeight;
+      if (totalScrollableDistance <= 0) return;
 
-  // 2. Impact.com Signature Audience Segment Switcher Tabs
-  const [activeAudience, setActiveAudience] = useState<"corporate" | "creators" | "clubs" | "agencies">("corporate");
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / totalScrollableDistance));
+      setScrollProgress(progress);
+    };
 
-  const audienceData = {
-    corporate: {
-      title: "Corporate & Enterprise Partners",
-      subtitle: "Equip modern enterprises with encrypted RFID credentials & executive staff badges.",
-      badge: "Enterprise Scale",
-      description: "Scale recurring commissions by introducing corporate identity suites, encrypted facility access passes, and NFC business cards to high-growth organizations and banks.",
-      benefits: [
-        "High average order value (₦500k – ₦5M+ per corporate batch)",
-        "Automated 7.5% cash commission paid directly via Paystack",
-        "Zero inventory required — 100% fulfilled by Identifine & Xtreme Cardz",
-        "Dedicated corporate onboarding manager & custom client digital mockups",
-      ],
-      previewTag: "Batch Enterprise Package",
-      previewTitle: "Corporate ID & NFC Access Suite",
-      previewPayout: "₦187,500 – ₦375,000",
-      previewNote: "Avg. monthly payout based on 2-3 corporate company rollouts",
-      image: "/images/products/corporate-id-system.webp",
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateMaxTranslate);
+    };
+  }, []);
+
+  // 7 Partner Persona Cards (People we can partner with)
+  const partnerShowcase = [
+    {
+      id: "corporate",
+      role: "Corporate Executives & C-Suite",
+      badge: "Corporate Identity",
+      opportunity: "Batch rollouts of smart staff badges, encrypted facility passes, and executive credentials.",
+      avgOrder: "₦500k – ₦5M",
+      commission: "7.5% Cash Payout",
+      image: "/images/partners/corporate-executive.jpg",
     },
-    creators: {
-      title: "Creators, Executives & Affiliates",
-      subtitle: "Promote ultra-luxurious 24K mirror gold and laser-engraved metal smart cards.",
+    {
+      id: "creators",
+      role: "Luxury Creators & Influencers",
       badge: "Creator Economy",
-      description: "Turn your social network, WhatsApp contacts, and business meetings into cash. Hand out an authentic metal card, let clients tap with their phones, and earn instantly when they order.",
-      benefits: [
-        "Instant visual appeal: 24K mirror finish, heavy titanium, & matte black",
-        "Viral tap-and-share contact sharing demo sells itself in seconds",
-        "Unique affiliate tracking link & branded promo code (e.g., JOSHUA-842)",
-        "Minimum bank withdrawal of ₦50,000 with same-day settlement",
-      ],
-      previewTag: "Luxury Executive Line",
-      previewTitle: "24K Gold Mirror & Titanium Smart Cards",
-      previewPayout: "₦75,000 – ₦225,000",
-      previewNote: "Avg. monthly payout based on 5-12 direct card referrals",
-      image: "/images/products/gold-mirror-metal.webp",
+      opportunity: "Tap-and-share networking demos with custom 24K mirror gold cards to personal audiences.",
+      avgOrder: "₦150k – ₦600k",
+      commission: "7.5% Cash Payout",
+      image: "/images/partners/luxury-creator.jpg",
     },
-    clubs: {
-      title: "Private VIP Clubs & Venues",
-      subtitle: "Digitize member access with encrypted RFID passes and dynamic VIP credentials.",
-      badge: "Hospitality & Venues",
-      description: "Partner with luxury private lounges, members clubs, golf resorts, and residential estates. Introduce seamless encrypted door access cards and premium member credentials.",
-      benefits: [
-        "Annual and seasonal membership card re-orders create recurring income",
-        "Encrypted RFID + digital vCard dynamic QR multi-chip technology",
-        "Pre-configured reader compatibility across leading access control locks",
-        "Transparent real-time partner attribution inside your partner portal",
-      ],
-      previewTag: "Encrypted Venue Solution",
-      previewTitle: "RFID VIP & Membership Access Cards",
-      previewPayout: "₦150,000 – ₦450,000",
-      previewNote: "Avg. payout per 150-500 private club member cards",
-      image: "/images/products/identifine-rfid-suite.webp",
+    {
+      id: "hospitality",
+      role: "VIP Hospitality & Venues",
+      badge: "VIP Access",
+      opportunity: "Encrypted RFID membership cards, VIP lounge credentials, and dynamic vCard passes.",
+      avgOrder: "₦350k – ₦1.8M",
+      commission: "7.5% Cash Payout",
+      image: "/images/partners/club-manager.jpg",
     },
-    agencies: {
-      title: "Agencies, Consultants & Resellers",
-      subtitle: "Offer branded smart identity solutions to your existing corporate client roster.",
+    {
+      id: "realestate",
+      role: "Real Estate Developers",
+      badge: "Property Access",
+      opportunity: "Smart keycard credentials and VIP homeowner identity cards for luxury developments.",
+      avgOrder: "₦800k – ₦3M",
+      commission: "7.5% Cash Payout",
+      image: "/images/partners/hospitality-director.jpg",
+    },
+    {
+      id: "tech",
+      role: "Tech Founders & Startups",
+      badge: "Tech Networking",
+      opportunity: "De-Titan 3-in-1 hybrid cards for investor pitches, tech conferences, and team rollouts.",
+      avgOrder: "₦250k – ₦1.2M",
+      commission: "7.5% Cash Payout",
+      image: "/images/partners/tech-founder.jpg",
+    },
+    {
+      id: "agency",
+      role: "Creative Agencies & PR",
       badge: "Agency Resellers",
-      description: "Add high-margin smart card and identity solutions to your creative, PR, or IT agency services. Provide turnkey physical credentials to executives and brand launches without manufacturing overhead.",
-      benefits: [
-        "White-glove priority manufacturing and rapid delivery across Nigeria",
-        "Client branding, laser logo engraving, and customized NFC chips",
-        "Volume partner bonuses and tiered revenue sharing",
-        "Instant Paystack payout automation straight to your agency account",
-      ],
-      previewTag: "Agency Enterprise License",
-      previewTitle: "De-Titan 3-in-1 Hybrid Credentials",
-      previewPayout: "₦300,000 – ₦1,200,000",
-      previewNote: "Avg. agency partner commission on ongoing corporate accounts",
-      image: "/images/products/de-titan-3in1.webp",
+      opportunity: "Turnkey client smart card branding and VIP executive gifts without inventory risk.",
+      avgOrder: "₦400k – ₦2.5M",
+      commission: "7.5% Cash Payout",
+      image: "/images/partners/agency-consultant.jpg",
     },
-  };
+    {
+      id: "bankers",
+      role: "Private Wealth Advisors",
+      badge: "Private Banking",
+      opportunity: "Custom laser-engraved titanium credentials for high-net-worth client onboarding.",
+      avgOrder: "₦600k – ₦4M",
+      commission: "7.5% Cash Payout",
+      image: "/images/partners/private-banker.jpg",
+    },
+  ];
 
-  // 3. Products Catalog
+  // Showcase Products
+  const [activeProductCard, setActiveProductCard] = useState<string | null>(null);
+
   const showcaseProducts = [
     {
       id: "de-titan",
       name: "De-Titan Smart Cards",
       image: "/images/products/de-titan-3in1.webp",
       tag: "Smart Badge",
-      badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
       description:
         "Titanium-reinforced 3-in-1 hybrid credentials designed for executive identification, contactless NFC networking, and corporate access control.",
-      commission: "₦18,750 / referral",
     },
     {
       id: "du-plex",
-      name: "Du-Plex 24K Gold Mirror",
+      name: "Du-Plex Smart Cards",
       image: "/images/products/gold-mirror-metal.webp",
       tag: "Dual NFC",
-      badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
       description:
         "Dual-chip 24K mirror gold metal cards combining digital NFC contact sharing with door access RFID encryption.",
-      commission: "₦22,500 / referral",
     },
     {
       id: "corporate-id",
-      name: "Corporate ID Access Systems",
+      name: "Corporate ID Cards",
       image: "/images/products/corporate-id-system.webp",
       tag: "Enterprise",
-      badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
       description:
         "Enterprise smart identification badges engineered for modern corporate organizations and secure staff tracking.",
-      commission: "₦37,500 / batch",
     },
     {
       id: "business-cards",
-      name: "Black Matte Laser Titanium",
+      name: "Business Cards",
       image: "/images/products/black-matte-metal.webp",
       tag: "Laser Metal",
-      badgeColor: "bg-slate-100 text-slate-800 border-slate-300",
       description:
         "Laser-engraved matte black metal cards designed to leave an unforgettable impression with every instant NFC tap.",
-      commission: "₦18,750 / referral",
     },
     {
       id: "access-membership",
-      name: "RFID VIP Membership Suites",
+      name: "Access & Membership Cards",
       image: "/images/products/identifine-rfid-suite.webp",
       tag: "RFID + Door",
-      badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
       description:
         "Encrypted RFID credentials tailored for luxury private clubs, VIP lounges, gyms, and gated corporate campuses.",
-      commission: "₦30,000 / batch",
     },
     {
       id: "digital-qr",
-      name: "Digital Identity & Cloud vCard",
+      name: "Digital Identity & QR Solutions",
       image: "/images/products/identifine-smart-id.webp",
       tag: "Cloud vCard",
-      badgeColor: "bg-purple-50 text-purple-700 border-purple-200",
       description:
         "Dynamic cloud-powered digital vCards and encrypted QR solutions for real-time contact sharing without requiring an app.",
-      commission: "₦15,000 / referral",
     },
   ];
 
+  const productScrollRef = useRef<HTMLDivElement>(null);
+  const scrollProducts = (dir: "left" | "right") => {
+    if (productScrollRef.current) {
+      const offset = dir === "left" ? -300 : 300;
+      productScrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-[#FF5B37] selection:text-white font-sans antialiased">
+    <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black">
       <SitePreloader />
       <MarketingNav />
 
       <main className="flex-1">
         {/* =========================================================================
-            1. IMPACT.COM HERO SECTION (BACKGROUND VIDEO & LEFT-SCROLLING CLIENTS)
+            1. HERO SECTION: TEXT ONLY + PINNED HORIZONTAL CONTAINER OF PICTURES
+               MOVES ON SCROLL, THEN UNPINS AND CONTINUES TO NEXT SECTION
            ========================================================================= */}
         <section
+          ref={heroSectionRef}
           id="hero"
-          className="relative w-full bg-[#0B132B] text-white pt-16 sm:pt-24 pb-12 sm:pb-16 overflow-hidden border-b border-white/10"
+          className="relative w-full h-[280vh] bg-white border-b border-neutral-200"
         >
-          {/* Background Cinematic Video with Impact.com Navy Overlay */}
-          <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover object-center"
-            >
-              <source src="/videos/hero-section.mp4" type="video/mp4" />
-              <source src="/videos/hero-section.webm" type="video/webm" />
-            </video>
-            {/* Deep Midnight Navy Overlay to preserve high contrast and readability */}
-            <div className="absolute inset-0 bg-[#0B132B]/85 backdrop-blur-[1.5px]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-transparent to-[#0B132B]/75" />
-          </div>
-
-          {/* Micro Grid Background Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-              {/* Left Column: Impact.com Display Copy & CTAs */}
-              <div className="lg:col-span-7 space-y-6 sm:space-y-8">
-                {/* Pre-headline Pill Badge */}
-                <div className="inline-flex items-center gap-2.5 rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold text-slate-200 backdrop-blur-md">
-                  <span className="flex h-2 w-2 rounded-full bg-[#FF5B37] animate-pulse" />
-                  <span>The #1 Partnership Cloud for Smart Cards &amp; Identity</span>
-                </div>
-
-                {/* Main Headline */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">
-                  Transform Card Partnerships into Your{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#FF5B37]">
-                    #1 Growth Engine
-                  </span>
-                </h1>
-
-                {/* Subheadline */}
-                <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl">
-                  Promote 24K gold mirror smart cards, laser-engraved titanium credentials, and enterprise RFID identity suites. Earn automated <strong className="text-white font-bold">7.5% recurring cash commissions</strong> with zero inventory and instant Paystack settlements.
-                </p>
-
-                {/* Dual Action CTAs */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
-                  <Link
-                    href="/portal?tab=register"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FF5B37] hover:bg-[#E04824] text-white px-8 py-4 text-sm font-extrabold shadow-xl shadow-orange-500/25 transition-all duration-200 transform hover:-translate-y-0.5 active:scale-[0.98]"
-                  >
-                    <span>Become a Partner</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-
-                  <Link
-                    href="/pricing"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white px-7 py-4 text-sm font-bold backdrop-blur-md transition-all duration-200 hover:border-white/30"
-                  >
-                    <span>Explore 7.5% Earnings</span>
-                    <ChevronRight className="w-4 h-4 text-slate-400" />
-                  </Link>
-                </div>
-
-                {/* Social Proof Text directly below CTA */}
-                <div className="pt-2 flex items-center gap-4 text-xs text-slate-400">
-                  <div className="flex items-center -space-x-2">
-                    <div className="h-7 w-7 rounded-full bg-indigo-600 border-2 border-[#0B132B] flex items-center justify-center text-[10px] font-bold text-white">IC</div>
-                    <div className="h-7 w-7 rounded-full bg-amber-600 border-2 border-[#0B132B] flex items-center justify-center text-[10px] font-bold text-white">XC</div>
-                    <div className="h-7 w-7 rounded-full bg-emerald-600 border-2 border-[#0B132B] flex items-center justify-center text-[10px] font-bold text-white">VIP</div>
-                  </div>
-                  <span>Trusted by 2,500+ corporate leaders, VIP venues &amp; affiliates across Nigeria.</span>
-                </div>
+          {/* Sticky Viewport: Stays fixed as user scrolls, animating the horizontal container */}
+          <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden bg-white">
+            
+            {/* Top Area: HERO TEXT ONLY (Clean, Centered, Display Typography) */}
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-4 shrink-0 z-10">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-4 py-1 text-xs font-bold text-amber-800">
+                <span className="h-2 w-2 rounded-full bg-[#F59E0B] animate-pulse" />
+                <span>Identifine &amp; Xtreme Cardz Partner Network</span>
               </div>
 
-              {/* Right Column: Impact.com Floating Partnership Console Mockup */}
-              <div className="lg:col-span-5 relative">
-                {/* Glowing Backdrop */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[#FF5B37]/20 to-indigo-500/20 blur-2xl pointer-events-none" />
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-black tracking-tight leading-[1.08]">
+                Turn Your Network Into{" "}
+                <span className="text-[#F59E0B]">7.5% Recurring Cash</span>
+              </h1>
 
-                <div className="relative rounded-3xl bg-white text-slate-900 border border-slate-200 shadow-2xl p-6 sm:p-8 space-y-6">
-                  {/* Console Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                        Identifine Partnership Cloud
-                      </span>
-                    </div>
-                    <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-orange-50 text-[#FF5B37] border border-orange-200">
-                      7.5% Payout Active
-                    </span>
-                  </div>
-
-                  {/* 1-Click Referral Link Box */}
-                  <div className="rounded-2xl bg-slate-50 border border-slate-200 p-3.5 space-y-2">
-                    <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                      <span>Your Unique Partner Link</span>
-                      <span className="text-[11px] text-emerald-600 font-bold">Auto-Attributed</span>
-                    </div>
-                    <div className="flex items-center justify-between gap-2 bg-white px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-slate-800">
-                      <span className="truncate">identifine.com/partner/XTREME-842</span>
-                      <button
-                        onClick={handleCopyLink}
-                        className="inline-flex items-center gap-1 text-[11px] font-bold text-[#FF5B37] hover:text-[#E04824] shrink-0 cursor-pointer"
-                        title="Copy link"
-                      >
-                        {copiedLink ? (
-                          <>
-                            <Check className="w-3.5 h-3.5 text-emerald-600" />
-                            <span className="text-emerald-600">Copied!</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5" />
-                            <span>Copy</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Interactive Monthly Revenue Simulator Slider */}
-                  <div className="rounded-2xl bg-gradient-to-br from-slate-50 to-orange-50/30 border border-slate-200 p-4 space-y-3">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-600 font-semibold">
-                        Monthly Referrals: <strong className="font-mono text-slate-900 text-sm">{heroReferrals} client{heroReferrals > 1 ? "s" : ""}</strong>
-                      </span>
-                      <div className="text-right">
-                        <span className="text-[10px] block text-slate-500 uppercase tracking-wider font-semibold">Estimated Payout</span>
-                        <span className="text-xl font-black text-[#FF5B37] font-mono tracking-tight">
-                          ₦{heroEstimatedCommission.toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
-                    <input
-                      type="range"
-                      min={1}
-                      max={40}
-                      value={heroReferrals}
-                      onChange={(e) => setHeroReferrals(Number(e.target.value))}
-                      className="w-full accent-[#FF5B37] cursor-pointer"
-                      aria-label="Monthly referral simulator"
-                    />
-                    <div className="flex items-center justify-between text-[10px] text-slate-500">
-                      <span>1 Referral (₦18,750)</span>
-                      <span>40 Referrals (₦750,000)</span>
-                    </div>
-                  </div>
-
-                  {/* Quick-Start Form */}
-                  <form onSubmit={handleHeroSignup} className="space-y-2.5">
-                    <input
-                      required
-                      value={heroName}
-                      onChange={(e) => setHeroName(e.target.value)}
-                      placeholder="Full Name"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-xs outline-none focus:border-[#FF5B37] focus:bg-white focus:ring-2 focus:ring-orange-500/10 transition"
-                    />
-                    <input
-                      required
-                      type="email"
-                      value={heroEmail}
-                      onChange={(e) => setHeroEmail(e.target.value)}
-                      placeholder="Corporate or Business Email"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-xs outline-none focus:border-[#FF5B37] focus:bg-white focus:ring-2 focus:ring-orange-500/10 transition"
-                    />
-                    <input
-                      required
-                      type="tel"
-                      value={heroPhone}
-                      onChange={(e) => setHeroPhone(e.target.value)}
-                      placeholder="WhatsApp / Phone Number"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-xs outline-none focus:border-[#FF5B37] focus:bg-white focus:ring-2 focus:ring-orange-500/10 transition"
-                    />
-                    <button
-                      type="submit"
-                      className="w-full rounded-xl bg-[#FF5B37] hover:bg-[#E04824] text-white font-extrabold py-3 text-xs shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      <span>Create Free Partner Account</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </form>
-
-                  {/* Security Guarantees */}
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                    <span className="flex items-center gap-1">
-                      <Zap className="w-3.5 h-3.5 text-amber-500" /> Paystack Instant
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <DollarSign className="w-3.5 h-3.5 text-emerald-600" /> 7.5% Flat Rate
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Lock className="w-3.5 h-3.5 text-indigo-500" /> Zero Inventory
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Clients We Have Worked With: Continuously Scrolling to the Left */}
-            <div className="pt-12 sm:pt-16 border-t border-white/10 mt-12 sm:mt-16 overflow-hidden">
-              <div className="text-center mb-4">
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
-                  Clients We Have Worked With
-                </span>
-              </div>
-
-              {/* Infinite Continuous Left-Scrolling Marquee Track */}
-              <div className="overflow-hidden select-none py-2 relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-                <div className="animate-ticker flex items-center gap-12 text-xs sm:text-sm font-extrabold tracking-wider uppercase text-slate-300">
-                  {[1, 2, 3].map((setIndex) => (
-                    <div key={setIndex} className="flex items-center gap-12 shrink-0">
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <Building2 className="w-4 h-4 text-[#FF5B37]" /> Access Bank Corporate
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <Crown className="w-4 h-4 text-amber-400" /> Transcorp Hilton VIP
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <Star className="w-4 h-4 text-indigo-400" /> Eko Hotels &amp; Suites
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <ShieldCheck className="w-4 h-4 text-emerald-400" /> Prime Capital Management
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <Award className="w-4 h-4 text-cyan-400" /> Genesis Luxury Club
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <Briefcase className="w-4 h-4 text-[#FF5B37]" /> Vanguard Executive Consulting
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <Zap className="w-4 h-4 text-amber-400" /> Stanbic IBTC Wealth
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="flex items-center gap-2.5 hover:text-white transition">
-                        <Building2 className="w-4 h-4 text-purple-400" /> Zenith Bank Enterprise
-                      </span>
-                      <span className="text-white/20">•</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            2. IMPACT.COM SECTION 2: INTERACTIVE AUDIENCE SWITCHER (HALLMARK FEATURE)
-           ========================================================================= */}
-        <section id="solutions" className="py-20 lg:py-28 bg-white border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-            {/* Header */}
-            <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF5B37] text-xs font-bold uppercase tracking-wider">
-                Tailored Solutions
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
-                Built for Every Type of Partner
-              </h2>
-              <p className="text-base sm:text-lg text-slate-600 font-normal">
-                Whether you connect corporate enterprises, private clubs, or executive clients, our platform provides turnkey smart card monetization.
+              <p className="text-base sm:text-lg text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">
+                Promote 24K gold mirror metal cards, laser-engraved titanium smart credentials, and corporate identity suites. Zero stock to purchase, automated commission tracking, and instant Paystack payouts.
               </p>
+
+              <div className="flex items-center justify-center gap-4 pt-1">
+                <Link
+                  href="/portal?tab=register"
+                  className="rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-8 py-3.5 text-xs sm:text-sm font-extrabold shadow-md hover:scale-105 transition"
+                >
+                  Become an Affiliate
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 text-xs sm:text-sm font-bold transition"
+                >
+                  Explore 7.5% Earnings
+                </Link>
+              </div>
+
+              <div className="pt-2 flex items-center justify-center gap-2 text-xs font-semibold text-neutral-400">
+                <span>People You Can Partner With</span>
+                <span className="text-neutral-300">•</span>
+                <span className="text-neutral-500">Scroll down to explore &rarr;</span>
+              </div>
             </div>
 
-            {/* 4 Interactive Segment Tabs (Impact.com Style) */}
-            <div className="flex items-center justify-center gap-2 p-1.5 rounded-2xl bg-slate-100 max-w-4xl mx-auto mb-12 overflow-x-auto">
-              <button
-                onClick={() => setActiveAudience("corporate")}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition whitespace-nowrap cursor-pointer ${
-                  activeAudience === "corporate"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
+            {/* Bottom Area: HORIZONTAL CONTAINER OF PICTURES THAT MOVES ON SCROLL */}
+            <div className="relative w-full overflow-hidden mt-6">
+              <div
+                ref={trackRef}
+                className="flex items-center gap-6 px-6 sm:px-12 will-change-transform transition-transform duration-75"
+                style={{
+                  transform: `translateX(-${scrollProgress * maxTranslate}px)`,
+                }}
               >
-                <Building2 className="w-4 h-4 text-[#FF5B37]" />
-                <span>Corporate &amp; Enterprise</span>
-              </button>
-
-              <button
-                onClick={() => setActiveAudience("creators")}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition whitespace-nowrap cursor-pointer ${
-                  activeAudience === "creators"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <CreditCard className="w-4 h-4 text-amber-500" />
-                <span>Affiliates &amp; Creators</span>
-              </button>
-
-              <button
-                onClick={() => setActiveAudience("clubs")}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition whitespace-nowrap cursor-pointer ${
-                  activeAudience === "clubs"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <Crown className="w-4 h-4 text-indigo-500" />
-                <span>Private Clubs &amp; VIP Venues</span>
-              </button>
-
-              <button
-                onClick={() => setActiveAudience("agencies")}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition whitespace-nowrap cursor-pointer ${
-                  activeAudience === "agencies"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <Briefcase className="w-4 h-4 text-emerald-500" />
-                <span>Agencies &amp; Resellers</span>
-              </button>
-            </div>
-
-            {/* Dynamic Audience Detail Split Card */}
-            <div className="rounded-3xl border border-slate-200 bg-slate-50/70 p-8 sm:p-12 lg:p-14 shadow-lg">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                {/* Left Detail Column */}
-                <div className="lg:col-span-7 space-y-6">
-                  <div className="inline-block px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 shadow-sm">
-                    {audienceData[activeAudience].badge}
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-                    {audienceData[activeAudience].title}
-                  </h3>
-
-                  <p className="text-base text-slate-600 leading-relaxed font-normal">
-                    {audienceData[activeAudience].description}
-                  </p>
-
-                  <div className="space-y-3 pt-2">
-                    {audienceData[activeAudience].benefits.map((benefit, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <div className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-                          <Check className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm font-medium text-slate-700 leading-snug">
-                          {benefit}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-4 flex items-center gap-4">
-                    <Link
-                      href="/portal?tab=register"
-                      className="inline-flex items-center gap-2 rounded-full bg-[#FF5B37] hover:bg-[#E04824] text-white px-7 py-3 text-xs font-bold shadow-md transition"
-                    >
-                      <span>Join as a Partner</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                    <Link
-                      href="/pricing"
-                      className="text-xs font-bold text-slate-700 hover:text-slate-900 transition flex items-center gap-1"
-                    >
-                      <span>View commission schedule</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Right Interactive Preview Card */}
-                <div className="lg:col-span-5">
-                  <div className="rounded-2xl bg-white border border-slate-200 shadow-xl p-6 sm:p-7 space-y-5">
-                    <div className="relative h-56 sm:h-64 rounded-xl bg-slate-900 overflow-hidden">
+                {partnerShowcase.map((partner) => (
+                  <div
+                    key={partner.id}
+                    className="w-[300px] sm:w-[360px] md:w-[400px] shrink-0 rounded-3xl bg-neutral-50 border border-neutral-200 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group"
+                  >
+                    {/* Picture Container */}
+                    <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-neutral-900">
                       <img
-                        src={audienceData[activeAudience].image}
-                        alt={audienceData[activeAudience].previewTitle}
-                        className="w-full h-full object-cover"
+                        src={partner.image}
+                        alt={partner.role}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold text-slate-900 shadow">
-                        {audienceData[activeAudience].previewTag}
+                      <div className="absolute top-4 left-4 rounded-full bg-white/95 backdrop-blur-md px-3.5 py-1 text-xs font-black text-black shadow-md">
+                        {partner.badge}
+                      </div>
+                      <div className="absolute bottom-4 right-4 rounded-full bg-black/90 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white shadow-md">
+                        {partner.commission}
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <h4 className="font-extrabold text-lg text-slate-900">
-                        {audienceData[activeAudience].previewTitle}
-                      </h4>
-                      <div className="p-3 rounded-xl bg-orange-50/60 border border-orange-100 flex items-center justify-between">
-                        <span className="text-xs font-semibold text-slate-600">Expected Commission:</span>
-                        <span className="text-base font-black text-[#FF5B37] font-mono">
-                          {audienceData[activeAudience].previewPayout}
+                    {/* Card Content */}
+                    <div className="p-6 space-y-3 bg-white flex-1 flex flex-col justify-between">
+                      <div className="space-y-1.5">
+                        <h3 className="font-black text-lg sm:text-xl text-black">
+                          {partner.role}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                          {partner.opportunity}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 border-t border-neutral-100 flex items-center justify-between text-xs">
+                        <span className="text-neutral-500">Avg. Order Value:</span>
+                        <span className="font-mono font-black text-neutral-900">
+                          {partner.avgOrder}
                         </span>
                       </div>
-                      <p className="text-[11px] text-slate-500 italic">
-                        {audienceData[activeAudience].previewNote}
-                      </p>
                     </div>
                   </div>
-                </div>
+                ))}
+              </div>
+
+              {/* Scroll Progress Bar indicator */}
+              <div className="mx-auto max-w-xs mt-4 h-1 bg-neutral-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-black transition-all duration-75 rounded-full"
+                  style={{ width: `${Math.max(5, scrollProgress * 100)}%` }}
+                />
               </div>
             </div>
           </div>
         </section>
 
         {/* =========================================================================
-            4. IMPACT.COM SECTION 3: THE 5-STAGE PARTNERSHIP LIFECYCLE
+            2. OUR PRODUCTS & SERVICES SECTION
            ========================================================================= */}
-        <section id="lifecycle" className="py-20 lg:py-28 bg-slate-50 border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-            {/* Header */}
-            <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold uppercase tracking-wider">
-                Full-Funnel Management
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
-                The 5-Stage Partnership Lifecycle
-              </h2>
-              <p className="text-base sm:text-lg text-slate-600 font-normal">
-                Everything you need to recruit, track, and monetize smart credentials from initiation to instant payout.
-              </p>
-            </div>
-
-            {/* 5 Impact-style Framework Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {/* Stage 1 */}
-              <div className="rounded-2xl bg-white border border-slate-200/90 p-6 space-y-4 shadow-sm hover:shadow-md transition flex flex-col justify-between border-t-4 border-t-[#FF5B37]">
-                <div className="space-y-3">
-                  <div className="h-10 w-10 rounded-xl bg-orange-50 text-[#FF5B37] font-extrabold flex items-center justify-center text-sm">
-                    01
-                  </div>
-                  <h3 className="font-extrabold text-base text-slate-900">
-                    Discover &amp; Recruit
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    Generate your custom link or promo code. Share digital card catalogs with corporate procurement and executive contacts.
-                  </p>
-                </div>
-                <div className="pt-2 text-[11px] font-bold text-[#FF5B37]">
-                  Instant Setup &rarr;
-                </div>
-              </div>
-
-              {/* Stage 2 */}
-              <div className="rounded-2xl bg-white border border-slate-200/90 p-6 space-y-4 shadow-sm hover:shadow-md transition flex flex-col justify-between border-t-4 border-t-indigo-500">
-                <div className="space-y-3">
-                  <div className="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-600 font-extrabold flex items-center justify-center text-sm">
-                    02
-                  </div>
-                  <h3 className="font-extrabold text-base text-slate-900">
-                    Contract &amp; Pay
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    Fixed 7.5% flat cash commission on every qualifying card order. Automated Paystack settlement with zero hidden fees.
-                  </p>
-                </div>
-                <div className="pt-2 text-[11px] font-bold text-indigo-600">
-                  7.5% Guaranteed &rarr;
-                </div>
-              </div>
-
-              {/* Stage 3 */}
-              <div className="rounded-2xl bg-white border border-slate-200/90 p-6 space-y-4 shadow-sm hover:shadow-md transition flex flex-col justify-between border-t-4 border-t-emerald-500">
-                <div className="space-y-3">
-                  <div className="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 font-extrabold flex items-center justify-center text-sm">
-                    03
-                  </div>
-                  <h3 className="font-extrabold text-base text-slate-900">
-                    Track &amp; Attribute
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    Real-time link click attribution, invoice status tracking, and multi-device order logging inside your partner portal.
-                  </p>
-                </div>
-                <div className="pt-2 text-[11px] font-bold text-emerald-600">
-                  Live Attribution &rarr;
-                </div>
-              </div>
-
-              {/* Stage 4 */}
-              <div className="rounded-2xl bg-white border border-slate-200/90 p-6 space-y-4 shadow-sm hover:shadow-md transition flex flex-col justify-between border-t-4 border-t-blue-500">
-                <div className="space-y-3">
-                  <div className="h-10 w-10 rounded-xl bg-blue-50 text-blue-600 font-extrabold flex items-center justify-center text-sm">
-                    04
-                  </div>
-                  <h3 className="font-extrabold text-base text-slate-900">
-                    Engage &amp; Scale
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    Access digital marketing kits, NFC tap demo scripts, and volume re-order bonuses for recurring corporate renewals.
-                  </p>
-                </div>
-                <div className="pt-2 text-[11px] font-bold text-blue-600">
-                  Partner Toolkit &rarr;
-                </div>
-              </div>
-
-              {/* Stage 5 */}
-              <div className="rounded-2xl bg-white border border-slate-200/90 p-6 space-y-4 shadow-sm hover:shadow-md transition flex flex-col justify-between border-t-4 border-t-purple-500">
-                <div className="space-y-3">
-                  <div className="h-10 w-10 rounded-xl bg-purple-50 text-purple-600 font-extrabold flex items-center justify-center text-sm">
-                    05
-                  </div>
-                  <h3 className="font-extrabold text-base text-slate-900">
-                    Protect &amp; Verify
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    Bank-grade encrypted NFC chips, authenticated 24K mirror metals, and certified RFID credentials protected from spoofing.
-                  </p>
-                </div>
-                <div className="pt-2 text-[11px] font-bold text-purple-600">
-                  Hardware Security &rarr;
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            5. IMPACT.COM SECTION 4: ENTERPRISE DATA & SCALE METRICS (DARK BLOCK)
-           ========================================================================= */}
-        <section className="py-20 lg:py-24 bg-[#0B132B] text-white border-b border-white/10 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.12),transparent_70%)] pointer-events-none" />
-
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 relative z-10">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-center">
-              {/* Stat 1 */}
-              <div className="space-y-2 p-4">
-                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#FF5B37] font-mono tracking-tight">
-                  ₦250M+
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-300">
-                  Card Volume Tracked
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Across enterprise &amp; luxury orders
-                </div>
-              </div>
-
-              {/* Stat 2 */}
-              <div className="space-y-2 p-4">
-                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-400 font-mono tracking-tight">
-                  7.5%
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-300">
-                  Flat Cash Commission
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Transparent recurring earnings
-                </div>
-              </div>
-
-              {/* Stat 3 */}
-              <div className="space-y-2 p-4">
-                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-emerald-400 font-mono tracking-tight">
-                  ₦50,000
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-300">
-                  Min. Bank Withdrawal
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Accessible threshold for all partners
-                </div>
-              </div>
-
-              {/* Stat 4 */}
-              <div className="space-y-2 p-4">
-                <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-cyan-400 font-mono tracking-tight">
-                  Instant
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-300">
-                  Paystack Settlement
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Direct credit to Nigerian bank accounts
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            6. IMPACT.COM SECTION 5: CARD PRODUCTS & SOLUTIONS (ELEVATED CARDS)
-           ========================================================================= */}
-        <section id="products" className="py-20 lg:py-28 bg-white border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider">
-                  Product Suite
-                </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
-                  High-Converting Card Solutions
+        <section id="products" className="py-24 sm:py-32 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-200">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+              <div>
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-neutral-950 tracking-tight leading-none">
+                  Our Products &amp; Services
                 </h2>
-                <p className="text-base sm:text-lg text-slate-600 max-w-2xl font-normal">
+                <p className="text-base sm:text-xl text-neutral-600 mt-3 font-medium">
                   Promote verified hardware credentials engineered for executives, private venues, and corporate enterprises.
                 </p>
               </div>
 
-              <Link
-                href="/portal?tab=register"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 px-6 py-3 text-xs font-bold transition shadow-sm shrink-0"
-              >
-                <span>View All Products in Portal</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              {/* Navigation Arrows */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => scrollProducts("left")}
+                  aria-label="Scroll left"
+                  className="h-12 w-12 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={() => scrollProducts("right")}
+                  aria-label="Scroll right"
+                  className="h-12 w-12 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
             </div>
 
-            {/* 6 Elevated Product Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Horizontal Product Track */}
+            <div
+              ref={productScrollRef}
+              className="flex items-stretch overflow-x-auto pb-8 scroll-smooth no-scrollbar"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
               {showcaseProducts.map((prod) => (
                 <div
                   key={prod.id}
-                  className="rounded-2xl border border-slate-200/90 bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                  onClick={() => setActiveProductCard(activeProductCard === prod.id ? null : prod.id)}
+                  className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-transparent flex flex-col group cursor-pointer m-[16px]"
                 >
-                  <div className="space-y-4">
-                    {/* Image Box */}
-                    <div className="relative h-60 w-full bg-slate-900 overflow-hidden">
-                      <img
-                        src={prod.image}
-                        alt={prod.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold border shadow-sm ${prod.badgeColor}`}>
-                        {prod.tag}
-                      </div>
-                    </div>
+                  {/* Container: image inside */}
+                  <div className="relative h-80 sm:h-96 md:h-[420px] w-full bg-neutral-950 overflow-hidden rounded-2xl shadow-md">
+                    <img
+                      src={prod.image}
+                      alt={prod.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
 
-                    {/* Content */}
-                    <div className="p-6 pt-2 space-y-2.5">
-                      <h3 className="font-black text-xl text-slate-900 tracking-tight">
-                        {prod.name}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                        {prod.description}
-                      </p>
+                    {/* Hover / Click Overlay: Changes to white background with description */}
+                    <div
+                      className={`absolute inset-0 bg-white p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
+                        activeProductCard === prod.id
+                          ? "opacity-100 pointer-events-auto"
+                          : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+                      }`}
+                    >
+                      <div className="space-y-4">
+                        <div className="inline-block rounded-full bg-amber-50 px-3.5 py-1 text-xs sm:text-sm font-bold text-amber-800">
+                          {prod.tag} — 7.5% Cash Commission
+                        </div>
+
+                        <h3 className="font-black text-2xl sm:text-3xl lg:text-4xl text-neutral-950 leading-tight">
+                          {prod.name}
+                        </h3>
+
+                        <p className="text-base sm:text-lg text-neutral-700 leading-relaxed font-medium">
+                          {prod.description}
+                        </p>
+                      </div>
+
+                      <div className="pt-6 border-t border-neutral-200 flex items-center justify-between">
+                        <span className="font-mono font-bold text-sm sm:text-base text-neutral-500">
+                          7.5% Cash Payout
+                        </span>
+                        <Link
+                          href={`/portal?tab=register&product=${prod.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="rounded-full bg-black text-white hover:bg-neutral-800 px-6 py-2.5 text-xs sm:text-sm font-extrabold transition shadow-md"
+                        >
+                          Refer Card
+                        </Link>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Card Action Footer */}
-                  <div className="p-6 pt-0 border-t border-slate-100 flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] block text-slate-400 uppercase font-semibold">Your Earning</span>
-                      <span className="font-mono font-bold text-xs sm:text-sm text-emerald-700">
-                        {prod.commission}
-                      </span>
-                    </div>
-
-                    <Link
-                      href={`/portal?tab=register&product=${prod.id}`}
-                      className="rounded-full bg-slate-900 hover:bg-[#FF5B37] text-white px-5 py-2 text-xs font-bold transition shadow"
-                    >
-                      Refer Card &rarr;
-                    </Link>
+                  {/* Name under image */}
+                  <div className="pt-4 pb-2 px-1">
+                    <h3 className="font-black text-xl sm:text-2xl text-neutral-900 tracking-tight">
+                      {prod.name}
+                    </h3>
+                    <p className="text-sm font-bold text-neutral-500 mt-1">
+                      7.5% Cash Commission
+                    </p>
                   </div>
                 </div>
               ))}
@@ -878,76 +419,73 @@ export default function ImpactPartnerHomePage() {
         </section>
 
         {/* =========================================================================
-            7. IMPACT.COM SECTION 6: QUANTIFIED PARTNER CASE STUDY
+            3. HOW IT WORKS SECTION
            ========================================================================= */}
-        <section className="py-20 lg:py-28 bg-slate-50 border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-            <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 lg:p-16 shadow-xl">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                {/* Left: Testimonial & Pull Quote */}
-                <div className="lg:col-span-7 space-y-6">
-                  <div className="inline-flex items-center gap-1 text-amber-500">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-amber-500" />
-                    ))}
+        <section id="how-it-works" className="py-24 sm:py-32 bg-[#121214] text-white border-b border-white/10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-3 mb-16">
+              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                How It Works
+              </h2>
+              <p className="text-base sm:text-lg text-neutral-300 font-medium">
+                Join. Refer. Earn. It&apos;s that simple!
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {[
+                { step: "1", title: "Register", desc: "Create your free affiliate account in seconds" },
+                { step: "2", title: "Get Your Link", desc: "Receive unique tracking link & custom promo code" },
+                { step: "3", title: "Refer Business", desc: "Share with companies, executives & contacts" },
+                { step: "4", title: "Earn Commission", desc: "Earn 7.5% flat cash on every card purchase" },
+                { step: "5", title: "Withdraw", desc: "Instant automated Paystack bank transfers" },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-7 text-center space-y-4 hover:border-[#F59E0B]/50 transition group flex flex-col justify-between"
+                >
+                  <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-black font-black text-base flex items-center justify-center mx-auto shadow-md">
+                    {item.step}
                   </div>
-
-                  <blockquote className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-snug tracking-tight">
-                    &ldquo;Partnering with Identifine and Xtreme Cardz allowed us to introduce luxury smart cards to our corporate clients. The 7.5% cash commission is credited seamlessly via Paystack without managing any inventory.&rdquo;
-                  </blockquote>
-
-                  <div className="flex items-center gap-4 pt-2">
-                    <div className="h-12 w-12 rounded-full bg-slate-900 text-white font-bold flex items-center justify-center text-sm">
-                      TA
-                    </div>
-                    <div>
-                      <div className="font-extrabold text-base text-slate-900">
-                        Tunde Adeleke
-                      </div>
-                      <div className="text-xs text-slate-500">
-                        Managing Partner, Vanguard Executive Consulting
-                      </div>
-                    </div>
+                  <div>
+                    <h3 className="font-extrabold text-base text-white">{item.title}</h3>
+                    <p className="text-xs text-neutral-400 leading-relaxed mt-2">{item.desc}</p>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                {/* Right: Quantified Results Cards (Impact.com Hallmark) */}
-                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-1">
-                    <div className="text-2xl sm:text-3xl font-black text-[#FF5B37] font-mono">
-                      +340%
-                    </div>
-                    <div className="text-xs font-bold text-slate-800">
-                      Annual Partner Revenue Growth
-                    </div>
-                    <div className="text-[11px] text-slate-500">
-                      Generated via corporate batch re-orders
-                    </div>
-                  </div>
+        {/* =========================================================================
+            4. YOUR EARNINGS AT A GLANCE
+           ========================================================================= */}
+        <section id="earnings" className="py-24 sm:py-32 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="rounded-3xl border border-neutral-300/80 bg-white p-10 sm:p-16 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="relative flex items-center justify-center">
+                <img
+                  src="/images/products/earnings-bar-chart.png"
+                  alt="7.5% Commission Chart"
+                  className="max-h-[280px] w-auto object-contain drop-shadow-2xl"
+                />
+              </div>
 
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-1">
-                    <div className="text-2xl sm:text-3xl font-black text-emerald-600 font-mono">
-                      ₦850,000+
-                    </div>
-                    <div className="text-xs font-bold text-slate-800">
-                      Average Monthly Commission
-                    </div>
-                    <div className="text-[11px] text-slate-500">
-                      Paid out automatically on qualifying orders
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-1">
-                    <div className="text-2xl sm:text-3xl font-black text-indigo-600 font-mono">
-                      100%
-                    </div>
-                    <div className="text-xs font-bold text-slate-800">
-                      On-Time Paystack Settlements
-                    </div>
-                    <div className="text-[11px] text-slate-500">
-                      Direct deposit to Nigerian bank accounts
-                    </div>
-                  </div>
+              <div className="space-y-6">
+                <h2 className="text-3xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight">
+                  Your Earnings at a Glance
+                </h2>
+                <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
+                  Earn 7.5% commission on qualifying sales, with a minimum withdrawal of ₦50,000 paid instantly via Paystack.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/pricing"
+                    className="inline-flex items-center gap-2 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black px-8 py-4 text-sm font-extrabold transition shadow-md hover:scale-[1.02]"
+                  >
+                    <span>View Detailed Breakdown</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -955,38 +493,27 @@ export default function ImpactPartnerHomePage() {
         </section>
 
         {/* =========================================================================
-            8. IMPACT.COM SECTION 7: HIGH-CONVERSION PRE-FOOTER CTA BANNER
+            5. READY TO START EARNING (CTA BANNER)
            ========================================================================= */}
-        <section className="py-20 lg:py-24 bg-white px-4 sm:px-6 lg:px-12">
-          <div className="mx-auto max-w-7xl">
-            <div className="rounded-3xl bg-gradient-to-br from-[#0B132B] via-[#0F172A] to-[#1E293B] border border-white/10 p-10 sm:p-14 lg:p-16 text-white text-center sm:text-left flex flex-col lg:flex-row items-center justify-between gap-10 shadow-2xl relative overflow-hidden">
-              <div className="space-y-4 max-w-2xl relative z-10">
-                <div className="inline-block px-3.5 py-1 rounded-full bg-white/10 text-orange-400 text-xs font-bold uppercase tracking-wider">
-                  Start Monetizing Your Network
-                </div>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-                  Ready to Accelerate Your Revenue with Modern Partnerships?
+        <section className="bg-[#121214] py-20 px-4 sm:px-6">
+          <div className="mx-auto max-w-6xl">
+            <div className="rounded-3xl bg-gradient-to-r from-[#F59E0B] via-[#E5A826] to-[#D97706] p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-2xl">
+              <div className="space-y-2 text-neutral-950">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-black">
+                  Ready to Start Earning?
                 </h3>
-                <p className="text-base text-slate-300 font-normal">
-                  Join hundreds of top professionals, private venue directors, and creators earning 7.5% recurring cash commissions with Identifine &amp; Xtreme Cardz.
+                <p className="text-sm sm:text-base text-black/80 font-medium">
+                  Join the Identifine &amp; Xtreme Cardz Affiliate Programme today!
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 relative z-10 w-full sm:w-auto">
-                <Link
-                  href="/portal?tab=register"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#FF5B37] hover:bg-[#E04824] text-white px-8 py-4 text-sm font-extrabold shadow-xl shadow-orange-500/25 transition hover:scale-105"
-                >
-                  <span>Become an Affiliate</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white px-7 py-4 text-sm font-bold backdrop-blur-md transition"
-                >
-                  <span>Calculate Earnings</span>
-                </Link>
-              </div>
+              <Link
+                href="/portal?tab=register"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-900 text-white px-9 py-4 text-sm font-black shadow-xl transition hover:scale-105"
+              >
+                <span>Become an Affiliate</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>

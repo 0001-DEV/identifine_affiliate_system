@@ -435,22 +435,18 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            1C. OUR CLIENTS SECTION (Warm Luxury Amber-Champagne Palette, 3D Perspective Kinetic Horizon Arc)
+            1C. OUR CLIENTS SECTION (Deep Obsidian Black Palette, 3D Perspective Kinetic Horizon Arc)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
-        <section id="clients" className="py-24 sm:py-28 bg-gradient-to-b from-[#F5EFE6] via-[#FAF5EC] to-[#F5EFE6] border-y border-[#E2D8C6] overflow-hidden relative">
+        <section id="clients" className="py-24 sm:py-28 bg-black border-y border-neutral-800 overflow-hidden relative">
           {/* Subtle Ambient Golden Spotlight */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.08),transparent_70%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14 sm:mb-16 text-center relative z-10">
-            <span className="text-xs uppercase tracking-widest text-[#B45309] font-bold bg-[#B45309]/10 px-4 py-1.5 rounded-full inline-flex items-center gap-2 mb-3 border border-[#B45309]/20 shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D97706] animate-ping inline-block" />
-              Verified Enterprise Network
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#26201B] tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
               Clients We Have Worked With
             </h2>
-            <p className="text-sm sm:text-base text-[#6B6358] mt-3 font-normal max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-neutral-400 mt-3 font-normal max-w-2xl mx-auto">
               Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
             </p>
           </div>
@@ -474,11 +470,11 @@ export default function HomePage() {
                         <img
                           src={client.logo}
                           alt={client.name}
-                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(40,30,20,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(217,119,6,0.38)] transition-all duration-500"
+                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(255,255,255,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.45)] transition-all duration-500"
                         />
                       </div>
                       {/* Micro Industry Domain Badge */}
-                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-[#8C4A00] bg-[#FAF5EC]/95 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-md border border-[#E2D8C6] mt-2 whitespace-nowrap text-center pointer-events-none">
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
                         {client.industry}
                       </span>
                     </div>
@@ -504,11 +500,11 @@ export default function HomePage() {
                         <img
                           src={client.logo}
                           alt={client.name}
-                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(40,30,20,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(217,119,6,0.38)] transition-all duration-500"
+                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(255,255,255,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.45)] transition-all duration-500"
                         />
                       </div>
                       {/* Micro Industry Domain Badge */}
-                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-[#8C4A00] bg-[#FAF5EC]/95 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-md border border-[#E2D8C6] mt-2 whitespace-nowrap text-center pointer-events-none">
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
                         {client.industry}
                       </span>
                     </div>
@@ -526,12 +522,13 @@ export default function HomePage() {
            ========================================================================= */}
         <section id="products" className="py-24 sm:py-32 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            {/* Header Text Section: Increased height, spacious and grand */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 py-6 sm:py-10 mb-10 sm:mb-14">
               <div>
-                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-black tracking-tight leading-[1.05]">
+                <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[90px] font-normal text-black tracking-tight leading-[1.05]">
                   Our Products &amp; Services
                 </h2>
-                <p className="text-base sm:text-xl text-neutral-600 mt-4 font-normal">
+                <p className="text-lg sm:text-2xl text-neutral-600 mt-5 font-normal max-w-3xl leading-relaxed">
                   Promote verified hardware credentials, identity architectures, and brand systems engineered across the ecosystem.
                 </p>
               </div>
@@ -555,8 +552,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Brand Filter Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 no-scrollbar">
+            {/* Brand Filter Tabs: Shifted 4px from the left */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 no-scrollbar pl-[4px]">
               {[
                 { id: "all", label: "All Offerings" },
                 { id: "identifine", label: "Identifine" },

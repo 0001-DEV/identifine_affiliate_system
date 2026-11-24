@@ -170,32 +170,22 @@ export function MarketingNav() {
   return (
     <header className="sticky top-0 z-50 bg-white text-black border-b border-neutral-200/90 h-16 sm:h-[68px] transition-colors duration-200 shadow-sm">
       <div className="w-full flex h-full items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
-        {/* Brand Dual Logo: Identifine | Xtreme Cardz */}
+        {/* Brand Logo: Xtreme Cardz */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3.5 select-none group shrink-0 -ml-1 sm:-ml-2"
+          className="flex items-center gap-2 select-none group shrink-0"
         >
-          {/* 1. IDENTIFINE LOGO (Dark text version for white header) */}
-          <img
-            src="/identifine_logo_dark.webp"
-            alt="Identifine Logo"
-            className="h-7 sm:h-8 w-auto object-contain transition-opacity group-hover:opacity-90"
-          />
-
-          {/* Elegant Divider */}
-          <span className="text-black/20 font-light text-base sm:text-lg">|</span>
-
-          {/* 2. XTREME CARDZ LOGO (Icon + Text Horizontal Lockup) */}
-          <div className="flex items-center gap-1.5 h-6 sm:h-7">
+          {/* XTREME CARDZ LOGO (Icon + Text Horizontal Lockup) */}
+          <div className="flex items-center gap-2 h-7 sm:h-8">
             <img
               src="/xtreme-cardz-icon.png"
               alt="Xtreme Cardz Icon"
-              className="h-6 sm:h-7 w-auto object-contain transition-transform group-hover:scale-105 duration-200"
+              className="h-7 sm:h-8 w-auto object-contain transition-transform group-hover:scale-105 duration-200"
             />
             <img
               src="/xtreme-cardz-text.png"
               alt="Xtreme Cardz Text"
-              className="h-3 sm:h-3.5 w-auto object-contain brightness-0"
+              className="h-3.5 sm:h-4 w-auto object-contain brightness-0"
             />
           </div>
         </Link>

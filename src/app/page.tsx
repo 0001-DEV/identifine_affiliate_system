@@ -199,7 +199,7 @@ export default function HomePage() {
       brandLabel: "Identifine",
       name: "RFID Facility Access Suite",
       tag: "Access Control",
-      image: "/images/products/identifine-rfid-suite.webp",
+      image: "/images/products/identifine-access-control.webp",
       description:
         "Enterprise encrypted RFID smart credentials for high-security doors, corporate turnstiles, executive elevators, and VIP suites.",
     },
@@ -209,7 +209,7 @@ export default function HomePage() {
       brandLabel: "Identifine",
       name: "Corporate ID Infrastructure",
       tag: "Staff Identification",
-      image: "/images/products/corporate-id-system.webp",
+      image: "/images/products/identifine-smart-card-reader.webp",
       description:
         "Multi-site organizational staff identification, badge issuance workflows, and centralized employee security tiering.",
     },
@@ -219,7 +219,7 @@ export default function HomePage() {
       brandLabel: "Identifine",
       name: "Cloud vCard & QR Solutions",
       tag: "Dynamic Cloud QR",
-      image: "/images/products/identifine-catalogue-hero.webp",
+      image: "/images/products/identifine-digital-identity.webp",
       description:
         "Real-time updateable cloud vCards with branded dynamic QR codes and analytics for modern corporate networking teams.",
     },
@@ -229,9 +229,9 @@ export default function HomePage() {
       id: "xtreme-metal-cards",
       brand: "xtremecardz",
       brandLabel: "Xtreme Cardz",
-      name: "Metal Business Cards",
+      name: "Black Matte Metal Cards",
       tag: "Metal Matte & Gunmetal",
-      image: "/images/products/card-metal-business-front.png",
+      image: "/images/products/black-matte-metal.webp",
       description:
         "Premium metal cards crafted in Metal Matte, Gunmetal, and Titanium Steel finishes, made for organizations that demand an unforgettable first impression.",
     },
@@ -239,9 +239,9 @@ export default function HomePage() {
       id: "xtreme-gold-mirror",
       brand: "xtremecardz",
       brandLabel: "Xtreme Cardz",
-      name: "24K Gold Mirror Cards",
+      name: "Gold Metal Cards",
       tag: "24K Gold Plated",
-      image: "/images/products/gold-mirror-metal.webp",
+      image: "/images/products/gold-metal-mesh.webp",
       description:
         "Ultra-exclusive mirror-finish brass plated in pure 24K gold, precision-etched with sub-millimeter CNC craftsmanship for VIP clientele.",
     },

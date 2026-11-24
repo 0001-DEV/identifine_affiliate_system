@@ -435,8 +435,8 @@ html.lenis, html.lenis body {
   animation: luxuryFloatC 8.5s ease-in-out infinite;
 }
 
-/* Silky smooth kinetic continuous streams */
-@keyframes luxuryMarqueeLeft {
+/* Silky smooth kinetic continuous streams with 3D Perspective Wave */
+@keyframes luxuryPerspectiveStreamLeft {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -445,7 +445,7 @@ html.lenis, html.lenis body {
   }
 }
 
-@keyframes luxuryMarqueeRight {
+@keyframes luxuryPerspectiveStreamRight {
   0% {
     transform: translate3d(-50%, 0, 0);
   }
@@ -454,22 +454,62 @@ html.lenis, html.lenis body {
   }
 }
 
-.animate-luxury-marquee-left {
+/* Floating harmonic wave animations */
+@keyframes dynamicWaveA {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) rotate(1.2deg) scale(1.02);
+  }
+  50% {
+    transform: translateY(-3px) rotate(0deg) scale(1.04);
+  }
+  75% {
+    transform: translateY(6px) rotate(-1.2deg) scale(1.01);
+  }
+}
+
+@keyframes dynamicWaveB {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(7px) rotate(-1.2deg) scale(1.01);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0deg) scale(1.03);
+  }
+  75% {
+    transform: translateY(-7px) rotate(1.2deg) scale(1.02);
+  }
+}
+
+.animate-perspective-stream-left {
   display: flex;
   width: max-content;
-  animation: luxuryMarqueeLeft 42s linear infinite;
+  animation: luxuryPerspectiveStreamLeft 38s linear infinite;
   will-change: transform;
 }
 
-.animate-luxury-marquee-right {
+.animate-perspective-stream-right {
   display: flex;
   width: max-content;
-  animation: luxuryMarqueeRight 46s linear infinite;
+  animation: luxuryPerspectiveStreamRight 42s linear infinite;
   will-change: transform;
 }
 
-.animate-luxury-marquee-left:hover,
-.animate-luxury-marquee-right:hover {
+.animate-wave-a {
+  animation: dynamicWaveA 6.5s ease-in-out infinite;
+}
+
+.animate-wave-b {
+  animation: dynamicWaveB 7.2s ease-in-out infinite;
+}
+
+/* Luxury smooth deceleration on hover */
+.perspective-stage:hover .animate-perspective-stream-left,
+.perspective-stage:hover .animate-perspective-stream-right {
   animation-play-state: paused;
 }
 

@@ -243,7 +243,7 @@ export function MarketingNav() {
                   {/* Mega Dropdown on Hover */}
                   {productsDropdownOpen && (
                     <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 w-[1080px] max-w-[96vw] pointer-events-auto animate-in fade-in slide-in-from-top-1 duration-200"
+                      className="fixed top-16 sm:top-[68px] left-1/2 -translate-x-1/2 pt-2 z-50 w-[1080px] max-w-[calc(100vw-32px)] pointer-events-auto animate-in fade-in slide-in-from-top-1 duration-200"
                       onMouseEnter={handleMouseEnterProducts}
                       onMouseLeave={handleMouseLeaveProducts}
                     >

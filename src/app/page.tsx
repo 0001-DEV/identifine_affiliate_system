@@ -338,11 +338,11 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black">
+    <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black w-full max-w-full overflow-x-clip">
       <SitePreloader />
       <MarketingNav />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-clip">
         {/* =========================================================================
             1. HERO SECTION: TEXT ONLY (Increased headline height, reduced copy height)
            ========================================================================= */}
@@ -380,7 +380,7 @@ export default function HomePage() {
         <section
           ref={heroSectionRef}
           id="partners-scroll"
-          className="relative w-full h-[280vh] bg-white border-b border-neutral-200"
+          className="relative w-full max-w-full h-[280vh] bg-white border-b border-neutral-200 overflow-hidden"
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
           <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
@@ -435,10 +435,10 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            1C. OUR CLIENTS SECTION (Deep Obsidian Black Palette, 3D Perspective Kinetic Horizon Arc)
+            1C. OUR CLIENTS SECTION (Deep Obsidian Black Palette, Continuous Kinetic Horizon Stream)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
-        <section id="clients" className="py-24 sm:py-28 bg-black border-y border-neutral-800 overflow-hidden relative">
+        <section id="clients" className="py-24 sm:py-28 bg-black border-y border-neutral-800 w-full max-w-full overflow-hidden relative">
           {/* Subtle Ambient Golden Spotlight */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
 
@@ -451,10 +451,10 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* 3D Perspective Stage: Continuous Kinetic Floating Arc */}
-          <div className="perspective-stage relative w-full overflow-hidden [perspective:1400px] [transform-style:preserve-3d] select-none">
+          {/* Continuous Kinetic Floating Stream Container */}
+          <div className="perspective-stage relative w-full max-w-full overflow-hidden select-none">
             {/* Upper Stream: Glides Left with Harmonic Wave A */}
-            <div className="relative w-full overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+            <div className="relative w-full max-w-full overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
               <div className="animate-perspective-stream-left gap-14 sm:gap-20 md:gap-28 flex items-center will-change-transform">
                 {[...clientLogosRow1, ...clientLogosRow1].map((client, idx) => {
                   const delay = -((idx % clientLogosRow1.length) * 1.6);
@@ -484,7 +484,7 @@ export default function HomePage() {
             </div>
 
             {/* Lower Stream: Glides Right with Harmonic Wave B */}
-            <div className="relative w-full overflow-hidden py-3 mt-2 sm:mt-4 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+            <div className="relative w-full max-w-full overflow-hidden py-3 mt-2 sm:mt-4 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
               <div className="animate-perspective-stream-right gap-14 sm:gap-20 md:gap-28 flex items-center will-change-transform">
                 {[...clientLogosRow2, ...clientLogosRow2].map((client, idx) => {
                   const delay = -((idx % clientLogosRow2.length) * 1.8);

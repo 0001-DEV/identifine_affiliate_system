@@ -90,66 +90,90 @@ export default function HomePage() {
     },
   ];
 
-  // Client Logo Pairs with 3D Roller Flip Animation (Original Colors, Container-Free)
-  const clientLogoPairsRow1 = [
+  // Authentic Client Logos across Identifine, Xtreme Cardz & CR8 Ecosystem
+  const clientLogosRow1 = [
     {
-      from: { name: "Seplat Energy", logo: "/images/clients/logo-seplat-energy.png" },
-      to: { name: "Nova Bank", logo: "/images/clients/logo-nova-bank.png" },
+      name: "Guinness Nigeria",
+      logo: "/images/clients/logo-guinness-nigeria.png",
     },
     {
-      from: { name: "Guinness Nigeria", logo: "/images/clients/logo-guinness-nigeria.png" },
-      to: { name: "Rainoil Limited", logo: "/images/clients/logo-rainoil.png" },
+      name: "Seplat Energy",
+      logo: "/images/clients/logo-seplat-energy.png",
     },
     {
-      from: { name: "Ikeja Electric", logo: "/images/clients/logo-ikeja-electric.png" },
-      to: { name: "Sapetro Oil", logo: "/images/clients/logo-sapetro-oil.webp" },
+      name: "Rainoil Limited",
+      logo: "/images/clients/logo-rainoil.png",
     },
     {
-      from: { name: "TVC Communications", logo: "/images/clients/logo-tvc-communications.png" },
-      to: { name: "IOGC Petroleum", logo: "/images/clients/logo-iogc-petroleum.png" },
+      name: "Ikeja Electric",
+      logo: "/images/clients/logo-ikeja-electric.png",
     },
     {
-      from: { name: "NECA Nigeria", logo: "/images/clients/logo-neca-nigeria.png" },
-      to: { name: "Apex Synergy", logo: "/images/clients/logo-apex-synergy.png" },
+      name: "Sapetro Oil",
+      logo: "/images/clients/logo-sapetro-oil.webp",
     },
     {
-      from: { name: "Credit Direct", logo: "/images/clients/logo-credit-direct.png" },
-      to: { name: "Falcon Oil", logo: "/images/clients/logo-falcon-oil.png" },
+      name: "Nova Bank",
+      logo: "/images/clients/logo-nova-bank.png",
     },
     {
-      from: { name: "Invera Energy", logo: "/images/clients/logo-invera-energy.webp" },
-      to: { name: "Optiva Capital", logo: "/images/clients/logo-optiva-capital.webp" },
+      name: "TVC Communications",
+      logo: "/images/clients/logo-tvc-communications.png",
+    },
+    {
+      name: "NECA Nigeria",
+      logo: "/images/clients/logo-neca-nigeria.png",
+    },
+    {
+      name: "Credit Direct",
+      logo: "/images/clients/logo-credit-direct.png",
+    },
+    {
+      name: "Optiva Capital",
+      logo: "/images/clients/logo-optiva-capital.webp",
     },
   ];
 
-  const clientLogoPairsRow2 = [
+  const clientLogosRow2 = [
     {
-      from: { name: "Stanbic IBTC", logo: "/images/clients/Asset 24.webp" },
-      to: { name: "Nigerian Breweries", logo: "/images/clients/Asset 25.webp" },
+      name: "Stanbic IBTC",
+      logo: "/images/clients/Asset 24.webp",
     },
     {
-      from: { name: "MTN Nigeria", logo: "/images/clients/Asset 26.webp" },
-      to: { name: "Renaissance", logo: "/images/clients/Asset 27.webp" },
+      name: "Nigerian Breweries",
+      logo: "/images/clients/Asset 25.webp",
     },
     {
-      from: { name: "ADNOC Group", logo: "/images/clients/Asset 28.webp" },
-      to: { name: "Sterling Capital", logo: "/images/clients/logo-sterling-capital.webp" },
+      name: "MTN Nigeria",
+      logo: "/images/clients/Asset 26.webp",
     },
     {
-      from: { name: "Horizon Group", logo: "/images/clients/logo-horizon-group.svg" },
-      to: { name: "Umbrella Group", logo: "/images/clients/Asset 29.webp" },
+      name: "Renaissance",
+      logo: "/images/clients/Asset 27.webp",
     },
     {
-      from: { name: "Corporate FMCG", logo: "/images/clients/Asset 30.webp" },
-      to: { name: "Seplat Energy", logo: "/images/clients/logo-seplat-energy.png" },
+      name: "ADNOC Group",
+      logo: "/images/clients/Asset 28.webp",
     },
     {
-      from: { name: "Nova Bank", logo: "/images/clients/logo-nova-bank.png" },
-      to: { name: "Guinness Nigeria", logo: "/images/clients/logo-guinness-nigeria.png" },
+      name: "Invera Energy",
+      logo: "/images/clients/logo-invera-energy.webp",
     },
     {
-      from: { name: "Rainoil Limited", logo: "/images/clients/logo-rainoil.png" },
-      to: { name: "Ikeja Electric", logo: "/images/clients/logo-ikeja-electric.png" },
+      name: "Sterling Capital",
+      logo: "/images/clients/logo-sterling-capital.webp",
+    },
+    {
+      name: "Apex Synergy",
+      logo: "/images/clients/logo-apex-synergy.png",
+    },
+    {
+      name: "Falcon Oil",
+      logo: "/images/clients/logo-falcon-oil.png",
+    },
+    {
+      name: "Horizon Group",
+      logo: "/images/clients/logo-horizon-group.svg",
     },
   ];
 
@@ -253,7 +277,7 @@ export default function HomePage() {
 
         {/* =========================================================================
             1B. PINNED HORIZONTAL CONTAINER OF PICTURES (MOVES ON SCROLL)
-                "people that can partner with us" placed directly with the images
+                "people who partner with us" placed directly with the images
            ========================================================================= */}
         <section
           ref={heroSectionRef}
@@ -262,10 +286,10 @@ export default function HomePage() {
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
           <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
-            {/* people that can partner with us: CENTER ALIGNED directly attached to images */}
+            {/* people who partner with us: CENTER ALIGNED directly attached to images */}
             <div className="w-full text-center px-4 mb-3 sm:mb-4">
               <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
-                people that can partner with us
+                people who partner with us
               </p>
             </div>
 
@@ -313,11 +337,11 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            1C. OUR CLIENTS SECTION (Continuous Kinetic Marquee Animation)
+            1C. OUR CLIENTS SECTION (Sophisticated Zero-Gravity Floating Stream)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
-        <section id="clients" className="py-20 sm:py-24 bg-white border-b border-neutral-200 overflow-hidden">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12 sm:mb-14 text-center">
+        <section id="clients" className="py-24 sm:py-28 bg-white border-b border-neutral-200 overflow-hidden relative">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14 sm:mb-16 text-center">
             <span className="text-xs uppercase tracking-widest text-[#F59E0B] font-bold bg-[#F59E0B]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">
               Trusted Partnerships
             </span>
@@ -329,93 +353,69 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Marquee Row 1: Sliding Left (Kinetic Vertical Roller Swap - Container-Free, Full Color) */}
-          <div className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="animate-ticker gap-10 sm:gap-14 flex items-center will-change-transform">
-              {[...clientLogoPairsRow1, ...clientLogoPairsRow1].map((pair, idx) => (
-                <div
-                  key={`${pair.from.name}-${idx}`}
-                  className="relative w-40 sm:w-52 h-14 sm:h-16 overflow-hidden flex items-center justify-center shrink-0 select-none"
-                >
+          {/* Stream Row 1: Silky Smooth Glide Left with Sinusoidal Floating Wave */}
+          <div className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+            <div className="animate-luxury-marquee-left gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
+              {[...clientLogosRow1, ...clientLogosRow1].map((client, idx) => {
+                const floatClass =
+                  idx % 3 === 0
+                    ? "animate-float-a"
+                    : idx % 3 === 1
+                    ? "animate-float-b"
+                    : "animate-float-c";
+                const delay = -((idx % clientLogosRow1.length) * 1.4);
+
+                return (
                   <div
-                    className="flex flex-col w-full will-change-transform"
-                    style={{
-                      animation: "clientLogoSlideUp 7s cubic-bezier(0.77, 0, 0.175, 1) infinite",
-                      animationDelay: `${(idx % clientLogoPairsRow1.length) * 0.65}s`,
-                    }}
+                    key={`${client.name}-${idx}`}
+                    className="relative flex items-center justify-center shrink-0 select-none group/logo cursor-pointer py-3"
                   >
-                    {/* Slot 1: Logo A */}
-                    <div className="h-14 sm:h-16 w-full flex items-center justify-center shrink-0">
+                    <div
+                      className={`${floatClass} transition-all duration-500 ease-out group-hover/logo:scale-125 group-hover/logo:-translate-y-2.5`}
+                      style={{ animationDelay: `${delay}s` }}
+                    >
                       <img
-                        src={pair.from.logo}
-                        alt={pair.from.name}
-                        className="max-h-11 sm:max-h-13 max-w-[145px] sm:max-w-[185px] w-auto object-contain transition-transform duration-300 hover:scale-110 drop-shadow-sm"
-                      />
-                    </div>
-                    {/* Slot 2: Logo B */}
-                    <div className="h-14 sm:h-16 w-full flex items-center justify-center shrink-0">
-                      <img
-                        src={pair.to.logo}
-                        alt={pair.to.name}
-                        className="max-h-11 sm:max-h-13 max-w-[145px] sm:max-w-[185px] w-auto object-contain transition-transform duration-300 hover:scale-110 drop-shadow-sm"
-                      />
-                    </div>
-                    {/* Slot 3: Logo A (seamless loop) */}
-                    <div className="h-14 sm:h-16 w-full flex items-center justify-center shrink-0">
-                      <img
-                        src={pair.from.logo}
-                        alt={pair.from.name}
-                        className="max-h-11 sm:max-h-13 max-w-[145px] sm:max-w-[185px] w-auto object-contain transition-transform duration-300 hover:scale-110 drop-shadow-sm"
+                        src={client.logo}
+                        alt={client.name}
+                        className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover/logo:drop-shadow-[0_16px_32px_rgba(245,158,11,0.28)] transition-all duration-500"
                       />
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
-          {/* Marquee Row 2: Sliding Right (Kinetic Vertical Roller Swap - Container-Free, Full Color) */}
-          <div className="relative w-full overflow-hidden py-4 mt-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="animate-ticker-reverse gap-10 sm:gap-14 flex items-center will-change-transform">
-              {[...clientLogoPairsRow2, ...clientLogoPairsRow2].map((pair, idx) => (
-                <div
-                  key={`${pair.from.name}-${idx}`}
-                  className="relative w-40 sm:w-52 h-14 sm:h-16 overflow-hidden flex items-center justify-center shrink-0 select-none"
-                >
+          {/* Stream Row 2: Silky Smooth Glide Right with Counter Sinusoidal Floating Wave */}
+          <div className="relative w-full overflow-hidden py-4 mt-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+            <div className="animate-luxury-marquee-right gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
+              {[...clientLogosRow2, ...clientLogosRow2].map((client, idx) => {
+                const floatClass =
+                  idx % 3 === 0
+                    ? "animate-float-b"
+                    : idx % 3 === 1
+                    ? "animate-float-c"
+                    : "animate-float-a";
+                const delay = -((idx % clientLogosRow2.length) * 1.5);
+
+                return (
                   <div
-                    className="flex flex-col w-full will-change-transform"
-                    style={{
-                      animation: "clientLogoSlideUp 7s cubic-bezier(0.77, 0, 0.175, 1) infinite",
-                      animationDelay: `${(idx % clientLogoPairsRow2.length) * 0.72}s`,
-                    }}
+                    key={`${client.name}-${idx}`}
+                    className="relative flex items-center justify-center shrink-0 select-none group/logo cursor-pointer py-3"
                   >
-                    {/* Slot 1: Logo A */}
-                    <div className="h-14 sm:h-16 w-full flex items-center justify-center shrink-0">
+                    <div
+                      className={`${floatClass} transition-all duration-500 ease-out group-hover/logo:scale-125 group-hover/logo:-translate-y-2.5`}
+                      style={{ animationDelay: `${delay}s` }}
+                    >
                       <img
-                        src={pair.from.logo}
-                        alt={pair.from.name}
-                        className="max-h-11 sm:max-h-13 max-w-[145px] sm:max-w-[185px] w-auto object-contain transition-transform duration-300 hover:scale-110 drop-shadow-sm"
-                      />
-                    </div>
-                    {/* Slot 2: Logo B */}
-                    <div className="h-14 sm:h-16 w-full flex items-center justify-center shrink-0">
-                      <img
-                        src={pair.to.logo}
-                        alt={pair.to.name}
-                        className="max-h-11 sm:max-h-13 max-w-[145px] sm:max-w-[185px] w-auto object-contain transition-transform duration-300 hover:scale-110 drop-shadow-sm"
-                      />
-                    </div>
-                    {/* Slot 3: Logo A (seamless loop) */}
-                    <div className="h-14 sm:h-16 w-full flex items-center justify-center shrink-0">
-                      <img
-                        src={pair.from.logo}
-                        alt={pair.from.name}
-                        className="max-h-11 sm:max-h-13 max-w-[145px] sm:max-w-[185px] w-auto object-contain transition-transform duration-300 hover:scale-110 drop-shadow-sm"
+                        src={client.logo}
+                        alt={client.name}
+                        className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover/logo:drop-shadow-[0_16px_32px_rgba(245,158,11,0.28)] transition-all duration-500"
                       />
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

@@ -9,6 +9,7 @@ import { SitePreloader } from "@/components/SitePreloader";
 import {
   Sparkles,
   ArrowRight,
+  ArrowLeft,
   ShieldCheck,
   Zap,
   DollarSign,
@@ -237,26 +238,26 @@ export default function HomePage() {
                 ))}
               </div>
 
-              {/* Custom Animated Scroll Indicator */}
+              {/* Custom Animated Scroll Indicator: Option 3 Obsidian & 24K Gold */}
               <div className="flex flex-col items-center justify-center mt-6 sm:mt-7 gap-2 select-none">
                 {/* Animated Scroll Device Pill */}
-                <div className="flex items-center gap-3 px-4 py-1.5 rounded-full bg-neutral-50 border border-neutral-200 shadow-sm">
-                  {/* Animated Mouse Capsule with Rolling Wheel */}
-                  <div className="relative w-4 h-6 rounded-full border-[1.5px] border-neutral-800 flex justify-center pt-1 overflow-hidden shrink-0">
-                    <span className="w-1 h-1.5 bg-black rounded-full animate-scroll-wheel" />
+                <div className="flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#121214] border border-neutral-800 shadow-[0_4px_16px_rgba(0,0,0,0.18)]">
+                  {/* Animated Mouse Capsule with Rolling Gold Wheel */}
+                  <div className="relative w-4 h-6 rounded-full border-[1.5px] border-[#F59E0B]/70 flex justify-center pt-1 overflow-hidden shrink-0">
+                    <span className="w-1 h-1.5 bg-[#F59E0B] rounded-full animate-scroll-wheel shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
                   </div>
 
-                  {/* Swipe/Scroll Text with Animated Directional Glide */}
-                  <div className="flex items-center gap-1.5 text-xs text-neutral-600 font-medium">
+                  {/* Swipe/Scroll Text with Animated 24K Gold Directional Glide */}
+                  <div className="flex items-center gap-1.5 text-xs text-neutral-300 font-medium">
                     <span>scroll to explore</span>
-                    <span className="inline-block animate-swipe-glide text-black font-bold">→</span>
+                    <span className="inline-block animate-swipe-glide text-[#F59E0B] font-bold">→</span>
                   </div>
                 </div>
 
                 {/* Dynamic Horizontal Progress Bar */}
                 <div className="w-36 h-1 bg-neutral-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-black transition-all duration-75 rounded-full"
+                    className="h-full bg-[#F59E0B] transition-all duration-75 rounded-full"
                     style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
                   />
                 </div>
@@ -280,21 +281,21 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Navigation Arrows */}
+              {/* Option 3: Obsidian & 24K Gold Luxury Navigation Arrows */}
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => scrollProducts("left")}
                   aria-label="Scroll left"
-                  className="h-12 w-12 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                  className="group relative h-12 w-12 rounded-full bg-[#121214] border border-neutral-800 hover:border-[#F59E0B] text-[#F59E0B] hover:text-[#FBBF24] flex items-center justify-center transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_0_24px_rgba(245,158,11,0.35)] hover:scale-105 active:scale-95 cursor-pointer"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ArrowLeft className="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-0.5" />
                 </button>
                 <button
                   onClick={() => scrollProducts("right")}
                   aria-label="Scroll right"
-                  className="h-12 w-12 rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-950 hover:text-white flex items-center justify-center transition shadow-sm cursor-pointer"
+                  className="group relative h-12 w-12 rounded-full bg-[#121214] border border-neutral-800 hover:border-[#F59E0B] text-[#F59E0B] hover:text-[#FBBF24] flex items-center justify-center transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_0_24px_rgba(245,158,11,0.35)] hover:scale-105 active:scale-95 cursor-pointer"
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5" />
                 </button>
               </div>
             </div>

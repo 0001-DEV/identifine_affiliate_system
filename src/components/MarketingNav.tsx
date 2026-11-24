@@ -27,20 +27,24 @@ const identifineServices = [
 
 const xtremeCardzServices = [
   {
-    title: "De-Titan 3-in-1 Hybrid Cards",
-    desc: "Titanium-reinforced smart cards with dual-chip NFC/RFID",
+    title: "Metal Business Cards",
+    desc: "Metal Matte, Gunmetal & Titanium Steel finishes built to make a lasting impression",
   },
   {
-    title: "24K Gold Mirror Cards",
-    desc: "Handcrafted 24K mirror gold finish for VIP executives",
+    title: "Corporate ID Systems",
+    desc: "Eggshell, Frosted translux & Nubis cards for staff, access & brand presence",
   },
   {
-    title: "Black Matte Stealth Titanium",
-    desc: "Tactical ultra-durable dark aerospace metal cards",
+    title: "Access & Smart Cards",
+    desc: "De-Titan 3-in-1 hybrid cards & tap-and-connect NFC smart networking",
   },
   {
-    title: "VIP Suites & Accessories",
-    desc: "Custom presentation boxes, magnetic holders & carbon cases",
+    title: "Membership & Special Purpose",
+    desc: "Distinctive VIP, club and loyalty cards combining prestige finishes with smart identification",
+  },
+  {
+    title: "Accessories & Packaging",
+    desc: "Bespoke card holders, custom branded lanyards and luxury unboxing suites",
   },
 ];
 
@@ -249,7 +253,7 @@ export function MarketingNav() {
                   {/* Mega Dropdown on Hover */}
                   {productsDropdownOpen && (
                     <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 w-[840px] max-w-[95vw] pointer-events-auto animate-in fade-in slide-in-from-top-1 duration-200"
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 w-[1080px] max-w-[96vw] pointer-events-auto animate-in fade-in slide-in-from-top-1 duration-200"
                       onMouseEnter={handleMouseEnterProducts}
                       onMouseLeave={handleMouseLeaveProducts}
                     >
@@ -258,35 +262,30 @@ export function MarketingNav() {
                         <div className="h-1 bg-gradient-to-r from-amber-400 via-neutral-900 to-amber-400" />
 
                         {/* 3-Column Grid */}
-                        <div className="grid grid-cols-3 divide-x divide-neutral-100 p-6 sm:p-7 gap-6">
+                        <div className="grid grid-cols-3 divide-x divide-neutral-100 p-8 sm:p-9 md:p-10 gap-8 md:gap-10">
                           {/* Column 1: IDENTIFINE */}
                           <div className="space-y-4">
-                            <div className="flex items-center gap-2 pb-2.5 border-b border-neutral-100">
-                              <img
-                                src="/identifine_logo_dark.webp"
-                                alt="Identifine"
-                                className="h-5 w-auto object-contain"
-                              />
-                              <h4 className="font-black text-sm uppercase tracking-wider text-black">
+                            <div className="pb-3 border-b border-neutral-100">
+                              <h4 className="font-black text-base uppercase tracking-wider text-black">
                                 IDENTIFINE
                               </h4>
                             </div>
-                            <p className="text-[11px] text-neutral-500 font-medium">
+                            <p className="text-xs text-neutral-500 font-medium leading-relaxed">
                               Digital identity architecture, encrypted credentials & enterprise verification systems.
                             </p>
-                            <ul className="space-y-2">
+                            <ul className="space-y-2.5">
                               {identifineServices.map((item, idx) => (
                                 <li key={idx}>
                                   <Link
                                     href="/#products"
                                     onClick={handleProductScroll}
-                                    className="group/item block rounded-lg p-2 -mx-2 hover:bg-neutral-50 transition-colors"
+                                    className="group/item block rounded-xl p-2.5 -mx-2.5 hover:bg-neutral-50 transition-colors"
                                   >
                                     <div className="text-xs font-bold text-black group-hover/item:text-[#F59E0B] transition-colors flex items-center justify-between">
                                       <span>{item.title}</span>
-                                      <ArrowRight className="w-3 h-3 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all text-[#F59E0B]" />
+                                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all text-[#F59E0B]" />
                                     </div>
-                                    <div className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
+                                    <div className="text-[11px] text-neutral-500 leading-snug mt-1">
                                       {item.desc}
                                     </div>
                                   </Link>
@@ -296,33 +295,28 @@ export function MarketingNav() {
                           </div>
 
                           {/* Column 2: XTREME CARDZ */}
-                          <div className="pl-6 space-y-4">
-                            <div className="flex items-center gap-2 pb-2.5 border-b border-neutral-100">
-                              <img
-                                src="/xtreme-cardz-icon.png"
-                                alt="Xtreme Cardz"
-                                className="h-5 w-auto object-contain"
-                              />
-                              <h4 className="font-black text-sm uppercase tracking-wider text-black">
+                          <div className="pl-8 md:pl-10 space-y-4">
+                            <div className="pb-3 border-b border-neutral-100">
+                              <h4 className="font-black text-base uppercase tracking-wider text-black">
                                 XTREME CARDZ
                               </h4>
                             </div>
-                            <p className="text-[11px] text-neutral-500 font-medium">
-                              Ultra-luxury smart metal cards, 24K mirror gold, and RFID executive suites.
+                            <p className="text-xs text-neutral-500 font-medium leading-relaxed">
+                              Ultra-luxury metal business cards, corporate ID finishes, smart NFC cards & accessories.
                             </p>
-                            <ul className="space-y-2">
+                            <ul className="space-y-2.5">
                               {xtremeCardzServices.map((item, idx) => (
                                 <li key={idx}>
                                   <Link
                                     href="/#products"
                                     onClick={handleProductScroll}
-                                    className="group/item block rounded-lg p-2 -mx-2 hover:bg-neutral-50 transition-colors"
+                                    className="group/item block rounded-xl p-2.5 -mx-2.5 hover:bg-neutral-50 transition-colors"
                                   >
                                     <div className="text-xs font-bold text-black group-hover/item:text-[#F59E0B] transition-colors flex items-center justify-between">
                                       <span>{item.title}</span>
-                                      <ArrowRight className="w-3 h-3 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all text-[#F59E0B]" />
+                                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all text-[#F59E0B]" />
                                     </div>
-                                    <div className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
+                                    <div className="text-[11px] text-neutral-500 leading-snug mt-1">
                                       {item.desc}
                                     </div>
                                   </Link>
@@ -332,33 +326,28 @@ export function MarketingNav() {
                           </div>
 
                           {/* Column 3: CR8 */}
-                          <div className="pl-6 space-y-4">
-                            <div className="flex items-center gap-2 pb-2.5 border-b border-neutral-100">
-                              <img
-                                src="/cr8-logo-dark.svg"
-                                alt="CR8"
-                                className="h-5 w-auto object-contain"
-                              />
-                              <h4 className="font-black text-sm uppercase tracking-wider text-black">
+                          <div className="pl-8 md:pl-10 space-y-4">
+                            <div className="pb-3 border-b border-neutral-100">
+                              <h4 className="font-black text-base uppercase tracking-wider text-black">
                                 CR8
                               </h4>
                             </div>
-                            <p className="text-[11px] text-neutral-500 font-medium">
-                              Brand memorability, tangible thinking, bespoke signatures and industrial design.
+                            <p className="text-xs text-neutral-500 font-medium leading-relaxed">
+                              Brand memorability, tangible thinking, brand signatures, and industrial design.
                             </p>
-                            <ul className="space-y-2">
+                            <ul className="space-y-2.5">
                               {cr8Services.map((item, idx) => (
                                 <li key={idx}>
                                   <Link
                                     href="/#products"
                                     onClick={handleProductScroll}
-                                    className="group/item block rounded-lg p-2 -mx-2 hover:bg-neutral-50 transition-colors"
+                                    className="group/item block rounded-xl p-2.5 -mx-2.5 hover:bg-neutral-50 transition-colors"
                                   >
                                     <div className="text-xs font-bold text-black group-hover/item:text-[#F59E0B] transition-colors flex items-center justify-between">
                                       <span>{item.title}</span>
-                                      <ArrowRight className="w-3 h-3 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all text-[#F59E0B]" />
+                                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 -translate-x-1 group-hover/item:translate-x-0 transition-all text-[#F59E0B]" />
                                     </div>
-                                    <div className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5">
+                                    <div className="text-[11px] text-neutral-500 leading-snug mt-1">
                                       {item.desc}
                                     </div>
                                   </Link>
@@ -369,16 +358,16 @@ export function MarketingNav() {
                         </div>
 
                         {/* Bottom Bar */}
-                        <div className="bg-neutral-50 px-6 py-3 border-t border-neutral-100 flex items-center justify-between text-xs">
-                          <span className="text-neutral-500">
-                            Earn recurring commissions by connecting clients to any of these enterprise solutions.
+                        <div className="bg-neutral-50 px-8 py-3.5 border-t border-neutral-100 flex items-center justify-between text-xs">
+                          <span className="text-neutral-500 font-medium">
+                            Earn recurring commission payouts by referring corporate clients and brands to any of these ecosystems.
                           </span>
                           <Link
                             href="/#products"
                             onClick={handleProductScroll}
-                            className="font-bold text-black hover:text-[#F59E0B] transition-colors inline-flex items-center gap-1"
+                            className="font-bold text-black hover:text-[#F59E0B] transition-colors inline-flex items-center gap-1.5 shrink-0"
                           >
-                            <span>View Full Catalog</span>
+                            <span>Explore Full Catalog</span>
                             <ArrowRight className="w-3.5 h-3.5" />
                           </Link>
                         </div>

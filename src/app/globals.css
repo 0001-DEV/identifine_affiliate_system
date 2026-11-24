@@ -447,5 +447,16 @@ html.lenis, html.lenis body {
   animation: horizontalSwipeGlide 1.8s ease-in-out infinite;
 }
 
+/* ==========================================================================
+   CUSTOM LUXURY CURSOR (Precision Dot & Trailing Ring)
+   ========================================================================== */
+@media (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+
 
 

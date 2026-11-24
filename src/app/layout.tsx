@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AppShell } from "@/components/AppShell";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { CustomCursor } from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "IDENTIFINE — Partner & Affiliate Commission App",
@@ -29,6 +30,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#09090B] text-neutral-100 selection:bg-white selection:text-black">
+        <CustomCursor />
         <SmoothScroll />
         <AppShell>{children}</AppShell>
       </body>

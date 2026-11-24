@@ -90,6 +90,85 @@ export default function HomePage() {
     },
   ];
 
+  // Clients We Have Worked With
+  const clientsListRow1 = [
+    {
+      name: "Transcorp Hilton",
+      category: "Luxury Hospitality",
+      credential: "VIP Smart Passes",
+      initial: "TH",
+    },
+    {
+      name: "Access Holdings",
+      category: "Corporate Banking",
+      credential: "Executive Metal ID",
+      initial: "AH",
+    },
+    {
+      name: "Eko Hotels & Suites",
+      category: "Hospitality & Events",
+      credential: "RFID Access Suites",
+      initial: "EH",
+    },
+    {
+      name: "Zenith Bank Plc",
+      category: "Private Wealth",
+      credential: "24K Mirror Credentials",
+      initial: "ZB",
+    },
+    {
+      name: "Landmark Africa",
+      category: "Real Estate & Venues",
+      credential: "Smart Facility Passes",
+      initial: "LA",
+    },
+    {
+      name: "Paystack HQ",
+      category: "Fintech Enterprise",
+      credential: "Smart Staff Identity",
+      initial: "PS",
+    },
+  ];
+
+  const clientsListRow2 = [
+    {
+      name: "The George Lagos",
+      category: "Boutique Hotel",
+      credential: "Encrypted Room Cards",
+      initial: "TG",
+    },
+    {
+      name: "Radisson Blu",
+      category: "Hotel & Conference",
+      credential: "NFC Member Cards",
+      initial: "RB",
+    },
+    {
+      name: "Aluko & Oyebode",
+      category: "Legal & Advisory",
+      credential: "Titanium Partner Badges",
+      initial: "AO",
+    },
+    {
+      name: "PwC Nigeria",
+      category: "Professional Services",
+      credential: "Corporate Access Suite",
+      initial: "PW",
+    },
+    {
+      name: "Flutterwave",
+      category: "Global Fintech",
+      credential: "Smart Digital Credentials",
+      initial: "FW",
+    },
+    {
+      name: "Oriental Hotel",
+      category: "Luxury Hospitality",
+      credential: "VIP Keycards",
+      initial: "OH",
+    },
+  ];
+
   // Showcase Products
   const [activeProductCard, setActiveProductCard] = useState<string | null>(null);
 
@@ -238,30 +317,91 @@ export default function HomePage() {
                 ))}
               </div>
 
-              {/* Custom Animated Scroll Indicator: Option 3 Obsidian & 24K Gold */}
-              <div className="flex flex-col items-center justify-center mt-6 sm:mt-7 gap-2 select-none">
-                {/* Animated Scroll Device Pill */}
-                <div className="flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#121214] border border-neutral-800 shadow-[0_4px_16px_rgba(0,0,0,0.18)]">
-                  {/* Animated Mouse Capsule with Rolling Gold Wheel */}
-                  <div className="relative w-4 h-6 rounded-full border-[1.5px] border-[#F59E0B]/70 flex justify-center pt-1 overflow-hidden shrink-0">
-                    <span className="w-1 h-1.5 bg-[#F59E0B] rounded-full animate-scroll-wheel shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
-                  </div>
-
-                  {/* Swipe/Scroll Text with Animated 24K Gold Directional Glide */}
-                  <div className="flex items-center gap-1.5 text-xs text-neutral-300 font-medium">
-                    <span>scroll to explore</span>
-                    <span className="inline-block animate-swipe-glide text-[#F59E0B] font-bold">→</span>
-                  </div>
-                </div>
-
-                {/* Dynamic Horizontal Progress Bar */}
-                <div className="w-36 h-1 bg-neutral-200 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-[#F59E0B] transition-all duration-75 rounded-full"
-                    style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
-                  />
-                </div>
+              {/* Horizontal Scroll Progress Bar */}
+              <div className="mx-auto max-w-xs mt-6 h-1 bg-neutral-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-black transition-all duration-75 rounded-full"
+                  style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
+                />
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            1C. OUR CLIENTS SECTION (Continuous Kinetic Marquee Animation)
+                Positioned directly before Our Products & Services
+           ========================================================================= */}
+        <section id="clients" className="py-20 sm:py-24 bg-white border-b border-neutral-200 overflow-hidden">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12 sm:mb-14 text-center">
+            <span className="text-xs uppercase tracking-widest text-[#F59E0B] font-bold bg-[#F59E0B]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">
+              Trusted Partnerships
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black text-black tracking-tight leading-tight">
+              Clients We Have Worked With
+            </h2>
+            <p className="text-sm sm:text-base text-neutral-600 mt-3 font-normal max-w-2xl mx-auto">
+              Our encrypted smart credentials and 24K metal suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
+            </p>
+          </div>
+
+          {/* Marquee Row 1: Sliding Left */}
+          <div className="relative w-full overflow-hidden py-2">
+            <div className="animate-ticker gap-4 sm:gap-6 flex items-center will-change-transform">
+              {[...clientsListRow1, ...clientsListRow1].map((client, idx) => (
+                <div
+                  key={`${client.name}-${idx}`}
+                  className="group relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-neutral-50 hover:bg-black border border-neutral-200/90 hover:border-neutral-800 transition-all duration-300 shadow-sm hover:shadow-xl shrink-0 cursor-default"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-black group-hover:bg-[#F59E0B] text-white group-hover:text-black font-black text-xs flex items-center justify-center transition-colors duration-300 shrink-0">
+                    {client.initial}
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-bold text-sm sm:text-base text-black group-hover:text-white transition-colors duration-300">
+                      {client.name}
+                    </h4>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-[11px] text-neutral-500 group-hover:text-neutral-400 font-medium">
+                        {client.category}
+                      </span>
+                      <span className="text-[10px] text-neutral-300 group-hover:text-neutral-600">•</span>
+                      <span className="text-[11px] text-[#F59E0B] font-semibold">
+                        {client.credential}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Marquee Row 2: Sliding Right (Reverse Direction) */}
+          <div className="relative w-full overflow-hidden py-3 mt-3">
+            <div className="animate-ticker-reverse gap-4 sm:gap-6 flex items-center will-change-transform">
+              {[...clientsListRow2, ...clientsListRow2].map((client, idx) => (
+                <div
+                  key={`${client.name}-${idx}`}
+                  className="group relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-neutral-50 hover:bg-black border border-neutral-200/90 hover:border-neutral-800 transition-all duration-300 shadow-sm hover:shadow-xl shrink-0 cursor-default"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-black group-hover:bg-[#F59E0B] text-white group-hover:text-black font-black text-xs flex items-center justify-center transition-colors duration-300 shrink-0">
+                    {client.initial}
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-bold text-sm sm:text-base text-black group-hover:text-white transition-colors duration-300">
+                      {client.name}
+                    </h4>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-[11px] text-neutral-500 group-hover:text-neutral-400 font-medium">
+                        {client.category}
+                      </span>
+                      <span className="text-[10px] text-neutral-300 group-hover:text-neutral-600">•</span>
+                      <span className="text-[11px] text-[#F59E0B] font-semibold">
+                        {client.credential}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

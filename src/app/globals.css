@@ -378,6 +378,15 @@ html.lenis, html.lenis body {
   }
 }
 
+@keyframes tickerSlideReverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .animate-ticker {
   display: flex;
   width: max-content;
@@ -385,6 +394,16 @@ html.lenis, html.lenis body {
 }
 
 .animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+.animate-ticker-reverse {
+  display: flex;
+  width: max-content;
+  animation: tickerSlideReverse 28s linear infinite;
+}
+
+.animate-ticker-reverse:hover {
   animation-play-state: paused;
 }
 

@@ -12,7 +12,8 @@ export function MarketingNav() {
   // Navigation items corresponding to the main landing page sections
   const navLinks = [
     { id: "hero", label: "Home", href: "/#hero" },
-    { id: "partners", label: "Partners", href: "/#partners" },
+    { id: "partners-scroll", label: "Partners", href: "/#partners-scroll" },
+    { id: "clients", label: "Clients", href: "/#clients" },
     { id: "products", label: "Products", href: "/#products" },
     { id: "how-it-works", label: "How It Works", href: "/#how-it-works" },
     { id: "earnings", label: "Earnings", href: "/pricing" },
@@ -36,7 +37,7 @@ export function MarketingNav() {
       return;
     }
 
-    const sectionIds = ["hero", "partners", "products", "how-it-works", "earnings"];
+    const sectionIds = ["hero", "partners-scroll", "clients", "products", "how-it-works", "earnings"];
 
     const onScroll = () => {
       const scrollY = window.scrollY;
@@ -152,7 +153,7 @@ export function MarketingNav() {
         <div className="hidden md:flex items-center gap-3 shrink-0">
           <Link
             href="/portal?tab=register"
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-6 py-2.5 text-xs font-extrabold transition shadow-md hover:scale-[1.02]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-black hover:bg-neutral-800 text-white px-6 py-2.5 text-xs font-semibold transition shadow-md hover:scale-[1.02]"
           >
             <span>Become an Affiliate</span>
           </Link>
@@ -200,10 +201,10 @@ export function MarketingNav() {
             <Link
               href="/portal?tab=register"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center rounded-xl bg-[#F59E0B] hover:bg-[#D97706] py-3 text-xs font-extrabold text-black transition flex items-center justify-center gap-1.5 shadow-md"
+              className="w-full text-center rounded-xl bg-black hover:bg-neutral-800 py-3 text-xs font-semibold text-white transition flex items-center justify-center gap-1.5 shadow-md"
             >
-              <span>Become an Affiliate (7.5% Cash)</span>
-              <ArrowRight className="w-3.5 h-3.5 text-black" />
+              <span>Become an Affiliate</span>
+              <ArrowRight className="w-3.5 h-3.5 text-white" />
             </Link>
           </div>
         </div>

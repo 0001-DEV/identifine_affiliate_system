@@ -177,57 +177,155 @@ export default function HomePage() {
     },
   ];
 
-  // Showcase Products
+  // Showcase Products Extracted from Identifine, Xtreme Cardz & CR8 Websites
   const [activeProductCard, setActiveProductCard] = useState<string | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<"all" | "identifine" | "xtremecardz" | "cr8">("all");
 
   const showcaseProducts = [
+    // --- IDENTIFINE PRODUCTS ---
     {
-      id: "de-titan",
-      name: "De-Titan Smart Cards",
-      image: "/images/products/de-titan-3in1.webp",
-      tag: "Smart Badge",
-      description:
-        "Titanium-reinforced 3-in-1 hybrid credentials designed for executive identification, contactless NFC networking, and corporate access control.",
-    },
-    {
-      id: "du-plex",
-      name: "Du-Plex Smart Cards",
-      image: "/images/products/gold-mirror-metal.webp",
-      tag: "Dual NFC",
-      description:
-        "Dual-chip 24K mirror gold metal cards combining digital NFC contact sharing with door access RFID encryption.",
-    },
-    {
-      id: "corporate-id",
-      name: "Corporate ID Cards",
-      image: "/images/products/corporate-id-system.webp",
-      tag: "Enterprise",
-      description:
-        "Enterprise smart identification badges engineered for modern corporate organizations and secure staff tracking.",
-    },
-    {
-      id: "business-cards",
-      name: "Business Cards",
-      image: "/images/products/black-matte-metal.webp",
-      tag: "Laser Metal",
-      description:
-        "Laser-engraved matte black metal cards designed to leave an unforgettable impression with every instant NFC tap.",
-    },
-    {
-      id: "access-membership",
-      name: "Access & Membership Cards",
-      image: "/images/products/identifine-rfid-suite.webp",
-      tag: "RFID + Door",
-      description:
-        "Encrypted RFID credentials tailored for luxury private clubs, VIP lounges, gyms, and gated corporate campuses.",
-    },
-    {
-      id: "digital-qr",
-      name: "Digital Identity & QR Solutions",
+      id: "identifine-smart-id",
+      brand: "identifine",
+      brandLabel: "Identifine",
+      name: "Smart Identity Systems",
+      tag: "NFC Digital Profile",
       image: "/images/products/identifine-smart-id.webp",
-      tag: "Cloud vCard",
       description:
-        "Dynamic cloud-powered digital vCards and encrypted QR solutions for real-time contact sharing without requiring an app.",
+        "NFC-enabled contactless corporate credentials, digital portfolios, and encrypted instant contact sync without requiring an app.",
+    },
+    {
+      id: "identifine-rfid-suite",
+      brand: "identifine",
+      brandLabel: "Identifine",
+      name: "RFID Facility Access Suite",
+      tag: "Access Control",
+      image: "/images/products/identifine-rfid-suite.webp",
+      description:
+        "Enterprise encrypted RFID smart credentials for high-security doors, corporate turnstiles, executive elevators, and VIP suites.",
+    },
+    {
+      id: "identifine-corp-id",
+      brand: "identifine",
+      brandLabel: "Identifine",
+      name: "Corporate ID Infrastructure",
+      tag: "Staff Identification",
+      image: "/images/products/corporate-id-system.webp",
+      description:
+        "Multi-site organizational staff identification, badge issuance workflows, and centralized employee security tiering.",
+    },
+    {
+      id: "identifine-vcard",
+      brand: "identifine",
+      brandLabel: "Identifine",
+      name: "Cloud vCard & QR Solutions",
+      tag: "Dynamic Cloud QR",
+      image: "/images/products/identifine-catalogue-hero.webp",
+      description:
+        "Real-time updateable cloud vCards with branded dynamic QR codes and analytics for modern corporate networking teams.",
+    },
+
+    // --- XTREME CARDZ PRODUCTS ---
+    {
+      id: "xtreme-metal-cards",
+      brand: "xtremecardz",
+      brandLabel: "Xtreme Cardz",
+      name: "Metal Business Cards",
+      tag: "Metal Matte & Gunmetal",
+      image: "/images/products/card-metal-business-front.png",
+      description:
+        "Premium metal cards crafted in Metal Matte, Gunmetal, and Titanium Steel finishes, made for organizations that demand an unforgettable first impression.",
+    },
+    {
+      id: "xtreme-gold-mirror",
+      brand: "xtremecardz",
+      brandLabel: "Xtreme Cardz",
+      name: "24K Gold Mirror Cards",
+      tag: "24K Gold Plated",
+      image: "/images/products/gold-mirror-metal.webp",
+      description:
+        "Ultra-exclusive mirror-finish brass plated in pure 24K gold, precision-etched with sub-millimeter CNC craftsmanship for VIP clientele.",
+    },
+    {
+      id: "xtreme-corporate-id",
+      brand: "xtremecardz",
+      brandLabel: "Xtreme Cardz",
+      name: "Corporate ID Systems",
+      tag: "Eggshell & Nubis",
+      image: "/images/products/card-corporate-id-system.png",
+      description:
+        "Reliable, versatile cards in soft Eggshell, Frosted Translux, and textured Nubis finishes designed for executive staff and organizational prestige.",
+    },
+    {
+      id: "xtreme-smart-cards",
+      brand: "xtremecardz",
+      brandLabel: "Xtreme Cardz",
+      name: "Access & Smart Cards",
+      tag: "De-Titan 3-in-1",
+      image: "/images/products/card-access-smart-nfc.jpg",
+      description:
+        "Technology-enabled 3-in-1 multifunctional credentials combining ID card, physical access badge, and tap-and-connect NFC smart card.",
+    },
+    {
+      id: "xtreme-membership",
+      brand: "xtremecardz",
+      brandLabel: "Xtreme Cardz",
+      name: "Membership & Special Purpose",
+      tag: "VIP Club Suites",
+      image: "/images/products/card-membership-special.png",
+      description:
+        "Distinctive VIP, private club, and luxury hospitality membership cards engineered with custom serialized security chips.",
+    },
+    {
+      id: "xtreme-accessories",
+      brand: "xtremecardz",
+      brandLabel: "Xtreme Cardz",
+      name: "Bespoke Accessories & Holders",
+      tag: "Custom Packaging",
+      image: "/images/products/card-accessories-lanyard.jpg",
+      description:
+        "Complete identity systems with aerospace aluminum card holders, braided custom lanyards, and handcrafted presentation boxes.",
+    },
+
+    // --- CR8 (XTREME CR8TIVITY) PRODUCTS & SERVICES ---
+    {
+      id: "cr8-brand-memorability",
+      brand: "cr8",
+      brandLabel: "CR8",
+      name: "Brand Memorability",
+      tag: "Identity & Architecture",
+      image: "/images/products/cr8-brand-memorability.webp",
+      description:
+        "Building brands with clarity, character, and distinction. From brand strategy and architecture to visual identity systems and creative direction.",
+    },
+    {
+      id: "cr8-tangible-thinking",
+      brand: "cr8",
+      brandLabel: "CR8",
+      name: "Tangible Thinking",
+      tag: "Product & Industrial Design",
+      image: "/images/products/cr8-tangible-thinking.webp",
+      description:
+        "Transforming opportunities and concepts into physical products, industrial objects, custom trophies, and tangible interactive brand experiences.",
+    },
+    {
+      id: "cr8-brand-signatures",
+      brand: "cr8",
+      brandLabel: "CR8",
+      name: "Brand Signatures & Memorabilia",
+      tag: "Executive Gifting",
+      image: "/images/products/cr8-brand-signatures.webp",
+      description:
+        "Distinctive physical expressions of brands: corporate executive gifting, commemorative identities, anniversary coin suites, and limited-edition objects.",
+    },
+    {
+      id: "cr8-creative-direction",
+      brand: "cr8",
+      brandLabel: "CR8",
+      name: "Creative Direction & Campaigns",
+      tag: "Experiential Design",
+      image: "/images/products/cr8-creative-direction.webp",
+      description:
+        "High-impact multi-channel campaign creative direction, high-fidelity 3D industrial renderings, and memorable physical-meets-digital brand narratives.",
     },
   ];
 
@@ -337,24 +435,24 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            1C. OUR CLIENTS SECTION (Sophisticated Zero-Gravity Floating Stream)
+            1C. OUR CLIENTS SECTION (Warm Luxury Palette, Zero-Gravity Floating Stream)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
-        <section id="clients" className="py-24 sm:py-28 bg-white border-b border-neutral-200 overflow-hidden relative">
+        <section id="clients" className="py-24 sm:py-28 bg-[#F6F3EB] border-y border-[#E8E3D7] overflow-hidden relative">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14 sm:mb-16 text-center">
-            <span className="text-xs uppercase tracking-widest text-[#F59E0B] font-bold bg-[#F59E0B]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">
-              Trusted Partnerships
+            <span className="text-xs uppercase tracking-widest text-[#B45309] font-bold bg-[#B45309]/10 px-3.5 py-1.5 rounded-full inline-block mb-3 border border-[#B45309]/20">
+              Verified Enterprise Network
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-black tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#262320] tracking-tight leading-tight">
               Clients We Have Worked With
             </h2>
-            <p className="text-sm sm:text-base text-neutral-600 mt-3 font-normal max-w-2xl mx-auto">
-              Our encrypted smart credentials and 24K metal suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
+            <p className="text-sm sm:text-base text-[#666159] mt-3 font-normal max-w-2xl mx-auto">
+              Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
             </p>
           </div>
 
           {/* Stream Row 1: Silky Smooth Glide Left with Sinusoidal Floating Wave */}
-          <div className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+          <div className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,#F6F3EB_15%,#F6F3EB_85%,transparent)]">
             <div className="animate-luxury-marquee-left gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
               {[...clientLogosRow1, ...clientLogosRow1].map((client, idx) => {
                 const floatClass =
@@ -377,7 +475,7 @@ export default function HomePage() {
                       <img
                         src={client.logo}
                         alt={client.name}
-                        className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover/logo:drop-shadow-[0_16px_32px_rgba(245,158,11,0.28)] transition-all duration-500"
+                        className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(217,119,6,0.35)] transition-all duration-500"
                       />
                     </div>
                   </div>
@@ -387,7 +485,7 @@ export default function HomePage() {
           </div>
 
           {/* Stream Row 2: Silky Smooth Glide Right with Counter Sinusoidal Floating Wave */}
-          <div className="relative w-full overflow-hidden py-4 mt-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+          <div className="relative w-full overflow-hidden py-4 mt-4 [mask-image:linear-gradient(to_right,transparent,#F6F3EB_15%,#F6F3EB_85%,transparent)]">
             <div className="animate-luxury-marquee-right gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
               {[...clientLogosRow2, ...clientLogosRow2].map((client, idx) => {
                 const floatClass =
@@ -410,7 +508,7 @@ export default function HomePage() {
                       <img
                         src={client.logo}
                         alt={client.name}
-                        className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover/logo:drop-shadow-[0_16px_32px_rgba(245,158,11,0.28)] transition-all duration-500"
+                        className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(217,119,6,0.35)] transition-all duration-500"
                       />
                     </div>
                   </div>
@@ -422,16 +520,18 @@ export default function HomePage() {
 
         {/* =========================================================================
             2. OUR PRODUCTS & SERVICES SECTION
+               (Hero typography: font-normal tracking-tight leading-[1.05])
+               (Extracted authentic offerings from Identifine, Xtreme Cardz & CR8)
            ========================================================================= */}
         <section id="products" className="py-24 sm:py-32 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
               <div>
-                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-neutral-950 tracking-tight leading-none">
+                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-black tracking-tight leading-[1.05]">
                   Our Products &amp; Services
                 </h2>
-                <p className="text-base sm:text-xl text-neutral-600 mt-3 font-medium">
-                  Promote verified hardware credentials engineered for executives, private venues, and corporate enterprises.
+                <p className="text-base sm:text-xl text-neutral-600 mt-4 font-normal">
+                  Promote verified hardware credentials, identity architectures, and brand systems engineered across the ecosystem.
                 </p>
               </div>
 
@@ -454,74 +554,104 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Brand Filter Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 no-scrollbar">
+              {[
+                { id: "all", label: "All Offerings" },
+                { id: "identifine", label: "Identifine" },
+                { id: "xtremecardz", label: "Xtreme Cardz" },
+                { id: "cr8", label: "CR8 (Xtreme Cr8tivity)" },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedBrand(tab.id as any)}
+                  className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shrink-0 cursor-pointer ${
+                    selectedBrand === tab.id
+                      ? "bg-black text-white shadow-md scale-105"
+                      : "bg-white text-neutral-600 border border-neutral-200 hover:bg-neutral-50 hover:text-black"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
             {/* Horizontal Product Track */}
             <div
               ref={productScrollRef}
               className="flex items-stretch overflow-x-auto pb-8 scroll-smooth no-scrollbar"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
-              {showcaseProducts.map((prod) => (
-                <div
-                  key={prod.id}
-                  onClick={() => setActiveProductCard(activeProductCard === prod.id ? null : prod.id)}
-                  className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-transparent flex flex-col group cursor-pointer m-[16px]"
-                >
-                  {/* Container: image inside */}
-                  <div className="relative h-80 sm:h-96 md:h-[420px] w-full bg-neutral-950 overflow-hidden rounded-2xl shadow-md">
-                    <img
-                      src={prod.image}
-                      alt={prod.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+              {showcaseProducts
+                .filter((p) => selectedBrand === "all" || p.brand === selectedBrand)
+                .map((prod) => (
+                  <div
+                    key={prod.id}
+                    onClick={() => setActiveProductCard(activeProductCard === prod.id ? null : prod.id)}
+                    className="w-[300px] sm:w-[380px] md:w-[420px] shrink-0 bg-transparent flex flex-col group cursor-pointer m-[16px]"
+                  >
+                    {/* Container: image inside */}
+                    <div className="relative h-80 sm:h-96 md:h-[420px] w-full bg-neutral-950 overflow-hidden rounded-2xl shadow-md">
+                      <img
+                        src={prod.image}
+                        alt={prod.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
 
-                    {/* Hover / Click Overlay: Changes to white background with description */}
-                    <div
-                      className={`absolute inset-0 bg-white p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
-                        activeProductCard === prod.id
-                          ? "opacity-100 pointer-events-auto"
-                          : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
-                      }`}
-                    >
-                      <div className="space-y-4">
-                        <div className="inline-block rounded-full bg-amber-50 px-3.5 py-1 text-xs sm:text-sm font-bold text-amber-800">
-                          {prod.tag} — 7.5% Cash Commission
+                      {/* Hover / Click Overlay: Changes to white background with description */}
+                      <div
+                        className={`absolute inset-0 bg-white p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 z-20 ${
+                          activeProductCard === prod.id
+                            ? "opacity-100 pointer-events-auto"
+                            : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+                        }`}
+                      >
+                        <div className="space-y-4">
+                          <div className="inline-block rounded-full bg-amber-50 px-3.5 py-1 text-xs sm:text-sm font-bold text-amber-800">
+                            {prod.brandLabel} — {prod.tag}
+                          </div>
+
+                          <h3 className="font-black text-2xl sm:text-3xl lg:text-4xl text-neutral-950 leading-tight">
+                            {prod.name}
+                          </h3>
+
+                          <p className="text-base sm:text-lg text-neutral-700 leading-relaxed font-medium">
+                            {prod.description}
+                          </p>
                         </div>
 
-                        <h3 className="font-black text-2xl sm:text-3xl lg:text-4xl text-neutral-950 leading-tight">
-                          {prod.name}
-                        </h3>
-
-                        <p className="text-base sm:text-lg text-neutral-700 leading-relaxed font-medium">
-                          {prod.description}
-                        </p>
-                      </div>
-
-                      <div className="pt-6 border-t border-neutral-200 flex items-center justify-between">
-                        <span className="font-mono font-bold text-sm sm:text-base text-neutral-500">
-                          7.5% Cash Payout
-                        </span>
-                        <Link
-                          href={`/portal?tab=register&product=${prod.id}`}
-                          onClick={(e) => e.stopPropagation()}
-                          className="rounded-full bg-black text-white hover:bg-neutral-800 px-6 py-2.5 text-xs sm:text-sm font-extrabold transition shadow-md"
-                        >
-                          Refer Card
-                        </Link>
+                        <div className="pt-6 border-t border-neutral-200 flex items-center justify-between">
+                          <span className="font-mono font-bold text-sm sm:text-base text-neutral-500">
+                            7.5% Commission
+                          </span>
+                          <Link
+                            href={`/portal?tab=register&product=${prod.id}`}
+                            onClick={(e) => e.stopPropagation()}
+                            className="rounded-full bg-black text-white hover:bg-neutral-800 px-6 py-2.5 text-xs sm:text-sm font-extrabold transition shadow-md"
+                          >
+                            Refer Offering
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Name under image */}
-                  <div className="pt-4 pb-2 px-1">
-                    <h3 className="font-black text-xl sm:text-2xl text-neutral-900 tracking-tight">
-                      {prod.name}
-                    </h3>
-                    <p className="text-sm font-bold text-neutral-500 mt-1">
-                      7.5% Cash Commission
-                    </p>
+                    {/* Name & Brand under image */}
+                    <div className="pt-4 pb-2 px-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100/70 px-2 py-0.5 rounded">
+                          {prod.brandLabel}
+                        </span>
+                        <span className="text-xs font-semibold text-neutral-400">• {prod.tag}</span>
+                      </div>
+                      <h3 className="font-bold text-xl sm:text-2xl text-neutral-900 tracking-tight">
+                        {prod.name}
+                      </h3>
+                      <p className="text-sm font-bold text-neutral-500 mt-1">
+                        7.5% Cash Commission
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </section>

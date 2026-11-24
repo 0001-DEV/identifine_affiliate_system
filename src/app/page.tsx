@@ -90,82 +90,130 @@ export default function HomePage() {
     },
   ];
 
-  // Clients We Have Worked With
+  // Real Client Logos from Identifine, Xtreme Cardz & CR8 Ecosystem
   const clientsListRow1 = [
     {
-      name: "Transcorp Hilton",
-      category: "Luxury Hospitality",
-      credential: "VIP Smart Passes",
-      initial: "TH",
+      name: "Guinness Nigeria",
+      logo: "/images/clients/logo-guinness-nigeria.png",
+      category: "Beverage & FMCG",
+      credential: "VIP Event Passes",
     },
     {
-      name: "Access Holdings",
-      category: "Corporate Banking",
-      credential: "Executive Metal ID",
-      initial: "AH",
+      name: "Seplat Energy",
+      logo: "/images/clients/logo-seplat-energy.png",
+      category: "Oil & Gas Energy",
+      credential: "Executive Smart ID",
     },
     {
-      name: "Eko Hotels & Suites",
-      category: "Hospitality & Events",
-      credential: "RFID Access Suites",
-      initial: "EH",
+      name: "Rainoil Limited",
+      logo: "/images/clients/logo-rainoil.png",
+      category: "Petroleum Downstream",
+      credential: "Corporate Staff Cards",
     },
     {
-      name: "Zenith Bank Plc",
-      category: "Private Wealth",
-      credential: "24K Mirror Credentials",
-      initial: "ZB",
+      name: "Ikeja Electric",
+      logo: "/images/clients/logo-ikeja-electric.png",
+      category: "Power & Utilities",
+      credential: "RFID Facility Access",
     },
     {
-      name: "Landmark Africa",
-      category: "Real Estate & Venues",
-      credential: "Smart Facility Passes",
-      initial: "LA",
+      name: "Sapetro Oil",
+      logo: "/images/clients/logo-sapetro-oil.webp",
+      category: "Energy Exploration",
+      credential: "Titanium Metal Badges",
     },
     {
-      name: "Paystack HQ",
-      category: "Fintech Enterprise",
-      credential: "Smart Staff Identity",
-      initial: "PS",
+      name: "Nova Bank",
+      logo: "/images/clients/logo-nova-bank.png",
+      category: "Commercial Banking",
+      credential: "Private Wealth Suite",
+    },
+    {
+      name: "TVC Communications",
+      logo: "/images/clients/logo-tvc-communications.png",
+      category: "Broadcast & Media",
+      credential: "Smart Media Credentials",
+    },
+    {
+      name: "NECA Nigeria",
+      logo: "/images/clients/logo-neca-nigeria.png",
+      category: "Employers Consultative",
+      credential: "Executive Membership",
+    },
+    {
+      name: "Credit Direct",
+      logo: "/images/clients/logo-credit-direct.png",
+      category: "Financial Services",
+      credential: "Staff ID Cards",
+    },
+    {
+      name: "Optiva Capital",
+      logo: "/images/clients/logo-optiva-capital.webp",
+      category: "Wealth Management",
+      credential: "Prestige Cards",
     },
   ];
 
   const clientsListRow2 = [
     {
-      name: "The George Lagos",
-      category: "Boutique Hotel",
-      credential: "Encrypted Room Cards",
-      initial: "TG",
+      name: "Stanbic IBTC",
+      logo: "/images/clients/Asset 24.webp",
+      category: "Banking & Wealth",
+      credential: "Encrypted Card Solutions",
     },
     {
-      name: "Radisson Blu",
-      category: "Hotel & Conference",
-      credential: "NFC Member Cards",
-      initial: "RB",
+      name: "Nigerian Breweries",
+      logo: "/images/clients/Asset 25.webp",
+      category: "Manufacturing",
+      credential: "Corporate VIP Passes",
     },
     {
-      name: "Aluko & Oyebode",
-      category: "Legal & Advisory",
-      credential: "Titanium Partner Badges",
-      initial: "AO",
+      name: "MTN Nigeria",
+      logo: "/images/clients/Asset 26.webp",
+      category: "Telecommunications",
+      credential: "Smart Badge Rollouts",
     },
     {
-      name: "PwC Nigeria",
-      category: "Professional Services",
-      credential: "Corporate Access Suite",
-      initial: "PW",
+      name: "Renaissance",
+      logo: "/images/clients/Asset 27.webp",
+      category: "Financial Advisory",
+      credential: "24K Gold Mirror Cards",
     },
     {
-      name: "Flutterwave",
-      category: "Global Fintech",
-      credential: "Smart Digital Credentials",
-      initial: "FW",
+      name: "ADNOC Group",
+      logo: "/images/clients/Asset 28.webp",
+      category: "Global Energy",
+      credential: "High-Security Access",
     },
     {
-      name: "Oriental Hotel",
-      category: "Luxury Hospitality",
-      credential: "VIP Keycards",
-      initial: "OH",
+      name: "Invera Energy",
+      logo: "/images/clients/logo-invera-energy.webp",
+      category: "Clean Energy",
+      credential: "Smart NFC Passes",
+    },
+    {
+      name: "Sterling Capital",
+      logo: "/images/clients/logo-sterling-capital.webp",
+      category: "Investment Group",
+      credential: "Custom Hardware Suites",
+    },
+    {
+      name: "Apex Synergy",
+      logo: "/images/clients/logo-apex-synergy.png",
+      category: "Corporate Holdings",
+      credential: "Digital Access Cards",
+    },
+    {
+      name: "Falcon Oil",
+      logo: "/images/clients/logo-falcon-oil.png",
+      category: "Energy Resources",
+      credential: "Executive Credentials",
+    },
+    {
+      name: "Horizon Group",
+      logo: "/images/clients/logo-horizon-group.svg",
+      category: "Enterprise Conglomerate",
+      credential: "Corporate Suite",
     },
   ];
 
@@ -351,13 +399,17 @@ export default function HomePage() {
               {[...clientsListRow1, ...clientsListRow1].map((client, idx) => (
                 <div
                   key={`${client.name}-${idx}`}
-                  className="group relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-neutral-50 hover:bg-black border border-neutral-200/90 hover:border-neutral-800 transition-all duration-300 shadow-sm hover:shadow-xl shrink-0 cursor-default"
+                  className="group relative flex items-center gap-4 px-5 py-3.5 rounded-2xl bg-white hover:bg-neutral-950 border border-neutral-200/90 hover:border-neutral-800 transition-all duration-300 shadow-sm hover:shadow-xl shrink-0 cursor-default"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-black group-hover:bg-[#F59E0B] text-white group-hover:text-black font-black text-xs flex items-center justify-center transition-colors duration-300 shrink-0">
-                    {client.initial}
+                  <div className="h-10 w-28 sm:w-32 flex items-center justify-center shrink-0 bg-neutral-50 group-hover:bg-neutral-900 rounded-xl px-2.5 py-1.5 border border-neutral-200/80 group-hover:border-neutral-800 transition-colors duration-300">
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="max-h-7 max-w-full object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                    />
                   </div>
-                  <div className="text-left">
-                    <h4 className="font-bold text-sm sm:text-base text-black group-hover:text-white transition-colors duration-300">
+                  <div className="text-left pr-2">
+                    <h4 className="font-bold text-sm text-black group-hover:text-white transition-colors duration-300 whitespace-nowrap">
                       {client.name}
                     </h4>
                     <div className="flex items-center gap-2 mt-0.5">
@@ -381,13 +433,17 @@ export default function HomePage() {
               {[...clientsListRow2, ...clientsListRow2].map((client, idx) => (
                 <div
                   key={`${client.name}-${idx}`}
-                  className="group relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-neutral-50 hover:bg-black border border-neutral-200/90 hover:border-neutral-800 transition-all duration-300 shadow-sm hover:shadow-xl shrink-0 cursor-default"
+                  className="group relative flex items-center gap-4 px-5 py-3.5 rounded-2xl bg-white hover:bg-neutral-950 border border-neutral-200/90 hover:border-neutral-800 transition-all duration-300 shadow-sm hover:shadow-xl shrink-0 cursor-default"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-black group-hover:bg-[#F59E0B] text-white group-hover:text-black font-black text-xs flex items-center justify-center transition-colors duration-300 shrink-0">
-                    {client.initial}
+                  <div className="h-10 w-28 sm:w-32 flex items-center justify-center shrink-0 bg-neutral-50 group-hover:bg-neutral-900 rounded-xl px-2.5 py-1.5 border border-neutral-200/80 group-hover:border-neutral-800 transition-colors duration-300">
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="max-h-7 max-w-full object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                    />
                   </div>
-                  <div className="text-left">
-                    <h4 className="font-bold text-sm sm:text-base text-black group-hover:text-white transition-colors duration-300">
+                  <div className="text-left pr-2">
+                    <h4 className="font-bold text-sm text-black group-hover:text-white transition-colors duration-300 whitespace-nowrap">
                       {client.name}
                     </h4>
                     <div className="flex items-center gap-2 mt-0.5">

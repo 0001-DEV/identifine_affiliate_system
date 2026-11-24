@@ -77,10 +77,10 @@ export function MarketingNav() {
   return (
     <header className="sticky top-0 z-50 bg-white text-black border-b border-neutral-200/90 h-16 sm:h-[68px] transition-colors duration-200 shadow-sm">
       <div className="w-full flex h-full items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
-        {/* Brand Dual Logo: Shifted to the far left as requested */}
+        {/* Brand Tri-Logo: Identifine | Xtreme Cardz | CR8 */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3.5 select-none group shrink-0 -ml-1 sm:-ml-2"
+          className="flex items-center gap-2 sm:gap-3 select-none group shrink-0 -ml-1 sm:-ml-2"
         >
           {/* 1. IDENTIFINE LOGO (Dark text version for white header) */}
           <img
@@ -103,6 +103,18 @@ export function MarketingNav() {
               src="/xtreme-cardz-text.png"
               alt="Xtreme Cardz Text"
               className="h-3 sm:h-3.5 w-auto object-contain brightness-0"
+            />
+          </div>
+
+          {/* Elegant Divider */}
+          <span className="text-black/20 font-light text-base sm:text-lg">|</span>
+
+          {/* 3. CR8 (Xtreme Cr8tivity) */}
+          <div className="flex items-center h-6 sm:h-7">
+            <img
+              src="/cr8-logo-dark.svg"
+              alt="CR8"
+              className="h-5 sm:h-6 w-auto object-contain transition-transform group-hover:scale-105 duration-200"
             />
           </div>
         </Link>

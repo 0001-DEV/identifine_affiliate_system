@@ -12,7 +12,7 @@ export function MarketingFooter() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-14 border-b border-white/10">
           {/* Column 1: Brand & Duality */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2 select-none">
+            <Link href="/" className="flex items-center gap-2 select-none flex-wrap">
               <span className="font-black tracking-wider text-base text-white">
                 IDENTIFINE
               </span>
@@ -20,9 +20,15 @@ export function MarketingFooter() {
               <span className="font-black tracking-wider text-base text-white flex items-center">
                 <span className="text-[#F59E0B]">X</span>TREME CARDZ
               </span>
+              <span className="text-white/30 font-light text-lg">|</span>
+              <img
+                src="/cr8-logo-white.svg"
+                alt="CR8"
+                className="h-5 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+              />
             </Link>
             <p className="text-neutral-400 text-xs leading-relaxed max-w-sm">
-              The premier luxury smart card and digital identity affiliate network in Nigeria. Connecting enterprise brands, VIP venues, and affiliates with instant Paystack commission payouts.
+              The premier luxury smart card and digital identity affiliate network in Nigeria. An initiative powered by Identifine, Xtreme Cardz, and Xtreme Cr8tivity (CR8), connecting enterprise brands, VIP venues, and affiliates with instant Paystack commission payouts.
             </p>
             <div className="flex items-center gap-2 pt-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-neutral-300 font-medium">

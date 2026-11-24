@@ -338,11 +338,11 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black w-full max-w-full overflow-x-clip">
+    <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black">
       <SitePreloader />
       <MarketingNav />
 
-      <main className="flex-1 w-full max-w-full overflow-x-clip">
+      <main className="flex-1">
         {/* =========================================================================
             1. HERO SECTION: TEXT ONLY (Increased headline height, reduced copy height)
            ========================================================================= */}
@@ -380,7 +380,7 @@ export default function HomePage() {
         <section
           ref={heroSectionRef}
           id="partners-scroll"
-          className="relative w-full max-w-full h-[280vh] bg-white border-b border-neutral-200 overflow-hidden"
+          className="relative w-full h-[280vh] bg-white border-b border-neutral-200"
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
           <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">

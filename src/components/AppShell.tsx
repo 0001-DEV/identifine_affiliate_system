@@ -82,7 +82,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       pathname === "/" || pathname === "/pricing" || pathname === "/faq";
 
     return (
-      <div className="min-h-screen bg-[#070708] text-white relative w-full max-w-full overflow-x-clip">
+      <div className="min-h-screen bg-[#070708] text-white relative">
         {!hasOwnNav && (
           <div className="absolute top-4 right-4 z-50 no-print">
             <ThemeToggle />

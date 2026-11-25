@@ -52,14 +52,27 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
   const cardRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const onGlideStartRef = useRef(onGlideStart);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onGlideStartRef.current = onGlideStart;
+    onCompleteRef.current = onComplete;
+  });
+
+  const hasStartedRef = useRef(false);
+
   useEffect(() => {
     // If already played during this client-side session (internal link navigation), skip
     if (hasPlayedInClientSession) {
       setAlreadySeen(true);
-      onGlideStart?.();
-      onComplete?.();
+      onGlideStartRef.current?.();
+      onCompleteRef.current?.();
       return;
     }
+
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
 
     // Lock body scroll during preloader
     const originalOverflow = document.body.style.overflow;
@@ -80,7 +93,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         window.scrollTo(0, 0);
       }
 
-      onGlideStart?.();
+      onGlideStartRef.current?.();
       setPhase("hero_glide");
 
       const cEl = cardRef.current;
@@ -126,7 +139,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         document.body.style.overflow = originalOverflow;
         hasPlayedInClientSession = true;
         setPhase("finished");
-        onComplete?.();
+        onCompleteRef.current?.();
       }, 1450);
     };
 
@@ -203,13 +216,13 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       clearTimeout(emergencyTimer);
       document.body.style.overflow = originalOverflow;
     };
-  }, [onGlideStart, onComplete]);
+  }, []);
 
   if (alreadySeen || phase === "finished") return null;
 
   const handleSkip = () => {
     hasPlayedInClientSession = true;
-    onGlideStart?.();
+    onGlideStartRef.current?.();
     setPhase("hero_glide");
     setCardTransform({
       transform: "translate3d(0, -160px, 0) scale(0.38) rotateX(8deg)",
@@ -219,7 +232,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     setTimeout(() => {
       document.body.style.overflow = "";
       setPhase("finished");
-      onComplete?.();
+      onCompleteRef.current?.();
     }, 380);
   };
 

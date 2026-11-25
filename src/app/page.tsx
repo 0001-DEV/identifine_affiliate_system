@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
@@ -26,6 +26,15 @@ export default function HomePage() {
   const router = useRouter();
   const [isPreloaderFinished, setIsPreloaderFinished] = useState(() => getHasPlayedInClientSession());
   const [isHeroHeadlineRevealed, setIsHeroHeadlineRevealed] = useState(() => getHasPlayedInClientSession());
+
+  const handleGlideStart = useCallback(() => {
+    setIsHeroHeadlineRevealed(true);
+  }, []);
+
+  const handlePreloaderComplete = useCallback(() => {
+    setIsHeroHeadlineRevealed(true);
+    setIsPreloaderFinished(true);
+  }, []);
 
   useEffect(() => {
     if (isPreloaderFinished) return;
@@ -364,13 +373,12 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black">
-      <SitePreloader
-        onGlideStart={() => setIsHeroHeadlineRevealed(true)}
-        onComplete={() => {
-          setIsHeroHeadlineRevealed(true);
-          setIsPreloaderFinished(true);
-        }}
-      />
+      {!isPreloaderFinished && (
+        <SitePreloader
+          onGlideStart={handleGlideStart}
+          onComplete={handlePreloaderComplete}
+        />
+      )}
       <MarketingNav />
 
       <main className="flex-1">

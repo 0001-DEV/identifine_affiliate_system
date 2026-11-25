@@ -41,34 +41,48 @@ export default function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [maxTranslate, setMaxTranslate] = useState(1600);
 
-  useEffect(() => {
-    const updateMaxTranslate = () => {
-      if (trackRef.current) {
-        const fullWidth = trackRef.current.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        setMaxTranslate(Math.max(0, fullWidth - viewportWidth + 80));
-      }
-    };
+  const updateMaxTranslate = () => {
+    if (trackRef.current) {
+      const fullWidth = trackRef.current.scrollWidth;
+      const viewportWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
+      setMaxTranslate(Math.max(0, fullWidth - viewportWidth + 120));
+    }
+  };
 
+  useEffect(() => {
     updateMaxTranslate();
+    const t1 = setTimeout(updateMaxTranslate, 300);
+    const t2 = setTimeout(updateMaxTranslate, 1000);
     window.addEventListener("resize", updateMaxTranslate);
 
+    let rafId: number | null = null;
     const handleScroll = () => {
       if (!heroSectionRef.current) return;
       const section = heroSectionRef.current;
       const rect = section.getBoundingClientRect();
-      const totalScrollableDistance = section.offsetHeight - window.innerHeight;
+      // Sticky top offset is 80px (top-20)
+      const stickyTop = 80;
+      const totalScrollableDistance = section.offsetHeight - (window.innerHeight - stickyTop);
       if (totalScrollableDistance <= 0) return;
 
-      const scrolled = -rect.top;
+      const scrolled = stickyTop - rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / totalScrollableDistance));
       setScrollProgress(progress);
     };
 
+    // Keep scroll progress in sync with Lenis smooth-scroll requestAnimationFrame
+    const onTick = () => {
+      handleScroll();
+      rafId = requestAnimationFrame(onTick);
+    };
+    rafId = requestAnimationFrame(onTick);
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(t1);
+      clearTimeout(t2);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateMaxTranslate);
     };
@@ -395,7 +409,7 @@ export default function HomePage() {
         <section
           ref={heroSectionRef}
           id="partners-scroll"
-          className="relative w-full h-[280vh] bg-white border-b border-neutral-200"
+          className="relative w-full h-[320vh] bg-white border-b border-neutral-200"
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
           <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
@@ -424,6 +438,7 @@ export default function HomePage() {
                       <img
                         src={partner.image}
                         alt={partner.role}
+                        onLoad={updateMaxTranslate}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     </div>
@@ -438,12 +453,29 @@ export default function HomePage() {
                 ))}
               </div>
 
-              {/* Horizontal Scroll Progress Bar */}
-              <div className="mx-auto max-w-xs mt-6 h-1 bg-neutral-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-black transition-all duration-75 rounded-full"
-                  style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
-                />
+              {/* Custom Animated Scroll Indicator: Obsidian & 24K Gold */}
+              <div className="flex flex-col items-center justify-center mt-5 sm:mt-6 gap-2.5 select-none">
+                {/* Animated Scroll Device Pill */}
+                <div className="flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#121214] border border-neutral-800 shadow-[0_4px_16px_rgba(0,0,0,0.18)]">
+                  {/* Animated Mouse Capsule with Rolling Gold Wheel */}
+                  <div className="relative w-4 h-6 rounded-full border-[1.5px] border-[#F59E0B]/70 flex justify-center pt-1 overflow-hidden shrink-0">
+                    <span className="w-1 h-1.5 bg-[#F59E0B] rounded-full animate-scroll-wheel shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
+                  </div>
+
+                  {/* Swipe/Scroll Text with Animated 24K Gold Directional Glide */}
+                  <div className="flex items-center gap-1.5 text-xs text-neutral-300 font-medium">
+                    <span>scroll to explore</span>
+                    <span className="inline-block animate-swipe-glide text-[#F59E0B] font-bold">→</span>
+                  </div>
+                </div>
+
+                {/* Dynamic Horizontal Progress Bar */}
+                <div className="w-36 sm:w-44 h-1 bg-neutral-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-[#F59E0B] transition-all duration-75 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.6)]"
+                    style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
+                  />
+                </div>
               </div>
             </div>
           </div>

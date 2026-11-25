@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
 import { SitePreloader } from "@/components/SitePreloader";
-import ClientShowcase from "@/components/ClientShowcase";
 import {
   Sparkles,
   ArrowRight,
@@ -88,6 +87,93 @@ export default function HomePage() {
       id: "tech-startups",
       role: "Tech Startups & Teams",
       image: "/images/partners/tech-startup-team.jpg",
+    },
+  ];
+
+  // Authentic, Full-Color Enterprise Client Roster (Zero monochrome / Zero black-and-white)
+  const clientLogosRow1 = [
+    {
+      name: "Guinness Nigeria",
+      industry: "Luxury FMCG & Hospitality",
+      logo: "/images/clients/logo-guinness-nigeria.png",
+    },
+    {
+      name: "Seplat Energy",
+      industry: "Energy & Infrastructure",
+      logo: "/images/clients/logo-seplat-energy.png",
+    },
+    {
+      name: "Nova Bank",
+      industry: "Commercial Banking & Treasury",
+      logo: "/images/clients/logo-nova-bank.png",
+    },
+    {
+      name: "Rainoil Limited",
+      industry: "Petroleum & Downstream Logistics",
+      logo: "/images/clients/logo-rainoil.png",
+    },
+    {
+      name: "Ikeja Electric",
+      industry: "Power Utilities & Distribution",
+      logo: "/images/clients/logo-ikeja-electric.png",
+    },
+    {
+      name: "Sapetro Oil",
+      industry: "Deepwater Exploration & Production",
+      logo: "/images/clients/logo-sapetro-oil.webp",
+    },
+    {
+      name: "TVC Communications",
+      industry: "National Broadcast & Media Network",
+      logo: "/images/clients/logo-tvc-communications.png",
+    },
+    {
+      name: "Credit Direct",
+      industry: "Consumer Credit & Financial Services",
+      logo: "/images/clients/logo-credit-direct.png",
+    },
+  ];
+
+  const clientLogosRow2 = [
+    {
+      name: "NECA Nigeria",
+      industry: "Employers Consultative Network",
+      logo: "/images/clients/logo-neca-nigeria.png",
+    },
+    {
+      name: "Optiva Capital",
+      industry: "Wealth Management & Advisory",
+      logo: "/images/clients/logo-optiva-capital.webp",
+    },
+    {
+      name: "Invera Energy",
+      industry: "Renewable & Clean Energy",
+      logo: "/images/clients/logo-invera-energy.png",
+    },
+    {
+      name: "Sterling Capital",
+      industry: "Investment Banking & Assets",
+      logo: "/images/clients/logo-sterling-capital.webp",
+    },
+    {
+      name: "Apex Synergy",
+      industry: "Corporate Real Estate & Assets",
+      logo: "/images/clients/logo-apex-synergy.png",
+    },
+    {
+      name: "Falcon Oil",
+      industry: "Marine Logistics & Energy",
+      logo: "/images/clients/logo-falcon-oil.png",
+    },
+    {
+      name: "Horizon Group",
+      industry: "Conglomerate & Strategic Assets",
+      logo: "/images/clients/logo-horizon-group.svg",
+    },
+    {
+      name: "IOGC Petroleum",
+      industry: "Oilfield Services & Engineering",
+      logo: "/images/clients/logo-iogc-petroleum.png",
     },
   ];
 
@@ -349,15 +435,15 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            1C. OUR CLIENTS SECTION (Fainted Black Palette, 3D Horizon Arc Showcase)
+            1C. OUR CLIENTS SECTION (Fainted Black Palette, Continuous Kinetic Horizon Stream)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
         <section id="clients" data-dark="true" className="py-24 sm:py-28 bg-[#17171A] border-y border-white/10 w-full max-w-full overflow-hidden relative">
-          {/* Subtle Ambient Radial Lighting: Soft contrast illumination */}
+          {/* Subtle Ambient Radial Lighting: Lifts dark logos with soft contrast */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.06),transparent_75%)] pointer-events-none" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12 sm:mb-14 text-center relative z-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14 sm:mb-16 text-center relative z-10">
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
               Clients We Have Worked With
             </h2>
@@ -366,8 +452,52 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Interactive 3D Cylindrical Horizon Showcase */}
-          <ClientShowcase />
+          {/* Continuous Standard Linear Infinite Marquee */}
+          <div className="marquee-track relative w-full max-w-full overflow-hidden select-none">
+            {/* Upper Track: Standard Linear Marquee (Glides Left) */}
+            <div className="relative w-full max-w-full overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+              <div className="animate-standard-marquee-left gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
+                {[...clientLogosRow1, ...clientLogosRow1].map((client, idx) => (
+                  <div
+                    key={`${client.name}-${idx}`}
+                    className="relative flex flex-col items-center justify-center shrink-0 group/logo cursor-pointer py-3"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
+                    />
+                    {/* Micro Industry Domain Badge */}
+                    <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
+                      {client.industry}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Lower Track: Standard Linear Marquee (Glides Right) */}
+            <div className="relative w-full max-w-full overflow-hidden py-3 mt-2 sm:mt-4 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+              <div className="animate-standard-marquee-right gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
+                {[...clientLogosRow2, ...clientLogosRow2].map((client, idx) => (
+                  <div
+                    key={`${client.name}-${idx}`}
+                    className="relative flex flex-col items-center justify-center shrink-0 group/logo cursor-pointer py-3"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
+                    />
+                    {/* Micro Industry Domain Badge */}
+                    <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
+                      {client.industry}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* =========================================================================

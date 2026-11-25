@@ -71,6 +71,7 @@ export function MarketingNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
+  const [isOverDark, setIsOverDark] = useState<boolean>(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
 
@@ -91,38 +92,79 @@ export function MarketingNav() {
   useEffect(() => {
     if (pathname === "/faq") {
       setActiveId("faq");
+      setIsOverDark(false);
       return;
     }
     if (pathname === "/pricing") {
       setActiveId("earnings");
+      setIsOverDark(false);
       return;
     }
     if (pathname !== "/") {
+      setIsOverDark(false);
       return;
     }
 
-    const sectionIds = ["hero", "partners-scroll", "clients", "products", "how-it-works", "earnings"];
+    const sectionIds = [
+      "hero",
+      "partners-scroll",
+      "clients",
+      "products",
+      "how-it-works",
+      "earnings",
+    ];
 
     const onScroll = () => {
       const scrollY = window.scrollY;
-      const targetOffset = scrollY + 160;
+      const navHeight = 70;
+      const probeY = navHeight + 40;
+
+      // 1. Check if near very top of page
+      if (scrollY < 80) {
+        setActiveId("hero");
+        setIsOverDark(false);
+        return;
+      }
+
+      // 2. Check if near bottom of page
+      if (window.innerHeight + scrollY >= document.documentElement.scrollHeight - 60) {
+        setActiveId("earnings");
+        setIsOverDark(false);
+        return;
+      }
+
+      // 3. Find section currently beneath the top bar probe point
+      let currentSectionId: string | null = null;
+      let overDarkSection = false;
 
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          if (targetOffset >= top) {
-            // Both partners-scroll and clients map to "clients" (Partners link)
-            setActiveId(id === "partners-scroll" ? "clients" : id);
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= probeY && rect.bottom > probeY) {
+            currentSectionId = id === "partners-scroll" ? "clients" : id;
+            if (el.getAttribute("data-dark") === "true") {
+              overDarkSection = true;
+            }
+            break;
           }
         }
       }
+
+      if (currentSectionId) {
+        setActiveId(currentSectionId);
+      }
+      setIsOverDark(overDarkSection);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    const interval = setInterval(onScroll, 100);
     onScroll();
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearInterval(interval);
+    };
   }, [pathname]);
 
   // Smooth scroll handler for anchor links on the homepage
@@ -168,7 +210,13 @@ export function MarketingNav() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white text-black border-b border-neutral-200/90 h-16 sm:h-[68px] transition-colors duration-200 shadow-sm">
+    <header
+      className={`sticky top-0 z-50 h-16 sm:h-[68px] transition-colors duration-300 shadow-sm ${
+        isOverDark
+          ? "bg-[#17171A]/95 text-white border-b border-white/10 backdrop-blur-md"
+          : "bg-white/95 text-black border-b border-neutral-200/90 backdrop-blur-md"
+      }`}
+    >
       <div className="w-full flex h-full items-center justify-between px-3 sm:px-6 md:px-8 lg:px-10">
         {/* Brand Logo: Xtreme Cardz */}
         <Link
@@ -185,7 +233,9 @@ export function MarketingNav() {
             <img
               src="/xtreme-cardz-text.png"
               alt="Xtreme Cardz Text"
-              className="h-3.5 sm:h-4 w-auto object-contain brightness-0"
+              className={`h-3.5 sm:h-4 w-auto object-contain transition-all duration-300 ${
+                isOverDark ? "brightness-100 invert" : "brightness-0"
+              }`}
             />
           </div>
         </Link>
@@ -212,7 +262,11 @@ export function MarketingNav() {
                     <span
                       className={`relative z-10 transition-colors duration-200 flex items-center gap-1.5 ${
                         isActive
-                          ? "text-neutral-700 font-extrabold"
+                          ? isOverDark
+                            ? "text-white font-extrabold"
+                            : "text-neutral-700 font-extrabold"
+                          : isOverDark
+                          ? "text-neutral-400 group-hover:text-white"
                           : "text-neutral-500 group-hover:text-black"
                       }`}
                     >
@@ -220,21 +274,27 @@ export function MarketingNav() {
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
                           productsDropdownOpen
-                            ? "rotate-180 text-black"
+                            ? isOverDark
+                              ? "rotate-180 text-white"
+                              : "rotate-180 text-black"
+                            : isOverDark
+                            ? "text-neutral-400 group-hover:text-white"
                             : "text-neutral-400 group-hover:text-black"
                         }`}
                       />
                     </span>
 
-                    {/* Black animated fill when active */}
+                    {/* Animated fill when active */}
                     {isActive && (
                       <div
                         key={`active-bg-${link.id}`}
-                        className="absolute inset-0 bg-black z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none"
+                        className={`absolute inset-0 z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none ${
+                          isOverDark ? "bg-white text-black" : "bg-black text-white"
+                        }`}
                       >
-                        <span className="text-white font-black uppercase tracking-wider text-xs whitespace-nowrap flex items-center gap-1.5">
+                        <span className="font-black uppercase tracking-wider text-xs whitespace-nowrap flex items-center gap-1.5">
                           <span>{link.label}</span>
-                          <ChevronDown className="w-3.5 h-3.5 text-white" />
+                          <ChevronDown className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     )}
@@ -375,24 +435,30 @@ export function MarketingNav() {
                 onClick={(e) => handleNavClick(e, link)}
                 className="relative h-full flex items-center justify-center px-6 text-xs uppercase tracking-wider font-bold select-none group overflow-hidden"
               >
-                {/* Base text (dark gray / black) */}
+                {/* Base text */}
                 <span
                   className={`relative z-10 transition-colors duration-200 ${
                     isActive
-                      ? "text-neutral-700 font-extrabold"
+                      ? isOverDark
+                        ? "text-white font-extrabold"
+                        : "text-neutral-700 font-extrabold"
+                      : isOverDark
+                      ? "text-neutral-400 group-hover:text-white"
                       : "text-neutral-500 group-hover:text-black"
                   }`}
                 >
                   {link.label}
                 </span>
 
-                {/* Black background around text expanding from left to right, revealing white text */}
+                {/* Animated fill when active */}
                 {isActive && (
                   <div
                     key={`active-bg-${link.id}`}
-                    className="absolute inset-0 bg-black z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none"
+                    className={`absolute inset-0 z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none ${
+                      isOverDark ? "bg-white text-black" : "bg-black text-white"
+                    }`}
                   >
-                    <span className="text-white font-black uppercase tracking-wider text-xs whitespace-nowrap">
+                    <span className="font-black uppercase tracking-wider text-xs whitespace-nowrap">
                       {link.label}
                     </span>
                   </div>
@@ -406,7 +472,11 @@ export function MarketingNav() {
         <div className="hidden md:flex items-center gap-3 shrink-0">
           <Link
             href="/portal?tab=register"
-            className="inline-flex items-center gap-1.5 rounded-full bg-black hover:bg-neutral-800 text-white px-6 py-2.5 text-xs font-semibold transition shadow-md hover:scale-[1.02]"
+            className={`inline-flex items-center gap-1.5 rounded-full px-6 py-2.5 text-xs font-semibold transition shadow-md hover:scale-[1.02] ${
+              isOverDark
+                ? "bg-white hover:bg-neutral-200 text-black"
+                : "bg-black hover:bg-neutral-800 text-white"
+            }`}
           >
             <span>Become an Affiliate</span>
           </Link>
@@ -416,7 +486,9 @@ export function MarketingNav() {
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-lg p-2 text-neutral-700 hover:text-black focus:outline-none"
+            className={`rounded-lg p-2 focus:outline-none transition-colors ${
+              isOverDark ? "text-white hover:text-neutral-300" : "text-neutral-700 hover:text-black"
+            }`}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

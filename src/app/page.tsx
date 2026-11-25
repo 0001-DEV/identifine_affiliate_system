@@ -24,16 +24,35 @@ import {
 
 export default function HomePage() {
   const router = useRouter();
-  const [isPreloaderFinished, setIsPreloaderFinished] = useState(false);
-  const [isHeroHeadlineRevealed, setIsHeroHeadlineRevealed] = useState(false);
+  const [isPreloaderFinished, setIsPreloaderFinished] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        return sessionStorage.getItem("has_seen_preloader") === "true";
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
+  });
+  const [isHeroHeadlineRevealed, setIsHeroHeadlineRevealed] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        return sessionStorage.getItem("has_seen_preloader") === "true";
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
+  });
 
   useEffect(() => {
+    if (isPreloaderFinished) return;
     const fallbackTimer = setTimeout(() => {
       setIsHeroHeadlineRevealed(true);
       setIsPreloaderFinished(true);
     }, 9500);
     return () => clearTimeout(fallbackTimer);
-  }, []);
+  }, [isPreloaderFinished]);
 
   // =========================================================================
   // PINNED HORIZONTAL SCROLL FOR HERO SECTION (PARTNER IMAGES MOVE ON SCROLL)

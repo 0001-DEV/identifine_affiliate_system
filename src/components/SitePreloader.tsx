@@ -29,6 +29,17 @@ interface SitePreloaderProps {
 }
 
 export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) {
+  const [alreadySeen, setAlreadySeen] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        return sessionStorage.getItem("has_seen_preloader") === "true";
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
+  });
+
   const [phase, setPhase] = useState<PreloaderPhase>("typing");
   const [lineIndex, setLineIndex] = useState<number>(0);
   const [charIndex, setCharIndex] = useState<number>(0);
@@ -39,12 +50,25 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Lock body scroll during preloader
+    // Check if user has already opened the website in this session
+    try {
+      if (sessionStorage.getItem("has_seen_preloader") === "true") {
+        setAlreadySeen(true);
+        onGlideStart?.();
+        onComplete?.();
+        return;
+      }
+    } catch (e) {}
+
+    // First time opening the website: lock body scroll and mark session as seen
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
       setScatterFactor(window.innerWidth < 640 ? 0.45 : 1);
+      try {
+        sessionStorage.setItem("has_seen_preloader", "true");
+      } catch (e) {}
     }
 
     let isCancelled = false;
@@ -182,9 +206,12 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     };
   }, [onGlideStart, onComplete]);
 
-  if (phase === "finished") return null;
+  if (alreadySeen || phase === "finished") return null;
 
   const handleSkip = () => {
+    try {
+      sessionStorage.setItem("has_seen_preloader", "true");
+    } catch (e) {}
     onGlideStart?.();
     setPhase("hero_glide");
     setCardTransform({

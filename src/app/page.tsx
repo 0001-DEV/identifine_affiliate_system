@@ -24,6 +24,7 @@ import {
 
 export default function HomePage() {
   const router = useRouter();
+  const [isPreloaderFinished, setIsPreloaderFinished] = useState(false);
 
   // =========================================================================
   // PINNED HORIZONTAL SCROLL FOR HERO SECTION (PARTNER IMAGES MOVE ON SCROLL)
@@ -339,7 +340,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black">
-      <SitePreloader />
+      <SitePreloader onComplete={() => setIsPreloaderFinished(true)} />
       <MarketingNav />
 
       <main className="flex-1">
@@ -348,8 +349,18 @@ export default function HomePage() {
            ========================================================================= */}
         <section id="hero" className="pt-24 sm:pt-32 pb-8 sm:pb-10 px-4 sm:px-6 bg-white">
           <div className="mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05]">
-              Turn Your Network Into Recurring Cash
+            <h1
+              id="hero-headline"
+              className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05] transition-opacity duration-200 ${
+                isPreloaderFinished ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <span id="hero-word-0" className="inline-block">Turn</span>{" "}
+              <span id="hero-word-1" className="inline-block">Your</span>{" "}
+              <span id="hero-word-2" className="inline-block">Network</span>{" "}
+              <span id="hero-word-3" className="inline-block">Into</span>{" "}
+              <span id="hero-word-4" className="inline-block">Recurring</span>{" "}
+              <span id="hero-word-5" className="inline-block">Cash</span>
             </h1>
 
             <p className="text-sm sm:text-base md:text-[17px] text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">

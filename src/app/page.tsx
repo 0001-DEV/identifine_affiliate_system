@@ -351,16 +351,13 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
             <h1
               id="hero-headline"
-              className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05] transition-opacity duration-200 ${
-                isPreloaderFinished ? "opacity-100" : "opacity-0"
+              className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05] transition-all duration-700 ease-out ${
+                isPreloaderFinished
+                  ? "opacity-100 scale-100 translate-y-0"
+                  : "opacity-0 scale-95 translate-y-3"
               }`}
             >
-              <span id="hero-word-0" className="inline-block">Turn</span>{" "}
-              <span id="hero-word-1" className="inline-block">Your</span>{" "}
-              <span id="hero-word-2" className="inline-block">Network</span>{" "}
-              <span id="hero-word-3" className="inline-block">Into</span>{" "}
-              <span id="hero-word-4" className="inline-block">Recurring</span>{" "}
-              <span id="hero-word-5" className="inline-block">Cash</span>
+              Turn Your Network Into Recurring Cash
             </h1>
 
             <p className="text-sm sm:text-base md:text-[17px] text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">

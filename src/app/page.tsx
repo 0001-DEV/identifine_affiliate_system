@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MarketingNav } from "@/components/MarketingNav";
 import { MarketingFooter } from "@/components/MarketingFooter";
-import { SitePreloader } from "@/components/SitePreloader";
+import { SitePreloader, getHasPlayedInClientSession } from "@/components/SitePreloader";
 import {
   Sparkles,
   ArrowRight,
@@ -24,26 +24,8 @@ import {
 
 export default function HomePage() {
   const router = useRouter();
-  const [isPreloaderFinished, setIsPreloaderFinished] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        return sessionStorage.getItem("has_seen_preloader") === "true";
-      } catch (e) {
-        return false;
-      }
-    }
-    return false;
-  });
-  const [isHeroHeadlineRevealed, setIsHeroHeadlineRevealed] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        return sessionStorage.getItem("has_seen_preloader") === "true";
-      } catch (e) {
-        return false;
-      }
-    }
-    return false;
-  });
+  const [isPreloaderFinished, setIsPreloaderFinished] = useState(() => getHasPlayedInClientSession());
+  const [isHeroHeadlineRevealed, setIsHeroHeadlineRevealed] = useState(() => getHasPlayedInClientSession());
 
   useEffect(() => {
     if (isPreloaderFinished) return;

@@ -28,18 +28,21 @@ interface SitePreloaderProps {
   onComplete?: () => void;
 }
 
-export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) {
-  const [alreadySeen, setAlreadySeen] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        return sessionStorage.getItem("has_seen_preloader") === "true";
-      } catch (e) {
-        return false;
-      }
-    }
-    return false;
-  });
+let hasPlayedInClientSession = false;
 
+// Clear any stale sessionStorage flag from previous sessions so refreshes always show the intro
+if (typeof window !== "undefined") {
+  try {
+    sessionStorage.removeItem("has_seen_preloader");
+  } catch (e) {}
+}
+
+export function getHasPlayedInClientSession() {
+  return hasPlayedInClientSession;
+}
+
+export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) {
+  const [alreadySeen, setAlreadySeen] = useState<boolean>(() => hasPlayedInClientSession);
   const [phase, setPhase] = useState<PreloaderPhase>("typing");
   const [lineIndex, setLineIndex] = useState<number>(0);
   const [charIndex, setCharIndex] = useState<number>(0);
@@ -50,25 +53,23 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Check if user has already opened the website in this session
-    try {
-      if (sessionStorage.getItem("has_seen_preloader") === "true") {
-        setAlreadySeen(true);
-        onGlideStart?.();
-        onComplete?.();
-        return;
-      }
-    } catch (e) {}
+    // If already played during this client-side session (internal link navigation), skip
+    if (hasPlayedInClientSession) {
+      setAlreadySeen(true);
+      onGlideStart?.();
+      onComplete?.();
+      return;
+    }
 
-    // First time opening the website: lock body scroll and mark session as seen
+    // Mark as played so internal navigation doesn't replay it
+    hasPlayedInClientSession = true;
+
+    // Lock body scroll during preloader
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
       setScatterFactor(window.innerWidth < 640 ? 0.45 : 1);
-      try {
-        sessionStorage.setItem("has_seen_preloader", "true");
-      } catch (e) {}
     }
 
     let isCancelled = false;
@@ -209,9 +210,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
   if (alreadySeen || phase === "finished") return null;
 
   const handleSkip = () => {
-    try {
-      sessionStorage.setItem("has_seen_preloader", "true");
-    } catch (e) {}
+    hasPlayedInClientSession = true;
     onGlideStart?.();
     setPhase("hero_glide");
     setCardTransform({

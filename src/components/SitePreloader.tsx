@@ -245,33 +245,25 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       onClick={handleSkip}
       className="fixed inset-0 z-[9999] cursor-pointer select-none overflow-hidden [perspective:1400px]"
     >
-      {/* 1. LEFT BLACK SHUTTER with crisp Black & White edge */}
+      {/* 1. LEFT BLACK SHUTTER: Seamless solid black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] border-r border-white/40 shadow-[1px_0_16px_rgba(255,255,255,0.25)] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
           isShuttersOpen ? "-translate-x-full" : "translate-x-0"
         }`}
         style={{
           transitionTimingFunction: "cubic-bezier(0.85, 0, 0.15, 1)",
         }}
-      >
-        {/* Subtle luminous monochrome edge gradient */}
-        <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-r from-transparent to-white/[0.08] pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-white to-transparent opacity-90 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-      </div>
+      />
 
-      {/* 2. RIGHT BLACK SHUTTER with crisp Black & White edge */}
+      {/* 2. RIGHT BLACK SHUTTER: Seamless solid black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 right-0 w-[50.5%] bg-[#0A0608] border-l border-white/40 shadow-[-1px_0_16px_rgba(255,255,255,0.25)] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 right-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
           isShuttersOpen ? "translate-x-full" : "translate-x-0"
         }`}
         style={{
           transitionTimingFunction: "cubic-bezier(0.85, 0, 0.15, 1)",
         }}
-      >
-        {/* Subtle luminous monochrome edge gradient */}
-        <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-l from-transparent to-white/[0.08] pointer-events-none" />
-        <div className="absolute inset-y-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-white to-transparent opacity-90 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-      </div>
+      />
 
       {/* 3. CENTER STAGE */}
       <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
@@ -349,7 +341,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           })}
         </div>
 
-        {/* C. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Formed from particles, clean text directly on card face (no container boxes) */}
+        {/* C. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Pure plain card picture, nothing on it */}
         <div
           ref={cardRef}
           style={{
@@ -366,7 +358,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
               : "opacity-0 scale-75 pointer-events-none duration-300"
           }`}
         >
-          {/* Authentic High-Definition 24K Gold Metal Mesh Card Image */}
+          {/* Authentic High-Definition 24K Gold Metal Mesh Card Image (Pure & Plain) */}
           <img
             src="/images/products/gold-metal-mesh.webp"
             alt="Xtreme Cardz Gold Metal Mesh Sample"
@@ -374,14 +366,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           />
 
           {/* Luxury Metallic Specular Glass Sheen Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-amber-100/20 pointer-events-none" />
-
-          {/* Clean Card Face: The text is written DIRECTLY on the card, NOT inside any badge or container boxes */}
-          <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-10 z-10 select-none">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal text-neutral-950 tracking-tight leading-[1.08] text-center drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
-              Turn Your Network Into Recurring Cash
-            </h3>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-amber-100/20 pointer-events-none" />
         </div>
       </div>
     </div>

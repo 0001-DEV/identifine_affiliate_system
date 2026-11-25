@@ -6,7 +6,7 @@ import { ShieldCheck, Lock, ExternalLink, ArrowRight } from "lucide-react";
 
 export function MarketingFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#121214] text-neutral-400 text-xs py-16 transition-colors duration-200">
+    <footer data-dark="true" className="border-t border-white/10 bg-[#121214] text-neutral-400 text-xs py-16 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Main 5-Column Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-14 border-b border-white/10">

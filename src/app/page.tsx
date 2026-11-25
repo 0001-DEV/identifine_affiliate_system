@@ -438,7 +438,7 @@ export default function HomePage() {
             1C. OUR CLIENTS SECTION (Deep Obsidian Black Palette, Continuous Kinetic Horizon Stream)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
-        <section id="clients" className="py-24 sm:py-28 bg-black border-y border-neutral-800 w-full max-w-full overflow-hidden relative">
+        <section id="clients" data-dark="true" className="py-24 sm:py-28 bg-black border-y border-neutral-800 w-full max-w-full overflow-hidden relative">
           {/* Subtle Ambient Golden Spotlight */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
 

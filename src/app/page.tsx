@@ -435,18 +435,19 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            1C. OUR CLIENTS SECTION (Deep Obsidian Black Palette, Continuous Kinetic Horizon Stream)
+            1C. OUR CLIENTS SECTION (Fainted Black Palette, Continuous Kinetic Horizon Stream)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
-        <section id="clients" data-dark="true" className="py-24 sm:py-28 bg-black border-y border-neutral-800 w-full max-w-full overflow-hidden relative">
-          {/* Subtle Ambient Golden Spotlight */}
+        <section id="clients" data-dark="true" className="py-24 sm:py-28 bg-[#17171A] border-y border-white/10 w-full max-w-full overflow-hidden relative">
+          {/* Subtle Ambient Radial Lighting: Lifts dark logos with soft contrast */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.06),transparent_75%)] pointer-events-none" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14 sm:mb-16 text-center relative z-10">
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
               Clients We Have Worked With
             </h2>
-            <p className="text-sm sm:text-base text-neutral-400 mt-3 font-normal max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-neutral-300 mt-3 font-normal max-w-2xl mx-auto">
               Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
             </p>
           </div>
@@ -470,7 +471,7 @@ export default function HomePage() {
                         <img
                           src={client.logo}
                           alt={client.name}
-                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(255,255,255,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.45)] transition-all duration-500"
+                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-500"
                         />
                       </div>
                       {/* Micro Industry Domain Badge */}
@@ -500,7 +501,7 @@ export default function HomePage() {
                         <img
                           src={client.logo}
                           alt={client.name}
-                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(255,255,255,0.06)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.45)] transition-all duration-500"
+                          className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-500"
                         />
                       </div>
                       {/* Micro Industry Domain Badge */}
@@ -657,7 +658,7 @@ export default function HomePage() {
         {/* =========================================================================
             3. HOW IT WORKS SECTION
            ========================================================================= */}
-        <section id="how-it-works" className="py-24 sm:py-32 bg-[#121214] text-white border-b border-white/10">
+        <section id="how-it-works" data-dark="true" className="py-24 sm:py-32 bg-[#17171A] text-white border-b border-white/10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-3 mb-16">
               <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
@@ -731,7 +732,7 @@ export default function HomePage() {
         {/* =========================================================================
             5. READY TO START EARNING (CTA BANNER)
            ========================================================================= */}
-        <section className="bg-[#121214] py-20 px-4 sm:px-6">
+        <section data-dark="true" className="bg-[#17171A] py-20 px-4 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <div className="rounded-3xl bg-gradient-to-r from-[#F59E0B] via-[#E5A826] to-[#D97706] p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-2xl">
               <div className="space-y-2 text-neutral-950">

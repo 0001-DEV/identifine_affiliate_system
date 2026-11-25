@@ -307,11 +307,12 @@ export default function ClientShowcase() {
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className={`h-12 sm:h-16 md:h-20 w-auto max-w-[160px] sm:max-w-[200px] object-contain transition-all duration-500 ${
-                      isCenter
-                        ? "drop-shadow-[0_8px_24px_rgba(245,158,11,0.5)] drop-shadow-[0_2px_12px_rgba(255,255,255,0.3)] filter-none"
-                        : "drop-shadow-[0_2px_12px_rgba(255,255,255,0.22)] filter-none"
-                    }`}
+                    className="h-12 sm:h-16 md:h-20 w-auto max-w-[160px] sm:max-w-[200px] object-contain transition-all duration-500"
+                    style={{
+                      filter: isCenter
+                        ? "drop-shadow(0 8px 24px rgba(245, 158, 11, 0.5)) drop-shadow(0 2px 12px rgba(255, 255, 255, 0.3))"
+                        : "drop-shadow(0 2px 12px rgba(255, 255, 255, 0.22))",
+                    }}
                   />
                 </div>
 

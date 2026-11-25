@@ -108,14 +108,18 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         } else {
           // Completed all 6 words!
           setIsTypingComplete(true);
-          // Illuminate card frame around text
-          setIsCardVisible(true);
 
-          // Hold completed card for 380ms so visitor sees the executive card
+          // Morph text into the authentic Gold Metal Mesh Card sample
           timerRef.current = setTimeout(() => {
             if (isCancelled) return;
-            startHeroTransition();
-          }, 380);
+            setIsCardVisible(true);
+
+            // Hold Gold Metal Mesh Card so visitor sees it clearly before shrinking to hero
+            timerRef.current = setTimeout(() => {
+              if (isCancelled) return;
+              startHeroTransition();
+            }, 550);
+          }, 120);
         }
       }
     };
@@ -123,12 +127,12 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
     // Kick off typing after 50ms
     timerRef.current = setTimeout(typeNextChar, 50);
 
-    // Emergency fail-safe: guarantee the preloader finishes after 3.8s
+    // Emergency fail-safe: guarantee the preloader finishes after 4.2s
     const emergencyTimer = setTimeout(() => {
       if (!isCancelled) {
         startHeroTransition();
       }
-    }, 3800);
+    }, 4200);
 
     return () => {
       isCancelled = true;
@@ -175,93 +179,102 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         }}
       />
 
-      {/* 3. CARD CONTAINER: Types vertically, morphs into luxury metal card, shrinks & flies to hero */}
+      {/* 3. CENTER STAGE: Vertical text types, condenses, then shrinks into Gold Metal Mesh card */}
       <div className="absolute inset-0 flex items-center justify-center p-4">
+        {/* A. VERTICAL TEXT WRITING STACK: Fades out as it condenses into the gold card */}
+        <div
+          className={`absolute flex flex-col items-center justify-center text-center py-2 transition-all duration-500 ease-out ${
+            isCardVisible ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
+          }`}
+        >
+          {WORDS.map((word, i) => {
+            const isVisible = i <= lineIndex;
+            const isCurrent = i === lineIndex && !isTypingComplete;
+            const currentTyped =
+              i < lineIndex ? word : i === lineIndex ? word.slice(0, charIndex) : word;
+
+            return (
+              <div
+                key={word}
+                className="flex items-center justify-center py-0.5 sm:py-1"
+              >
+                <span
+                  className={`inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-[0_2px_14px_rgba(245,158,11,0.3)] ${
+                    !isVisible ? "opacity-0 pointer-events-none" : "opacity-100"
+                  }`}
+                >
+                  {isVisible ? currentTyped : word}
+                  {isCurrent && (
+                    <span className="inline-block w-[3px] sm:w-[3.5px] h-[0.75em] bg-amber-400 ml-1.5 align-baseline animate-pulse shadow-[0_0_12px_rgba(245,158,11,1)]" />
+                  )}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* B. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Shrinks and glides to hero headline */}
         <div
           ref={cardRef}
           style={{
             ...cardTransform,
             transformOrigin: "center center",
           }}
-          className={`relative w-[88vw] max-w-[340px] sm:max-w-[400px] md:max-w-[440px] aspect-[1/1.52] sm:aspect-[1/1.54] rounded-3xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden will-change-transform transition-all duration-500 ease-out ${
+          className={`relative w-[90vw] max-w-[420px] sm:max-w-[480px] md:max-w-[540px] aspect-[1.58/1] rounded-2xl sm:rounded-3xl overflow-hidden will-change-transform transition-all duration-600 ease-out ${
             isCardVisible
-              ? "bg-gradient-to-br from-[#1C1C1F] via-[#111113] to-[#08080A] border border-amber-400/50 shadow-[0_30px_70px_rgba(0,0,0,0.9),0_0_40px_rgba(245,158,11,0.3)] ring-1 ring-inset ring-amber-300/20"
-              : "bg-transparent border-transparent shadow-none"
+              ? "opacity-100 scale-100 shadow-[0_30px_70px_rgba(0,0,0,0.95),0_0_55px_rgba(245,158,11,0.6)] border-2 border-amber-300/80"
+              : "opacity-0 scale-90 pointer-events-none"
           }`}
         >
-          {/* Subtle Brushed Metal Light Sheen Overlay */}
-          <div
-            className={`absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.14),transparent_65%)] pointer-events-none transition-opacity duration-500 ${
-              isCardVisible ? "opacity-100" : "opacity-0"
-            }`}
+          {/* Authentic High-Definition 24K Gold Metal Mesh Card Image */}
+          <img
+            src="/images/products/gold-metal-mesh.webp"
+            alt="Xtreme Cardz Gold Metal Mesh Sample"
+            className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
           />
 
-          {/* TOP BAR OF CARD: Smart EMV Chip, NFC Waves, Luxury Foil Stamp */}
-          <div
-            className={`relative z-10 flex items-center justify-between transition-all duration-500 ${
-              isCardVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
-            }`}
-          >
-            {/* Left: Contactless Waves & EMV Chip */}
-            <div className="flex items-center gap-2.5 sm:gap-3">
-              {/* Etched Gold EMV Smart Chip */}
-              <div className="w-10 h-7 sm:w-11 sm:h-8 rounded-md bg-gradient-to-tr from-amber-600 via-amber-400 to-yellow-200 p-[1.5px] shadow-[0_2px_8px_rgba(245,158,11,0.35)]">
-                <div className="w-full h-full rounded-[4px] border border-amber-900/40 grid grid-cols-2 grid-rows-3 gap-[1px] p-[2px] bg-amber-500/25">
-                  <div className="border border-amber-900/30 rounded-[1px]" />
-                  <div className="border border-amber-900/30 rounded-[1px]" />
-                  <div className="border border-amber-900/30 rounded-[1px]" />
-                  <div className="border border-amber-900/30 rounded-[1px]" />
-                  <div className="border border-amber-900/30 rounded-[1px]" />
-                  <div className="border border-amber-900/30 rounded-[1px]" />
+          {/* Luxury Metallic Specular Glass Sheen Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/50 via-transparent to-amber-100/25 pointer-events-none" />
+
+          {/* Precision 24K Card Face Details & Engraved Headline */}
+          <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-7 z-10 select-none">
+            {/* Top Bar: Etched Smart Chip, NFC Waves & Brand Badge */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                {/* 24K Gold EMV Microchip */}
+                <div className="w-10 h-7 sm:w-12 sm:h-8 rounded bg-gradient-to-tr from-amber-600 via-amber-300 to-yellow-100 p-[1.5px] shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                  <div className="w-full h-full rounded-[2px] border border-amber-900/50 grid grid-cols-2 grid-rows-3 gap-[1px] p-[1.5px] bg-amber-500/30">
+                    <div className="border border-amber-900/30" />
+                    <div className="border border-amber-900/30" />
+                    <div className="border border-amber-900/30" />
+                    <div className="border border-amber-900/30" />
+                    <div className="border border-amber-900/30" />
+                    <div className="border border-amber-900/30" />
+                  </div>
                 </div>
+
+                {/* NFC Contactless Wave Indicator */}
+                <Wifi className="w-4 h-4 sm:w-5 sm:h-5 text-amber-200 rotate-90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]" />
               </div>
 
-              {/* NFC Contactless Wave Indicator */}
-              <Wifi className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 rotate-90" />
+              {/* Micro Brand Stamp */}
+              <span className="text-[10px] sm:text-xs font-bold tracking-[0.22em] text-neutral-950 uppercase bg-amber-300/90 backdrop-blur-md px-2.5 py-1 rounded shadow-sm border border-amber-200/60">
+                XTREME CARDZ
+              </span>
             </div>
 
-            {/* Right: Micro Gold Foil Branding */}
-            <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.22em] text-amber-300/85 uppercase">
-              XTREME • IDENTIFINE
-            </span>
-          </div>
+            {/* Center: The Headline Engraved on the Gold Card Face */}
+            <div className="my-auto text-center px-2 py-1">
+              <h3 className="text-lg sm:text-2xl md:text-3xl font-black text-neutral-950 tracking-tight leading-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
+                Turn Your Network Into Recurring Cash
+              </h3>
+            </div>
 
-          {/* CENTER: The 6 Vertical Headline Words */}
-          <div className="relative z-10 my-auto flex flex-col items-center justify-center text-center py-2">
-            {WORDS.map((word, i) => {
-              const isVisible = i <= lineIndex;
-              const isCurrent = i === lineIndex && !isTypingComplete;
-              const currentTyped =
-                i < lineIndex ? word : i === lineIndex ? word.slice(0, charIndex) : word;
-
-              return (
-                <div
-                  key={word}
-                  className="flex items-center justify-center py-0.5 sm:py-1"
-                >
-                  <span
-                    className={`inline-block font-normal tracking-tight leading-[1.08] text-3xl sm:text-4xl md:text-[44px] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] ${
-                      !isVisible ? "opacity-0 pointer-events-none" : "opacity-100"
-                    }`}
-                  >
-                    {isVisible ? currentTyped : word}
-                    {isCurrent && (
-                      <span className="inline-block w-[3px] sm:w-[3.5px] h-[0.75em] bg-amber-400 ml-1.5 align-baseline animate-pulse shadow-[0_0_12px_rgba(245,158,11,1)]" />
-                    )}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* BOTTOM BAR OF CARD: Executive Security Credential Bar */}
-          <div
-            className={`relative z-10 flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.2em] font-mono uppercase transition-all duration-500 ${
-              isCardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-            }`}
-          >
-            <span className="text-neutral-400">ENCRYPTED SMART CARD</span>
-            <span className="text-amber-400/95 font-semibold">24K METAL</span>
+            {/* Bottom Bar: Executive Gold Mesh Signature */}
+            <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-widest uppercase font-bold text-neutral-900 bg-amber-200/40 backdrop-blur-xs px-2 py-0.5 rounded">
+              <span>24K GOLD METAL MESH</span>
+              <span>SMART CREDENTIAL</span>
+            </div>
           </div>
         </div>
       </div>

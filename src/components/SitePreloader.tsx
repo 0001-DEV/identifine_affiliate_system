@@ -1,18 +1,20 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Wifi } from "lucide-react";
 
 const WORDS = ["Turn", "Your", "Network", "Into", "Recurring", "Cash"];
 
-const SCATTER_OFFSETS = [
-  { x: -190, y: -130, z: 90, rot: -16, scale: 1.15 }, // Turn
-  { x: 200, y: -105, z: 70, rot: 15, scale: 1.12 }, // Your
-  { x: -250, y: 15, z: 110, rot: -20, scale: 1.22 }, // Network
-  { x: 240, y: 25, z: 80, rot: 18, scale: 1.16 }, // Into
-  { x: -200, y: 145, z: 95, rot: -12, scale: 1.2 }, // Recurring
-  { x: 220, y: 165, z: 120, rot: 22, scale: 1.28 }, // Cash
-];
+// 42 Dynamic Golden Ember Particles for the text-to-card scatter transition
+const PARTICLES = Array.from({ length: 42 }).map((_, i) => {
+  const angle = (i / 42) * 2 * Math.PI + (i % 3) * 0.25;
+  const distance = 130 + (i % 7) * 48;
+  const x = Math.round(Math.cos(angle) * distance);
+  const y = Math.round(Math.sin(angle) * (distance * 0.72));
+  const z = Math.round(((i % 5) - 2) * 45);
+  const size = 3.5 + (i % 4) * 2.2;
+  const delay = (i % 8) * 35;
+  return { id: i, x, y, z, size, delay };
+});
 
 type PreloaderPhase =
   | "typing"
@@ -79,7 +81,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     document.body.style.overflow = "hidden";
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
-      setScatterFactor(window.innerWidth < 640 ? 0.45 : 1);
+      setScatterFactor(window.innerWidth < 640 ? 0.5 : 1);
     }
 
     let isCancelled = false;
@@ -148,29 +150,29 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       if (isCancelled) return;
       setPhase("typed_hold");
 
-      // 1. Hold typed text briefly so user reads the completed words
+      // 1. Hold completed typed text cleanly WITHOUT any blinking cursor (400ms)
       timerRef.current = setTimeout(() => {
         if (isCancelled) return;
         setPhase("scatter");
 
-        // 2. Text scatters dynamically into 3D space (700ms)
+        // 2. Text dissolves into glowing particles scattering outwards into 3D space (750ms)
         timerRef.current = setTimeout(() => {
           if (isCancelled) return;
           setPhase("forming");
 
-          // 3. Scattered text condenses inwards and forms the 24K Gold Card (550ms)
+          // 3. Particles rush inward magnetically to form the 24K Gold Card (550ms)
           timerRef.current = setTimeout(() => {
             if (isCancelled) return;
             setPhase("card_showcase");
 
-            // 4. Showcase the formed 24K Gold Metal Mesh card with generous time (1600ms)
+            // 4. Showcase the clean gold card with text directly on card face (1600ms)
             timerRef.current = setTimeout(() => {
               if (isCancelled) return;
               startHeroGlide();
             }, 1600);
           }, 550);
-        }, 700);
-      }, 450);
+        }, 750);
+      }, 400);
     };
 
     const typeNextChar = () => {
@@ -194,7 +196,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             timerRef.current = setTimeout(typeNextChar, 36);
           }, 75);
         } else {
-          // Completed all 6 words! Begin scatter and card formation
+          // Completed all 6 words! No cursor line - proceed to particle scatter
           beginScatterSequence();
         }
       }
@@ -236,8 +238,6 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     }, 380);
   };
 
-  const isCardFormed =
-    phase === "forming" || phase === "card_showcase" || phase === "hero_glide";
   const isShuttersOpen = phase === "hero_glide";
 
   return (
@@ -245,85 +245,64 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       onClick={handleSkip}
       className="fixed inset-0 z-[9999] cursor-pointer select-none overflow-hidden [perspective:1400px]"
     >
-      {/* 1. LEFT BLACK SHUTTER: slides smoothly to the left when opening */}
+      {/* 1. LEFT BLACK SHUTTER with crisp Black & White edge */}
       <div
-        className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] border-r border-white/40 shadow-[1px_0_16px_rgba(255,255,255,0.25)] transition-transform duration-[1400ms] ${
           isShuttersOpen ? "-translate-x-full" : "translate-x-0"
         }`}
         style={{
           transitionTimingFunction: "cubic-bezier(0.85, 0, 0.15, 1)",
         }}
-      />
+      >
+        {/* Subtle luminous monochrome edge gradient */}
+        <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-r from-transparent to-white/[0.08] pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-white to-transparent opacity-90 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+      </div>
 
-      {/* 2. RIGHT BLACK SHUTTER: slides smoothly to the right when opening */}
+      {/* 2. RIGHT BLACK SHUTTER with crisp Black & White edge */}
       <div
-        className={`absolute inset-y-0 right-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 right-0 w-[50.5%] bg-[#0A0608] border-l border-white/40 shadow-[-1px_0_16px_rgba(255,255,255,0.25)] transition-transform duration-[1400ms] ${
           isShuttersOpen ? "translate-x-full" : "translate-x-0"
         }`}
         style={{
           transitionTimingFunction: "cubic-bezier(0.85, 0, 0.15, 1)",
         }}
-      />
+      >
+        {/* Subtle luminous monochrome edge gradient */}
+        <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-l from-transparent to-white/[0.08] pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-white to-transparent opacity-90 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+      </div>
 
-      {/* 3. CENTER STAGE: Vertical text types, scatters into 3D, condenses to form Gold card, then glides to hero */}
+      {/* 3. CENTER STAGE */}
       <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
-        {/* A. SCATTERABLE TEXT STACK */}
+        {/* A. TYPED TEXT STACK (Dissolves into particles upon completion) */}
         <div
-          className={`absolute flex flex-col items-center justify-center text-center py-2 transition-opacity duration-300 ${
-            phase === "card_showcase" || phase === "hero_glide"
+          className={`absolute flex flex-col items-center justify-center text-center py-2 transition-all duration-500 ${
+            phase === "scatter"
+              ? "opacity-0 scale-105 blur-sm"
+              : phase === "forming" || phase === "card_showcase" || phase === "hero_glide"
               ? "opacity-0 pointer-events-none"
-              : "opacity-100"
+              : "opacity-100 scale-100"
           }`}
         >
           {WORDS.map((word, i) => {
             const isVisible = i <= lineIndex;
-            const isCurrent = i === lineIndex && phase === "typing";
+            // Only show the gold cursor while typing is actively typing that word; never after writing is complete!
+            const showCursor =
+              phase === "typing" &&
+              i === lineIndex &&
+              charIndex < word.length;
             const currentTyped =
               i < lineIndex ? word : i === lineIndex ? word.slice(0, charIndex) : word;
-
-            // Calculate word transform based on phase
-            const offset = SCATTER_OFFSETS[i];
-            let wordStyle: React.CSSProperties = {
-              transform: "translate3d(0, 0, 0) rotate(0deg) scale(1)",
-              opacity: isVisible ? 1 : 0,
-              transition: "transform 400ms ease-out, opacity 400ms ease-out",
-            };
-
-            if (phase === "scatter") {
-              // Word bursts dynamically into 3D space
-              wordStyle = {
-                transform: `translate3d(${offset.x * scatterFactor}px, ${
-                  offset.y * scatterFactor
-                }px, ${offset.z}px) rotate(${offset.rot}deg) scale(${offset.scale})`,
-                opacity: 0.9,
-                transition:
-                  "transform 700ms cubic-bezier(0.18, 0.89, 0.32, 1.15), opacity 700ms ease-out",
-              };
-            } else if (phase === "forming") {
-              // Word magnetically accelerates inward to form the card
-              wordStyle = {
-                transform: "translate3d(0, 0, -160px) rotate(0deg) scale(0.15)",
-                opacity: 0,
-                transition:
-                  "transform 550ms cubic-bezier(0.7, 0, 0.25, 1), opacity 450ms ease-in",
-              };
-            }
 
             return (
               <div
                 key={word}
                 className="flex items-center justify-center py-0.5 sm:py-1 will-change-transform"
-                style={wordStyle}
               >
-                <span
-                  className={`inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white ${
-                    phase === "scatter"
-                      ? "drop-shadow-[0_0_28px_rgba(245,158,11,0.9)] text-amber-200"
-                      : "drop-shadow-[0_2px_14px_rgba(245,158,11,0.3)]"
-                  }`}
-                >
+                <span className="inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-[0_2px_14px_rgba(245,158,11,0.3)]">
                   {isVisible ? currentTyped : word}
-                  {isCurrent && (
+                  {showCursor && (
                     <span className="inline-block w-[3px] sm:w-[3.5px] h-[0.75em] bg-amber-400 ml-1.5 align-baseline animate-pulse shadow-[0_0_12px_rgba(245,158,11,1)]" />
                   )}
                 </span>
@@ -332,7 +311,45 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           })}
         </div>
 
-        {/* B. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Formed from text, showcased, then glides to hero headline */}
+        {/* B. GOLDEN PARTICLES (Dissolves from text, scatters into 3D, then pulls into card) */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {PARTICLES.map((p) => {
+            let pStyle: React.CSSProperties = {
+              width: `${p.size}px`,
+              height: `${p.size}px`,
+              transform: "translate3d(0, 0, 0) scale(0)",
+              opacity: 0,
+            };
+
+            if (phase === "scatter") {
+              pStyle = {
+                width: `${p.size}px`,
+                height: `${p.size}px`,
+                transform: `translate3d(${p.x * scatterFactor}px, ${p.y * scatterFactor}px, ${p.z}px) scale(1)`,
+                opacity: 0.95,
+                transition: `transform 700ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay}ms, opacity 500ms ease-out ${p.delay}ms`,
+              };
+            } else if (phase === "forming") {
+              pStyle = {
+                width: `${p.size}px`,
+                height: `${p.size}px`,
+                transform: "translate3d(0, 0, -80px) scale(0)",
+                opacity: 0,
+                transition: "transform 500ms cubic-bezier(0.7, 0, 0.2, 1), opacity 350ms ease-in",
+              };
+            }
+
+            return (
+              <span
+                key={p.id}
+                style={pStyle}
+                className="absolute rounded-full bg-gradient-to-tr from-amber-400 via-amber-200 to-yellow-100 shadow-[0_0_12px_rgba(245,158,11,1)] will-change-transform"
+              />
+            );
+          })}
+        </div>
+
+        {/* C. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Formed from particles, clean text directly on card face (no container boxes) */}
         <div
           ref={cardRef}
           style={{
@@ -357,47 +374,13 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           />
 
           {/* Luxury Metallic Specular Glass Sheen Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/50 via-transparent to-amber-100/25 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-amber-100/20 pointer-events-none" />
 
-          {/* Precision 24K Card Face Details & Engraved Headline */}
-          <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-7 z-10 select-none">
-            {/* Top Bar: Etched Smart Chip, NFC Waves & Brand Badge */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5 sm:gap-3">
-                {/* 24K Gold EMV Microchip */}
-                <div className="w-10 h-7 sm:w-12 sm:h-8 rounded bg-gradient-to-tr from-amber-600 via-amber-300 to-yellow-100 p-[1.5px] shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
-                  <div className="w-full h-full rounded-[2px] border border-amber-900/50 grid grid-cols-2 grid-rows-3 gap-[1px] p-[1.5px] bg-amber-500/30">
-                    <div className="border border-amber-900/30" />
-                    <div className="border border-amber-900/30" />
-                    <div className="border border-amber-900/30" />
-                    <div className="border border-amber-900/30" />
-                    <div className="border border-amber-900/30" />
-                    <div className="border border-amber-900/30" />
-                  </div>
-                </div>
-
-                {/* NFC Contactless Wave Indicator */}
-                <Wifi className="w-4 h-4 sm:w-5 sm:h-5 text-amber-200 rotate-90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]" />
-              </div>
-
-              {/* Micro Brand Stamp */}
-              <span className="text-[10px] sm:text-xs font-bold tracking-[0.22em] text-neutral-950 uppercase bg-amber-300/90 backdrop-blur-md px-2.5 py-1 rounded shadow-sm border border-amber-200/60">
-                XTREME CARDZ
-              </span>
-            </div>
-
-            {/* Center: The Headline Engraved on the Gold Card Face */}
-            <div className="my-auto text-center px-2 py-1">
-              <h3 className="text-lg sm:text-2xl md:text-3xl font-black text-neutral-950 tracking-tight leading-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
-                Turn Your Network Into Recurring Cash
-              </h3>
-            </div>
-
-            {/* Bottom Bar: Executive Gold Mesh Signature */}
-            <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-widest uppercase font-bold text-neutral-900 bg-amber-200/40 backdrop-blur-xs px-2 py-0.5 rounded">
-              <span>24K GOLD METAL MESH</span>
-              <span>SMART CREDENTIAL</span>
-            </div>
+          {/* Clean Card Face: The text is written DIRECTLY on the card, NOT inside any badge or container boxes */}
+          <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-10 z-10 select-none">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal text-neutral-950 tracking-tight leading-[1.08] text-center drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">
+              Turn Your Network Into Recurring Cash
+            </h3>
           </div>
         </div>
       </div>

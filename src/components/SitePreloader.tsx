@@ -15,12 +15,9 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
   const [cardTransform, setCardTransform] = useState<React.CSSProperties>({});
 
   const cardRef = useRef<HTMLDivElement>(null);
-  const hasStartedRef = useRef(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (hasStartedRef.current) return;
-    hasStartedRef.current = true;
-
     // Lock body scroll during preloader
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -49,7 +46,7 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         if (cRect.width > 0 && hRect.width > 0) {
           const deltaX = hRect.left + hRect.width / 2 - (cRect.left + cRect.width / 2);
           const deltaY = hRect.top + hRect.height / 2 - (cRect.top + cRect.height / 2);
-          const scale = Math.min(0.46, Math.max(0.32, (hRect.height / cRect.height) * 1.55));
+          const scale = Math.min(0.48, Math.max(0.32, (hRect.height / cRect.height) * 1.55));
 
           if (
             !isNaN(deltaX) &&
@@ -97,45 +94,67 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         setLineIndex(currentLine);
         setCharIndex(currentChar);
 
-        setTimeout(typeNextChar, 38);
+        timerRef.current = setTimeout(typeNextChar, 36);
       } else {
         if (currentLine < WORDS.length - 1) {
-          setTimeout(() => {
+          timerRef.current = setTimeout(() => {
             if (isCancelled) return;
             currentLine++;
             currentChar = 0;
             setLineIndex(currentLine);
             setCharIndex(0);
-            setTimeout(typeNextChar, 38);
-          }, 80);
+            timerRef.current = setTimeout(typeNextChar, 36);
+          }, 75);
         } else {
           // Completed all 6 words!
           setIsTypingComplete(true);
           // Illuminate card frame around text
           setIsCardVisible(true);
 
-          // Hold completed card for 420ms so visitor sees the executive card
-          setTimeout(() => {
+          // Hold completed card for 380ms so visitor sees the executive card
+          timerRef.current = setTimeout(() => {
             if (isCancelled) return;
             startHeroTransition();
-          }, 420);
+          }, 380);
         }
       }
     };
 
-    const initialTimer = setTimeout(typeNextChar, 180);
+    // Kick off typing after 50ms
+    timerRef.current = setTimeout(typeNextChar, 50);
+
+    // Emergency fail-safe: guarantee the preloader finishes after 3.8s
+    const emergencyTimer = setTimeout(() => {
+      if (!isCancelled) {
+        startHeroTransition();
+      }
+    }, 3800);
 
     return () => {
       isCancelled = true;
-      clearTimeout(initialTimer);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      clearTimeout(emergencyTimer);
       document.body.style.overflow = originalOverflow;
     };
   }, [onComplete]);
 
   if (isFinished) return null;
 
+  const handleSkip = () => {
+    setIsTypingComplete(true);
+    setIsCardVisible(true);
+    setIsExiting(true);
+    setTimeout(() => {
+      setIsFinished(true);
+      onComplete?.();
+    }, 350);
+  };
+
   return (
-    <div className="fixed inset-0 z-[9999] pointer-events-none select-none overflow-hidden [perspective:1200px]">
+    <div
+      onClick={handleSkip}
+      className="fixed inset-0 z-[9999] cursor-pointer select-none overflow-hidden [perspective:1200px]"
+    >
       {/* 1. LEFT BLACK SHUTTER: slides smoothly to the left when opening */}
       <div
         className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1000ms] ${

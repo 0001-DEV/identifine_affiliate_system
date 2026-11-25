@@ -26,6 +26,13 @@ export default function HomePage() {
   const router = useRouter();
   const [isPreloaderFinished, setIsPreloaderFinished] = useState(false);
 
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      setIsPreloaderFinished(true);
+    }, 4500);
+    return () => clearTimeout(fallbackTimer);
+  }, []);
+
   // =========================================================================
   // PINNED HORIZONTAL SCROLL FOR HERO SECTION (PARTNER IMAGES MOVE ON SCROLL)
   // =========================================================================

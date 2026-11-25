@@ -5,14 +5,35 @@ import { Wifi } from "lucide-react";
 
 const WORDS = ["Turn", "Your", "Network", "Into", "Recurring", "Cash"];
 
-export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
+const SCATTER_OFFSETS = [
+  { x: -190, y: -130, z: 90, rot: -16, scale: 1.15 }, // Turn
+  { x: 200, y: -105, z: 70, rot: 15, scale: 1.12 }, // Your
+  { x: -250, y: 15, z: 110, rot: -20, scale: 1.22 }, // Network
+  { x: 240, y: 25, z: 80, rot: 18, scale: 1.16 }, // Into
+  { x: -200, y: 145, z: 95, rot: -12, scale: 1.2 }, // Recurring
+  { x: 220, y: 165, z: 120, rot: 22, scale: 1.28 }, // Cash
+];
+
+type PreloaderPhase =
+  | "typing"
+  | "typed_hold"
+  | "scatter"
+  | "forming"
+  | "card_showcase"
+  | "hero_glide"
+  | "finished";
+
+interface SitePreloaderProps {
+  onGlideStart?: () => void;
+  onComplete?: () => void;
+}
+
+export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) {
+  const [phase, setPhase] = useState<PreloaderPhase>("typing");
   const [lineIndex, setLineIndex] = useState<number>(0);
   const [charIndex, setCharIndex] = useState<number>(0);
-  const [isTypingComplete, setIsTypingComplete] = useState<boolean>(false);
-  const [isCardVisible, setIsCardVisible] = useState<boolean>(false);
-  const [isExiting, setIsExiting] = useState<boolean>(false);
-  const [isFinished, setIsFinished] = useState<boolean>(false);
   const [cardTransform, setCardTransform] = useState<React.CSSProperties>({});
+  const [scatterFactor, setScatterFactor] = useState<number>(1);
 
   const cardRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -23,18 +44,22 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
     document.body.style.overflow = "hidden";
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
+      setScatterFactor(window.innerWidth < 640 ? 0.45 : 1);
     }
 
     let isCancelled = false;
     let currentLine = 0;
     let currentChar = 0;
 
-    const startHeroTransition = () => {
+    const startHeroGlide = () => {
       if (isCancelled) return;
 
       if (typeof window !== "undefined") {
         window.scrollTo(0, 0);
       }
+
+      onGlideStart?.();
+      setPhase("hero_glide");
 
       const cEl = cardRef.current;
       const hEl = document.getElementById("hero-headline");
@@ -46,7 +71,7 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         if (cRect.width > 0 && hRect.width > 0) {
           const deltaX = hRect.left + hRect.width / 2 - (cRect.left + cRect.width / 2);
           const deltaY = hRect.top + hRect.height / 2 - (cRect.top + cRect.height / 2);
-          const scale = Math.min(0.48, Math.max(0.32, (hRect.height / cRect.height) * 1.55));
+          const scale = Math.min(0.55, Math.max(0.34, (hRect.height / cRect.height) * 1.6));
 
           if (
             !isNaN(deltaX) &&
@@ -57,31 +82,59 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             isFinite(scale)
           ) {
             setCardTransform({
-              transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale}) rotateX(12deg) rotateZ(-3deg)`,
+              transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale}) rotateX(6deg) rotateZ(-2deg)`,
               opacity: 0,
               transition:
-                "transform 1000ms cubic-bezier(0.85, 0, 0.15, 1), opacity 950ms cubic-bezier(0.85, 0, 0.15, 1)",
+                "transform 1400ms cubic-bezier(0.22, 1, 0.36, 1), opacity 1300ms cubic-bezier(0.85, 0, 0.15, 1)",
             });
           }
         }
       } else {
         setCardTransform({
-          transform: "translate3d(0, -160px, 0) scale(0.42) rotateX(10deg)",
+          transform: "translate3d(0, -160px, 0) scale(0.4) rotateX(8deg)",
           opacity: 0,
           transition:
-            "transform 1000ms cubic-bezier(0.85, 0, 0.15, 1), opacity 950ms cubic-bezier(0.85, 0, 0.15, 1)",
+            "transform 1400ms cubic-bezier(0.22, 1, 0.36, 1), opacity 1300ms cubic-bezier(0.85, 0, 0.15, 1)",
         });
       }
 
-      setIsExiting(true);
-
-      // Complete preloader as shutters finish opening (1050ms)
-      setTimeout(() => {
+      // Finish preloader as shutters and glide complete
+      timerRef.current = setTimeout(() => {
         if (isCancelled) return;
         document.body.style.overflow = originalOverflow;
-        setIsFinished(true);
+        setPhase("finished");
         onComplete?.();
-      }, 1050);
+      }, 1450);
+    };
+
+    // Sequential Phase Engine
+    const beginScatterSequence = () => {
+      if (isCancelled) return;
+      setPhase("typed_hold");
+
+      // 1. Hold typed text briefly so user reads the completed words
+      timerRef.current = setTimeout(() => {
+        if (isCancelled) return;
+        setPhase("scatter");
+
+        // 2. Text scatters dynamically into 3D space (700ms)
+        timerRef.current = setTimeout(() => {
+          if (isCancelled) return;
+          setPhase("forming");
+
+          // 3. Scattered text condenses inwards and forms the 24K Gold Card (550ms)
+          timerRef.current = setTimeout(() => {
+            if (isCancelled) return;
+            setPhase("card_showcase");
+
+            // 4. Showcase the formed 24K Gold Metal Mesh card with generous time (1600ms)
+            timerRef.current = setTimeout(() => {
+              if (isCancelled) return;
+              startHeroGlide();
+            }, 1600);
+          }, 550);
+        }, 700);
+      }, 450);
     };
 
     const typeNextChar = () => {
@@ -93,7 +146,6 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
         currentChar++;
         setLineIndex(currentLine);
         setCharIndex(currentChar);
-
         timerRef.current = setTimeout(typeNextChar, 36);
       } else {
         if (currentLine < WORDS.length - 1) {
@@ -106,20 +158,8 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
             timerRef.current = setTimeout(typeNextChar, 36);
           }, 75);
         } else {
-          // Completed all 6 words!
-          setIsTypingComplete(true);
-
-          // Morph text into the authentic Gold Metal Mesh Card sample
-          timerRef.current = setTimeout(() => {
-            if (isCancelled) return;
-            setIsCardVisible(true);
-
-            // Hold Gold Metal Mesh Card so visitor sees it clearly before shrinking to hero
-            timerRef.current = setTimeout(() => {
-              if (isCancelled) return;
-              startHeroTransition();
-            }, 550);
-          }, 120);
+          // Completed all 6 words! Begin scatter and card formation
+          beginScatterSequence();
         }
       }
     };
@@ -127,12 +167,12 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
     // Kick off typing after 50ms
     timerRef.current = setTimeout(typeNextChar, 50);
 
-    // Emergency fail-safe: guarantee the preloader finishes after 4.2s
+    // Emergency fail-safe: guarantee the preloader unblocks after 9.5s
     const emergencyTimer = setTimeout(() => {
       if (!isCancelled) {
-        startHeroTransition();
+        startHeroGlide();
       }
-    }, 4200);
+    }, 9500);
 
     return () => {
       isCancelled = true;
@@ -140,29 +180,38 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
       clearTimeout(emergencyTimer);
       document.body.style.overflow = originalOverflow;
     };
-  }, [onComplete]);
+  }, [onGlideStart, onComplete]);
 
-  if (isFinished) return null;
+  if (phase === "finished") return null;
 
   const handleSkip = () => {
-    setIsTypingComplete(true);
-    setIsCardVisible(true);
-    setIsExiting(true);
+    onGlideStart?.();
+    setPhase("hero_glide");
+    setCardTransform({
+      transform: "translate3d(0, -160px, 0) scale(0.38) rotateX(8deg)",
+      opacity: 0,
+      transition: "transform 350ms ease-out, opacity 300ms ease-out",
+    });
     setTimeout(() => {
-      setIsFinished(true);
+      document.body.style.overflow = "";
+      setPhase("finished");
       onComplete?.();
-    }, 350);
+    }, 380);
   };
+
+  const isCardFormed =
+    phase === "forming" || phase === "card_showcase" || phase === "hero_glide";
+  const isShuttersOpen = phase === "hero_glide";
 
   return (
     <div
       onClick={handleSkip}
-      className="fixed inset-0 z-[9999] cursor-pointer select-none overflow-hidden [perspective:1200px]"
+      className="fixed inset-0 z-[9999] cursor-pointer select-none overflow-hidden [perspective:1400px]"
     >
       {/* 1. LEFT BLACK SHUTTER: slides smoothly to the left when opening */}
       <div
-        className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1000ms] ${
-          isExiting ? "-translate-x-full" : "translate-x-0"
+        className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
+          isShuttersOpen ? "-translate-x-full" : "translate-x-0"
         }`}
         style={{
           transitionTimingFunction: "cubic-bezier(0.85, 0, 0.15, 1)",
@@ -171,36 +220,69 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
 
       {/* 2. RIGHT BLACK SHUTTER: slides smoothly to the right when opening */}
       <div
-        className={`absolute inset-y-0 right-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1000ms] ${
-          isExiting ? "translate-x-full" : "translate-x-0"
+        className={`absolute inset-y-0 right-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
+          isShuttersOpen ? "translate-x-full" : "translate-x-0"
         }`}
         style={{
           transitionTimingFunction: "cubic-bezier(0.85, 0, 0.15, 1)",
         }}
       />
 
-      {/* 3. CENTER STAGE: Vertical text types, condenses, then shrinks into Gold Metal Mesh card */}
-      <div className="absolute inset-0 flex items-center justify-center p-4">
-        {/* A. VERTICAL TEXT WRITING STACK: Fades out as it condenses into the gold card */}
+      {/* 3. CENTER STAGE: Vertical text types, scatters into 3D, condenses to form Gold card, then glides to hero */}
+      <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+        {/* A. SCATTERABLE TEXT STACK */}
         <div
-          className={`absolute flex flex-col items-center justify-center text-center py-2 transition-all duration-500 ease-out ${
-            isCardVisible ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
+          className={`absolute flex flex-col items-center justify-center text-center py-2 transition-opacity duration-300 ${
+            phase === "card_showcase" || phase === "hero_glide"
+              ? "opacity-0 pointer-events-none"
+              : "opacity-100"
           }`}
         >
           {WORDS.map((word, i) => {
             const isVisible = i <= lineIndex;
-            const isCurrent = i === lineIndex && !isTypingComplete;
+            const isCurrent = i === lineIndex && phase === "typing";
             const currentTyped =
               i < lineIndex ? word : i === lineIndex ? word.slice(0, charIndex) : word;
+
+            // Calculate word transform based on phase
+            const offset = SCATTER_OFFSETS[i];
+            let wordStyle: React.CSSProperties = {
+              transform: "translate3d(0, 0, 0) rotate(0deg) scale(1)",
+              opacity: isVisible ? 1 : 0,
+              transition: "transform 400ms ease-out, opacity 400ms ease-out",
+            };
+
+            if (phase === "scatter") {
+              // Word bursts dynamically into 3D space
+              wordStyle = {
+                transform: `translate3d(${offset.x * scatterFactor}px, ${
+                  offset.y * scatterFactor
+                }px, ${offset.z}px) rotate(${offset.rot}deg) scale(${offset.scale})`,
+                opacity: 0.9,
+                transition:
+                  "transform 700ms cubic-bezier(0.18, 0.89, 0.32, 1.15), opacity 700ms ease-out",
+              };
+            } else if (phase === "forming") {
+              // Word magnetically accelerates inward to form the card
+              wordStyle = {
+                transform: "translate3d(0, 0, -160px) rotate(0deg) scale(0.15)",
+                opacity: 0,
+                transition:
+                  "transform 550ms cubic-bezier(0.7, 0, 0.25, 1), opacity 450ms ease-in",
+              };
+            }
 
             return (
               <div
                 key={word}
-                className="flex items-center justify-center py-0.5 sm:py-1"
+                className="flex items-center justify-center py-0.5 sm:py-1 will-change-transform"
+                style={wordStyle}
               >
                 <span
-                  className={`inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-[0_2px_14px_rgba(245,158,11,0.3)] ${
-                    !isVisible ? "opacity-0 pointer-events-none" : "opacity-100"
+                  className={`inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white ${
+                    phase === "scatter"
+                      ? "drop-shadow-[0_0_28px_rgba(245,158,11,0.9)] text-amber-200"
+                      : "drop-shadow-[0_2px_14px_rgba(245,158,11,0.3)]"
                   }`}
                 >
                   {isVisible ? currentTyped : word}
@@ -213,17 +295,21 @@ export function SitePreloader({ onComplete }: { onComplete?: () => void }) {
           })}
         </div>
 
-        {/* B. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Shrinks and glides to hero headline */}
+        {/* B. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Formed from text, showcased, then glides to hero headline */}
         <div
           ref={cardRef}
           style={{
             ...cardTransform,
             transformOrigin: "center center",
           }}
-          className={`relative w-[90vw] max-w-[420px] sm:max-w-[480px] md:max-w-[540px] aspect-[1.58/1] rounded-2xl sm:rounded-3xl overflow-hidden will-change-transform transition-all duration-600 ease-out ${
-            isCardVisible
-              ? "opacity-100 scale-100 shadow-[0_30px_70px_rgba(0,0,0,0.95),0_0_55px_rgba(245,158,11,0.6)] border-2 border-amber-300/80"
-              : "opacity-0 scale-90 pointer-events-none"
+          className={`relative w-[90vw] max-w-[420px] sm:max-w-[480px] md:max-w-[540px] aspect-[1.58/1] rounded-2xl sm:rounded-3xl overflow-hidden will-change-transform transition-all ${
+            phase === "hero_glide"
+              ? "" // Controlled by cardTransform
+              : phase === "card_showcase"
+              ? "opacity-100 scale-100 duration-1000 ease-out shadow-[0_35px_80px_rgba(0,0,0,0.95),0_0_65px_rgba(245,158,11,0.7)] border-2 border-amber-300/90"
+              : phase === "forming"
+              ? "opacity-95 scale-105 duration-550 ease-out shadow-[0_25px_60px_rgba(245,158,11,0.5)] border border-amber-300"
+              : "opacity-0 scale-75 pointer-events-none duration-300"
           }`}
         >
           {/* Authentic High-Definition 24K Gold Metal Mesh Card Image */}

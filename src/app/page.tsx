@@ -25,11 +25,13 @@ import {
 export default function HomePage() {
   const router = useRouter();
   const [isPreloaderFinished, setIsPreloaderFinished] = useState(false);
+  const [isHeroHeadlineRevealed, setIsHeroHeadlineRevealed] = useState(false);
 
   useEffect(() => {
     const fallbackTimer = setTimeout(() => {
+      setIsHeroHeadlineRevealed(true);
       setIsPreloaderFinished(true);
-    }, 4500);
+    }, 9500);
     return () => clearTimeout(fallbackTimer);
   }, []);
 
@@ -361,7 +363,13 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black">
-      <SitePreloader onComplete={() => setIsPreloaderFinished(true)} />
+      <SitePreloader
+        onGlideStart={() => setIsHeroHeadlineRevealed(true)}
+        onComplete={() => {
+          setIsHeroHeadlineRevealed(true);
+          setIsPreloaderFinished(true);
+        }}
+      />
       <MarketingNav />
 
       <main className="flex-1">
@@ -372,8 +380,8 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
             <h1
               id="hero-headline"
-              className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05] transition-all duration-700 ease-out ${
-                isPreloaderFinished
+              className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05] transition-all duration-1000 ease-out ${
+                isHeroHeadlineRevealed
                   ? "opacity-100 scale-100 translate-y-0"
                   : "opacity-0 scale-95 translate-y-3"
               }`}

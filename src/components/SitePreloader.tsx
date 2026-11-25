@@ -61,9 +61,6 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       return;
     }
 
-    // Mark as played so internal navigation doesn't replay it
-    hasPlayedInClientSession = true;
-
     // Lock body scroll during preloader
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -127,6 +124,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       timerRef.current = setTimeout(() => {
         if (isCancelled) return;
         document.body.style.overflow = originalOverflow;
+        hasPlayedInClientSession = true;
         setPhase("finished");
         onComplete?.();
       }, 1450);

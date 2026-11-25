@@ -45,7 +45,7 @@ export default function PricingEarningsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Left Title */}
               <div className="space-y-3">
-                <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-normal text-white tracking-tight leading-[1.05]">
                   Earnings &amp; Commission
                 </h1>
                 <p className="text-sm sm:text-base text-neutral-300 font-medium">
@@ -106,7 +106,7 @@ export default function PricingEarningsPage() {
         <section className="py-16 md:py-20 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-10">
             <div className="text-center space-y-1">
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-950">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-neutral-950 tracking-tight leading-[1.05]">
                 Estimate Your Earnings
               </h2>
               <p className="text-sm text-neutral-600">
@@ -179,7 +179,7 @@ export default function PricingEarningsPage() {
            ========================================================================= */}
         <section className="py-16 md:py-24 bg-[#F8F9FA] text-neutral-900 border-b border-neutral-300/60">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-neutral-950">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-center text-neutral-950 tracking-tight leading-[1.05]">
               How You Get Paid
             </h2>
 
@@ -231,9 +231,9 @@ export default function PricingEarningsPage() {
         {/* Quick CTA */}
         <section className="bg-[#121214] py-12 px-4 sm:px-6 text-center">
           <div className="mx-auto max-w-4xl space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-black text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-white tracking-tight leading-[1.05]">
               Ready to Start Earning?
-            </h3>
+            </h2>
             <p className="text-xs sm:text-sm text-neutral-400">
               Join thousands of professionals introducing luxury NFC smart cards in Nigeria.
             </p>

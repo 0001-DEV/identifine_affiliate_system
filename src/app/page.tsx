@@ -508,10 +508,10 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14 sm:mb-16 text-center relative z-10">
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white tracking-tight leading-[1.05]">
               Clients We Have Worked With
             </h2>
-            <p className="text-sm sm:text-base text-neutral-300 mt-3 font-normal max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-neutral-300 mt-5 font-normal max-w-2xl mx-auto leading-relaxed">
               Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
             </p>
           </div>
@@ -708,11 +708,11 @@ export default function HomePage() {
            ========================================================================= */}
         <section id="how-it-works" data-dark="true" className="py-24 sm:py-32 bg-[#17171A] text-white border-b border-white/10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center space-y-3 mb-16">
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <div className="text-center space-y-4 mb-16 sm:mb-20">
+              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white tracking-tight leading-[1.05]">
                 How It Works
               </h2>
-              <p className="text-base sm:text-lg text-neutral-300 font-medium">
+              <p className="text-base sm:text-xl text-neutral-300 font-normal">
                 Join. Refer. Earn. It&apos;s that simple!
               </p>
             </div>
@@ -757,10 +757,10 @@ export default function HomePage() {
               </div>
 
               <div className="space-y-6">
-                <h2 className="text-3xl sm:text-5xl font-extrabold text-neutral-950 tracking-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-black tracking-tight leading-[1.05]">
                   Your Earnings at a Glance
                 </h2>
-                <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
+                <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal">
                   Earn 7.5% commission on qualifying sales, with a minimum withdrawal of ₦50,000 paid instantly via Paystack.
                 </p>
                 <div className="pt-2">
@@ -783,11 +783,11 @@ export default function HomePage() {
         <section data-dark="true" className="bg-[#17171A] py-20 px-4 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <div className="rounded-3xl bg-gradient-to-r from-[#F59E0B] via-[#E5A826] to-[#D97706] p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-2xl">
-              <div className="space-y-2 text-neutral-950">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-black">
+              <div className="space-y-3 text-neutral-950">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-black tracking-tight leading-[1.05]">
                   Ready to Start Earning?
-                </h3>
-                <p className="text-sm sm:text-base text-black/80 font-medium">
+                </h2>
+                <p className="text-sm sm:text-base text-black/80 font-normal">
                   Join the Identifine &amp; Xtreme Cardz Affiliate Programme today!
                 </p>
               </div>

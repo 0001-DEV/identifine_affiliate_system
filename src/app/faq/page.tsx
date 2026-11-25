@@ -72,7 +72,7 @@ export default function FAQPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Left Title */}
               <div className="space-y-3">
-                <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-normal text-white tracking-tight leading-[1.05]">
                   Frequently Asked Questions
                 </h1>
                 <p className="text-sm sm:text-base text-neutral-300 font-medium">

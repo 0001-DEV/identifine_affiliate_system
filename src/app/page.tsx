@@ -389,10 +389,10 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
             <h1
               id="hero-headline"
-              className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal text-black tracking-tight leading-[1.05] transition-all duration-1000 ease-out ${
+              className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal tracking-tight leading-[1.05] transition-all duration-1000 ease-out ${
                 isHeroHeadlineRevealed
-                  ? "opacity-100 scale-100 translate-y-0"
-                  : "opacity-0 scale-95 translate-y-3"
+                  ? "opacity-100 scale-100 translate-y-0 text-black drop-shadow-none"
+                  : "opacity-0 scale-90 translate-y-2 text-[#F59E0B] drop-shadow-[0_0_35px_rgba(245,158,11,0.9)]"
               }`}
             >
               Turn Your Network Into Recurring Cash

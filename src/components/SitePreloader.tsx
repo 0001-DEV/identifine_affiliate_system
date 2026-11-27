@@ -23,6 +23,7 @@ type PreloaderPhase =
   | "forming"
   | "card_showcase"
   | "hero_glide"
+  | "card_dissolve"
   | "finished";
 
 interface SitePreloaderProps {
@@ -49,6 +50,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
   const [lineIndex, setLineIndex] = useState<number>(0);
   const [charIndex, setCharIndex] = useState<number>(0);
   const [cardTransform, setCardTransform] = useState<React.CSSProperties>({});
+  const [headlineOffset, setHeadlineOffset] = useState({ x: 0, y: -180 });
   const [scatterFactor, setScatterFactor] = useState<number>(1);
 
   const cardRef = useRef<HTMLDivElement>(null);
@@ -111,7 +113,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         if (cRect.width > 0 && hRect.width > 0) {
           const calcX = hRect.left + hRect.width / 2 - (cRect.left + cRect.width / 2);
           const calcY = hRect.top + hRect.height / 2 - (cRect.top + cRect.height / 2);
-          const calcScale = Math.min(0.65, Math.max(0.38, (hRect.height / cRect.height) * 1.7));
+          const calcScale = Math.min(0.72, Math.max(0.42, (hRect.height / cRect.height) * 1.8));
 
           if (!isNaN(calcX) && !isNaN(calcY) && !isNaN(calcScale) && isFinite(calcX) && isFinite(calcY) && isFinite(calcScale)) {
             deltaX = calcX;
@@ -121,36 +123,39 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         }
       }
 
-      // Step 1: Card glides smoothly and stays 100% visible as it travels toward the hero headline position
+      setHeadlineOffset({ x: deltaX, y: deltaY });
+
+      // Step 1: Shutters open while card glides smoothly and stays 100% visible to the hero headline position (850ms)
       setCardTransform({
-        transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale}) rotateX(3deg)`,
+        transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale})`,
         opacity: 1,
-        filter: "drop-shadow(0 15px 35px rgba(245,158,11,0.6)) blur(0px)",
-        transition: "transform 750ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease-out, filter 300ms ease-out",
+        filter: "drop-shadow(0 15px 35px rgba(245,158,11,0.65))",
+        transition: "transform 850ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease-out, filter 300ms ease-out",
       });
 
-      // Step 2: As the card hits the headline position at 600ms, trigger hero headline reveal
-      // and dissolve the card with a luminous golden bloom directly into the headline text!
+      // Step 2: At 850ms, the card arrives at the headline.
+      // Trigger card dissolution into particles and reveal the hero headline!
       timerRef.current = setTimeout(() => {
         if (isCancelled) return;
+        setPhase("card_dissolve");
         onGlideStartRef.current?.();
 
         setCardTransform({
-          transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale * 1.08})`,
+          transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale * 1.12})`,
           opacity: 0,
-          filter: "drop-shadow(0 0 50px rgba(245,158,11,1)) blur(8px)",
-          transition: "transform 550ms ease-out, opacity 500ms cubic-bezier(0.85, 0, 0.15, 1), filter 500ms ease-out",
+          filter: "drop-shadow(0 0 55px rgba(245,158,11,1)) blur(8px)",
+          transition: "transform 650ms cubic-bezier(0.16, 1, 0.3, 1), opacity 550ms ease-out, filter 550ms ease-out",
         });
-      }, 600);
+      }, 850);
 
-      // Step 3: Finish preloader as shutters and glide complete
+      // Step 3: Finish preloader as shutters and morph complete
       setTimeout(() => {
         if (isCancelled) return;
         document.body.style.overflow = originalOverflow;
         hasPlayedInClientSession = true;
         setPhase("finished");
         onCompleteRef.current?.();
-      }, 1500);
+      }, 1900);
     };
 
     // Sequential Phase Engine
@@ -246,7 +251,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     }, 380);
   };
 
-  const isShuttersOpen = phase === "hero_glide";
+  const isShuttersOpen = phase === "hero_glide" || phase === "card_dissolve";
 
   return (
     <div
@@ -280,7 +285,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           className={`absolute z-30 flex flex-col items-center justify-center text-center py-2 transition-all duration-500 ${
             phase === "scatter"
               ? "opacity-0 scale-105 blur-sm"
-              : phase === "forming" || phase === "card_showcase" || phase === "hero_glide"
+              : phase === "forming" || phase === "card_showcase" || phase === "hero_glide" || phase === "card_dissolve"
               ? "opacity-0 pointer-events-none"
               : "opacity-100 scale-100"
           }`}
@@ -344,6 +349,22 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
                 opacity: 0,
                 transition: "transform 500ms cubic-bezier(0.7, 0, 0.2, 1), opacity 350ms ease-in",
               };
+            } else if (phase === "hero_glide") {
+              pStyle = {
+                width: `${p.size}px`,
+                height: `${p.size}px`,
+                transform: `translate3d(${headlineOffset.x}px, ${headlineOffset.y}px, 0) scale(0)`,
+                opacity: 0,
+                transition: "transform 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+              };
+            } else if (phase === "card_dissolve") {
+              pStyle = {
+                width: `${p.size * 1.5}px`,
+                height: `${p.size * 1.5}px`,
+                transform: `translate3d(${headlineOffset.x + p.x * 1.25}px, ${headlineOffset.y + p.y * 0.45}px, 0) scale(1.15)`,
+                opacity: 0,
+                transition: `transform 750ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay * 0.35}ms, opacity 700ms ease-out ${p.delay * 0.35}ms`,
+              };
             }
 
             return (
@@ -370,8 +391,8 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             ...cardTransform,
           }}
           className={`relative w-[90vw] max-w-[390px] sm:max-w-[450px] md:max-w-[500px] aspect-[1172/698] will-change-transform transition-all ${
-            phase === "hero_glide"
-              ? "" // Controlled by cardTransform during hero glide
+            phase === "hero_glide" || phase === "card_dissolve"
+              ? "" // Controlled by cardTransform during hero glide & dissolve
               : phase === "card_showcase"
               ? "opacity-100 scale-100 duration-1000 ease-out"
               : phase === "forming"

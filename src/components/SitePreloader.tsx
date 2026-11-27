@@ -245,9 +245,9 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       onClick={handleSkip}
       className="fixed inset-0 z-[9999] cursor-pointer select-none overflow-hidden [perspective:1400px]"
     >
-      {/* 1. LEFT BLACK SHUTTER: Seamless solid black, no line in the middle */}
+      {/* 1. LEFT BLACK SHUTTER: Solid deep black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 left-0 w-[50.5%] z-10 bg-[#0A0608] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 left-0 w-[50.5%] z-10 bg-black transition-transform duration-[1400ms] ${
           isShuttersOpen ? "-translate-x-full" : "translate-x-0"
         }`}
         style={{
@@ -255,9 +255,9 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         }}
       />
 
-      {/* 2. RIGHT BLACK SHUTTER: Seamless solid black, no line in the middle */}
+      {/* 2. RIGHT BLACK SHUTTER: Solid deep black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 right-0 w-[50.5%] z-10 bg-[#0A0608] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 right-0 w-[50.5%] z-10 bg-black transition-transform duration-[1400ms] ${
           isShuttersOpen ? "translate-x-full" : "translate-x-0"
         }`}
         style={{
@@ -265,7 +265,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         }}
       />
 
-      {/* 3. CENTER STAGE: Elevated to z-20 above shutters so text is vivid and never embedded or clipped */}
+      {/* 3. CENTER STAGE: Elevated to z-20 above shutters */}
       <div className="absolute inset-0 z-20 flex items-center justify-center p-4 pointer-events-none">
         {/* A. TYPED TEXT STACK (Dissolves into particles upon completion) */}
         <div
@@ -297,12 +297,12 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
                 className="flex items-center justify-center py-0.5 sm:py-1 will-change-transform"
               >
                 <span
-                  style={{ color: "#ffffff" }}
-                  className="inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white"
+                  style={{ color: "#FFFFFF", opacity: 1 }}
+                  className="inline-block font-bold sm:font-extrabold tracking-tight leading-[1.08] text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white select-none"
                 >
-                  {currentTyped}
+                  {currentTyped || word}
                   {showCursor && (
-                    <span className="inline-block w-[2.5px] sm:w-[3px] h-[0.75em] bg-white ml-1.5 align-baseline animate-pulse" />
+                    <span className="inline-block w-[3.5px] sm:w-[4px] h-[0.75em] bg-white ml-2 align-baseline animate-pulse shadow-[0_0_8px_#ffffff]" />
                   )}
                 </span>
               </div>

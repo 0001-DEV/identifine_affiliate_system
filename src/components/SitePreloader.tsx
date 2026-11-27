@@ -85,10 +85,10 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     if (hasStartedRef.current) return;
     hasStartedRef.current = true;
 
-    // Immediately preload the 24K Gold Metal Mesh card image in browser cache
+    // Immediately preload the authentic 24K Gold Metal Mesh card image in browser cache
     if (typeof window !== "undefined") {
       const preloadImg = new Image();
-      preloadImg.src = "/images/products/gold-metal-mesh-pure.webp";
+      preloadImg.src = "/images/products/gold-metal-mesh.webp";
     }
 
     // Lock body scroll during preloader
@@ -393,7 +393,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
                 : undefined,
             ...cardTransform,
           }}
-          className={`relative w-[90vw] max-w-[390px] sm:max-w-[450px] md:max-w-[500px] aspect-[1172/698] will-change-transform transition-all ${
+          className={`relative w-[90vw] max-w-[390px] sm:max-w-[450px] md:max-w-[500px] aspect-[1172/698] will-change-transform transition-all rounded-2xl overflow-hidden border border-amber-400/50 shadow-2xl ${
             phase === "intro_open" || phase === "hero_dissolve"
               ? "" // Controlled by cardTransform (burst & dissolve)
               : phase === "card_ready"
@@ -403,11 +403,11 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
               : "opacity-0 scale-85 pointer-events-none duration-250"
           }`}
         >
-          {/* Authentic 24K Gold Metal Mesh Card - 100% transparent outside card boundary */}
+          {/* Authentic 24K Gold Metal Mesh Card Picture */}
           <img
-            src="/images/products/gold-metal-mesh-pure.webp"
+            src="/images/products/gold-metal-mesh.webp"
             alt="Xtreme Cardz 24K Gold Metal Mesh Card"
-            className="w-full h-full object-contain select-none pointer-events-none"
+            className="w-full h-full object-cover select-none pointer-events-none"
           />
         </div>
       </div>

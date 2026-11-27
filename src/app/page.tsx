@@ -405,12 +405,14 @@ export default function HomePage() {
             <div className="flex items-center justify-center gap-3 sm:gap-4 pt-2">
               <Link
                 href="/portal?tab=register"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                 className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
               >
                 Join Affiliate Program
               </Link>
               <Link
                 href="/pricing"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                 className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
               >
                 Affiliate Commission Guide
@@ -804,6 +806,7 @@ export default function HomePage() {
 
               <Link
                 href="/portal?tab=register"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                 className="shrink-0 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white border border-white/20 px-9 py-4 text-sm font-bold shadow-xl transition hover:scale-105"
               >
                 <span>Become an Affiliate</span>

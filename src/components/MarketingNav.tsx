@@ -472,10 +472,11 @@ export function MarketingNav() {
         <div className="hidden md:flex items-center gap-3 shrink-0">
           <Link
             href="/portal?tab=register"
+            style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
             className={`inline-flex items-center gap-1.5 rounded-full px-6 py-2.5 text-xs font-semibold transition shadow-md hover:scale-[1.02] ${
               isOverDark
                 ? "bg-black hover:bg-neutral-800 text-white border border-white/30"
-                : "bg-black hover:bg-neutral-800 text-white"
+                : "bg-black hover:bg-neutral-800 text-white border border-transparent"
             }`}
           >
             <span>Become an Affiliate</span>
@@ -622,6 +623,7 @@ export function MarketingNav() {
             <Link
               href="/portal?tab=register"
               onClick={() => setMobileMenuOpen(false)}
+              style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
               className="w-full text-center rounded-xl bg-black hover:bg-neutral-800 py-3 text-xs font-semibold text-white transition flex items-center justify-center gap-1.5 shadow-md"
             >
               <span>Become an Affiliate</span>

@@ -247,7 +247,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     >
       {/* 1. LEFT BLACK SHUTTER: Seamless solid black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 left-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 left-0 w-[50.5%] z-10 bg-[#0A0608] transition-transform duration-[1400ms] ${
           isShuttersOpen ? "-translate-x-full" : "translate-x-0"
         }`}
         style={{
@@ -257,7 +257,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
 
       {/* 2. RIGHT BLACK SHUTTER: Seamless solid black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 right-0 w-[50.5%] bg-[#0A0608] transition-transform duration-[1400ms] ${
+        className={`absolute inset-y-0 right-0 w-[50.5%] z-10 bg-[#0A0608] transition-transform duration-[1400ms] ${
           isShuttersOpen ? "translate-x-full" : "translate-x-0"
         }`}
         style={{
@@ -265,11 +265,11 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         }}
       />
 
-      {/* 3. CENTER STAGE */}
-      <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+      {/* 3. CENTER STAGE: Elevated to z-20 above shutters so text is vivid and never embedded or clipped */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center p-4 pointer-events-none">
         {/* A. TYPED TEXT STACK (Dissolves into particles upon completion) */}
         <div
-          className={`absolute flex flex-col items-center justify-center text-center py-2 transition-all duration-500 ${
+          className={`absolute z-30 flex flex-col items-center justify-center text-center py-2 transition-all duration-500 ${
             phase === "scatter"
               ? "opacity-0 scale-105 blur-sm"
               : phase === "forming" || phase === "card_showcase" || phase === "hero_glide"
@@ -279,23 +279,27 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         >
           {WORDS.map((word, i) => {
             const isVisible = i <= lineIndex;
-            // Only show the gold cursor while typing is actively typing that word; never after writing is complete!
+            // Only show the cursor while typing is actively typing that word; never after writing is complete!
             const showCursor =
               phase === "typing" &&
               i === lineIndex &&
               charIndex < word.length;
             const currentTyped =
-              i < lineIndex ? word : i === lineIndex ? word.slice(0, charIndex) : word;
+              i < lineIndex ? word : i === lineIndex ? word.slice(0, charIndex) : "";
+
+            if (!isVisible && phase === "typing") {
+              return null;
+            }
 
             return (
               <div
                 key={word}
                 className="flex items-center justify-center py-0.5 sm:py-1 will-change-transform"
               >
-                <span className="inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white">
-                  {isVisible ? currentTyped : word}
+                <span className="inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-[0_2px_18px_rgba(255,255,255,0.7)]">
+                  {currentTyped}
                   {showCursor && (
-                    <span className="inline-block w-[3px] sm:w-[3.5px] h-[0.75em] bg-white ml-1.5 align-baseline animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+                    <span className="inline-block w-[3.5px] sm:w-[4px] h-[0.75em] bg-white ml-1.5 align-baseline animate-pulse shadow-[0_0_12px_rgba(255,255,255,1)]" />
                   )}
                 </span>
               </div>

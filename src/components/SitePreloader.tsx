@@ -393,7 +393,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
                 : undefined,
             ...cardTransform,
           }}
-          className={`relative w-[90vw] max-w-[390px] sm:max-w-[450px] md:max-w-[500px] aspect-[1160/685] will-change-transform transition-all ${
+          className={`relative w-[90vw] max-w-[390px] sm:max-w-[450px] md:max-w-[500px] aspect-[1165/690] will-change-transform transition-all ${
             phase === "intro_open" || phase === "hero_dissolve"
               ? "" // Controlled by cardTransform (burst & dissolve)
               : phase === "card_ready"
@@ -403,11 +403,11 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
               : "opacity-0 scale-85 pointer-events-none duration-250"
           }`}
         >
-          {/* Authentic 24K Gold Metal Mesh Card - clean floating card without border or container */}
+          {/* Authentic 24K Gold Metal Mesh Card - pure cutout card with zero background */}
           <img
             src="/images/products/gold-metal-mesh-pure.webp"
             alt="Xtreme Cardz 24K Gold Metal Mesh Card"
-            className="w-full h-full object-contain rounded-xl select-none pointer-events-none"
+            className="w-full h-full object-contain select-none pointer-events-none"
           />
         </div>
       </div>

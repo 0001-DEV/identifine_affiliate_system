@@ -296,10 +296,13 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
                 key={word}
                 className="flex items-center justify-center py-0.5 sm:py-1 will-change-transform"
               >
-                <span className="inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-[0_2px_18px_rgba(255,255,255,0.7)]">
+                <span
+                  style={{ color: "#ffffff" }}
+                  className="inline-block font-normal tracking-tight leading-[1.08] text-4xl sm:text-5xl md:text-6xl text-white"
+                >
                   {currentTyped}
                   {showCursor && (
-                    <span className="inline-block w-[3.5px] sm:w-[4px] h-[0.75em] bg-white ml-1.5 align-baseline animate-pulse shadow-[0_0_12px_rgba(255,255,255,1)]" />
+                    <span className="inline-block w-[2.5px] sm:w-[3px] h-[0.75em] bg-white ml-1.5 align-baseline animate-pulse" />
                   )}
                 </span>
               </div>

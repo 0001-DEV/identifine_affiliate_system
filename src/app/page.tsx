@@ -411,7 +411,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/pricing"
-                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-800 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-medium transition"
+                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
               >
                 Affiliate Commission Guide
               </Link>

@@ -347,14 +347,20 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           style={{
             ...cardTransform,
             transformOrigin: "center center",
+            filter:
+              phase === "card_showcase"
+                ? "drop-shadow(0 20px 45px rgba(0,0,0,0.9)) drop-shadow(0 0 35px rgba(245,158,11,0.5))"
+                : phase === "forming"
+                ? "drop-shadow(0 15px 30px rgba(245,158,11,0.4))"
+                : undefined,
           }}
           className={`relative w-[90vw] max-w-[380px] sm:max-w-[440px] md:max-w-[480px] aspect-[1076/585] will-change-transform transition-all ${
             phase === "hero_glide"
               ? "" // Controlled by cardTransform during hero glide
               : phase === "card_showcase"
-              ? "opacity-100 scale-100 duration-1000 ease-out drop-shadow-[0_20px_45px_rgba(0,0,0,0.9)] drop-shadow-[0_0_35px_rgba(245,158,11,0.5)]"
+              ? "opacity-100 scale-100 duration-1000 ease-out"
               : phase === "forming"
-              ? "opacity-95 scale-105 duration-550 ease-out drop-shadow-[0_15px_30px_rgba(245,158,11,0.4)]"
+              ? "opacity-95 scale-105 duration-550 ease-out"
               : "opacity-0 scale-75 pointer-events-none duration-300"
           }`}
         >

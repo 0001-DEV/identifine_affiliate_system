@@ -739,7 +739,7 @@ export default function HomePage() {
                   key={idx}
                   className="rounded-2xl border border-white/10 bg-white/[0.04] p-7 text-center space-y-4 hover:border-[#F59E0B]/50 transition group flex flex-col justify-between"
                 >
-                  <div style={{ color: "#FFFFFF" }} className="h-12 w-12 rounded-full bg-[#F59E0B] !text-white font-black text-base flex items-center justify-center mx-auto shadow-md">
+                  <div style={{ color: "#FFFFFF" }} className="h-12 w-12 rounded-full bg-black border border-white/30 !text-white font-black text-base flex items-center justify-center mx-auto shadow-md">
                     {item.step}
                   </div>
                   <div>
@@ -776,7 +776,7 @@ export default function HomePage() {
                 <div className="pt-2">
                   <Link
                     href="/pricing"
-                    className="inline-flex items-center gap-2 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-black px-8 py-4 text-sm font-extrabold transition shadow-md hover:scale-[1.02]"
+                    className="inline-flex items-center gap-2 rounded-xl bg-black hover:bg-neutral-800 text-white px-8 py-4 text-sm font-extrabold transition shadow-md hover:scale-[1.02]"
                   >
                     <span>View Detailed Breakdown</span>
                     <ArrowRight className="w-4 h-4" />
@@ -804,7 +804,7 @@ export default function HomePage() {
 
               <Link
                 href="/portal?tab=register"
-                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-white px-9 py-4 text-sm font-bold shadow-xl transition hover:scale-105"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white border border-white/20 px-9 py-4 text-sm font-bold shadow-xl transition hover:scale-105"
               >
                 <span>Become an Affiliate</span>
                 <ArrowRight className="w-4 h-4" />

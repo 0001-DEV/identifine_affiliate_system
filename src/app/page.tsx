@@ -412,8 +412,8 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/pricing"
-                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
-                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
+                style={{ backgroundColor: "#FFFFFF", color: "#000000" }}
+                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-black px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-sm hover:scale-105 transition"
               >
                 Affiliate Commission Guide
               </Link>

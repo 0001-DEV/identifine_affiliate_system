@@ -502,63 +502,66 @@ export default function HomePage() {
             1C. OUR CLIENTS SECTION (Continuous Kinetic Horizon Stream)
                 Positioned directly before Our Products & Services
            ========================================================================= */}
-        <section id="clients" data-dark="true" className="py-24 sm:py-28 bg-[#17171A] border-y border-white/10 w-full max-w-full overflow-hidden relative">
+        <section id="clients" data-dark="true" className="py-20 sm:py-24 bg-[#17171A] border-y border-white/10 w-full overflow-hidden relative">
           {/* Subtle Ambient Radial Lighting: Lifts dark logos with soft contrast */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.06),transparent_75%)] pointer-events-none" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
 
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 mb-14 sm:mb-16 text-center relative z-10">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white tracking-tight leading-[1.05]">
-              Clients We Have Worked With
-            </h2>
-            <p className="text-base sm:text-lg text-white mt-5 font-normal max-w-xl mx-auto leading-relaxed">
-              Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
-            </p>
-          </div>
-
-          {/* Continuous Standard Linear Infinite Marquee */}
-          <div className="marquee-track relative w-full max-w-full overflow-hidden select-none">
-            {/* Upper Track: Standard Linear Marquee (Glides Left) */}
-            <div className="relative w-full max-w-full overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
-              <div className="animate-standard-marquee-left gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
-                {[...clientLogosRow1, ...clientLogosRow1].map((client, idx) => (
-                  <div
-                    key={`${client.name}-${idx}`}
-                    className="relative flex flex-col items-center justify-center shrink-0 group/logo cursor-pointer py-3"
-                  >
-                    <img
-                      src={client.logo}
-                      alt={client.name}
-                      className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
-                    />
-                    {/* Micro Industry Domain Badge */}
-                    <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
-                      {client.industry}
-                    </span>
-                  </div>
-                ))}
-              </div>
+          {/* Reduced-width Centered Container */}
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-12 sm:mb-14 text-center relative z-10">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-tight leading-[1.05]">
+                Clients We Have Worked With
+              </h2>
+              <p className="text-sm sm:text-base text-white mt-4 font-normal max-w-lg mx-auto leading-relaxed">
+                Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
+              </p>
             </div>
 
-            {/* Lower Track: Standard Linear Marquee (Glides Right) */}
-            <div className="relative w-full max-w-full overflow-hidden py-3 mt-2 sm:mt-4 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
-              <div className="animate-standard-marquee-right gap-14 sm:gap-20 md:gap-24 flex items-center will-change-transform">
-                {[...clientLogosRow2, ...clientLogosRow2].map((client, idx) => (
-                  <div
-                    key={`${client.name}-${idx}`}
-                    className="relative flex flex-col items-center justify-center shrink-0 group/logo cursor-pointer py-3"
-                  >
-                    <img
-                      src={client.logo}
-                      alt={client.name}
-                      className="h-12 sm:h-14 md:h-16 max-w-[150px] sm:max-w-[190px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
-                    />
-                    {/* Micro Industry Domain Badge */}
-                    <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
-                      {client.industry}
-                    </span>
-                  </div>
-                ))}
+            {/* Continuous Standard Linear Infinite Marquee */}
+            <div className="marquee-track relative w-full overflow-hidden select-none rounded-2xl bg-white/[0.02] border border-white/5 py-4">
+              {/* Upper Track: Standard Linear Marquee (Glides Left) */}
+              <div className="relative w-full overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+                <div className="animate-standard-marquee-left gap-12 sm:gap-16 md:gap-20 flex items-center will-change-transform">
+                  {[...clientLogosRow1, ...clientLogosRow1].map((client, idx) => (
+                    <div
+                      key={`${client.name}-${idx}`}
+                      className="relative flex flex-col items-center justify-center shrink-0 group/logo cursor-pointer py-2"
+                    >
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                        className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
+                      />
+                      {/* Micro Industry Domain Badge */}
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
+                        {client.industry}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Lower Track: Standard Linear Marquee (Glides Right) */}
+              <div className="relative w-full overflow-hidden py-2 mt-1 sm:mt-2 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+                <div className="animate-standard-marquee-right gap-12 sm:gap-16 md:gap-20 flex items-center will-change-transform">
+                  {[...clientLogosRow2, ...clientLogosRow2].map((client, idx) => (
+                    <div
+                      key={`${client.name}-${idx}`}
+                      className="relative flex flex-col items-center justify-center shrink-0 group/logo cursor-pointer py-2"
+                    >
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                        className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
+                      />
+                      {/* Micro Industry Domain Badge */}
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
+                        {client.industry}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -729,7 +732,7 @@ export default function HomePage() {
                   key={idx}
                   className="rounded-2xl border border-white/10 bg-white/[0.04] p-7 text-center space-y-4 hover:border-[#F59E0B]/50 transition group flex flex-col justify-between"
                 >
-                  <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-black font-black text-base flex items-center justify-center mx-auto shadow-md">
+                  <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-white font-black text-base flex items-center justify-center mx-auto shadow-md">
                     {item.step}
                   </div>
                   <div>
@@ -794,7 +797,7 @@ export default function HomePage() {
 
               <Link
                 href="/portal?tab=register"
-                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-white hover:bg-neutral-200 text-black px-9 py-4 text-sm font-semibold shadow-xl transition hover:scale-105"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-white px-9 py-4 text-sm font-bold shadow-xl transition hover:scale-105"
               >
                 <span>Become an Affiliate</span>
                 <ArrowRight className="w-4 h-4" />

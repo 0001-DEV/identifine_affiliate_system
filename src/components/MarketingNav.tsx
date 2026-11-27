@@ -289,7 +289,7 @@ export function MarketingNav() {
                       <div
                         key={`active-bg-${link.id}`}
                         className={`absolute inset-0 z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none ${
-                          isOverDark ? "bg-white text-black" : "bg-black text-white"
+                          isOverDark ? "bg-white/20 text-white border-y border-white/40 backdrop-blur-xs" : "bg-black text-white"
                         }`}
                       >
                         <span className="font-black uppercase tracking-wider text-xs whitespace-nowrap flex items-center gap-1.5">
@@ -455,7 +455,7 @@ export function MarketingNav() {
                   <div
                     key={`active-bg-${link.id}`}
                     className={`absolute inset-0 z-20 flex items-center justify-center px-6 animate-fill-left-to-right pointer-events-none ${
-                      isOverDark ? "bg-white text-black" : "bg-black text-white"
+                      isOverDark ? "bg-white/20 text-white border-y border-white/40 backdrop-blur-xs" : "bg-black text-white"
                     }`}
                   >
                     <span className="font-black uppercase tracking-wider text-xs whitespace-nowrap">
@@ -474,7 +474,7 @@ export function MarketingNav() {
             href="/portal?tab=register"
             className={`inline-flex items-center gap-1.5 rounded-full px-6 py-2.5 text-xs font-semibold transition shadow-md hover:scale-[1.02] ${
               isOverDark
-                ? "bg-white hover:bg-neutral-200 text-black"
+                ? "bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]"
                 : "bg-black hover:bg-neutral-800 text-white"
             }`}
           >

@@ -141,7 +141,7 @@ export default function FAQPage() {
                 href="https://wa.me/2349030001851?text=Hello%20Identifine%2C%20I%20have%20questions%20about%20the%20Affiliate%20Programme."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-black px-7 py-3 text-xs font-extrabold transition shadow-md hover:scale-105"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-white px-7 py-3 text-xs font-extrabold transition shadow-md hover:scale-105"
               >
                 <span>Contact Us</span>
                 <ArrowRight className="w-3.5 h-3.5" />

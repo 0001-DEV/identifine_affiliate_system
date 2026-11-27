@@ -341,32 +341,29 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           })}
         </div>
 
-        {/* C. THE AUTHENTIC GOLD METAL MESH CARD SAMPLE: Pure plain card picture, nothing on it */}
+        {/* C. THE AUTHENTIC GOLD METAL MESH CARD: Pure isolated card picture, no container box, border, or background */}
         <div
           ref={cardRef}
           style={{
             ...cardTransform,
             transformOrigin: "center center",
           }}
-          className={`relative w-[90vw] max-w-[420px] sm:max-w-[480px] md:max-w-[540px] aspect-[1.58/1] rounded-2xl sm:rounded-3xl overflow-hidden will-change-transform transition-all ${
+          className={`relative w-[90vw] max-w-[380px] sm:max-w-[440px] md:max-w-[480px] aspect-[1076/585] will-change-transform transition-all ${
             phase === "hero_glide"
-              ? "" // Controlled by cardTransform
+              ? "" // Controlled by cardTransform during hero glide
               : phase === "card_showcase"
-              ? "opacity-100 scale-100 duration-1000 ease-out shadow-[0_35px_80px_rgba(0,0,0,0.95),0_0_65px_rgba(245,158,11,0.7)] border-2 border-amber-300/90"
+              ? "opacity-100 scale-100 duration-1000 ease-out drop-shadow-[0_20px_45px_rgba(0,0,0,0.9)] drop-shadow-[0_0_35px_rgba(245,158,11,0.5)]"
               : phase === "forming"
-              ? "opacity-95 scale-105 duration-550 ease-out shadow-[0_25px_60px_rgba(245,158,11,0.5)] border border-amber-300"
+              ? "opacity-95 scale-105 duration-550 ease-out drop-shadow-[0_15px_30px_rgba(245,158,11,0.4)]"
               : "opacity-0 scale-75 pointer-events-none duration-300"
           }`}
         >
-          {/* Authentic High-Definition 24K Gold Metal Mesh Card Image (Pure & Plain) */}
+          {/* Authentic High-Definition 24K Gold Metal Mesh Card - Pure transparent-background card cutout */}
           <img
-            src="/images/products/gold-metal-mesh.webp"
-            alt="Xtreme Cardz Gold Metal Mesh Sample"
-            className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+            src="/images/products/gold-card-pure.webp"
+            alt="Xtreme Cardz 24K Gold Metal Mesh Card"
+            className="w-full h-full object-contain select-none pointer-events-none"
           />
-
-          {/* Luxury Metallic Specular Glass Sheen Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-amber-100/20 pointer-events-none" />
         </div>
       </div>
     </div>

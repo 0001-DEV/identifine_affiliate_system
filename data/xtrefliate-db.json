@@ -118,6 +118,20 @@
       "accountNumber": "2222222222",
       "accountName": "LOVE OLAOYE",
       "createdAt": "2026-11-19T13:27:40.887Z"
+    },
+    {
+      "id": "usr_1795794022185",
+      "name": "d",
+      "email": "loveolaoye8@gmail.com",
+      "phone": "09122222222",
+      "password": "1234",
+      "role": "AFFILIATE",
+      "referralCode": "d-547",
+      "commissionRate": 10,
+      "bankName": "GTBank (Guaranty Trust Bank)",
+      "accountNumber": "8149706739",
+      "accountName": "OLOYE LOVE",
+      "createdAt": "2026-11-27T15:40:22.185Z"
     }
   ],
   "referrals": [

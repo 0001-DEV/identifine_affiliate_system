@@ -500,31 +500,22 @@ export default function HomePage() {
 
         {/* =========================================================================
             1C. OUR CLIENTS SECTION (Continuous Kinetic Horizon Stream)
-                Positioned directly before Our Products & Services
+                Small Width Container with Clean White Background
            ========================================================================= */}
-        <section id="clients" data-dark="true" className="py-20 sm:py-24 bg-[#17171A] border-y border-white/10 w-full overflow-hidden relative">
-          {/* Subtle Clean Ambient Radial Lighting (Soft White Only, Zero Amber Tint over Text) */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(255,255,255,0.04),transparent_75%)] pointer-events-none" />
-
+        <section id="clients" className="py-20 sm:py-24 bg-white border-y border-neutral-200 w-full overflow-hidden relative">
           {/* Reduced-width Centered Container */}
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative z-20">
             <div className="mb-12 sm:mb-14 text-center">
-              <h2
-                style={{ color: "#FFFFFF", opacity: 1 }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal !text-white tracking-tight leading-[1.05]"
-              >
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-black tracking-tight leading-[1.05]">
                 Clients We Have Worked With
               </h2>
-              <p
-                style={{ color: "#FFFFFF", opacity: 1 }}
-                className="text-sm sm:text-base !text-white mt-4 font-normal max-w-lg mx-auto leading-relaxed"
-              >
+              <p className="text-sm sm:text-base text-neutral-600 mt-4 font-normal max-w-lg mx-auto leading-relaxed">
                 Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
               </p>
             </div>
 
-            {/* Continuous Standard Linear Infinite Marquee */}
-            <div className="marquee-track relative w-full overflow-hidden select-none rounded-2xl bg-white/[0.02] border border-white/5 py-4">
+            {/* Continuous Standard Linear Infinite Marquee on Clean White Background */}
+            <div className="marquee-track relative w-full overflow-hidden select-none rounded-2xl bg-neutral-50/90 border border-neutral-200/90 py-5">
               {/* Upper Track: Standard Linear Marquee (Glides Left) */}
               <div className="relative w-full overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
                 <div className="animate-standard-marquee-left gap-12 sm:gap-16 md:gap-20 flex items-center will-change-transform">
@@ -536,10 +527,10 @@ export default function HomePage() {
                       <img
                         src={client.logo}
                         alt={client.name}
-                        className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
+                        className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-sm group-hover/logo:scale-110 group-hover/logo:drop-shadow-md transition-all duration-300"
                       />
                       {/* Micro Industry Domain Badge */}
-                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-neutral-800 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm border border-neutral-200 mt-2 whitespace-nowrap text-center pointer-events-none">
                         {client.industry}
                       </span>
                     </div>
@@ -558,10 +549,10 @@ export default function HomePage() {
                       <img
                         src={client.logo}
                         alt={client.name}
-                        className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-[0_2px_14px_rgba(255,255,255,0.28)] group-hover/logo:scale-110 group-hover/logo:drop-shadow-[0_16px_36px_rgba(245,158,11,0.55)] transition-all duration-300"
+                        className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-sm group-hover/logo:scale-110 group-hover/logo:drop-shadow-md transition-all duration-300"
                       />
                       {/* Micro Industry Domain Badge */}
-                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-amber-300 bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-lg border border-neutral-700 mt-2 whitespace-nowrap text-center pointer-events-none">
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-neutral-800 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm border border-neutral-200 mt-2 whitespace-nowrap text-center pointer-events-none">
                         {client.industry}
                       </span>
                     </div>
@@ -717,10 +708,10 @@ export default function HomePage() {
         <section id="how-it-works" data-dark="true" className="py-24 sm:py-32 bg-[#17171A] text-white border-b border-white/10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16 sm:mb-20">
-              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white tracking-tight leading-[1.05]">
+              <h2 style={{ color: "#FFFFFF" }} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal !text-white tracking-tight leading-[1.05]">
                 How It Works
               </h2>
-              <p className="text-base sm:text-xl text-white font-normal">
+              <p style={{ color: "#FFFFFF" }} className="text-base sm:text-xl !text-white font-normal">
                 Join. Refer. Earn. It&apos;s that simple!
               </p>
             </div>
@@ -737,12 +728,12 @@ export default function HomePage() {
                   key={idx}
                   className="rounded-2xl border border-white/10 bg-white/[0.04] p-7 text-center space-y-4 hover:border-[#F59E0B]/50 transition group flex flex-col justify-between"
                 >
-                  <div className="h-12 w-12 rounded-full bg-[#F59E0B] text-white font-black text-base flex items-center justify-center mx-auto shadow-md">
+                  <div style={{ color: "#FFFFFF" }} className="h-12 w-12 rounded-full bg-[#F59E0B] !text-white font-black text-base flex items-center justify-center mx-auto shadow-md">
                     {item.step}
                   </div>
                   <div>
-                    <h3 className="font-extrabold text-base text-white">{item.title}</h3>
-                    <p className="text-xs text-white/90 leading-relaxed mt-2">{item.desc}</p>
+                    <h3 style={{ color: "#FFFFFF" }} className="font-extrabold text-base !text-white">{item.title}</h3>
+                    <p style={{ color: "#FFFFFF" }} className="text-xs !text-white opacity-100 leading-relaxed mt-2">{item.desc}</p>
                   </div>
                 </div>
               ))}

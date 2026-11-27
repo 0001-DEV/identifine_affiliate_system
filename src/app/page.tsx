@@ -500,22 +500,33 @@ export default function HomePage() {
 
         {/* =========================================================================
             1C. OUR CLIENTS SECTION (Continuous Kinetic Horizon Stream)
-                Small Width Container with Clean White Background
+                Outer section with dark background and pure white text;
+                Small container holding the logos has a clean white background.
            ========================================================================= */}
-        <section id="clients" className="py-20 sm:py-24 bg-white border-y border-neutral-200 w-full overflow-hidden relative">
+        <section id="clients" data-dark="true" className="py-20 sm:py-24 bg-[#17171A] border-y border-white/10 w-full overflow-hidden relative">
+          {/* Subtle Ambient Radial Glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.03),transparent_75%)] pointer-events-none" />
+
           {/* Reduced-width Centered Container */}
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative z-20">
+            {/* Outer Section Text: Pure White on Dark Background */}
             <div className="mb-12 sm:mb-14 text-center">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-black tracking-tight leading-[1.05]">
+              <h2
+                style={{ color: "#FFFFFF", opacity: 1 }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal !text-white tracking-tight leading-[1.05]"
+              >
                 Clients We Have Worked With
               </h2>
-              <p className="text-sm sm:text-base text-neutral-600 mt-4 font-normal max-w-lg mx-auto leading-relaxed">
+              <p
+                style={{ color: "#FFFFFF", opacity: 1 }}
+                className="text-sm sm:text-base !text-white mt-4 font-normal max-w-lg mx-auto leading-relaxed"
+              >
                 Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
               </p>
             </div>
 
-            {/* Continuous Standard Linear Infinite Marquee on Clean White Background */}
-            <div className="marquee-track relative w-full overflow-hidden select-none rounded-2xl bg-neutral-50/90 border border-neutral-200/90 py-5">
+            {/* Small Container: Clean Pure White Background with Subtle Shadow */}
+            <div className="marquee-track relative w-full overflow-hidden select-none rounded-2xl bg-white shadow-2xl border border-neutral-100 py-6">
               {/* Upper Track: Standard Linear Marquee (Glides Left) */}
               <div className="relative w-full overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
                 <div className="animate-standard-marquee-left gap-12 sm:gap-16 md:gap-20 flex items-center will-change-transform">
@@ -530,7 +541,7 @@ export default function HomePage() {
                         className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-sm group-hover/logo:scale-110 group-hover/logo:drop-shadow-md transition-all duration-300"
                       />
                       {/* Micro Industry Domain Badge */}
-                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-neutral-800 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm border border-neutral-200 mt-2 whitespace-nowrap text-center pointer-events-none">
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-neutral-800 bg-neutral-100/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm border border-neutral-200 mt-2 whitespace-nowrap text-center pointer-events-none">
                         {client.industry}
                       </span>
                     </div>
@@ -552,7 +563,7 @@ export default function HomePage() {
                         className="h-10 sm:h-12 md:h-14 max-w-[130px] sm:max-w-[160px] w-auto object-contain drop-shadow-sm group-hover/logo:scale-110 group-hover/logo:drop-shadow-md transition-all duration-300"
                       />
                       {/* Micro Industry Domain Badge */}
-                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-neutral-800 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm border border-neutral-200 mt-2 whitespace-nowrap text-center pointer-events-none">
+                      <span className="opacity-0 group-hover/logo:opacity-100 transition-all duration-300 transform translate-y-1 group-hover/logo:translate-y-0 text-[10px] tracking-wider uppercase font-semibold text-neutral-800 bg-neutral-100/90 backdrop-blur-md px-2.5 py-0.5 rounded-full shadow-sm border border-neutral-200 mt-2 whitespace-nowrap text-center pointer-events-none">
                         {client.industry}
                       </span>
                     </div>

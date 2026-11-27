@@ -23,6 +23,7 @@ type PreloaderPhase =
   | "forming"
   | "card_showcase"
   | "hero_glide"
+  | "card_burst"
   | "card_dissolve"
   | "finished";
 
@@ -129,33 +130,40 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
       setCardTransform({
         transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale})`,
         opacity: 1,
-        filter: "drop-shadow(0 15px 35px rgba(245,158,11,0.65))",
+        filter: "drop-shadow(0 20px 45px rgba(245,158,11,0.75))",
         transition: "transform 850ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease-out, filter 300ms ease-out",
       });
 
-      // Step 2: At 850ms, the card arrives at the headline.
-      // Trigger card dissolution into particles and reveal the hero headline!
+      // Step 2: At 850ms, the card arrives at the hero headline position.
+      // THE CARD TURNS BACK INTO PARTICLES!
       timerRef.current = setTimeout(() => {
         if (isCancelled) return;
-        setPhase("card_dissolve");
+        setPhase("card_burst");
         onGlideStartRef.current?.();
 
+        // Card bursts and shatters into the golden particles
         setCardTransform({
-          transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale * 1.12})`,
+          transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale * 1.08})`,
           opacity: 0,
-          filter: "drop-shadow(0 0 55px rgba(245,158,11,1)) blur(8px)",
-          transition: "transform 650ms cubic-bezier(0.16, 1, 0.3, 1), opacity 550ms ease-out, filter 550ms ease-out",
+          filter: "drop-shadow(0 0 60px rgba(245,158,11,1)) blur(12px) brightness(1.7)",
+          transition: "transform 400ms ease-out, opacity 350ms ease-out, filter 350ms ease-out",
         });
+
+        // Step 3: Golden particles spread across the headline and dissolve directly into the text
+        timerRef.current = setTimeout(() => {
+          if (isCancelled) return;
+          setPhase("card_dissolve");
+        }, 550);
       }, 850);
 
-      // Step 3: Finish preloader as shutters and morph complete
+      // Step 4: Finish preloader as shutters and morph complete
       setTimeout(() => {
         if (isCancelled) return;
         document.body.style.overflow = originalOverflow;
         hasPlayedInClientSession = true;
         setPhase("finished");
         onCompleteRef.current?.();
-      }, 1900);
+      }, 2100);
     };
 
     // Sequential Phase Engine
@@ -251,7 +259,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     }, 380);
   };
 
-  const isShuttersOpen = phase === "hero_glide" || phase === "card_dissolve";
+  const isShuttersOpen = phase === "hero_glide" || phase === "card_burst" || phase === "card_dissolve";
 
   return (
     <div
@@ -285,7 +293,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           className={`absolute z-30 flex flex-col items-center justify-center text-center py-2 transition-all duration-500 ${
             phase === "scatter"
               ? "opacity-0 scale-105 blur-sm"
-              : phase === "forming" || phase === "card_showcase" || phase === "hero_glide" || phase === "card_dissolve"
+              : phase === "forming" || phase === "card_showcase" || phase === "hero_glide" || phase === "card_burst" || phase === "card_dissolve"
               ? "opacity-0 pointer-events-none"
               : "opacity-100 scale-100"
           }`}
@@ -357,13 +365,23 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
                 opacity: 0,
                 transition: "transform 850ms cubic-bezier(0.16, 1, 0.3, 1)",
               };
-            } else if (phase === "card_dissolve") {
+            } else if (phase === "card_burst") {
+              // CARD TURNS BACK INTO PARTICLES: Luminous golden particles burst out from the card
               pStyle = {
-                width: `${p.size * 1.5}px`,
-                height: `${p.size * 1.5}px`,
-                transform: `translate3d(${headlineOffset.x + p.x * 1.25}px, ${headlineOffset.y + p.y * 0.45}px, 0) scale(1.15)`,
+                width: `${p.size * 1.8}px`,
+                height: `${p.size * 1.8}px`,
+                transform: `translate3d(${headlineOffset.x + p.x * 2.4}px, ${headlineOffset.y + p.y * 0.75}px, ${p.z}px) scale(1.4)`,
+                opacity: 1,
+                transition: `transform 550ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay * 0.2}ms, opacity 350ms ease-out ${p.delay * 0.2}ms`,
+              };
+            } else if (phase === "card_dissolve") {
+              // Particles dissolve and melt directly into the hero headline letters
+              pStyle = {
+                width: `${p.size}px`,
+                height: `${p.size}px`,
+                transform: `translate3d(${headlineOffset.x + p.x * 0.5}px, ${headlineOffset.y + p.y * 0.2}px, 0) scale(0.1)`,
                 opacity: 0,
-                transition: `transform 750ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay * 0.35}ms, opacity 700ms ease-out ${p.delay * 0.35}ms`,
+                transition: `transform 550ms cubic-bezier(0.7, 0, 0.2, 1) ${p.delay * 0.2}ms, opacity 450ms ease-out ${p.delay * 0.2}ms`,
               };
             }
 
@@ -391,7 +409,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             ...cardTransform,
           }}
           className={`relative w-[90vw] max-w-[390px] sm:max-w-[450px] md:max-w-[500px] aspect-[1172/698] will-change-transform transition-all ${
-            phase === "hero_glide" || phase === "card_dissolve"
+            phase === "hero_glide" || phase === "card_burst" || phase === "card_dissolve"
               ? "" // Controlled by cardTransform during hero glide & dissolve
               : phase === "card_showcase"
               ? "opacity-100 scale-100 duration-1000 ease-out"

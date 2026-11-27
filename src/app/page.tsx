@@ -503,17 +503,22 @@ export default function HomePage() {
                 Positioned directly before Our Products & Services
            ========================================================================= */}
         <section id="clients" data-dark="true" className="py-20 sm:py-24 bg-[#17171A] border-y border-white/10 w-full overflow-hidden relative">
-          {/* Subtle Ambient Radial Lighting: Lifts dark logos with soft contrast */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(255,255,255,0.06),transparent_75%)] pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(217,119,6,0.14),transparent_70%)] pointer-events-none" />
+          {/* Subtle Clean Ambient Radial Lighting (Soft White Only, Zero Amber Tint over Text) */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(255,255,255,0.04),transparent_75%)] pointer-events-none" />
 
           {/* Reduced-width Centered Container */}
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 sm:mb-14 text-center relative z-10">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white tracking-tight leading-[1.05]">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative z-20">
+            <div className="mb-12 sm:mb-14 text-center">
+              <h2
+                style={{ color: "#FFFFFF", opacity: 1 }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal !text-white tracking-tight leading-[1.05]"
+              >
                 Clients We Have Worked With
               </h2>
-              <p className="text-sm sm:text-base text-white mt-4 font-normal max-w-lg mx-auto leading-relaxed">
+              <p
+                style={{ color: "#FFFFFF", opacity: 1 }}
+                className="text-sm sm:text-base !text-white mt-4 font-normal max-w-lg mx-auto leading-relaxed"
+              >
                 Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
               </p>
             </div>

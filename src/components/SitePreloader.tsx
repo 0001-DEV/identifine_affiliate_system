@@ -341,7 +341,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
           })}
         </div>
 
-        {/* C. THE AUTHENTIC 24K GOLD CARD: Pure isolated plain gold card, zero background, zero container */}
+        {/* C. THE AUTHENTIC 24K GOLD METAL MESH CARD: Pure isolated card, zero studio background, zero container */}
         <div
           ref={cardRef}
           style={{
@@ -354,7 +354,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
                 ? "drop-shadow(0 15px 30px rgba(245,158,11,0.4))"
                 : undefined,
           }}
-          className={`relative w-[90vw] max-w-[380px] sm:max-w-[440px] md:max-w-[480px] aspect-[1200/756] will-change-transform transition-all ${
+          className={`relative w-[90vw] max-w-[390px] sm:max-w-[450px] md:max-w-[500px] aspect-[1172/698] will-change-transform transition-all ${
             phase === "hero_glide"
               ? "" // Controlled by cardTransform during hero glide
               : phase === "card_showcase"
@@ -364,10 +364,10 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
               : "opacity-0 scale-75 pointer-events-none duration-300"
           }`}
         >
-          {/* Authentic 24K Gold Card - 100% transparent outside card boundary, no container box or studio background */}
+          {/* Authentic 24K Gold Metal Mesh Card - 100% transparent outside card boundary, no container box or studio background */}
           <img
-            src="/images/products/gold-card-pure.webp"
-            alt="Xtreme Cardz 24K Gold Card"
+            src="/images/products/gold-metal-mesh-pure.webp"
+            alt="Xtreme Cardz 24K Gold Metal Mesh Card"
             className="w-full h-full object-contain select-none pointer-events-none"
           />
         </div>

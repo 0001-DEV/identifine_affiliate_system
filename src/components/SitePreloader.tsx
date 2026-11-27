@@ -4,25 +4,33 @@ import React, { useState, useEffect, useRef } from "react";
 
 const WORDS = ["Turn", "Your", "Network", "Into", "Recurring", "Cash"];
 
-// 42 Dynamic Golden Ember Particles for the scatter & transform transitions
-const PARTICLES = Array.from({ length: 42 }).map((_, i) => {
-  const angle = (i / 42) * 2 * Math.PI + (i % 3) * 0.25;
-  const distance = 130 + (i % 7) * 48;
+// 48 Dynamic Golden Ember Particles with precise card assembly coordinates
+const PARTICLES = Array.from({ length: 48 }).map((_, i) => {
+  const angle = (i / 48) * 2 * Math.PI + (i % 3) * 0.25;
+  const distance = 160 + (i % 8) * 45;
   const x = Math.round(Math.cos(angle) * distance);
-  const y = Math.round(Math.sin(angle) * (distance * 0.72));
-  const z = Math.round(((i % 5) - 2) * 45);
-  const size = 3.5 + (i % 4) * 2.2;
-  const delay = (i % 8) * 35;
-  return { id: i, x, y, z, size, delay };
+  const y = Math.round(Math.sin(angle) * (distance * 0.65));
+  const z = Math.round(((i % 5) - 2) * 50);
+  const size = 4 + (i % 4) * 2.5;
+  const delay = (i % 8) * 30;
+
+  // Grid coordinates on the card face (card dimensions approx 380x226)
+  const cols = 8;
+  const col = i % cols;
+  const row = Math.floor(i / cols);
+  const cardX = Math.round((col - 3.5) * 44);
+  const cardY = Math.round((row - 2.5) * 34);
+
+  return { id: i, x, y, z, size, delay, cardX, cardY };
 });
 
 type PreloaderPhase =
   | "typing"
   | "scatter"       // 1. Text turns into gold particles
-  | "forming"       // 2. Particles immediately transform into the Gold Metal Mesh picture
-  | "card_ready"    // Card is showcased in center
-  | "intro_open"    // 3. Intro section opens WHILE card turns into particles back and flies to hero
-  | "hero_dissolve" // 4. Particles dissolve into the initial text in the hero section
+  | "forming"       // 2. Particles visibly converge to assemble the Gold Metal Mesh card
+  | "card_ready"    // 3. Clear showcase of the 24K Gold Metal Mesh card in center
+  | "intro_open"    // 4. Shutters open WHILE card turns back to particles flying to hero
+  | "hero_dissolve" // 5. Particles dissolve directly into the hero headline text
   | "finished";
 
 interface SitePreloaderProps {
@@ -77,12 +85,18 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     if (hasStartedRef.current) return;
     hasStartedRef.current = true;
 
+    // Immediately preload the 24K Gold Metal Mesh card image in browser cache
+    if (typeof window !== "undefined") {
+      const preloadImg = new Image();
+      preloadImg.src = "/images/products/gold-metal-mesh-pure.webp";
+    }
+
     // Lock body scroll during preloader
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
-      setScatterFactor(window.innerWidth < 640 ? 0.5 : 1);
+      setScatterFactor(window.innerWidth < 640 ? 0.55 : 1);
     }
 
     let isCancelled = false;
@@ -93,19 +107,19 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     const beginIntroSequence = () => {
       if (isCancelled) return;
 
-      // 1. Text turns into gold particles (immediate scatter)
+      // 1. Text turns into glowing golden particles that scatter outward (650ms)
       setPhase("scatter");
 
       timerRef.current = setTimeout(() => {
         if (isCancelled) return;
 
-        // 2. Particles immediately transform into the Gold Metal Mesh picture
+        // 2. Particles converge magnetically to assemble the Gold Metal Mesh card (650ms)
         setPhase("forming");
 
         timerRef.current = setTimeout(() => {
           if (isCancelled) return;
 
-          // Card is fully formed in center
+          // 3. Clear, unmistakable showcase of the 24K Gold Metal Mesh card (1400ms)
           setPhase("card_ready");
 
           timerRef.current = setTimeout(() => {
@@ -131,35 +145,35 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             }
             setHeadlineOffset({ x: deltaX, y: deltaY });
 
-            // 3. THEN THE INTRO SECTION OPENS, WHILE THE CARD TURNS TO PARTICLES BACK
+            // 4. THEN THE INTRO SECTION OPENS, WHILE THE CARD TURNS TO PARTICLES BACK
             setPhase("intro_open");
             onGlideStartRef.current?.();
 
             // Card shatters / bursts into particles
             setCardTransform({
-              transform: `translate3d(0, -25px, 0) scale(1.06)`,
+              transform: `translate3d(0, -30px, 0) scale(1.06)`,
               opacity: 0,
               filter: "drop-shadow(0 0 60px rgba(245,158,11,1)) blur(12px) brightness(1.7)",
               transition: "transform 350ms ease-out, opacity 300ms ease-out, filter 300ms ease-out",
             });
 
-            // 4. Particles fly up and dissolve into the initial text in the hero section
+            // 5. Particles stream up to hero headline and dissolve into the text (850ms)
             timerRef.current = setTimeout(() => {
               if (isCancelled) return;
               setPhase("hero_dissolve");
 
-              // 5. Complete preloader and release page
+              // 6. Complete preloader and release page (650ms)
               timerRef.current = setTimeout(() => {
                 if (isCancelled) return;
                 document.body.style.overflow = originalOverflow;
                 hasPlayedInClientSession = true;
                 setPhase("finished");
                 onCompleteRef.current?.();
-              }, 600);
-            }, 750);
-          }, 350); // 350ms card showcase so user clearly sees the Gold Metal Mesh card
-        }, 380); // 380ms particles transform into card
-      }, 400); // 400ms text scatter
+              }, 650);
+            }, 850);
+          }, 1400); // 1.4 seconds showcase: user clearly sees the Gold Metal Mesh card!
+        }, 650); // 650ms particles converging to assemble card
+      }, 650); // 650ms text scattering
     };
 
     const typeNextChar = () => {
@@ -183,8 +197,8 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             timerRef.current = setTimeout(typeNextChar, 24);
           }, 45);
         } else {
-          // Completed all 6 words! Immediately trigger particle scatter sequence
-          timerRef.current = setTimeout(beginIntroSequence, 120);
+          // Completed all 6 words! Briefly hold, then trigger particle scatter sequence
+          timerRef.current = setTimeout(beginIntroSequence, 180);
         }
       }
     };
@@ -192,7 +206,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     // Kick off typing after 50ms
     timerRef.current = setTimeout(typeNextChar, 50);
 
-    // Emergency fail-safe: guarantee the preloader unblocks after 8s
+    // Emergency fail-safe: guarantee the preloader unblocks after 10s
     const emergencyTimer = setTimeout(() => {
       if (!isCancelled) {
         setPhase("finished");
@@ -200,7 +214,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
         onGlideStartRef.current?.();
         onCompleteRef.current?.();
       }
-    }, 8000);
+    }, 10000);
 
     return () => {
       isCancelled = true;
@@ -237,7 +251,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
     >
       {/* 1. LEFT BLACK SHUTTER: Solid deep black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 left-0 w-[50.5%] z-10 bg-black transition-transform duration-[1100ms] ${
+        className={`absolute inset-y-0 left-0 w-[50.5%] z-10 bg-black transition-transform duration-[1200ms] ${
           isShuttersOpen ? "-translate-x-full" : "translate-x-0"
         }`}
         style={{
@@ -247,7 +261,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
 
       {/* 2. RIGHT BLACK SHUTTER: Solid deep black, no line in the middle */}
       <div
-        className={`absolute inset-y-0 right-0 w-[50.5%] z-10 bg-black transition-transform duration-[1100ms] ${
+        className={`absolute inset-y-0 right-0 w-[50.5%] z-10 bg-black transition-transform duration-[1200ms] ${
           isShuttersOpen ? "translate-x-full" : "translate-x-0"
         }`}
         style={{
@@ -310,45 +324,49 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             };
 
             if (phase === "scatter") {
+              // 1. Scatter outward in 3D space
               pStyle = {
                 width: `${p.size}px`,
                 height: `${p.size}px`,
-                transform: `translate3d(${p.x * scatterFactor}px, ${p.y * scatterFactor}px, ${p.z}px) scale(1)`,
+                transform: `translate3d(${p.x * scatterFactor}px, ${p.y * scatterFactor}px, ${p.z}px) scale(1.15)`,
                 opacity: 1,
-                transition: `transform 400ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay * 0.25}ms, opacity 300ms ease-out`,
+                transition: `transform 650ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay * 0.25}ms, opacity 400ms ease-out`,
               };
             } else if (phase === "forming") {
+              // 2. Converge magnetically to assemble the Gold Metal Mesh card surface!
               pStyle = {
-                width: `${p.size}px`,
-                height: `${p.size}px`,
-                transform: "translate3d(0, 0, -40px) scale(0)",
-                opacity: 0,
-                transition: "transform 380ms cubic-bezier(0.7, 0, 0.2, 1), opacity 250ms ease-in",
+                width: `${p.size * 1.2}px`,
+                height: `${p.size * 1.2}px`,
+                transform: `translate3d(${p.cardX}px, ${p.cardY}px, 0) scale(1)`,
+                opacity: 1,
+                transition: `transform 650ms cubic-bezier(0.34, 1.56, 0.64, 1) ${p.delay * 0.15}ms, opacity 250ms ease-in`,
               };
             } else if (phase === "card_ready") {
+              // 3. Card is formed and visible, particles settle gently into the gold card
               pStyle = {
                 width: `${p.size}px`,
                 height: `${p.size}px`,
-                transform: "translate3d(0, 0, 0) scale(0)",
+                transform: `translate3d(${p.cardX}px, ${p.cardY}px, 0) scale(0.6)`,
                 opacity: 0,
+                transition: "opacity 300ms ease-out, transform 300ms ease-out",
               };
             } else if (phase === "intro_open") {
-              // CARD TURNS BACK INTO PARTICLES & FLIES UP TO HERO HEADLINE!
+              // 4. CARD TURNS BACK INTO PARTICLES & STREAMS UP TO HERO HEADLINE!
               pStyle = {
-                width: `${p.size * 1.8}px`,
-                height: `${p.size * 1.8}px`,
+                width: `${p.size * 1.7}px`,
+                height: `${p.size * 1.7}px`,
                 transform: `translate3d(${headlineOffset.x + p.x * 2.2}px, ${headlineOffset.y + p.y * 0.75}px, ${p.z}px) scale(1.35)`,
                 opacity: 1,
-                transition: `transform 750ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay * 0.2}ms, opacity 300ms ease-out`,
+                transition: `transform 850ms cubic-bezier(0.16, 1, 0.3, 1) ${p.delay * 0.2}ms, opacity 300ms ease-out`,
               };
             } else if (phase === "hero_dissolve") {
-              // PARTICLES DISSOLVE DIRECTLY INTO THE HERO HEADLINE TEXT
+              // 5. PARTICLES DISSOLVE DIRECTLY INTO THE HERO HEADLINE TEXT
               pStyle = {
                 width: `${p.size}px`,
                 height: `${p.size}px`,
                 transform: `translate3d(${headlineOffset.x + p.x * 0.3}px, ${headlineOffset.y + p.y * 0.15}px, 0) scale(0)`,
                 opacity: 0,
-                transition: `transform 550ms cubic-bezier(0.7, 0, 0.2, 1) ${p.delay * 0.15}ms, opacity 450ms ease-out ${p.delay * 0.15}ms`,
+                transition: `transform 650ms cubic-bezier(0.7, 0, 0.2, 1) ${p.delay * 0.15}ms, opacity 500ms ease-out ${p.delay * 0.15}ms`,
               };
             }
 
@@ -369,7 +387,7 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             transformOrigin: "center center",
             filter:
               phase === "card_ready"
-                ? "drop-shadow(0 20px 45px rgba(0,0,0,0.9)) drop-shadow(0 0 35px rgba(245,158,11,0.6))"
+                ? "drop-shadow(0 25px 50px rgba(0,0,0,0.95)) drop-shadow(0 0 45px rgba(245,158,11,0.7))"
                 : phase === "forming"
                 ? "drop-shadow(0 15px 30px rgba(245,158,11,0.5))"
                 : undefined,
@@ -379,9 +397,9 @@ export function SitePreloader({ onGlideStart, onComplete }: SitePreloaderProps) 
             phase === "intro_open" || phase === "hero_dissolve"
               ? "" // Controlled by cardTransform (burst & dissolve)
               : phase === "card_ready"
-              ? "opacity-100 scale-100 duration-300 ease-out"
+              ? "opacity-100 scale-100 duration-500 ease-out"
               : phase === "forming"
-              ? "opacity-100 scale-100 duration-380 ease-out"
+              ? "opacity-100 scale-100 duration-650 ease-out"
               : "opacity-0 scale-85 pointer-events-none duration-250"
           }`}
         >

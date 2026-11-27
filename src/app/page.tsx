@@ -511,7 +511,7 @@ export default function HomePage() {
             <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white tracking-tight leading-[1.05]">
               Clients We Have Worked With
             </h2>
-            <p className="text-base sm:text-lg text-white mt-5 font-normal max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-neutral-300 mt-5 font-normal max-w-2xl mx-auto leading-relaxed">
               Our encrypted smart credentials and bespoke hardware suites power identification, networking, and access for leading luxury brands, hotel establishments, and corporate enterprises.
             </p>
           </div>
@@ -712,7 +712,7 @@ export default function HomePage() {
               <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white tracking-tight leading-[1.05]">
                 How It Works
               </h2>
-              <p className="text-base sm:text-xl text-white font-normal">
+              <p className="text-base sm:text-xl text-neutral-300 font-normal">
                 Join. Refer. Earn. It&apos;s that simple!
               </p>
             </div>
@@ -734,7 +734,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-extrabold text-base text-white">{item.title}</h3>
-                    <p className="text-xs text-white/90 leading-relaxed mt-2">{item.desc}</p>
+                    <p className="text-xs text-neutral-400 leading-relaxed mt-2">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -782,19 +782,19 @@ export default function HomePage() {
            ========================================================================= */}
         <section data-dark="true" className="bg-[#17171A] py-20 px-4 sm:px-6">
           <div className="mx-auto max-w-6xl">
-            <div className="rounded-3xl bg-neutral-900 border border-white/10 p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-2xl">
-              <div className="space-y-3 text-white">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-white tracking-tight leading-[1.05]">
+            <div className="rounded-3xl bg-gradient-to-r from-[#F59E0B] via-[#E5A826] to-[#D97706] p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-2xl">
+              <div className="space-y-3 text-neutral-950">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal text-black tracking-tight leading-[1.05]">
                   Ready to Start Earning?
                 </h2>
-                <p className="text-sm sm:text-base text-white/90 font-normal">
+                <p className="text-sm sm:text-base text-black/80 font-normal">
                   Join the Identifine &amp; Xtreme Cardz Affiliate Programme today!
                 </p>
               </div>
 
               <Link
                 href="/portal?tab=register"
-                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-white hover:bg-neutral-200 text-black px-9 py-4 text-sm font-semibold shadow-xl transition hover:scale-105"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-900 text-white px-9 py-4 text-sm font-black shadow-xl transition hover:scale-105"
               >
                 <span>Become an Affiliate</span>
                 <ArrowRight className="w-4 h-4" />

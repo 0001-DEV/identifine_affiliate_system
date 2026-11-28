@@ -412,8 +412,8 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/pricing"
-                style={{ backgroundColor: "#FFFFFF", color: "#000000" }}
-                className="rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 text-black px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-sm hover:scale-105 transition"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
+                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
               >
                 Affiliate Commission Guide
               </Link>
@@ -686,6 +686,7 @@ export default function HomePage() {
                           <Link
                             href={`/portal?tab=register&product=${prod.id}`}
                             onClick={(e) => e.stopPropagation()}
+                            style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                             className="rounded-full bg-black text-white hover:bg-neutral-800 px-6 py-2.5 text-xs sm:text-sm font-extrabold transition shadow-md"
                           >
                             Refer Offering
@@ -778,6 +779,7 @@ export default function HomePage() {
                 <div className="pt-2">
                   <Link
                     href="/pricing"
+                    style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                     className="inline-flex items-center gap-2 rounded-xl bg-black hover:bg-neutral-800 text-white px-8 py-4 text-sm font-extrabold transition shadow-md hover:scale-[1.02]"
                   >
                     <span>View Detailed Breakdown</span>

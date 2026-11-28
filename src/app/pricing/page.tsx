@@ -125,6 +125,7 @@ export default function PricingEarningsPage() {
               />
               <button
                 type="submit"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                 className="rounded-xl bg-black hover:bg-neutral-800 text-white font-extrabold px-7 py-3 text-sm transition shadow-sm cursor-pointer border border-neutral-700"
               >
                 Calculate
@@ -240,6 +241,7 @@ export default function PricingEarningsPage() {
             <div className="pt-2">
               <Link
                 href="/portal?tab=register"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                 className="inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white border border-white/20 px-8 py-3.5 text-xs font-black shadow-lg transition hover:scale-105"
               >
                 <span>Become an Affiliate</span>

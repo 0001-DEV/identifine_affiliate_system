@@ -141,6 +141,7 @@ export default function FAQPage() {
                 href="https://wa.me/2349030001851?text=Hello%20Identifine%2C%20I%20have%20questions%20about%20the%20Affiliate%20Programme."
                 target="_blank"
                 rel="noopener noreferrer"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                 className="shrink-0 inline-flex items-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white border border-white/20 px-7 py-3 text-xs font-extrabold transition shadow-md hover:scale-105"
               >
                 <span>Contact Us</span>

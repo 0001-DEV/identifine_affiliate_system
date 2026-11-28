@@ -268,8 +268,34 @@ nextjs-portal,
    ========================================================================== */
 html.light,
 html.light body {
-  background-color: #FAF8F5;
-  color: #111111;
+  background-color: #FAF8F5 !important;
+  color: #111111 !important;
+}
+
+html.light [class*="070708"],
+html.light [class*="07070A"],
+html.light [class*="09090B"],
+html.light [class*="070707"],
+html.light [class*="0D0D0D"],
+html.light [class*="0A0A0A"],
+html.light [class*="050508"],
+html.light [class*="0A090D"],
+html.light [class*="0C0A06"] {
+  background-color: #FAF8F5 !important;
+  color: #111111 !important;
+}
+
+html.light [class*="111113"],
+html.light [class*="111116"],
+html.light [class*="141414"],
+html.light [class*="121216"],
+html.light [class*="121217"],
+html.light .bg-neutral-900,
+html.light .bg-neutral-950 {
+  background-color: #FFFFFF !important;
+  color: #111111 !important;
+  border-color: #E8E4DA !important;
+  box-shadow: 0 4px 20px -2px rgba(30, 20, 10, 0.06) !important;
 }
 
 /* SOLID BLACK BUTTONS MUST ALWAYS REMAIN SOLID BLACK WITH PURE WHITE TEXT ACROSS ALL THEMES */
@@ -300,50 +326,11 @@ button.bg-black:hover {
   color: #FFFFFF !important;
 }
 
-/* Dark background sections must ALWAYS preserve their dark background and pure white text in ALL modes */
-[data-dark="true"],
-html.light [data-dark="true"],
-html.dark [data-dark="true"],
-#hero,
-html.light #hero,
-#partners-scroll,
-html.light #partners-scroll,
-#clients,
-html.light #clients,
-#how-it-works,
-html.light #how-it-works,
-footer,
-html.light footer {
-  background-color: #070708 !important;
-  color: #FFFFFF !important;
-}
-
-[data-dark="true"] h1,
-[data-dark="true"] h2,
-[data-dark="true"] h3,
-[data-dark="true"] h4,
-[data-dark="true"] p:not(.text-black),
-html.light [data-dark="true"] h1,
-html.light [data-dark="true"] h2,
-html.light [data-dark="true"] h3,
-html.light [data-dark="true"] h4,
-html.light [data-dark="true"] p:not(.text-black),
-#hero h1,
-#hero p,
-html.light #hero h1,
-html.light #hero p {
-  color: #FFFFFF !important;
-}
-
-#hero p,
-html.light #hero p {
-  color: #D4D4D8 !important;
-}
-
-/* White buttons (such as Affiliate Commission Guide) must always stay solid white with pure black text */
+/* SOLID WHITE BUTTONS (such as Affiliate Commission Guide) MUST ALWAYS STAY SOLID WHITE WITH BLACK TEXT */
 a.bg-white,
 button.bg-white,
 .btn-white,
+[class*="bg-white"] a,
 [data-dark="true"] a.bg-white,
 [data-dark="true"] button.bg-white {
   background-color: #FFFFFF !important;
@@ -362,8 +349,26 @@ a.bg-white:hover,
 button.bg-white:hover,
 [data-dark="true"] a.bg-white:hover,
 [data-dark="true"] button.bg-white:hover {
-  background-color: #E5E5E5 !important;
+  background-color: #F5F5F5 !important;
   color: #000000 !important;
+}
+
+/* Dark background sections must ALWAYS preserve their dark background and pure white text */
+[data-dark="true"],
+html.light [data-dark="true"],
+[data-dark="true"] h1,
+[data-dark="true"] h2,
+[data-dark="true"] h3,
+[data-dark="true"] h4,
+[data-dark="true"] p,
+[data-dark="true"] span,
+html.light [data-dark="true"] h1,
+html.light [data-dark="true"] h2,
+html.light [data-dark="true"] h3,
+html.light [data-dark="true"] h4,
+html.light [data-dark="true"] p,
+html.light [data-dark="true"] span:not(.text-black) {
+  color: #FFFFFF !important;
 }
 
 html.light header {

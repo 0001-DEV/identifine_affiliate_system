@@ -195,10 +195,11 @@ function PortalContent() {
                 setError("");
                 setMode("LOGIN");
               }}
-              className={`rounded-lg py-2.5 text-xs font-bold transition ${
+              style={mode === "LOGIN" ? { backgroundColor: "#000000", color: "#FFFFFF" } : undefined}
+              className={`rounded-lg py-2.5 text-xs font-bold transition border ${
                 mode === "LOGIN"
-                  ? "bg-white text-black"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-black text-white border-white/30 shadow-md"
+                  : "border-transparent text-neutral-400 hover:text-white"
               }`}
             >
               Sign In
@@ -209,10 +210,11 @@ function PortalContent() {
                 setError("");
                 setMode("REGISTER");
               }}
-              className={`rounded-lg py-2.5 text-xs font-bold transition ${
+              style={mode === "REGISTER" ? { backgroundColor: "#000000", color: "#FFFFFF" } : undefined}
+              className={`rounded-lg py-2.5 text-xs font-bold transition border ${
                 mode === "REGISTER"
-                  ? "bg-white text-black"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-black text-white border-white/30 shadow-md"
+                  : "border-transparent text-neutral-400 hover:text-white"
               }`}
             >
               Register
@@ -223,10 +225,11 @@ function PortalContent() {
                 setError("");
                 setMode("REFEREE");
               }}
-              className={`rounded-lg py-2.5 text-xs font-bold transition ${
+              style={mode === "REFEREE" ? { backgroundColor: "#000000", color: "#FFFFFF" } : undefined}
+              className={`rounded-lg py-2.5 text-xs font-bold transition border ${
                 mode === "REFEREE"
-                  ? "bg-white text-black"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-black text-white border-white/30 shadow-md"
+                  : "border-transparent text-neutral-400 hover:text-white"
               }`}
             >
               Have a Code?
@@ -311,7 +314,8 @@ function PortalContent() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-white py-3 text-xs font-bold text-black hover:bg-neutral-200 transition disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg"
+                  style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
+                  className="w-full rounded-xl bg-black border border-white/20 py-3 text-xs font-bold text-white hover:bg-neutral-800 transition disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg"
                 >
                   <MessageSquare className="w-4 h-4 text-emerald-600" />
                   <span>
@@ -385,7 +389,8 @@ function PortalContent() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-xl bg-white py-3 text-xs font-bold text-black hover:bg-neutral-200 transition disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg mt-2"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
+                className="w-full rounded-xl bg-black border border-white/20 py-3 text-xs font-bold text-white hover:bg-neutral-800 transition disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg mt-2"
               >
                 {mode === "LOGIN" ? (
                   <>

@@ -218,7 +218,8 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-white py-3.5 text-sm font-bold text-black hover:bg-neutral-200 transition disabled:opacity-50"
+            style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-black border border-white/20 py-3.5 text-sm font-bold text-white hover:bg-neutral-800 transition disabled:opacity-50"
           >
             <UserPlus className="w-4 h-4" />
             <span>

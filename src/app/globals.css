@@ -264,7 +264,7 @@ nextjs-portal,
 }
 
 /* ==========================================================================
-   LIGHT MODE DESIGN SYSTEM (WARM IDENTIFINE OYSTER STONE & GOLD)
+   LIGHT MODE DESIGN SYSTEM
    ========================================================================== */
 html.light,
 html.light body {
@@ -298,10 +298,50 @@ html.light .bg-neutral-950 {
   box-shadow: 0 4px 20px -2px rgba(30, 20, 10, 0.06) !important;
 }
 
-html.light .bg-black:not(.keep-black) {
-  background-color: #F3EFE6 !important;
-  color: #111111 !important;
-  border-color: #DDD8CD !important;
+/* SOLID BLACK BUTTONS MUST ALWAYS REMAIN SOLID BLACK WITH PURE WHITE TEXT ACROSS ALL THEMES */
+.bg-black,
+html.light .bg-black,
+html.dark .bg-black,
+a.bg-black,
+button.bg-black,
+[class*="bg-black"] {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+.bg-black *,
+html.light .bg-black *,
+html.dark .bg-black *,
+a.bg-black *,
+button.bg-black * {
+  color: #FFFFFF !important;
+}
+
+.bg-black:hover,
+html.light .bg-black:hover,
+html.dark .bg-black:hover,
+a.bg-black:hover,
+button.bg-black:hover {
+  background-color: #262626 !important;
+  color: #FFFFFF !important;
+}
+
+/* Dark background sections must ALWAYS preserve their dark background and pure white text */
+[data-dark="true"],
+html.light [data-dark="true"],
+[data-dark="true"] h1,
+[data-dark="true"] h2,
+[data-dark="true"] h3,
+[data-dark="true"] h4,
+[data-dark="true"] p,
+[data-dark="true"] span,
+html.light [data-dark="true"] h1,
+html.light [data-dark="true"] h2,
+html.light [data-dark="true"] h3,
+html.light [data-dark="true"] h4,
+html.light [data-dark="true"] p,
+html.light [data-dark="true"] span:not(.text-black) {
+  color: #FFFFFF !important;
 }
 
 html.light header {
@@ -325,23 +365,6 @@ html.light textarea::placeholder {
 html.light [class*="border-white"],
 html.light .border-neutral-800 {
   border-color: #E8E4DA !important;
-}
-
-html.light .text-white {
-  color: #111111 !important;
-}
-
-html.light .text-neutral-400,
-html.light .text-neutral-300 {
-  color: #55524A !important;
-}
-
-html.light .text-neutral-200 {
-  color: #222222 !important;
-}
-
-html.light .text-neutral-500 {
-  color: #77746C !important;
 }
 
 /* Ensure Gold Gradient Buttons preserve gold richness in Light Mode */

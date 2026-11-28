@@ -385,20 +385,29 @@ export default function HomePage() {
         {/* =========================================================================
             1. HERO SECTION: TEXT ONLY (Luxury Black Background & Pure White Text)
            ========================================================================= */}
-        <section id="hero" data-dark="true" className="pt-24 sm:pt-32 pb-8 sm:pb-10 px-4 sm:px-6 bg-[#070708] text-white">
+        <section
+          id="hero"
+          data-dark="true"
+          style={{ backgroundColor: "#070708", color: "#FFFFFF" }}
+          className="pt-24 sm:pt-32 pb-8 sm:pb-10 px-4 sm:px-6 bg-[#070708] text-white"
+        >
           <div className="mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
             <h1
               id="hero-headline"
+              style={{ color: "#FFFFFF" }}
               className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal tracking-tight leading-[1.05] transition-all duration-1000 ease-out ${
                 isHeroHeadlineRevealed
-                  ? "opacity-100 scale-100 translate-y-0 text-white drop-shadow-none"
+                  ? "opacity-100 scale-100 translate-y-0 !text-white drop-shadow-none"
                   : "opacity-0 scale-90 translate-y-2 text-[#F59E0B] drop-shadow-[0_0_35px_rgba(245,158,11,0.9)]"
               }`}
             >
               Turn Your Network Into Recurring Cash
             </h1>
 
-            <p className="text-sm sm:text-base md:text-[17px] text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto">
+            <p
+              style={{ color: "#D4D4D8" }}
+              className="text-sm sm:text-base md:text-[17px] !text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto"
+            >
               Join our high-earning affiliate program. Refer corporate clients, creative agencies, and luxury establishments to custom metal smart cards and digital identity suites. Earn high-yield recurring commissions on every closed deal with automated referral tracking and instant payouts.
             </p>
 
@@ -429,10 +438,14 @@ export default function HomePage() {
           ref={heroSectionRef}
           id="partners-scroll"
           data-dark="true"
+          style={{ backgroundColor: "#070708", color: "#FFFFFF" }}
           className="relative w-full h-[320vh] bg-[#070708] border-b border-white/10"
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
-          <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-[#070708]">
+          <div
+            style={{ backgroundColor: "#070708" }}
+            className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-[#070708]"
+          >
             {/* people who partner with us: CENTER ALIGNED directly attached to images */}
             <div className="w-full text-center px-4 mb-3 sm:mb-4">
               <p className="text-sm sm:text-base text-neutral-400 font-medium lowercase">

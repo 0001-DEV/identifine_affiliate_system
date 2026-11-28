@@ -334,14 +334,38 @@ html.light [data-dark="true"],
 [data-dark="true"] h3,
 [data-dark="true"] h4,
 [data-dark="true"] p,
-[data-dark="true"] span,
 html.light [data-dark="true"] h1,
 html.light [data-dark="true"] h2,
 html.light [data-dark="true"] h3,
 html.light [data-dark="true"] h4,
-html.light [data-dark="true"] p,
-html.light [data-dark="true"] span:not(.text-black) {
+html.light [data-dark="true"] p {
   color: #FFFFFF !important;
+}
+
+/* White buttons (such as Affiliate Commission Guide) must always stay solid white with pure black text */
+a.bg-white,
+button.bg-white,
+.btn-white,
+[data-dark="true"] a.bg-white,
+[data-dark="true"] button.bg-white {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+a.bg-white *,
+button.bg-white *,
+.btn-white *,
+[data-dark="true"] a.bg-white *,
+[data-dark="true"] button.bg-white * {
+  color: #000000 !important;
+}
+
+a.bg-white:hover,
+button.bg-white:hover,
+[data-dark="true"] a.bg-white:hover,
+[data-dark="true"] button.bg-white:hover {
+  background-color: #E5E5E5 !important;
+  color: #000000 !important;
 }
 
 html.light header {

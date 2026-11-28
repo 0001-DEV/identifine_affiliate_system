@@ -68,12 +68,12 @@ const cr8Services = [
 ];
 
 export function MarketingNav() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
-  const [isOverDark, setIsOverDark] = useState<boolean>(false);
+  const [isOverDark, setIsOverDark] = useState<boolean>(pathname === "/");
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const pathname = usePathname();
 
   // Navigation items: Partners links directly to the Clients section, Clients removed as standalone
   const navLinks = [
@@ -122,7 +122,8 @@ export function MarketingNav() {
       // 1. Check if near very top of page
       if (scrollY < 80) {
         setActiveId("hero");
-        setIsOverDark(false);
+        const heroEl = document.getElementById("hero");
+        setIsOverDark(heroEl ? heroEl.getAttribute("data-dark") === "true" : true);
         return;
       }
 

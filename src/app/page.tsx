@@ -100,27 +100,27 @@ export default function HomePage() {
     };
   }, []);
 
-  // 4 Focused Partner Establishment Cards
+  // 4 Focused Partner Establishment Cards (Black American Executives & Creative Innovators)
   const partnerShowcase = [
     {
       id: "office-colleagues",
       role: "Corporate Offices & Coworkers",
-      image: "/images/partners/office-colleagues-chatting.jpg",
+      image: "/images/partners/black-corporate-executives.jpg",
     },
     {
       id: "executive-boardroom",
       role: "Executive Boardrooms & C-Suite",
-      image: "/images/partners/executive-boardroom-meeting.jpg",
+      image: "/images/partners/black-csuite-boardroom.jpg",
     },
     {
       id: "creative-agency",
       role: "Creative Agencies & Studios",
-      image: "/images/partners/creative-agency-studio.jpg",
+      image: "/images/partners/black-creative-agency.jpg",
     },
     {
       id: "tech-startups",
       role: "Tech Startups & Teams",
-      image: "/images/partners/tech-startup-team.jpg",
+      image: "/images/partners/black-tech-startup.jpg",
     },
   ];
 
@@ -372,7 +372,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col selection:bg-[#F59E0B] selection:text-black">
+    <div className="min-h-screen bg-[#070708] text-white flex flex-col selection:bg-[#F59E0B] selection:text-black">
       {!isPreloaderFinished && (
         <SitePreloader
           onGlideStart={handleGlideStart}
@@ -383,22 +383,22 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* =========================================================================
-            1. HERO SECTION: TEXT ONLY (Increased headline height, reduced copy height)
+            1. HERO SECTION: TEXT ONLY (Luxury Black Background & Pure White Text)
            ========================================================================= */}
-        <section id="hero" className="pt-24 sm:pt-32 pb-8 sm:pb-10 px-4 sm:px-6 bg-white">
+        <section id="hero" data-dark="true" className="pt-24 sm:pt-32 pb-8 sm:pb-10 px-4 sm:px-6 bg-[#070708] text-white">
           <div className="mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
             <h1
               id="hero-headline"
               className={`text-6xl sm:text-7xl md:text-8xl lg:text-[88px] xl:text-[96px] font-normal tracking-tight leading-[1.05] transition-all duration-1000 ease-out ${
                 isHeroHeadlineRevealed
-                  ? "opacity-100 scale-100 translate-y-0 text-black drop-shadow-none"
+                  ? "opacity-100 scale-100 translate-y-0 text-white drop-shadow-none"
                   : "opacity-0 scale-90 translate-y-2 text-[#F59E0B] drop-shadow-[0_0_35px_rgba(245,158,11,0.9)]"
               }`}
             >
               Turn Your Network Into Recurring Cash
             </h1>
 
-            <p className="text-sm sm:text-base md:text-[17px] text-neutral-600 font-normal leading-relaxed max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-[17px] text-neutral-300 font-normal leading-relaxed max-w-2xl mx-auto">
               Join our high-earning affiliate program. Refer corporate clients, creative agencies, and luxury establishments to custom metal smart cards and digital identity suites. Earn high-yield recurring commissions on every closed deal with automated referral tracking and instant payouts.
             </p>
 
@@ -406,14 +406,14 @@ export default function HomePage() {
               <Link
                 href="/portal?tab=register"
                 style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
-                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
+                className="rounded-full bg-black hover:bg-neutral-800 text-white border border-white/20 px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
               >
                 Join Affiliate Program
               </Link>
               <Link
                 href="/pricing"
                 style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
-                className="rounded-full bg-black hover:bg-neutral-800 text-white px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
+                className="rounded-full bg-black hover:bg-neutral-800 text-white border border-white/20 px-8 py-3.5 sm:px-9 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:scale-105 transition"
               >
                 Affiliate Commission Guide
               </Link>
@@ -428,13 +428,14 @@ export default function HomePage() {
         <section
           ref={heroSectionRef}
           id="partners-scroll"
-          className="relative w-full h-[320vh] bg-white border-b border-neutral-200"
+          data-dark="true"
+          className="relative w-full h-[320vh] bg-[#070708] border-b border-white/10"
         >
           {/* Sticky Viewport: Pins beneath header as user scrolls, animating cards horizontally */}
-          <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-white">
+          <div className="sticky top-20 h-[calc(100vh-80px)] w-full flex flex-col justify-center overflow-hidden bg-[#070708]">
             {/* people who partner with us: CENTER ALIGNED directly attached to images */}
             <div className="w-full text-center px-4 mb-3 sm:mb-4">
-              <p className="text-sm sm:text-base text-gray-500 font-medium lowercase">
+              <p className="text-sm sm:text-base text-neutral-400 font-medium lowercase">
                 people who partner with us
               </p>
             </div>
@@ -464,7 +465,7 @@ export default function HomePage() {
 
                     {/* Text outside the container: PROMINENT NAME OF WHAT IT REPRESENTS */}
                     <div className="pt-4 pb-1 px-1">
-                      <h3 className="font-semibold text-lg sm:text-xl md:text-2xl text-black tracking-tight">
+                      <h3 className="font-semibold text-lg sm:text-xl md:text-2xl text-white tracking-tight">
                         {partner.role}
                       </h3>
                     </div>
@@ -489,7 +490,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Dynamic Horizontal Progress Bar */}
-                <div className="w-36 sm:w-44 h-1 bg-neutral-200 rounded-full overflow-hidden">
+                <div className="w-36 sm:w-44 h-1 bg-white/20 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-[#F59E0B] transition-all duration-75 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.6)]"
                     style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
